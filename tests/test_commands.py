@@ -40,9 +40,7 @@ class CommandsTest(CliTestCase):
             # Example:
             infile = "/path/to/asset.tif"
             destination = os.path.join(tmp_dir, "item.json")
-            result = self.run_command(
-                f"noaacdr create-item {infile} {destination}"
-            )
+            result = self.run_command(f"noaacdr create-item {infile} {destination}")
             assert result.exit_code == 0, "\n{}".format(result.output)
 
             jsons = [p for p in os.listdir(tmp_dir) if p.endswith(".json")]
