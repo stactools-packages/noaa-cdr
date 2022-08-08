@@ -1,5 +1,5 @@
-import stactools.ephemeral
+import stactools.noaa_cdr
 
 
 def test_version() -> None:
-    assert stactools.ephemeral.__version__ is not None
+    assert stactools.noaa_cdr.__version__ is not None

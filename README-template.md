@@ -1,17 +1,17 @@
-# stactools-ephemeral
+# stactools-noaa-cdr
 
-[![PyPI](https://img.shields.io/pypi/v/stactools-ephemeral)](https://pypi.org/project/stactools-ephemeral/)
+[![PyPI](https://img.shields.io/pypi/v/stactools-noaa-cdr)](https://pypi.org/project/stactools-noaa-cdr/)
 
-- Name: ephemeral
-- Package: `stactools.ephemeral`
-- [stactools-ephemeral on PyPI](https://pypi.org/project/stactools-ephemeral/)
+- Name: noaa-cdr
+- Package: `stactools.noaa_cdr`
+- [stactools-noaa-cdr on PyPI](https://pypi.org/project/stactools-noaa-cdr/)
 - Owner: @githubusername
 - [Dataset homepage](http://example.com)
 - STAC extensions used:
   - [proj](https://github.com/stac-extensions/projection/)
 - Extra fields:
-  - `ephemeral:custom`: A custom attribute
-- [Browse the example in human-readable form](https://radiantearth.github.io/stac-browser/#/external/raw.githubusercontent.com/stactools-packages/ephemeral/main/examples/collection.json)
+  - `noaa-cdr:custom`: A custom attribute
+- [Browse the example in human-readable form](https://radiantearth.github.io/stac-browser/#/external/raw.githubusercontent.com/stactools-packages/noaa-cdr/main/examples/collection.json)
 
 A short description of the package and its usage.
 
@@ -23,7 +23,7 @@ A short description of the package and its usage.
 ## Installation
 
 ```shell
-pip install stactools-ephemeral
+pip install stactools-noaa-cdr
 ```
 
 ## Command-line Usage
@@ -31,10 +31,10 @@ pip install stactools-ephemeral
 Description of the command line functions
 
 ```shell
-stac ephemeral create-item source destination
+stac noaa-cdr create-item source destination
 ```
 
-Use `stac ephemeral --help` to see all subcommands and options.
+Use `stac noaa-cdr --help` to see all subcommands and options.
 
 ## Contributing
 
