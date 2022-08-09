@@ -51,3 +51,7 @@ class CommandsTest(CliTestCase):
             # assert item.other_attr...
 
             item.validate()
+
+    def test_download(self) -> None:
+        result = self.run_command("noaa-cdr download --help")
+        assert result.exit_code == 0
