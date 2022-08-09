@@ -6,12 +6,12 @@ import pystac
 from click import Command, Group
 from stactools.testing.cli_test import CliTestCase
 
-from stactools.noaa_cdr.commands import create_noaacdr_command
+from stactools.noaa_cdr.commands import create_noaa_cdr_command
 
 
 class CommandsTest(CliTestCase):
     def create_subcommand_functions(self) -> List[Callable[[Group], Command]]:
-        return [create_noaacdr_command]
+        return [create_noaa_cdr_command]
 
     def test_create_collection(self) -> None:
         with TemporaryDirectory() as tmp_dir:
@@ -20,7 +20,7 @@ class CommandsTest(CliTestCase):
             # Example:
             destination = os.path.join(tmp_dir, "collection.json")
 
-            result = self.run_command(f"noaacdr create-collection {destination}")
+            result = self.run_command(f"noaa-cdr create-collection {destination}")
 
             assert result.exit_code == 0, "\n{}".format(result.output)
 
@@ -40,7 +40,7 @@ class CommandsTest(CliTestCase):
             # Example:
             infile = "/path/to/asset.tif"
             destination = os.path.join(tmp_dir, "item.json")
-            result = self.run_command(f"noaacdr create-item {infile} {destination}")
+            result = self.run_command(f"noaa-cdr create-item {infile} {destination}")
             assert result.exit_code == 0, "\n{}".format(result.output)
 
             jsons = [p for p in os.listdir(tmp_dir) if p.endswith(".json")]
