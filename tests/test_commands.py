@@ -7,7 +7,7 @@ from click import Command, Group
 from stactools.testing.cli_test import CliTestCase
 
 from stactools.noaa_cdr.commands import create_noaa_cdr_command
-from stactools.noaa_cdr.constants import Names
+from stactools.noaa_cdr.constants import Name
 
 
 class CommandsTest(CliTestCase):
@@ -60,4 +60,4 @@ class CommandsTest(CliTestCase):
     def test_list(self) -> None:
         result = self.run_command("noaa-cdr list")
         assert result.exit_code == 0
-        assert result.stdout.strip() == "\n".join(Names)
+        assert result.stdout.strip() == "\n".join(Name)
