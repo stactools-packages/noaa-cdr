@@ -1,10 +1,13 @@
 import logging
+import os
 
 import click
-from click import Command, Group
+import requests
+from click import ClickException, Command, Group
+from tqdm import tqdm
 
-from stactools.noaa_cdr import stac
-from stactools.noaa_cdr.constants import Names
+from stactools.noaa_cdr import constants, stac
+from stactools.noaa_cdr.constants import Name
 
 logger = logging.getLogger(__name__)
 
@@ -65,12 +68,30 @@ def create_noaa_cdr_command(cli: Group) -> Command:
                 a list of available CDRs.
             destination (str): The directory in which to store the CDR data.
         """
-        raise NotImplementedError
+        resolved_name = next((n for n in Name if n == name), None)
+        if not resolved_name:
+            print("Run `stac noaa-cdr list` to see all supported names")
+            raise ClickException(f"invalid name: {name}")
+        os.makedirs(destination, exist_ok=True)
+        for href in constants.hrefs(resolved_name):
+            path = os.path.join(destination, os.path.basename(href))
+            if os.path.exists(path):
+                print(f"File already downloaded, skipping: {path}")
+            response = requests.get(href, stream=True)
+            with tqdm.wrapattr(
+                open(path, "wb"),
+                "write",
+                miniters=1,
+                desc=href.split("/")[-1],
+                total=int(response.headers.get("content-length", 0)),
+            ) as fout:
+                for chunk in response.iter_content(chunk_size=4096):
+                    fout.write(chunk)
 
     @noaa_cdr.command("list", short_help="List the names of all supported CDRs")
     def create_list_command() -> None:
         """Prints the names of all supported CDRs."""
-        for name in Names:
+        for name in Name:
             print(name.value)
 
     return noaa_cdr
