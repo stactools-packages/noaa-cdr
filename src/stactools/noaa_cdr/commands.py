@@ -53,4 +53,17 @@ def create_noaa_cdr_command(cli: Group) -> Command:
 
         return None
 
+    @noaa_cdr.command("download", short_help="Download data from NOAA's HTTP server")
+    @click.argument("name")
+    @click.argument("destination")
+    def create_download_command(name: str, destination: str) -> None:
+        """Downloads data from NOAA's HTTP server.
+
+        Args:
+            name (str): The name of the CDR. Use `stac noaa-cdr list` to print
+                a list of available CDRs.
+            destination (str): The directory in which to store the CDR data.
+        """
+        raise NotImplementedError
+
     return noaa_cdr
