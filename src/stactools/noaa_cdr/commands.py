@@ -8,17 +8,17 @@ from stactools.noaa_cdr import stac
 logger = logging.getLogger(__name__)
 
 
-def create_noaacdr_command(cli: Group) -> Command:
+def create_noaa_cdr_command(cli: Group) -> Command:
     """Creates the stactools-noaa-cdr command line utility."""
 
     @cli.group(
-        "noaacdr",
-        short_help=("Commands for working with stactools-noaa-cdr"),
+        "noaa-cdr",
+        short_help=("Commands for working with NOAA Climate Data Records (CDR)"),
     )
-    def noaacdr() -> None:
+    def noaa_cdr() -> None:
         pass
 
-    @noaacdr.command(
+    @noaa_cdr.command(
         "create-collection",
         short_help="Creates a STAC collection",
     )
@@ -37,7 +37,7 @@ def create_noaacdr_command(cli: Group) -> Command:
 
         return None
 
-    @noaacdr.command("create-item", short_help="Create a STAC item")
+    @noaa_cdr.command("create-item", short_help="Create a STAC item")
     @click.argument("source")
     @click.argument("destination")
     def create_item_command(source: str, destination: str) -> None:
@@ -53,4 +53,4 @@ def create_noaacdr_command(cli: Group) -> Command:
 
         return None
 
-    return noaacdr
+    return noaa_cdr
