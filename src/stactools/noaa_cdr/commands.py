@@ -4,6 +4,7 @@ import click
 from click import Command, Group
 
 from stactools.noaa_cdr import stac
+from stactools.noaa_cdr.constants import Names
 
 logger = logging.getLogger(__name__)
 
@@ -65,5 +66,11 @@ def create_noaa_cdr_command(cli: Group) -> Command:
             destination (str): The directory in which to store the CDR data.
         """
         raise NotImplementedError
+
+    @noaa_cdr.command("list", short_help="List the names of all supported CDRs")
+    def create_list_command() -> None:
+        """Prints the names of all supported CDRs."""
+        for name in Names:
+            print(name)
 
     return noaa_cdr
