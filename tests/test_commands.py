@@ -60,4 +60,4 @@ class CommandsTest(CliTestCase):
     def test_list(self) -> None:
         result = self.run_command("noaa-cdr list")
         assert result.exit_code == 0
-        assert result.stdout == "\n".join(Names)
+        assert result.stdout.strip() == "\n".join(Names)

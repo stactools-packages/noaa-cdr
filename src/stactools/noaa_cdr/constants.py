@@ -2,4 +2,5 @@ from enum import Enum
 
 
 class Names(str, Enum):
-    pass
+    # https://www.ncei.noaa.gov/products/climate-data-records/global-ocean-heat-content
+    OceanHeatContent = "ocean-heat-content"

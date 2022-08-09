@@ -71,6 +71,6 @@ def create_noaa_cdr_command(cli: Group) -> Command:
     def create_list_command() -> None:
         """Prints the names of all supported CDRs."""
         for name in Names:
-            print(name)
+            print(name.value)
 
     return noaa_cdr
