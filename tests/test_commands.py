@@ -3,6 +3,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable, List
 
 import pystac
+import pytest
 from click import Command, Group
 from stactools.testing.cli_test import CliTestCase
 
@@ -10,7 +11,10 @@ from stactools.noaa_cdr.commands import create_noaa_cdr_command
 from stactools.noaa_cdr.constants import Name
 
 
+@pytest.mark.usefixtures("external_data")
 class CommandsTest(CliTestCase):
+    netcdf_path_for_cogify: str
+
     def create_subcommand_functions(self) -> List[Callable[[Group], Command]]:
         return [create_noaa_cdr_command]
 
@@ -61,3 +65,10 @@ class CommandsTest(CliTestCase):
         result = self.run_command("noaa-cdr list")
         assert result.exit_code == 0
         assert result.stdout.strip() == "\n".join(Name)
+
+    def test_cogify(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            result = self.run_command(
+                f"noaa-cdr cogify {self.netcdf_path_for_cogify} -o {temporary_directory}"
+            )
+            assert result.exit_code == 0

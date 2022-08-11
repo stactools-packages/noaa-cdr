@@ -1,11 +1,13 @@
 import logging
 import os
+from typing import Optional
 
 import click
 import requests
-from click import ClickException, Command, Group
+from click import ClickException, Command, Group, Path
 from tqdm import tqdm
 
+import stactools.noaa_cdr
 from stactools.noaa_cdr import constants, stac
 from stactools.noaa_cdr.constants import Name
 
@@ -93,5 +95,27 @@ def create_noaa_cdr_command(cli: Group) -> Command:
         """Prints the names of all supported CDRs."""
         for name in Name:
             print(name.value)
+
+    @noaa_cdr.command(
+        "cogify",
+        short_help="Create a Cloud-Optimized GeoTIFF (COG) from a CDR NetCDF file",
+    )
+    @click.argument("infile", type=Path(exists=True))
+    @click.option("-o", "--outdir", help="The output directory")
+    def create_cog_command(infile: str, outdir: Optional[Path]) -> None:
+        """Creates a Cloud-Optimized GeoTIFF (COG) from a CDR NetCDF file.
+
+        The COG will have the same file name but with a .tif extension.
+
+        Args:
+            infile (str): The input NetCDF file.
+            outdir (click.Path, optional): The output directory. If not
+                provided, the tif will be created in the same directory as the
+                NetCDF.
+        """
+        paths = stactools.noaa_cdr.cogify(
+            infile, None if outdir is None else str(outdir)
+        )
+        print(f"Wrote {len(paths)} COGs to {os.path.dirname(paths[0])}")
 
     return noaa_cdr
