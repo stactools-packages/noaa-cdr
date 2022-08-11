@@ -1,9 +1,10 @@
 import stactools.core
 from stactools.cli.registry import Registry
 
+from stactools.noaa_cdr.cogify import cogify
 from stactools.noaa_cdr.stac import create_collection, create_item
 
-__all__ = ["create_collection", "create_item"]
+__all__ = ["create_collection", "create_item", "cogify"]
 
 stactools.core.use_fsspec()
 
