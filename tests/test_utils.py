@@ -1,9 +1,11 @@
 import datetime
 
 import pytest
+import xarray
 
 from stactools.noaa_cdr import utils
 from stactools.noaa_cdr.constants import TimeResolution
+from tests import test_data
 
 
 def test_add_months_to_datetime_integer() -> None:
@@ -31,3 +33,15 @@ def test_time_interval_as_str(
     time: datetime.datetime, time_resolution: TimeResolution, expected: str
 ) -> None:
     assert utils.time_interval_as_str(time, time_resolution) == expected
+
+
+def test_data_variable_name() -> None:
+    path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
+    with xarray.open_dataset(path, decode_times=False) as dataset:
+        assert utils.data_variable_name(dataset) == "h18_hc"
+
+    path = test_data.get_external_data(
+        "mean_halosteric_sea_level_anomaly_0-2000_yearly.nc"
+    )
+    with xarray.open_dataset(path, decode_times=False) as dataset:
+        assert utils.data_variable_name(dataset) == "b_mm_hs"

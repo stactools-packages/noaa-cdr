@@ -50,14 +50,14 @@ def cogify(path: str, outdir: Optional[str] = None) -> List[str]:
                 "Encountered unexpected time_coverage_resolution: "
                 f"{dataset.time_coverage_resolution}"
             )
-        for i, month_offset in enumerate(dataset.h18_hc.time):
+        variable = utils.data_variable_name(dataset)
+        for i, month_offset in enumerate(dataset[variable].time):
             time = utils.add_months_to_datetime(BASE_TIME, month_offset)
             suffix = utils.time_interval_as_str(time, time_resolution)
             output_path = os.path.join(
                 outdir, f"{os.path.splitext(os.path.basename(path))[0]}_{suffix}.tif"
             )
-            # TODO learn the variable name from the netcdf metadata
-            values = dataset.h18_hc.isel(time=i).values.squeeze()
+            values = dataset[variable].isel(time=i).values.squeeze()
             with MemoryFile() as memory_file:
                 with memory_file.open(**GTIFF_PROFILE) as open_memory_file:
                     open_memory_file.write(values, 1)
