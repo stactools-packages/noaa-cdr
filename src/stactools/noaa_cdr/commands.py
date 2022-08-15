@@ -32,6 +32,7 @@ def create_noaa_cdr_command(cli: Group) -> Command:
     def create_collection_command(destination: str) -> None:
         """Creates a STAC Collection
 
+        \b
         Args:
             destination (str): An HREF for the Collection JSON
         """
@@ -49,6 +50,7 @@ def create_noaa_cdr_command(cli: Group) -> Command:
     def create_item_command(source: str, destination: str) -> None:
         """Creates a STAC Item
 
+        \b
         Args:
             source (str): HREF of the Asset associated with the Item
             destination (str): An HREF for the STAC Item
@@ -65,6 +67,7 @@ def create_noaa_cdr_command(cli: Group) -> Command:
     def create_download_command(name: str, destination: str) -> None:
         """Downloads data from NOAA's HTTP server.
 
+        \b
         Args:
             name (str): The name of the CDR. Use `stac noaa-cdr list` to print
                 a list of available CDRs.
@@ -107,6 +110,7 @@ def create_noaa_cdr_command(cli: Group) -> Command:
 
         The COG will have the same file name but with a .tif extension.
 
+        \b
         Args:
             infile (str): The input NetCDF file.
             outdir (click.Path, optional): The output directory. If not
