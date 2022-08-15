@@ -13,6 +13,10 @@ COGIFY_PARAMETERS = [
     ("heat_content_anomaly_0-2000_seasonal.nc", 69),
     ("heat_content_anomaly_0-2000_yearly.nc", 17),
     ("mean_halosteric_sea_level_anomaly_0-2000_yearly.nc", 17),
+    ("mean_salinity_anomaly_0-2000_yearly.nc", 17),
+    ("mean_temperature_anomaly_0-2000_yearly.nc", 17),
+    ("mean_thermosteric_sea_level_anomaly_0-2000_yearly.nc", 17),
+    ("mean_total_steric_sea_level_anomaly_0-2000_yearly.nc", 17),
 ]
 
 
