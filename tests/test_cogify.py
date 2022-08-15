@@ -6,7 +6,13 @@ import pytest
 from stactools import noaa_cdr
 from tests import test_data
 
-COGIFY_PARAMETERS = [("heat_content_anomaly_0-2000_yearly.nc", 17)]
+COGIFY_PARAMETERS = [
+    ("heat_content_anomaly_0-700_yearly.nc", 67),
+    ("heat_content_anomaly_0-2000_monthly.nc", 207),
+    ("heat_content_anomaly_0-2000_pentad.nc", 63),
+    ("heat_content_anomaly_0-2000_seasonal.nc", 69),
+    ("heat_content_anomaly_0-2000_yearly.nc", 17),
+]
 
 
 @pytest.mark.parametrize("infile,num_cogs", COGIFY_PARAMETERS)
