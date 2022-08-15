@@ -113,6 +113,8 @@ def create_noaa_cdr_command(cli: Group) -> Command:
                 provided, the tif will be created in the same directory as the
                 NetCDF.
         """
+        if outdir:
+            os.makedirs(str(outdir), exist_ok=True)
         paths = stactools.noaa_cdr.cogify(
             infile, None if outdir is None else str(outdir)
         )
