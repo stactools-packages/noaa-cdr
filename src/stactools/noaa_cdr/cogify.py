@@ -56,10 +56,13 @@ def cogify(path: str, outdir: Optional[str] = None) -> List[str]:
             output_path = os.path.join(
                 outdir, f"{os.path.splitext(os.path.basename(path))[0]}_{suffix}.tif"
             )
+            # TODO learn the variable name from the netcdf metadata
             values = dataset.h18_hc.isel(time=i).values.squeeze()
             with MemoryFile() as memory_file:
                 with memory_file.open(**GTIFF_PROFILE) as open_memory_file:
                     open_memory_file.write(values, 1)
+                    # TODO save the month offset and time resolution in the TIFF
+                    # tags for later discovery
                     rasterio.shutil.copy(open_memory_file, output_path, **COG_PROFILE)
             output_paths.append(output_path)
     return output_paths
