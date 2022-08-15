@@ -41,9 +41,14 @@ def hrefs(name: Name) -> List[str]:
             "mean_thermosteric_sea_level",
             "mean_total_steric_sea_level",
         ]:
-            for depth in ["700", "2000"]:
+            for depth in ["100", "700", "2000"]:
                 for period in ["monthly", "pentad", "seasonal", "yearly"]:
                     if period == "monthly" and variable != "heat_content":
+                        continue
+                    elif depth == "100" and variable not in [
+                        "mean_salinity",
+                        "mean_temperature",
+                    ]:
                         continue
                     hrefs.append(
                         "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/"
