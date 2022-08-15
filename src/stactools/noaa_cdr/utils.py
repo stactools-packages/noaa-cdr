@@ -2,6 +2,7 @@ import datetime
 import math
 
 import dateutil.relativedelta
+import xarray
 
 from .constants import TimeResolution
 
@@ -54,6 +55,21 @@ def time_interval_as_str(
         return f"{time.year - 2}-{time.year + 2}"
     else:
         raise NotImplementedError
+
+
+def data_variable_name(dataset: xarray.Dataset) -> str:
+    """Returns the variable name that points to a four-dimensional data array.
+
+    Args:
+        dataset (xarray.Dataset): An open xarray Dataset
+
+    Returns:
+        str: The variable name.
+    """
+    for variable in dataset.variables:
+        if len(dataset[variable].sizes) == 4:
+            return str(variable)
+    raise Exception("No 4-dimensional variable found in this dataset.")
 
 
 def _month_to_season(month: int) -> str:
