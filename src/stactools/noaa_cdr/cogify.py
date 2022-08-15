@@ -10,6 +10,8 @@ from rasterio import Affine, MemoryFile
 
 from stactools.noaa_cdr import utils
 
+from .constants import TimeResolution
+
 BASE_TIME = datetime.datetime(1955, 1, 1)
 GTIFF_PROFILE = {
     "crs": "epsg:4326",
@@ -39,11 +41,20 @@ def cogify(path: str, outdir: Optional[str] = None) -> List[str]:
         outdir = os.path.dirname(path)
     output_paths = list()
     with xarray.open_dataset(path, decode_times=False) as dataset:
+        time_resolution = next(
+            (t for t in TimeResolution if t.value == dataset.time_coverage_resolution),
+            None,
+        )
+        if time_resolution is None:
+            raise Exception(
+                "Encountered unexpected time_coverage_resolution: "
+                f"{dataset.time_coverage_resolution}"
+            )
         for i, month_offset in enumerate(dataset.h18_hc.time):
             time = utils.add_months_to_datetime(BASE_TIME, month_offset)
-            year = time.year
+            suffix = utils.time_interval_as_str(time, time_resolution)
             output_path = os.path.join(
-                outdir, f"{os.path.splitext(os.path.basename(path))[0]}_{year}.tif"
+                outdir, f"{os.path.splitext(os.path.basename(path))[0]}_{suffix}.tif"
             )
             values = dataset.h18_hc.isel(time=i).values.squeeze()
             with MemoryFile() as memory_file:
