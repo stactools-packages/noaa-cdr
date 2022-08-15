@@ -24,9 +24,9 @@ def test_add_months_to_datetime_fractional() -> None:
     "time,time_resolution,expected",
     [
         (datetime.datetime(2022, 6, 15), TimeResolution.Monthly, "2022-06"),
-        (datetime.datetime(2022, 2, 15), TimeResolution.Seasonal, "2022-Winter"),
+        (datetime.datetime(2022, 2, 15), TimeResolution.Seasonal, "2022-Q1"),
         (datetime.datetime(2022, 7, 15), TimeResolution.Yearly, "2022"),
-        (datetime.datetime(2022, 7, 15), TimeResolution.Pentadal, "2020-2024"),
+        (datetime.datetime(2022, 7, 15), TimeResolution.Pentadal, "2020-2025"),
     ],
 )
 def test_time_interval_as_str(
