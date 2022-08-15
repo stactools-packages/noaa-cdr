@@ -3,6 +3,8 @@ import math
 
 import dateutil.relativedelta
 
+from .constants import TimeResolution
+
 
 def add_months_to_datetime(
     base_time: datetime.datetime, months: float
@@ -32,3 +34,34 @@ def add_months_to_datetime(
         )
     else:
         return time
+
+
+def time_interval_as_str(
+    time: datetime.datetime, time_resolution: TimeResolution
+) -> str:
+    """Returns the given time interval as a string.
+
+    TODO
+    """
+    if time_resolution is TimeResolution.Monthly:
+        return time.strftime("%Y-%m")
+    elif time_resolution is TimeResolution.Seasonal:
+        season = _month_to_season(time.month)
+        return f"{time.year}-{season}"
+    elif time_resolution is TimeResolution.Yearly:
+        return time.strftime("%Y")
+    elif time_resolution is TimeResolution.Pentadal:
+        return f"{time.year - 2}-{time.year + 2}"
+    else:
+        raise NotImplementedError
+
+
+def _month_to_season(month: int) -> str:
+    if month in (1, 2, 3):
+        return "Winter"
+    elif month in (4, 5, 6):
+        return "Spring"
+    elif month in (7, 8, 9):
+        return "Summer"
+    else:
+        return "Fall"
