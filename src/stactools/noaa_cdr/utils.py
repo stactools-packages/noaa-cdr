@@ -42,7 +42,17 @@ def time_interval_as_str(
 ) -> str:
     """Returns the given time interval as a string.
 
-    TODO
+    Yearly and monthly values are turned into simple strings, e.g. "2020" and
+    "2020-06", respectively. Pentadal are turned into a five-year interval with
+    an exclusive top bound, e.g. "2018-2023". Seasonal values are given a "Q1",
+    "Q2", "Q3", or "Q4" suffix.
+
+    Args:
+        time (datetime.datetime): The center time in the interval.
+        time_resolution (TimeResolution): The length of the interval.
+
+    Returns:
+        str: The time interval as a string.
     """
     if time_resolution is TimeResolution.Monthly:
         return time.strftime("%Y-%m")
@@ -52,7 +62,7 @@ def time_interval_as_str(
     elif time_resolution is TimeResolution.Yearly:
         return time.strftime("%Y")
     elif time_resolution is TimeResolution.Pentadal:
-        return f"{time.year - 2}-{time.year + 2}"
+        return f"{time.year - 2}-{time.year + 3}"
     else:
         raise NotImplementedError
 
@@ -74,10 +84,10 @@ def data_variable_name(dataset: xarray.Dataset) -> str:
 
 def _month_to_season(month: int) -> str:
     if month in (1, 2, 3):
-        return "Winter"
+        return "Q1"
     elif month in (4, 5, 6):
-        return "Spring"
+        return "Q2"
     elif month in (7, 8, 9):
-        return "Summer"
+        return "Q3"
     else:
-        return "Fall"
+        return "Q4"
