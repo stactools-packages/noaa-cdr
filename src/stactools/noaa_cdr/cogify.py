@@ -2,12 +2,13 @@ import datetime
 import os.path
 from typing import List, Optional
 
-import dateutil.relativedelta
 import numpy
 import rasterio
 import rasterio.shutil
 import xarray
 from rasterio import Affine, MemoryFile
+
+from stactools.noaa_cdr import utils
 
 BASE_TIME = datetime.datetime(1955, 1, 1)
 GTIFF_PROFILE = {
@@ -39,7 +40,7 @@ def cogify(path: str, outdir: Optional[str] = None) -> List[str]:
     output_paths = list()
     with xarray.open_dataset(path, decode_times=False) as dataset:
         for i, month_offset in enumerate(dataset.h18_hc.time):
-            time = BASE_TIME + dateutil.relativedelta.relativedelta(months=month_offset)
+            time = utils.add_months_to_datetime(BASE_TIME, month_offset)
             year = time.year
             output_path = os.path.join(
                 outdir, f"{os.path.splitext(os.path.basename(path))[0]}_{year}.tif"

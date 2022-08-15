@@ -8,6 +8,20 @@ class Name(str, Enum):
     OceanHeatContent = "ocean-heat-content"
 
 
+@unique
+class TimeResolution(str, Enum):
+    """Used to parse ``time_coverage_resolution`` in NetCDF files.
+
+    We _could_ use a real datetime package, e.g. pandas's Timedelta, but since
+    we only need to handle four cases, this simple structure seemed easier.
+    """
+
+    Monthly = "P01M"
+    Seasonal = "P03M"
+    Yearly = "P01Y"
+    Pentadal = "P05Y"
+
+
 def hrefs(name: Name) -> List[str]:
     """Returns all asset hrefs for the given CDR name.
 
