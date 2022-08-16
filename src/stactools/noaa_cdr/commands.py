@@ -30,7 +30,17 @@ def create_noaa_cdr_command(cli: Group) -> Command:
     )
     @click.argument("cdr-name")
     @click.argument("destination")
-    def create_collection_command(cdr_name: str, destination: str) -> None:
+    @click.option(
+        "-s",
+        "--include-self-link",
+        is_flag=True,
+        default=False,
+        show_default=True,
+        help="Include a self link in the collection",
+    )
+    def create_collection_command(
+        cdr_name: str, destination: str, include_self_link: bool
+    ) -> None:
         """Creates a STAC Collection
 
         \b
@@ -42,7 +52,7 @@ def create_noaa_cdr_command(cli: Group) -> Command:
         cdr = Cdr.from_value(cdr_name)
         collection = stac.create_collection(cdr)
         collection.set_self_href(destination)
-        collection.save_object()
+        collection.save_object(include_self_link=include_self_link)
         return None
 
     @noaa_cdr.command("create-item", short_help="Create a STAC item")
