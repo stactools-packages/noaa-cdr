@@ -13,7 +13,27 @@
 
 ## STAC Examples
 
-TODO
+### Layout
+
+Each Climate Data Record can have multiple subdatasets, which themselves can be
+organized by time intervals and other attributes. We have chosen to create one
+STAC collection for each CDR, and to organize items in that collection by time
+interval and time window. Subdatasets are included as COG assets. Not all time
+intervals, time windows, and other attributes are represented in each
+subdataset, so any given item may only have a subset of available subdatasets.
+Tables of the time windows and other attributes for each supported CDR are
+included below.
+
+#### Ocean heat content
+
+| Subdataset | Depths | Time intervals |
+| -- | -- | -- |
+| heat-content | 0-700, 0-2000 | monthly, seasonal, yearly, pentadal |
+| mean-halosteric-sea-level | 0-700, 0-2000 | seasonal, yearly, pentadal |
+| mean-salinity | 0-100, 0-700, 0-2000 | seasonal, yearly, pentadal |
+| mean-temperature | 0-100, 0-700, 0-2000 | seasonal, yearly, pentadal |
+| mean-thermosteric-sea-level | 0-700, 0-2000 | seasonal, yearly, pentadal |
+| mean-total-steric-sea-level | 0-700, 0-2000 | seasonal, yearly, pentadal |
 
 ## Installation
 
