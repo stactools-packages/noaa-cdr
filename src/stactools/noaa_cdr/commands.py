@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 import stactools.noaa_cdr
 from stactools.noaa_cdr import constants, stac
-from stactools.noaa_cdr.constants import Name
+from stactools.noaa_cdr.constants import Cdr
 
 logger = logging.getLogger(__name__)
 
@@ -28,20 +28,21 @@ def create_noaa_cdr_command(cli: Group) -> Command:
         "create-collection",
         short_help="Creates a STAC collection",
     )
+    @click.argument("cdr-name")
     @click.argument("destination")
-    def create_collection_command(destination: str) -> None:
+    def create_collection_command(cdr_name: str, destination: str) -> None:
         """Creates a STAC Collection
 
         \b
         Args:
+            cdr_name (str): The name of a CDR. Use `stac noaa-cdr list` to see a
+                list of available names.
             destination (str): An HREF for the Collection JSON
         """
-        collection = stac.create_collection()
-
+        cdr = Cdr.from_value(cdr_name)
+        collection = stac.create_collection(cdr)
         collection.set_self_href(destination)
-
         collection.save_object()
-
         return None
 
     @noaa_cdr.command("create-item", short_help="Create a STAC item")
@@ -55,11 +56,7 @@ def create_noaa_cdr_command(cli: Group) -> Command:
             source (str): HREF of the Asset associated with the Item
             destination (str): An HREF for the STAC Item
         """
-        item = stac.create_item(source)
-
-        item.save_object(dest_href=destination)
-
-        return None
+        raise NotImplementedError
 
     @noaa_cdr.command("download", short_help="Download data from NOAA's HTTP server")
     @click.argument("name")
@@ -73,7 +70,7 @@ def create_noaa_cdr_command(cli: Group) -> Command:
                 a list of available CDRs.
             destination (str): The directory in which to store the CDR data.
         """
-        resolved_name = next((n for n in Name if n == name), None)
+        resolved_name = next((n for n in Cdr if n == name), None)
         if not resolved_name:
             print("Run `stac noaa-cdr list` to see all supported names")
             raise ClickException(f"invalid name: {name}")
@@ -96,7 +93,7 @@ def create_noaa_cdr_command(cli: Group) -> Command:
     @noaa_cdr.command("list", short_help="List the names of all supported CDRs")
     def create_list_command() -> None:
         """Prints the names of all supported CDRs."""
-        for name in Name:
+        for name in Cdr:
             print(name.value)
 
     @noaa_cdr.command(
