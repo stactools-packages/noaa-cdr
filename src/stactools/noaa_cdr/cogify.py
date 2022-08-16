@@ -41,15 +41,7 @@ def cogify(path: str, outdir: Optional[str] = None) -> List[str]:
         outdir = os.path.dirname(path)
     output_paths = list()
     with xarray.open_dataset(path, decode_times=False) as dataset:
-        time_resolution = next(
-            (t for t in TimeResolution if t.value == dataset.time_coverage_resolution),
-            None,
-        )
-        if time_resolution is None:
-            raise Exception(
-                "Encountered unexpected time_coverage_resolution: "
-                f"{dataset.time_coverage_resolution}"
-            )
+        time_resolution = TimeResolution.from_value(dataset.time_coverage_resolution)
         variable = utils.data_variable_name(dataset)
         for i, month_offset in enumerate(dataset[variable].time):
             time = utils.add_months_to_datetime(BASE_TIME, month_offset)

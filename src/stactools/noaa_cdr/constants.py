@@ -21,6 +21,30 @@ class TimeResolution(str, Enum):
     Yearly = "P01Y"
     Pentadal = "P05Y"
 
+    @classmethod
+    def from_value(cls, value: str) -> "TimeResolution":
+        """Finds the TimeResolution that matches the provided value.
+
+        Args:
+            value (str): The string value of the TimeResolution, per NetCDF standard.
+
+        Returns:
+            TimeResolution: The resolved time resolution.
+
+        Raises:
+            ValueError: Raised if the value is not a valid TimeResolution.
+        """
+        time_resolution = next(
+            (t for t in TimeResolution if t.value == value),
+            None,
+        )
+        if time_resolution is None:
+            raise ValueError(
+                "Encountered unexpected time_coverage_resolution: " f"{value}"
+            )
+        else:
+            return time_resolution
+
 
 def hrefs(name: Name) -> List[str]:
     """Returns all asset hrefs for the given CDR name.
