@@ -13,6 +13,9 @@
 
 ## STAC Examples
 
+- Collections
+  - [Ocean heat content](examples/ocean-heat-content/collection.json)
+
 ### Layout
 
 Each Climate Data Record can have multiple subdatasets, which themselves can be
@@ -43,7 +46,11 @@ pip install stactools-noaa-cdr
 
 ## Command-line Usage
 
-TODO
+To create a collection, e.g. for the [Ocean heat content CDR](https://www.ncei.noaa.gov/products/climate-data-records/global-ocean-heat-content):
+
+```sh
+stac create-collection noaa-cdr ocean-heat-content examples/ocean-heat-content/collection.json
+```
 
 ## Contributing
 
