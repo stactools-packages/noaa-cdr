@@ -45,8 +45,3 @@ def test_data_variable_name() -> None:
     )
     with xarray.open_dataset(path, decode_times=False) as dataset:
         assert utils.data_variable_name(dataset) == "b_mm_hs"
-
-
-def test_asset_key_to_title() -> None:
-    key = "heat_content_anomaly_0-700_monthly"
-    assert utils.asset_key_to_title(key) == "Heat content anomaly 0-700 monthly"
