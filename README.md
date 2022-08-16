@@ -6,7 +6,7 @@
 - Package: `stactools.noaa_cdr`
 - [stactools-noaa-cdr on PyPI](https://pypi.org/project/stactools-noaa-cdr/)
 - Owner: @gadomski
-- [Dataset homepage](https://www.ncei.noaa.gov/products/climate-data-records/global-ocean-heat-content)
+- [Dataset homepage](https://www.ncei.noaa.gov/products/climate-data-records/)
 - STAC extensions used: None
 - Extra fields: None
 - [Browse the example in human-readable form](https://radiantearth.github.io/stac-browser/#/external/raw.githubusercontent.com/stactools-packages/noaa-cdr/main/examples/collection.json)
