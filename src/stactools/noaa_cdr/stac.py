@@ -2,7 +2,7 @@ import os.path
 
 from pystac import Asset, CatalogType, Collection
 
-from . import constants, utils
+from . import constants
 from .constants import LICENSE, PROVIDERS, Cdr
 
 DEFAULT_CATALOG_TYPE = CatalogType.SELF_CONTAINED
@@ -15,6 +15,8 @@ def create_collection(
 
     Args:
         cdr (Cdr): The CDR.
+        catalog_type (CatalogType): The type of catalog to create.
+
     Returns:
         Collection: STAC Collection object
     """
@@ -30,6 +32,15 @@ def create_collection(
     )
     for href in constants.hrefs(cdr):
         key = os.path.splitext(os.path.basename(href))[0]
-        collection.add_asset(key, Asset(href=href, title=utils.asset_key_to_title(key)))
+        collection.add_asset(
+            key,
+            Asset(
+                href=href,
+                title=cdr.asset_title(key),
+                description=cdr.asset_description(key),
+                media_type="application/netcdf",
+                roles=["data"],
+            ),
+        )
 
     return collection

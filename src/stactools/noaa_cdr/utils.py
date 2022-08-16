@@ -91,15 +91,3 @@ def _month_to_season(month: int) -> str:
         return "Q3"
     else:
         return "Q4"
-
-
-def asset_key_to_title(key: str) -> str:
-    """Converts an asset key to a human-readable title.
-
-    Args:
-        key (str): The asset key.
-
-    Returns:
-        str: The title.
-    """
-    return key.replace("_", " ").capitalize()

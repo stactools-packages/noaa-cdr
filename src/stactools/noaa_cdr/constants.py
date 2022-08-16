@@ -1,6 +1,8 @@
 import datetime
+import importlib.resources
+import json
 from enum import Enum, unique
-from typing import List
+from typing import List, cast
 
 from pystac import Extent, Provider, ProviderRole, SpatialExtent, TemporalExtent
 
@@ -23,6 +25,11 @@ PROVIDERS = [
     )
 ]
 LICENSE = "proprietary"
+COLLECTION_ASSET_METADATA = json.loads(
+    importlib.resources.read_text(
+        "stactools.noaa_cdr", "collection-asset-metadata.json"
+    )
+)
 
 
 @unique
@@ -105,6 +112,30 @@ class Cdr(str, Enum):
             return TemporalExtent(intervals=[[datetime.datetime(1955, 1, 1), None]])
         else:
             raise NotImplementedError
+
+    def asset_title(self, key: str) -> str:
+        """Returns the asset title for the given key.
+
+        Args:
+            key (str): The asset key.
+
+        Returns:
+            str: The asset title.
+        """
+        # Cast is appropriate because we know the structure of the metadata json file.
+        return cast(str, COLLECTION_ASSET_METADATA[self][key]["title"])
+
+    def asset_description(self, key: str) -> str:
+        """Returns the asset description for the given key.
+
+        Args:
+            key (str): The asset key.
+
+        Returns:
+            str: The asset description.
+        """
+        # Cast is appropriate because we know the structure of the metadata json file.
+        return cast(str, COLLECTION_ASSET_METADATA[self][key]["description"])
 
 
 @unique
