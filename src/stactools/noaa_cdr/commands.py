@@ -103,8 +103,8 @@ def create_noaa_cdr_command(cli: Group) -> Command:
     @noaa_cdr.command("list", short_help="List the names of all supported CDRs")
     def create_list_command() -> None:
         """Prints the names of all supported CDRs."""
-        for name in Cdr:
-            print(name.value)
+        for cdr in Cdr:
+            print(cdr.value)
 
     @noaa_cdr.command(
         "cogify",
