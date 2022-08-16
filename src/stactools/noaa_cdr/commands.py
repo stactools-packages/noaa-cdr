@@ -4,7 +4,7 @@ from typing import Optional
 
 import click
 import requests
-from click import ClickException, Command, Group, Path
+from click import Command, Group, Path
 from tqdm import tqdm
 
 import stactools.noaa_cdr
@@ -80,12 +80,9 @@ def create_noaa_cdr_command(cli: Group) -> Command:
                 a list of available CDRs.
             destination (str): The directory in which to store the CDR data.
         """
-        resolved_name = next((n for n in Cdr if n == name), None)
-        if not resolved_name:
-            print("Run `stac noaa-cdr list` to see all supported names")
-            raise ClickException(f"invalid name: {name}")
+        cdr = Cdr.from_value(name)
         os.makedirs(destination, exist_ok=True)
-        for href in constants.hrefs(resolved_name):
+        for href in constants.hrefs(cdr):
             path = os.path.join(destination, os.path.basename(href))
             if os.path.exists(path):
                 print(f"File already downloaded, skipping: {path}")
