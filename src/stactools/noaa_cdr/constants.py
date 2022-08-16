@@ -176,17 +176,17 @@ class TimeResolution(str, Enum):
             return time_resolution
 
 
-def hrefs(name: Cdr) -> List[str]:
-    """Returns all asset hrefs for the given CDR name.
+def hrefs(cdr: Cdr) -> List[str]:
+    """Returns all asset hrefs for the given CDR.
 
     Args:
-        name (str): The CDR Name.
+        cdr (Cdr): The CDR.
 
     Returns:
         List[str]: The CDR hrefs.
     """
     hrefs = []
-    if name == Cdr.OceanHeatContent:
+    if cdr == Cdr.OceanHeatContent:
         for variable in [
             "heat_content",
             "mean_halosteric_sea_level",
