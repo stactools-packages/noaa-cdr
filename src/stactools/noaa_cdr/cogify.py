@@ -2,6 +2,7 @@ import datetime
 import os.path
 from typing import List, Optional
 
+import fsspec
 import numpy
 import rasterio
 import rasterio.shutil
@@ -26,35 +27,44 @@ GTIFF_PROFILE = {
 COG_PROFILE = {"compress": "deflate", "blocksize": 512, "driver": "COG"}
 
 
-def cogify(path: str, outdir: Optional[str] = None) -> List[str]:
+def cogify(href: str, outdir: Optional[str] = None) -> List[str]:
     """Creates a Cloud-Optimized GeoTIFF from a CDR NetCDF.
 
     Args:
-        path (str): Input NetCDF path.
+        href (str): Input NetCDF href.
         outdir (str, optional): Output directory for the COG. Defaults to None.
-            If None, the COG will be created alongside the input NetCDF.
+            If None, the COG will be created alongside the input NetCDF. If href
+            is a url and outdir is not provided, an Exception is raised.
 
     Returns:
         str: The path of the COG.
     """
     if outdir is None:
-        outdir = os.path.dirname(path)
+        if href.startswith("http"):
+            raise ValueError(f"Output directory is required for http hrefs: {href}")
+        outdir = os.path.dirname(href)
     output_paths = list()
-    with xarray.open_dataset(path, decode_times=False) as dataset:
-        time_resolution = TimeResolution.from_value(dataset.time_coverage_resolution)
-        variable = utils.data_variable_name(dataset)
-        for i, month_offset in enumerate(dataset[variable].time):
-            time = utils.add_months_to_datetime(BASE_TIME, month_offset)
-            suffix = utils.time_interval_as_str(time, time_resolution)
-            output_path = os.path.join(
-                outdir, f"{os.path.splitext(os.path.basename(path))[0]}_{suffix}.tif"
+    with fsspec.open(href) as file:
+        with xarray.open_dataset(file, decode_times=False) as dataset:
+            time_resolution = TimeResolution.from_value(
+                dataset.time_coverage_resolution
             )
-            values = dataset[variable].isel(time=i).values.squeeze()
-            with MemoryFile() as memory_file:
-                with memory_file.open(**GTIFF_PROFILE) as open_memory_file:
-                    open_memory_file.write(values, 1)
-                    # TODO save the month offset and time resolution in the TIFF
-                    # tags for later discovery
-                    rasterio.shutil.copy(open_memory_file, output_path, **COG_PROFILE)
-            output_paths.append(output_path)
+            variable = utils.data_variable_name(dataset)
+            for i, month_offset in enumerate(dataset[variable].time):
+                time = utils.add_months_to_datetime(BASE_TIME, month_offset)
+                suffix = utils.time_interval_as_str(time, time_resolution)
+                output_path = os.path.join(
+                    outdir,
+                    f"{os.path.splitext(os.path.basename(href))[0]}_{suffix}.tif",
+                )
+                values = dataset[variable].isel(time=i).values.squeeze()
+                with MemoryFile() as memory_file:
+                    with memory_file.open(**GTIFF_PROFILE) as open_memory_file:
+                        open_memory_file.write(values, 1)
+                        # TODO save the month offset and time resolution in the TIFF
+                        # tags for later discovery
+                        rasterio.shutil.copy(
+                            open_memory_file, output_path, **COG_PROFILE
+                        )
+                output_paths.append(output_path)
     return output_paths
