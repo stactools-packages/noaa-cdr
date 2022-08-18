@@ -1,6 +1,7 @@
 import datetime
 import os.path
-from typing import List, Optional
+from dataclasses import dataclass
+from typing import Any, Dict, Hashable, List, Optional
 
 import fsspec
 import numpy
@@ -27,7 +28,23 @@ GTIFF_PROFILE = {
 COG_PROFILE = {"compress": "deflate", "blocksize": 512, "driver": "COG"}
 
 
-def cogify(href: str, outdir: Optional[str] = None) -> List[str]:
+@dataclass(frozen=True)
+class Cog:
+    path: str
+    time_resolution: TimeResolution
+    datetime: datetime.datetime
+    attributes: Dict[Hashable, Any]
+
+    def time_interval_as_str(self) -> str:
+        """Returns this COGs time resolution and datetime as a string.
+
+        Returns:
+            str: The time interval
+        """
+        return utils.time_interval_as_str(self.datetime, self.time_resolution)
+
+
+def cogify(href: str, outdir: Optional[str] = None) -> List[Cog]:
     """Creates a Cloud-Optimized GeoTIFF from a CDR NetCDF.
 
     Args:
@@ -37,13 +54,13 @@ def cogify(href: str, outdir: Optional[str] = None) -> List[str]:
             is a url and outdir is not provided, an Exception is raised.
 
     Returns:
-        str: The path of the COG.
+        Cog: The created Cog.
     """
     if outdir is None:
         if href.startswith("http"):
             raise ValueError(f"Output directory is required for http hrefs: {href}")
         outdir = os.path.dirname(href)
-    output_paths = list()
+    cogs = list()
     with fsspec.open(href) as file:
         with xarray.open_dataset(file, decode_times=False) as dataset:
             time_resolution = TimeResolution.from_value(
@@ -66,5 +83,5 @@ def cogify(href: str, outdir: Optional[str] = None) -> List[str]:
                         rasterio.shutil.copy(
                             open_memory_file, output_path, **COG_PROFILE
                         )
-                output_paths.append(output_path)
-    return output_paths
+                cogs.append(Cog(output_path, time_resolution, time, dataset.attrs))
+    return cogs

@@ -2,9 +2,12 @@ import importlib.resources
 import json
 from enum import Enum, unique
 
+import shapely.geometry
 from pystac import Provider, ProviderRole, SpatialExtent
 
-SPATIAL_EXTENT = SpatialExtent(bboxes=[-180.0, -90.0, 180.0, 90.0])
+BBOX = [-180.0, -90.0, 180.0, 90.0]
+GEOMETRY = shapely.geometry.mapping(shapely.geometry.box(*BBOX))
+SPATIAL_EXTENT = SpatialExtent(bboxes=BBOX)
 PROVIDERS = [
     Provider(
         name="National Centers for Environmental Information",

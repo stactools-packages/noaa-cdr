@@ -1,9 +1,10 @@
 import os.path
-from typing import Type
+from typing import List, Type
 
-from pystac import Asset, CatalogType, Collection
+from pystac import Asset, CatalogType, Collection, Item
 
 from .cdr import Cdr
+from .cogify import cogify
 from .constants import LICENSE, PROVIDERS
 
 DEFAULT_CATALOG_TYPE = CatalogType.SELF_CONTAINED
@@ -45,3 +46,27 @@ def create_collection(
         )
 
     return collection
+
+
+def create_items(
+    cdr: Type[Cdr], cog_directory: str, hrefs: List[str] = []
+) -> List[Item]:
+    """Creates COG items for the provided CDR.
+
+    Args:
+        cdr (Type[Cdr]): The CDR type.
+        cog_directory (str): Directory in which to store the COGs.
+        hrefs (List[str], optional): The NetCDF hrefs to use to create the
+            items. Defaults to [], which means COGs will be created for all NOAA
+            HTTP hrefs defined for this CDR.
+
+    Returns:
+        List[Item]: A list of PySTAC items.
+    """
+    if not hrefs:
+        hrefs = list(cdr.hrefs())
+    items: List[Item] = []
+    for href in hrefs:
+        cogs = cogify(href, cog_directory)
+        items = cdr.update_items(items, cogs)
+    return items
