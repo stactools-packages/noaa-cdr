@@ -4,8 +4,7 @@ from typing import List
 import pytest
 from pytest import Config, FixtureRequest, Item, Parser
 
-from stactools.noaa_cdr import constants
-from stactools.noaa_cdr.constants import Cdr
+from stactools.noaa_cdr.cdr import OceanHeatContent
 from tests import test_data
 
 
@@ -20,7 +19,7 @@ def external_data(request: FixtureRequest) -> None:
 def cogify_href() -> str:
     return next(
         href
-        for href in constants.hrefs(Cdr.OceanHeatContent)
+        for href in OceanHeatContent.hrefs()
         if os.path.basename(href) == "heat_content_anomaly_0-2000_yearly.nc"
     )
 
