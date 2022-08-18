@@ -62,7 +62,7 @@ def time_interval_as_str(
     elif time_resolution is TimeResolution.Yearly:
         return time.strftime("%Y")
     elif time_resolution is TimeResolution.Pentadal:
-        return f"{time.year - 2}-{time.year + 3}"
+        return f"{time.year - 2}-{time.year + 2}"
     else:
         raise NotImplementedError
 
