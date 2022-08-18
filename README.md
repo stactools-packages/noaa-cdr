@@ -74,3 +74,10 @@ To run the tests:
 ```shell
 pytest -vv
 ```
+
+Some tests that require network access or a lot of work are marked as "slow" and
+are skipped by default. To run the complete test suite, run:
+
+```sh
+pytest --slow
+```
