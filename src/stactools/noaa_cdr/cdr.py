@@ -1,10 +1,11 @@
 import datetime
 from abc import ABC, abstractmethod
-from typing import Iterable, Type, cast
+from typing import Iterable, List, Type, cast
 
-from pystac import Extent, TemporalExtent
+from pystac import Asset, Extent, Item, MediaType, TemporalExtent
 
-from .constants import COLLECTION_ASSET_METADATA, SPATIAL_EXTENT
+from .cogify import Cog
+from .constants import BBOX, COLLECTION_ASSET_METADATA, GEOMETRY, SPATIAL_EXTENT
 
 
 class Cdr(ABC):
@@ -128,6 +129,63 @@ class Cdr(ABC):
         """Iterates over a list of hrefs of this CDR's NetCDF assets."""
         ...
 
+    @classmethod
+    def update_items(cls, items: List[Item], cogs: List[Cog]) -> List[Item]:
+        """Updates a list of items with new COGs.
+
+        Args:
+            items (List[Item]): STAC Items to be updated w/ new COGs.
+            cogs (List[Cog]): A list of Cog objects.
+
+        Returns:
+            List[Item]: STAC Items, updated with the COGs.
+        """
+        items_as_dict = dict((item.id, item) for item in items)
+        for cog in cogs:
+            id = cls.item_id(cog)
+            if id not in items_as_dict:
+                items_as_dict[id] = Item(
+                    id=id,
+                    geometry=GEOMETRY,
+                    bbox=BBOX,
+                    datetime=cog.datetime,
+                    properties={},
+                )
+            item = items_as_dict[id]
+            title = f"{cog.attributes['title']} {cog.time_interval_as_str()}"
+            asset = Asset(
+                href=cog.path, title=title, media_type=MediaType.COG, roles=["data"]
+            )
+            item.assets[cls.asset_key(cog)] = asset
+            items_as_dict[id] = item
+        return list(items_as_dict.values())
+
+    @classmethod
+    @abstractmethod
+    def item_id(cls, cog: Cog) -> str:
+        """Creates an Item id from a COG.
+
+        Args:
+            cog (Cog): A Cog.
+
+        Returns:
+            str: The Item id.
+        """
+        ...
+
+    @staticmethod
+    @abstractmethod
+    def asset_key(cog: Cog) -> str:
+        """Returns the asset key for the given COG.
+
+        Args:
+            cog (Cog): A Cog.
+
+        Returns:
+            str: The asset key.
+        """
+        ...
+
 
 class OceanHeatContent(Cdr):
     """The ocean heat content CDR.
@@ -183,3 +241,19 @@ class OceanHeatContent(Cdr):
                         "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/"
                         f"derived/{variable}_anomaly_0-{depth}_{period}.nc"
                     )
+
+    @classmethod
+    def item_id(cls, cog: Cog) -> str:
+        time_interval_as_str = cog.time_interval_as_str()
+        depth = int(cog.attributes["geospatial_vertical_max"])
+        return f"{cls.slug()}-{time_interval_as_str}-{depth}m"
+
+    @staticmethod
+    def asset_key(cog: Cog) -> str:
+        parts = []
+        for part in cog.attributes["id"].split("_"):
+            if part == "anomaly":
+                break
+            else:
+                parts.append(part)
+        return "_".join(parts)

@@ -5,10 +5,12 @@ from typing import Callable, List
 import pystac
 import pytest
 from click import Command, Group
+from pystac import ItemCollection
 from stactools.testing.cli_test import CliTestCase
 
 from stactools.noaa_cdr import Cdr
 from stactools.noaa_cdr.commands import create_noaa_cdr_command
+from tests import test_data
 
 
 @pytest.mark.usefixtures("external_data")
@@ -19,37 +21,38 @@ class CommandsTest(CliTestCase):
         return [create_noaa_cdr_command]
 
     def test_create_collection(self) -> None:
-        with TemporaryDirectory() as tmp_dir:
-            destination = os.path.join(tmp_dir, "collection.json")
+        with TemporaryDirectory() as temporary_directory:
+            destination = os.path.join(temporary_directory, "collection.json")
             result = self.run_command(
                 f"noaa-cdr create-collection ocean-heat-content {destination}"
             )
             assert result.exit_code == 0, "\n{}".format(result.output)
-            jsons = [p for p in os.listdir(tmp_dir) if p.endswith(".json")]
-            assert len(jsons) == 1
+            paths = [p for p in os.listdir(temporary_directory) if p.endswith(".json")]
+            assert len(paths) == 1
             collection = pystac.read_file(destination)
             assert collection.id == "noaa-cdr-ocean-heat-content"
             collection.validate()
 
-    @pytest.mark.xfail
-    def test_create_item(self) -> None:
-        with TemporaryDirectory() as tmp_dir:
-            # Run your custom create-item command and validate
-
-            # Example:
-            infile = "/path/to/asset.tif"
-            destination = os.path.join(tmp_dir, "item.json")
-            result = self.run_command(f"noaa-cdr create-item {infile} {destination}")
+    def test_create_items(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            destination = os.path.join(temporary_directory, "item-collection.json")
+            infile = test_data.get_external_data(
+                "heat_content_anomaly_0-2000_yearly.nc"
+            )
+            result = self.run_command(
+                f"noaa-cdr create-items ocean-heat-content {infile} {destination}"
+            )
             assert result.exit_code == 0, "\n{}".format(result.output)
 
-            jsons = [p for p in os.listdir(tmp_dir) if p.endswith(".json")]
-            assert len(jsons) == 1
+            paths = [p for p in os.listdir(temporary_directory) if p.endswith(".json")]
+            assert len(paths) == 1
 
-            item = pystac.read_file(destination)
-            assert item.id == "my-item-id"
-            # assert item.other_attr...
-
-            item.validate()
+            item_collection = ItemCollection.from_file(
+                os.path.join(temporary_directory, paths[0])
+            )
+            assert len(item_collection) == 17
+            for item in item_collection:
+                item.validate()
 
     def test_download(self) -> None:
         result = self.run_command("noaa-cdr download --help")
