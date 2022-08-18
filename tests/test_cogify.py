@@ -24,18 +24,18 @@ COGIFY_PARAMETERS = [
 def test_cogify(infile: str, num_cogs: int) -> None:
     external_data_path = test_data.get_external_data(infile)
     with TemporaryDirectory() as temporary_directory:
-        paths = noaa_cdr.cogify(external_data_path, temporary_directory)
-        assert len(paths) == num_cogs
-        for path in paths:
-            assert os.path.exists(path)
+        cogs = noaa_cdr.cogify(external_data_path, temporary_directory)
+        assert len(cogs) == num_cogs
+        for cog in cogs:
+            assert os.path.exists(cog.path)
 
 
 def test_cogify_href(cogify_href: str) -> None:
     with TemporaryDirectory() as temporary_directory:
-        paths = noaa_cdr.cogify(cogify_href, temporary_directory)
-        assert len(paths) == 17
-        for path in paths:
-            assert os.path.exists(path)
+        cogs = noaa_cdr.cogify(cogify_href, temporary_directory)
+        assert len(cogs) == 17
+        for cog in cogs:
+            assert os.path.exists(cog.path)
 
 
 def test_cogify_href_no_output_directory(cogify_href: str) -> None:
