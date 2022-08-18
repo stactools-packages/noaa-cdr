@@ -20,18 +20,17 @@ import fsspec
 import xarray
 from tqdm import tqdm
 
-from stactools.noaa_cdr import constants
-from stactools.noaa_cdr.constants import Cdr
+from stactools.noaa_cdr import Cdr
 
 metadata: Dict[str, Dict[str, Dict[str, str]]] = {}
-for cdr in Cdr:
-    print(f"Reading NetCDF files for {cdr}", file=sys.stderr)
-    metadata[cdr] = {}
-    for href in tqdm(constants.hrefs(cdr)):
+for cdr in Cdr.cdrs():
+    print(f"Reading NetCDF files for {cdr.slug()}", file=sys.stderr)
+    metadata[cdr.slug()] = {}
+    for href in tqdm(cdr.hrefs()):
         key = os.path.splitext(os.path.basename(href))[0]
         with fsspec.open(href) as file:
             with xarray.open_dataset(file, decode_times=False) as dataset:
-                metadata[cdr][key] = {
+                metadata[cdr.slug()][key] = {
                     "title": dataset.title,
                     "description": dataset.summary,
                 }

@@ -1,15 +1,16 @@
 import os.path
+from typing import Type
 
 from pystac import Asset, CatalogType, Collection
 
-from . import constants
-from .constants import LICENSE, PROVIDERS, Cdr
+from .cdr import Cdr
+from .constants import LICENSE, PROVIDERS
 
 DEFAULT_CATALOG_TYPE = CatalogType.SELF_CONTAINED
 
 
 def create_collection(
-    cdr: Cdr, catalog_type: CatalogType = DEFAULT_CATALOG_TYPE
+    cdr: Type[Cdr], catalog_type: CatalogType = DEFAULT_CATALOG_TYPE
 ) -> Collection:
     """Creates a STAC Collection for the provided CDR.
 
@@ -22,15 +23,15 @@ def create_collection(
     """
 
     collection = Collection(
-        id=f"noaa-cdr-{cdr.value}",
-        title=cdr.title,
-        description=cdr.description,
+        id=f"noaa-cdr-{cdr.slug()}",
+        title=cdr.title(),
+        description=cdr.description(),
         license=LICENSE,
         providers=PROVIDERS,
-        extent=cdr.extent,
+        extent=cdr.extent(),
         catalog_type=catalog_type,
     )
-    for href in constants.hrefs(cdr):
+    for href in cdr.hrefs():
         key = os.path.splitext(os.path.basename(href))[0]
         collection.add_asset(
             key,

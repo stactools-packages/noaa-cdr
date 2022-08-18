@@ -8,8 +8,8 @@ from click import Command, Group, Path
 from tqdm import tqdm
 
 import stactools.noaa_cdr
-from stactools.noaa_cdr import constants, stac
-from stactools.noaa_cdr.constants import Cdr
+from stactools.noaa_cdr import stac
+from stactools.noaa_cdr.cdr import Cdr
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +49,7 @@ def create_noaa_cdr_command(cli: Group) -> Command:
                 list of available names.
             destination (str): An HREF for the Collection JSON
         """
-        cdr = Cdr.from_value(cdr_name)
+        cdr = Cdr.from_slug(cdr_name)
         collection = stac.create_collection(cdr)
         collection.set_self_href(destination)
         collection.save_object(include_self_link=include_self_link)
@@ -80,9 +80,9 @@ def create_noaa_cdr_command(cli: Group) -> Command:
                 a list of available CDRs.
             destination (str): The directory in which to store the CDR data.
         """
-        cdr = Cdr.from_value(name)
+        cdr = Cdr.from_slug(name)
         os.makedirs(destination, exist_ok=True)
-        for href in constants.hrefs(cdr):
+        for href in cdr.hrefs():
             path = os.path.join(destination, os.path.basename(href))
             if os.path.exists(path):
                 print(f"File already downloaded, skipping: {path}")
@@ -100,8 +100,8 @@ def create_noaa_cdr_command(cli: Group) -> Command:
     @noaa_cdr.command("list", short_help="List the names of all supported CDRs")
     def create_list_command() -> None:
         """Prints the names of all supported CDRs."""
-        for cdr in Cdr:
-            print(cdr.value)
+        for slug in Cdr.slugs():
+            print(slug)
 
     @noaa_cdr.command(
         "cogify",

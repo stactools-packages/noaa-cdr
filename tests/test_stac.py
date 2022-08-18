@@ -1,9 +1,9 @@
 from stactools.noaa_cdr import stac
-from stactools.noaa_cdr.constants import Cdr
+from stactools.noaa_cdr.cdr import OceanHeatContent
 
 
 def test_create_collection() -> None:
-    collection = stac.create_collection(Cdr.OceanHeatContent)
+    collection = stac.create_collection(OceanHeatContent)
     assert collection.id == "noaa-cdr-ocean-heat-content"
     assert len(collection.assets) == 44
     for asset in collection.assets.values():
