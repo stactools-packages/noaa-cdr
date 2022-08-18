@@ -7,8 +7,8 @@ import pytest
 from click import Command, Group
 from stactools.testing.cli_test import CliTestCase
 
+from stactools.noaa_cdr import Cdr
 from stactools.noaa_cdr.commands import create_noaa_cdr_command
-from stactools.noaa_cdr.constants import Cdr
 
 
 @pytest.mark.usefixtures("external_data")
@@ -58,7 +58,7 @@ class CommandsTest(CliTestCase):
     def test_list(self) -> None:
         result = self.run_command("noaa-cdr list")
         assert result.exit_code == 0
-        assert result.stdout.strip() == "\n".join(Cdr)
+        assert result.stdout.strip() == "\n".join(Cdr.slugs())
 
     def test_cogify(self) -> None:
         with TemporaryDirectory() as temporary_directory:
