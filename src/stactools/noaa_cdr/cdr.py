@@ -2,6 +2,7 @@ import datetime
 from abc import ABC, abstractmethod
 from typing import Iterable, List, Type, cast
 
+import pystac.utils
 from pystac import Asset, Extent, Item, MediaType, TemporalExtent
 
 from .cogify import Cog
@@ -149,7 +150,12 @@ class Cdr(ABC):
                     geometry=GEOMETRY,
                     bbox=BBOX,
                     datetime=cog.datetime,
-                    properties={},
+                    properties={
+                        "start_datetime": pystac.utils.datetime_to_str(
+                            cog.start_datetime
+                        ),
+                        "end_datetime": pystac.utils.datetime_to_str(cog.end_datetime),
+                    },
                 )
             item = items_as_dict[id]
             title = f"{cog.attributes['title']} {cog.time_interval_as_str()}"

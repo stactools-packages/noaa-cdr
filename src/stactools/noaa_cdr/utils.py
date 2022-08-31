@@ -1,5 +1,6 @@
 import datetime
 import math
+from typing import Tuple
 
 import dateutil.relativedelta
 import xarray
@@ -35,6 +36,61 @@ def add_months_to_datetime(
         )
     else:
         return time
+
+
+def datetime_bounds(
+    time: datetime.datetime, time_resolution: TimeResolution
+) -> Tuple[datetime.datetime, datetime.datetime]:
+    """Returns the start and end datetimes for a given datetime and time resolution.
+
+    E.g. if the time resolution is yearly, the start datetime will be 01 Jan,
+    and the end datetime will be 31 Dec one second before midnight.
+
+    Args:
+        time (datetime.datetime): The reference datetime.
+        time_resolution (TimeResolution): The time resolution.
+
+    Returns
+        Tuple[datetime.datetime, datetime.datetime]: start_datetime and
+            end_datetime as a two-tuple.
+    """
+    if time_resolution is TimeResolution.Monthly:
+        start_datetime = datetime.datetime(time.year, time.month, 1)
+        return (
+            start_datetime,
+            start_datetime
+            + dateutil.relativedelta.relativedelta(months=+1, seconds=-1),
+        )
+    elif time_resolution is TimeResolution.Seasonal:
+        season = _month_to_season(time.month)
+        if season == "Q1":
+            start_month = 1
+        elif season == "Q2":
+            start_month = 4
+        elif season == "Q3":
+            start_month = 7
+        elif season == "Q4":
+            start_month = 10
+        else:
+            raise NotImplementedError
+        start_datetime = datetime.datetime(time.year, start_month, 1)
+        return (
+            start_datetime,
+            start_datetime
+            + dateutil.relativedelta.relativedelta(months=+3, seconds=-1),
+        )
+    elif time_resolution is TimeResolution.Yearly:
+        return (
+            datetime.datetime(time.year, 1, 1),
+            datetime.datetime(time.year, 12, 31, 23, 59, 59),
+        )
+    elif time_resolution is TimeResolution.Pentadal:
+        return (
+            datetime.datetime(time.year - 2, 1, 1),
+            datetime.datetime(time.year + 2, 12, 31, 23, 59, 59),
+        )
+    else:
+        raise NotImplementedError
 
 
 def time_interval_as_str(
