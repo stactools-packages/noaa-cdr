@@ -1,6 +1,6 @@
 import logging
 import os.path
-from typing import List, Type
+from typing import List, Optional, Type
 
 from pystac import Asset, CatalogType, Collection, Item
 
@@ -14,13 +14,25 @@ logger = logging.getLogger(__name__)
 
 
 def create_collection(
-    cdr: Type[Cdr], catalog_type: CatalogType = DEFAULT_CATALOG_TYPE
+    cdr: Type[Cdr],
+    catalog_type: CatalogType = DEFAULT_CATALOG_TYPE,
+    cog_directory: Optional[str] = None,
+    latest_only: bool = False,
+    local_directory: Optional[str] = None,
 ) -> Collection:
     """Creates a STAC Collection for the provided CDR.
 
     Args:
         cdr (Cdr): The CDR.
         catalog_type (CatalogType): The type of catalog to create.
+        cog_directory (Optional[str]): If provided, COGs will be created in this
+            directory, and items pointing to those COGs will be added to the
+            collection.
+        latest_only (bool): Only create the most recent items, not all. Only
+            used if cog_directory is not None. Defaults to False.
+        local_directory (Optional[str]): Read netcdf files from this local
+            directory instead of from NOAA's servers. Only used if
+            cog_directory is not None.
 
     Returns:
         Collection: STAC Collection object
@@ -47,6 +59,13 @@ def create_collection(
                 roles=["data"],
             ),
         )
+    if cog_directory:
+        hrefs = []
+        if local_directory:
+            hrefs = list(cdr.local_hrefs(local_directory))
+        items = create_items(cdr, cog_directory, hrefs=hrefs, latest_only=latest_only)
+        collection.add_items(items)
+        collection.update_extent_from_items()
 
     return collection
 

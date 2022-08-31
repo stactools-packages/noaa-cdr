@@ -1,5 +1,6 @@
 import datetime
 import math
+import os.path
 from abc import ABC, abstractmethod
 from typing import Iterable, List, Type, Union, cast
 
@@ -133,6 +134,15 @@ class Cdr(ABC):
     def hrefs() -> Iterable[str]:
         """Iterates over a list of hrefs of this CDR's NetCDF assets."""
         ...
+
+    @classmethod
+    def local_hrefs(cls, directory: str) -> Iterable[str]:
+        """Iterates over this CDR's hrefs, but each href is rebased to live in
+        the provided directory.
+
+        Used for pre-fetched NetCDFs."""
+        for href in cls.hrefs():
+            yield os.path.join(directory, os.path.basename(href))
 
     @classmethod
     def update_items(cls, items: List[Item], cogs: List[Cog]) -> List[Item]:

@@ -76,7 +76,7 @@
       "updated": "2022-01-07T00:00:00Z",
       "raster:bands": [
         {
-          "nodata": NaN,
+          "nodata": "nan",
           "data_type": "float32",
           "unit": "10^18 joules"
         }
@@ -93,7 +93,7 @@
       "updated": "2022-01-07T00:00:00Z",
       "raster:bands": [
         {
-          "nodata": NaN,
+          "nodata": "nan",
           "data_type": "float32",
           "unit": "millimeters"
         }
@@ -110,7 +110,7 @@
       "updated": "2022-01-07T00:00:00Z",
       "raster:bands": [
         {
-          "nodata": NaN,
+          "nodata": "nan",
           "data_type": "float32",
           "unit": "unitless"
         }
@@ -127,7 +127,7 @@
       "updated": "2022-01-07T00:00:00Z",
       "raster:bands": [
         {
-          "nodata": NaN,
+          "nodata": "nan",
           "data_type": "float32",
           "unit": "degrees Celsius"
         }
@@ -144,7 +144,7 @@
       "updated": "2022-01-07T00:00:00Z",
       "raster:bands": [
         {
-          "nodata": NaN,
+          "nodata": "nan",
           "data_type": "float32",
           "unit": "millimeters"
         }
@@ -161,7 +161,7 @@
       "updated": "2022-01-07T00:00:00Z",
       "raster:bands": [
         {
-          "nodata": NaN,
+          "nodata": "nan",
           "data_type": "float32",
           "unit": "millimeters"
         }
