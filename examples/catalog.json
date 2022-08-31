@@ -1,0 +1,14 @@
+{
+    "type": "Catalog",
+    "stac_version": "1.0.0",
+    "id": "noaa-cdr",
+    "title": "NOAA CDR",
+    "links": [
+        {
+            "href": "./ocean-heat-content/collection.json",
+            "rel": "child",
+            "type": "application/json",
+            "title": "NOAA Ocean Heat Content CDR"
+        }
+    ]
+}

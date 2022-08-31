@@ -1,7 +1,10 @@
 import datetime
+import math
 from tempfile import TemporaryDirectory
 
 from dateutil.tz import tzutc
+from pystac.extensions.projection import ProjectionExtension
+from pystac.extensions.raster import RasterExtension
 
 from stactools.noaa_cdr import stac
 from stactools.noaa_cdr.cdr import OceanHeatContent
@@ -37,6 +40,25 @@ def test_create_items_one_netcdf() -> None:
         assert item.common_metadata.end_datetime == datetime.datetime(
             year, 12, 31, 23, 59, 59, tzinfo=tzutc()
         )
+
+        proj = ProjectionExtension.ext(item)
+        assert proj.epsg == 4326
+        assert proj.shape == [180, 360]
+        assert proj.transform == [-180, 1.0, 0.0, -90.0, 0.0, 1.0]
+
+        for asset in item.assets.values():
+            assert asset.common_metadata.created
+            assert asset.common_metadata.updated
+
+            raster = RasterExtension.ext(asset)
+            assert raster.bands
+            assert len(raster.bands) == 1
+            band = raster.bands[0]
+            assert isinstance(band.nodata, float)
+            assert math.isnan(band.nodata)
+            assert band.data_type == "float32"
+            assert band.unit == "10^18 joules"
+
         item.validate()
 
 

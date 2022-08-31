@@ -2,8 +2,11 @@ import datetime
 from abc import ABC, abstractmethod
 from typing import Iterable, List, Type, cast
 
+import dateutil.parser
 import pystac.utils
 from pystac import Asset, Extent, Item, MediaType, TemporalExtent
+from pystac.extensions.projection import ProjectionExtension
+from pystac.extensions.raster import RasterBand, RasterExtension
 
 from .cogify import Cog
 from .constants import BBOX, COLLECTION_ASSET_METADATA, GEOMETRY, SPATIAL_EXTENT
@@ -145,7 +148,7 @@ class Cdr(ABC):
         for cog in cogs:
             id = cls.item_id(cog)
             if id not in items_as_dict:
-                items_as_dict[id] = Item(
+                item = Item(
                     id=id,
                     geometry=GEOMETRY,
                     bbox=BBOX,
@@ -157,12 +160,29 @@ class Cdr(ABC):
                         "end_datetime": pystac.utils.datetime_to_str(cog.end_datetime),
                     },
                 )
+                proj = ProjectionExtension.ext(item, add_if_missing=True)
+                proj.epsg = cog.epsg
+                proj.shape = cog.shape
+                proj.transform = cog.transform
+                items_as_dict[id] = item
             item = items_as_dict[id]
             title = f"{cog.attributes['title']} {cog.time_interval_as_str()}"
             asset = Asset(
                 href=cog.path, title=title, media_type=MediaType.COG, roles=["data"]
             )
-            item.assets[cls.asset_key(cog)] = asset
+            asset.common_metadata.created = dateutil.parser.parse(
+                cog.attributes["date_created"]
+            )
+            asset.common_metadata.updated = dateutil.parser.parse(
+                cog.attributes["date_modified"]
+            )
+            item.add_asset(cls.asset_key(cog), asset)
+            raster = RasterExtension.ext(asset, add_if_missing=True)
+            raster.bands = [
+                RasterBand.create(
+                    nodata=cog.nodata, data_type=cog.data_type, unit=cog.unit
+                )
+            ]
             items_as_dict[id] = item
         return list(items_as_dict.values())
 
