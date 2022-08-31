@@ -10,6 +10,7 @@
 - STAC extensions used:
   - [proj](https://github.com/stac-extensions/projection)
   - [raster](https://github.com/stac-extensions/raster)
+  - [item assets](https://github.com/stac-extensions/item-assets)
 - Extra fields: None
 - [Browse the example in human-readable form](https://radiantearth.github.io/stac-browser/#/external/raw.githubusercontent.com/stactools-packages/noaa-cdr/main/examples/catalog.json)
 
