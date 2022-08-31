@@ -4,6 +4,7 @@ from typing import List, Optional, Type
 
 from pystac import Asset, CatalogType, Collection, Item
 from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
+from pystac.extensions.scientific import ScientificExtension
 
 from .cdr import Cdr
 from .cogify import cogify
@@ -60,6 +61,9 @@ def create_collection(
                 roles=["data"],
             ),
         )
+    scientific = ScientificExtension.ext(collection, add_if_missing=True)
+    scientific.doi = cdr.doi()
+    scientific.citation = cdr.citation()
     if cog_directory:
         hrefs = []
         if local_directory:
