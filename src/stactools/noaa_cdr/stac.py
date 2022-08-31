@@ -1,3 +1,4 @@
+import logging
 import os.path
 from typing import List, Type
 
@@ -8,6 +9,8 @@ from .cogify import cogify
 from .constants import LICENSE, PROVIDERS
 
 DEFAULT_CATALOG_TYPE = CatalogType.SELF_CONTAINED
+
+logger = logging.getLogger(__name__)
 
 
 def create_collection(
@@ -71,7 +74,8 @@ def create_items(
     if not hrefs:
         hrefs = list(cdr.hrefs())
     items: List[Item] = []
-    for href in hrefs:
+    for i, href in enumerate(hrefs):
+        logger.info(f"Creating COGs for {href} ({i + 1} / {len(hrefs)})")
         cogs = cogify(href, cog_directory, latest_only)
         items = cdr.update_items(items, cogs)
     return items

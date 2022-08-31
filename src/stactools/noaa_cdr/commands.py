@@ -1,12 +1,15 @@
 import logging
 import os
+from tempfile import TemporaryDirectory
 from typing import List, Optional
 
 import click
+import click_logging
 import pystac.utils
 import requests
+import stactools.core.copy
 from click import Command, Group, Path
-from pystac import ItemCollection
+from pystac import CatalogType, ItemCollection
 from tqdm import tqdm
 
 import stactools.noaa_cdr
@@ -14,6 +17,7 @@ from stactools.noaa_cdr import stac
 from stactools.noaa_cdr.cdr import Cdr
 
 logger = logging.getLogger(__name__)
+click_logging.basic_config(logger)
 
 
 def create_noaa_cdr_command(cli: Group) -> Command:
@@ -33,15 +37,27 @@ def create_noaa_cdr_command(cli: Group) -> Command:
     @click.argument("cdr-name")
     @click.argument("destination")
     @click.option(
-        "-s",
-        "--include-self-link",
+        "-c",
+        "--create-items",
         is_flag=True,
         default=False,
         show_default=True,
-        help="Include a self link in the collection",
+        help="Create items and include them with this collection",
     )
+    @click.option(
+        "-l",
+        "--latest-only",
+        is_flag=True,
+        default=False,
+        show_default=True,
+        help="Only create the most recent items (only used if --create-items is True)",
+    )
+    @click_logging.simple_verbosity_option(logger)  # type: ignore
     def create_collection_command(
-        cdr_name: str, destination: str, include_self_link: bool
+        cdr_name: str,
+        destination: str,
+        create_items: bool,
+        latest_only: bool,
     ) -> None:
         """Creates a STAC Collection
 
@@ -50,11 +66,26 @@ def create_noaa_cdr_command(cli: Group) -> Command:
             cdr_name (str): The name of a CDR. Use `stac noaa-cdr list` to see a
                 list of available names.
             destination (str): An HREF for the Collection JSON
+            create_items (bool): Create items and include them in this
+                collection. Defaults to False.
+            latest_only (bool): Only create the most recent items, not all. Only
+                used if --create-items is true. Defaults to False.
         """
         cdr = Cdr.from_slug(cdr_name)
         collection = stac.create_collection(cdr)
         collection.set_self_href(destination)
-        collection.save_object(include_self_link=include_self_link)
+        if create_items:
+            with TemporaryDirectory() as temporary_directory:
+                items = stac.create_items(
+                    cdr, temporary_directory, latest_only=latest_only
+                )
+                collection.add_items(items)
+                collection.normalize_hrefs(os.path.dirname(destination))
+                collection.update_extent_from_items()
+                stactools.core.copy.move_all_assets(
+                    collection, make_hrefs_relative=True, copy=False
+                )
+        collection.save(catalog_type=CatalogType.SELF_CONTAINED)
         return None
 
     @noaa_cdr.command("create-items", short_help="Create STAC items from a NetCDF")
