@@ -68,3 +68,13 @@ def test_create_items_two_netcdfs_different_items() -> None:
     for item in items:
         assert len(item.assets) == 1
         item.validate()
+
+
+def test_create_items_one_netcdf_latest_only() -> None:
+    path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
+    with TemporaryDirectory() as temporary_directory:
+        items = stac.create_items(
+            OceanHeatContent, temporary_directory, [path], latest_only=True
+        )
+    assert len(items) == 1
+    items[0].validate()
