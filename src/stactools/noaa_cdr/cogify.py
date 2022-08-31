@@ -1,3 +1,4 @@
+import copy
 import datetime
 import os.path
 from dataclasses import dataclass
@@ -8,21 +9,22 @@ import numpy
 import rasterio
 import rasterio.shutil
 import xarray
+from pystac.extensions.raster import DataType
 from rasterio import Affine, MemoryFile
 
 from stactools.noaa_cdr import utils
 
-from .constants import TimeResolution
+from .constants import EPSG, GDAL_TRANFORM, TimeResolution
 
 BASE_TIME = datetime.datetime(1955, 1, 1)
 GTIFF_PROFILE = {
-    "crs": "epsg:4326",
+    "crs": f"epsg:{EPSG}",
     "width": 360,
     "height": 180,
-    "dtype": "float32",
+    "dtype": DataType.FLOAT32,
     "nodata": numpy.nan,
     "count": 1,
-    "transform": Affine.from_gdal(-180, 1, 0, -90, 0, 1),
+    "transform": Affine.from_gdal(*GDAL_TRANFORM),
     "driver": "GTiff",
 }
 COG_PROFILE = {"compress": "deflate", "blocksize": 512, "driver": "COG"}
@@ -35,6 +37,12 @@ class Cog:
     start_datetime: datetime.datetime
     end_datetime: datetime.datetime
     datetime: datetime.datetime
+    epsg: int
+    shape: List[int]
+    transform: List[float]
+    nodata: float
+    data_type: DataType
+    unit: str
     attributes: Dict[Hashable, Any]
 
     def time_interval_as_str(self) -> str:
@@ -87,6 +95,9 @@ def cogify(
                     f"{os.path.splitext(os.path.basename(href))[0]}_{suffix}.tif",
                 )
                 values = dataset[variable].isel(time=i).values.squeeze()
+                profile = copy.deepcopy(GTIFF_PROFILE)
+                unit = dataset[variable].units.replace("_", " ")
+                profile["unit"] = unit
                 with MemoryFile() as memory_file:
                     with memory_file.open(**GTIFF_PROFILE) as open_memory_file:
                         open_memory_file.write(values, 1)
@@ -100,6 +111,12 @@ def cogify(
                         datetime=time,
                         start_datetime=start_datetime,
                         end_datetime=end_datetime,
+                        epsg=EPSG,
+                        shape=[GTIFF_PROFILE["height"], GTIFF_PROFILE["width"]],
+                        transform=GDAL_TRANFORM,
+                        nodata=GTIFF_PROFILE["nodata"],
+                        data_type=GTIFF_PROFILE["dtype"],
+                        unit=unit,
                         attributes=dataset.attrs,
                     )
                 )

@@ -83,7 +83,10 @@ def create_noaa_cdr_command(cli: Group) -> Command:
                 collection.normalize_hrefs(os.path.dirname(destination))
                 collection.update_extent_from_items()
                 stactools.core.copy.move_all_assets(
-                    collection, make_hrefs_relative=True, copy=False
+                    collection,
+                    make_hrefs_relative=True,
+                    copy=False,
+                    ignore_conflicts=True,
                 )
         collection.save(catalog_type=CatalogType.SELF_CONTAINED)
         return None
