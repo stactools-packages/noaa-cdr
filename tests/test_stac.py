@@ -4,6 +4,7 @@ from tempfile import TemporaryDirectory
 from dateutil.tz import tzutc
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterExtension
+from pystac.extensions.scientific import ScientificExtension
 
 from stactools.noaa_cdr import stac
 from stactools.noaa_cdr.cdr import OceanHeatContent
@@ -19,6 +20,10 @@ def test_create_collection() -> None:
         assert asset.description is not None
         assert asset.media_type == "application/netcdf"
         assert asset.roles == ["data"]
+
+    scientific = ScientificExtension.ext(collection)
+    assert scientific.doi == "10.7289/v53f4mvp"
+    assert scientific.citation
 
     collection.set_self_href("")
     collection.validate_all()
