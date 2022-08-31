@@ -52,12 +52,19 @@ def create_noaa_cdr_command(cli: Group) -> Command:
         show_default=True,
         help="Only create the most recent items (only used if --create-items is True)",
     )
+    @click.option(
+        "-d",
+        "--local-directory",
+        help="Read NetCDFs from this local directory instead of from NOAA's HTTP "
+        "servers (only used if --create-items is True)",
+    )
     @click_logging.simple_verbosity_option(logger)  # type: ignore
     def create_collection_command(
         cdr_name: str,
         destination: str,
         create_items: bool,
         latest_only: bool,
+        local_directory: Optional[str],
     ) -> None:
         """Creates a STAC Collection
 
@@ -70,25 +77,33 @@ def create_noaa_cdr_command(cli: Group) -> Command:
                 collection. Defaults to False.
             latest_only (bool): Only create the most recent items, not all. Only
                 used if --create-items is true. Defaults to False.
+            local_directory (Optional[str]): Read netcdf files from this local
+                directory instead of from NOAA's servers. Only used if
+                --create-items is true.
         """
         cdr = Cdr.from_slug(cdr_name)
-        collection = stac.create_collection(cdr)
-        collection.set_self_href(destination)
         if create_items:
             with TemporaryDirectory() as temporary_directory:
-                items = stac.create_items(
-                    cdr, temporary_directory, latest_only=latest_only
+                collection = stac.create_collection(
+                    cdr,
+                    catalog_type=CatalogType.SELF_CONTAINED,
+                    cog_directory=temporary_directory,
+                    latest_only=latest_only,
+                    local_directory=local_directory,
                 )
-                collection.add_items(items)
                 collection.normalize_hrefs(os.path.dirname(destination))
-                collection.update_extent_from_items()
                 stactools.core.copy.move_all_assets(
                     collection,
                     make_hrefs_relative=True,
                     copy=False,
                     ignore_conflicts=True,
                 )
-        collection.save(catalog_type=CatalogType.SELF_CONTAINED)
+        else:
+            collection = stac.create_collection(
+                cdr, catalog_type=CatalogType.SELF_CONTAINED
+            )
+        collection.set_self_href(destination)
+        collection.save()
         return None
 
     @noaa_cdr.command("create-items", short_help="Create STAC items from a NetCDF")
