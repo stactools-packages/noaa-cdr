@@ -32,6 +32,8 @@ COG_PROFILE = {"compress": "deflate", "blocksize": 512, "driver": "COG"}
 class Cog:
     path: str
     time_resolution: TimeResolution
+    start_datetime: datetime.datetime
+    end_datetime: datetime.datetime
     datetime: datetime.datetime
     attributes: Dict[Hashable, Any]
 
@@ -69,6 +71,9 @@ def cogify(href: str, outdir: Optional[str] = None) -> List[Cog]:
             variable = utils.data_variable_name(dataset)
             for i, month_offset in enumerate(dataset[variable].time):
                 time = utils.add_months_to_datetime(BASE_TIME, month_offset)
+                start_datetime, end_datetime = utils.datetime_bounds(
+                    time, time_resolution
+                )
                 suffix = utils.time_interval_as_str(time, time_resolution)
                 output_path = os.path.join(
                     outdir,
@@ -83,5 +88,14 @@ def cogify(href: str, outdir: Optional[str] = None) -> List[Cog]:
                         rasterio.shutil.copy(
                             open_memory_file, output_path, **COG_PROFILE
                         )
-                cogs.append(Cog(output_path, time_resolution, time, dataset.attrs))
+                cogs.append(
+                    Cog(
+                        output_path,
+                        time_resolution,
+                        datetime=time,
+                        start_datetime=start_datetime,
+                        end_datetime=end_datetime,
+                        attributes=dataset.attrs,
+                    )
+                )
     return cogs
