@@ -9,6 +9,61 @@
       "href": "./collection.json",
       "type": "application/json",
       "title": "Global Ocean Heat Content CDR"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-1972-03-700m/ocean-heat-content-1972-03-700m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2017-2021-700m/ocean-heat-content-2017-2021-700m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2022-Q1-700m/ocean-heat-content-2022-Q1-700m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2021-700m/ocean-heat-content-2021-700m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-1972-03-2000m/ocean-heat-content-1972-03-2000m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2017-2021-2000m/ocean-heat-content-2017-2021-2000m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2022-Q1-2000m/ocean-heat-content-2022-Q1-2000m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2021-2000m/ocean-heat-content-2021-2000m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2017-2021-100m/ocean-heat-content-2017-2021-100m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2022-Q1-100m/ocean-heat-content-2022-Q1-100m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2021-100m/ocean-heat-content-2021-100m.json",
+      "type": "application/json"
     }
   ],
   "stac_extensions": [],
@@ -27,8 +82,8 @@
     "temporal": {
       "interval": [
         [
-          "1955-01-01T00:00:00Z",
-          null
+          "1972-03-01T00:00:00Z",
+          "2022-03-31T23:59:59Z"
         ]
       ]
     }
