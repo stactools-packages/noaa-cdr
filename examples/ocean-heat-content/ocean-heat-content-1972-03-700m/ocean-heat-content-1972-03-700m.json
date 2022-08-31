@@ -76,7 +76,7 @@
       "updated": "2022-04-18T00:00:00Z",
       "raster:bands": [
         {
-          "nodata": NaN,
+          "nodata": "nan",
           "data_type": "float32",
           "unit": "10^18 joules"
         }
