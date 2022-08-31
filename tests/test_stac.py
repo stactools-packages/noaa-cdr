@@ -1,5 +1,4 @@
 import datetime
-import math
 from tempfile import TemporaryDirectory
 
 from dateutil.tz import tzutc
@@ -54,8 +53,7 @@ def test_create_items_one_netcdf() -> None:
             assert raster.bands
             assert len(raster.bands) == 1
             band = raster.bands[0]
-            assert isinstance(band.nodata, float)
-            assert math.isnan(band.nodata)
+            assert band.nodata == "nan"
             assert band.data_type == "float32"
             assert band.unit == "10^18 joules"
 

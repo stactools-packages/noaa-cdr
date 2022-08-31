@@ -1,12 +1,13 @@
 import datetime
+import math
 from abc import ABC, abstractmethod
-from typing import Iterable, List, Type, cast
+from typing import Iterable, List, Type, Union, cast
 
 import dateutil.parser
 import pystac.utils
 from pystac import Asset, Extent, Item, MediaType, TemporalExtent
 from pystac.extensions.projection import ProjectionExtension
-from pystac.extensions.raster import RasterBand, RasterExtension
+from pystac.extensions.raster import NoDataStrings, RasterBand, RasterExtension
 
 from .cogify import Cog
 from .constants import BBOX, COLLECTION_ASSET_METADATA, GEOMETRY, SPATIAL_EXTENT
@@ -178,10 +179,12 @@ class Cdr(ABC):
             )
             item.add_asset(cls.asset_key(cog), asset)
             raster = RasterExtension.ext(asset, add_if_missing=True)
+            if math.isnan(cog.nodata):
+                nodata: Union[NoDataStrings, float] = NoDataStrings.NAN
+            else:
+                nodata = cog.nodata
             raster.bands = [
-                RasterBand.create(
-                    nodata=cog.nodata, data_type=cog.data_type, unit=cog.unit
-                )
+                RasterBand.create(nodata=nodata, data_type=cog.data_type, unit=cog.unit)
             ]
             items_as_dict[id] = item
         return list(items_as_dict.values())
