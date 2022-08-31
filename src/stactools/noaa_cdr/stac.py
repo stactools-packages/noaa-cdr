@@ -49,6 +49,7 @@ def create_collection(
         extent=cdr.extent(),
         catalog_type=catalog_type,
     )
+    collection.add_link(cdr.license_link())
     for href in cdr.hrefs():
         key = os.path.splitext(os.path.basename(href))[0]
         collection.add_asset(
