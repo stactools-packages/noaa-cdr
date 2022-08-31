@@ -39,6 +39,8 @@ def test_create_items_one_netcdf() -> None:
         assert item.common_metadata.end_datetime == datetime.datetime(
             year, 12, 31, 23, 59, 59, tzinfo=tzutc()
         )
+        assert item.common_metadata.created
+        assert item.common_metadata.updated is None
 
         proj = ProjectionExtension.ext(item)
         assert proj.epsg == 4326

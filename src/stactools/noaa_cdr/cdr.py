@@ -169,6 +169,9 @@ class Cdr(ABC):
                             cog.start_datetime
                         ),
                         "end_datetime": pystac.utils.datetime_to_str(cog.end_datetime),
+                        "created": pystac.utils.datetime_to_str(
+                            datetime.datetime.now()
+                        ),
                     },
                 )
                 proj = ProjectionExtension.ext(item, add_if_missing=True)
