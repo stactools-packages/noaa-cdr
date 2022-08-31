@@ -11,6 +11,12 @@
       "title": "Global Ocean Heat Content CDR"
     },
     {
+      "rel": "license",
+      "href": "https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/Ocean_Heat_Content/UseAgreement_01B-41.pdf",
+      "type": "application/pdf",
+      "title": "CDR Open Data Blurb"
+    },
+    {
       "rel": "cite-as",
       "href": "https://doi.org/10.7289/v53f4mvp"
     },
