@@ -228,6 +228,26 @@ class Cdr(ABC):
         """
         ...
 
+    @staticmethod
+    @abstractmethod
+    def doi() -> str:
+        """Returns the DOI for this CDR.
+
+        Returns:
+            str: The doi.
+        """
+        ...
+
+    @staticmethod
+    @abstractmethod
+    def citation() -> str:
+        """Returns the citation for this CDR.
+
+        Returns:
+            str: The citation.
+        """
+        ...
+
 
 class OceanHeatContent(Cdr):
     """The ocean heat content CDR.
@@ -299,3 +319,21 @@ class OceanHeatContent(Cdr):
             else:
                 parts.append(part)
         return "_".join(parts)
+
+    @staticmethod
+    def doi() -> str:
+        return "10.7289/v53f4mvp"
+
+    @staticmethod
+    def citation() -> str:
+        return (
+            "Levitus, Sydney; Antonov, John I.; Boyer, Tim P.; Baranova, Olga K.; "
+            "García, Hernán E.; Locarnini, Ricardo A.; Mishonov, Alexey V.; Reagan, James R.; "
+            "[Seidov, Dan; Yarosh, Evgeney; Zweng, Melissa M. (2017). "
+            "NCEI ocean heat content, temperature anomalies, salinity anomalies, thermosteric "
+            "sea level anomalies, halosteric sea level anomalies, and total steric sea level "
+            "anomalies from 1955 to present calculated from in situ oceanographic subsurface "
+            "profile data (NCEI Accession 0164586). [indicate subset used]. "
+            "NOAA National Centers for Environmental Information. Dataset. "
+            "https://doi.org/10.7289/v53f4mvp. Accessed [date]."
+        )
