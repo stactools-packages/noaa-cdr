@@ -1,4 +1,7 @@
+import datetime
 from tempfile import TemporaryDirectory
+
+from dateutil.tz import tzutc
 
 from stactools.noaa_cdr import stac
 from stactools.noaa_cdr.cdr import OceanHeatContent
@@ -26,6 +29,14 @@ def test_create_items_one_netcdf() -> None:
     assert len(items) == 17
     for item in items:
         assert len(item.assets) == 1
+        assert item.datetime
+        year = item.datetime.year
+        assert item.common_metadata.start_datetime == datetime.datetime(
+            year, 1, 1, tzinfo=tzutc()
+        )
+        assert item.common_metadata.end_datetime == datetime.datetime(
+            year, 12, 31, 23, 59, 59, tzinfo=tzutc()
+        )
         item.validate()
 
 
