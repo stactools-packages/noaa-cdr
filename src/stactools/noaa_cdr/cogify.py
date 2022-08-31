@@ -46,7 +46,9 @@ class Cog:
         return utils.time_interval_as_str(self.datetime, self.time_resolution)
 
 
-def cogify(href: str, outdir: Optional[str] = None) -> List[Cog]:
+def cogify(
+    href: str, outdir: Optional[str] = None, latest_only: bool = False
+) -> List[Cog]:
     """Creates a Cloud-Optimized GeoTIFF from a CDR NetCDF.
 
     Args:
@@ -54,6 +56,8 @@ def cogify(href: str, outdir: Optional[str] = None) -> List[Cog]:
         outdir (str, optional): Output directory for the COG. Defaults to None.
             If None, the COG will be created alongside the input NetCDF. If href
             is a url and outdir is not provided, an Exception is raised.
+        latest_only (bool): Only create COGs for the latest data. Useful for
+            creating a small subset of a CDRs items. Defaults to false.
 
     Returns:
         Cog: The created Cog.
@@ -69,7 +73,10 @@ def cogify(href: str, outdir: Optional[str] = None) -> List[Cog]:
                 dataset.time_coverage_resolution
             )
             variable = utils.data_variable_name(dataset)
+            num_records = len(dataset[variable].time)
             for i, month_offset in enumerate(dataset[variable].time):
+                if latest_only and i < (num_records - 1):
+                    continue
                 time = utils.add_months_to_datetime(BASE_TIME, month_offset)
                 start_datetime, end_datetime = utils.datetime_bounds(
                     time, time_resolution

@@ -49,7 +49,10 @@ def create_collection(
 
 
 def create_items(
-    cdr: Type[Cdr], cog_directory: str, hrefs: List[str] = []
+    cdr: Type[Cdr],
+    cog_directory: str,
+    hrefs: List[str] = [],
+    latest_only: bool = False,
 ) -> List[Item]:
     """Creates COG items for the provided CDR.
 
@@ -59,6 +62,8 @@ def create_items(
         hrefs (List[str], optional): The NetCDF hrefs to use to create the
             items. Defaults to [], which means COGs will be created for all NOAA
             HTTP hrefs defined for this CDR.
+        latest_only (bool): Only create STAC items for the latest data. Useful
+            for creating a small subset of a CDRs items. Defaults to false.
 
     Returns:
         List[Item]: A list of PySTAC items.
@@ -67,6 +72,6 @@ def create_items(
         hrefs = list(cdr.hrefs())
     items: List[Item] = []
     for href in hrefs:
-        cogs = cogify(href, cog_directory)
+        cogs = cogify(href, cog_directory, latest_only)
         items = cdr.update_items(items, cogs)
     return items
