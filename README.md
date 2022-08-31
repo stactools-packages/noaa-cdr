@@ -15,6 +15,8 @@
 
 - Collections
   - [Ocean heat content](examples/ocean-heat-content/collection.json)
+- Items
+  - [Ocean heat content, yearly for 2021, 2000m depth](examples/ocean-heat-content/ocean-heat-content-2021-2000m/ocean-heat-content-2021-2000m.json)
 
 ### Layout
 
@@ -49,7 +51,23 @@ pip install stactools-noaa-cdr
 To create a collection, e.g. for the [Ocean heat content CDR](https://www.ncei.noaa.gov/products/climate-data-records/global-ocean-heat-content):
 
 ```sh
-stac create-collection noaa-cdr ocean-heat-content examples/ocean-heat-content/collection.json
+stac noaa-cdr create-collection \
+  ocean-heat-content examples/ocean-heat-content/collection.json
+```
+
+To create COGs and items:
+
+```sh
+stac noaa-cdr create-collection --create-items \
+  ocean-heat-content examples/ocean-heat-content/collection.json
+```
+
+To only create COGs and items for the latest data (e.g. to create a small
+example collection):
+
+```sh
+stac noaa-cdr create-collection --create-items --latest-only \
+  ocean-heat-content examples/ocean-heat-content/collection.json
 ```
 
 ## Contributing
@@ -72,12 +90,5 @@ pre-commit run --all-files
 To run the tests:
 
 ```shell
-pytest -vv
-```
-
-Some tests that require network access or a lot of work are marked as "slow" and
-are skipped by default. To run the complete test suite, run:
-
-```sh
-pytest --slow
+pytest
 ```
