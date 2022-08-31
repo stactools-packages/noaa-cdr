@@ -6,7 +6,7 @@ from typing import Iterable, List, Type, Union, cast
 
 import dateutil.parser
 import pystac.utils
-from pystac import Asset, Extent, Item, MediaType, TemporalExtent
+from pystac import Asset, Extent, Item, Link, MediaType, TemporalExtent
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import NoDataStrings, RasterBand, RasterExtension
 
@@ -248,6 +248,16 @@ class Cdr(ABC):
         """
         ...
 
+    @staticmethod
+    @abstractmethod
+    def license_link() -> Link:
+        """Returns the license link for this CDR.
+
+        Returns:
+            Link: The license link.
+        """
+        ...
+
 
 class OceanHeatContent(Cdr):
     """The ocean heat content CDR.
@@ -336,4 +346,14 @@ class OceanHeatContent(Cdr):
             "profile data (NCEI Accession 0164586). [indicate subset used]. "
             "NOAA National Centers for Environmental Information. Dataset. "
             "https://doi.org/10.7289/v53f4mvp. Accessed [date]."
+        )
+
+    @staticmethod
+    def license_link() -> Link:
+        return Link(
+            rel="license",
+            target="https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/"
+            "Ocean_Heat_Content/UseAgreement_01B-41.pdf",
+            media_type=MediaType.PDF,
+            title="CDR Open Data Blurb",
         )
