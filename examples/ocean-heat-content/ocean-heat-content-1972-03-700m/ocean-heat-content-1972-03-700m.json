@@ -5,6 +5,7 @@
   "properties": {
     "start_datetime": "1972-03-01T00:00:00Z",
     "end_datetime": "1972-03-31T23:59:59Z",
+    "created": "2022-08-31T13:33:20.564945Z",
     "proj:epsg": 4326,
     "proj:shape": [
       180,
