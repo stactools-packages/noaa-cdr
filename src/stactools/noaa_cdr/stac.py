@@ -3,6 +3,7 @@ import os.path
 from typing import List, Optional, Type
 
 from pystac import Asset, CatalogType, Collection, Item
+from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
 
 from .cdr import Cdr
 from .cogify import cogify
@@ -64,8 +65,25 @@ def create_collection(
         if local_directory:
             hrefs = list(cdr.local_hrefs(local_directory))
         items = create_items(cdr, cog_directory, hrefs=hrefs, latest_only=latest_only)
+        asset_definitions = dict()
+        for item in items:
+            for key, asset in item.assets.items():
+                if key not in asset_definitions:
+                    if asset.title:
+                        # TODO this pattern may not work for all CDRs
+                        title = asset.title.split(" : ")[0]
+                    else:
+                        title = None
+                    asset_definitions[key] = AssetDefinition.create(
+                        title=title,
+                        description=asset.description,
+                        media_type=asset.media_type,
+                        roles=asset.roles,
+                    )
         collection.add_items(items)
         collection.update_extent_from_items()
+        item_assets = ItemAssetsExtension.ext(collection, add_if_missing=True)
+        item_assets.item_assets = asset_definitions
 
     return collection
 

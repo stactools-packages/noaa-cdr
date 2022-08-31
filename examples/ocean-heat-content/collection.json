@@ -66,7 +66,53 @@
       "type": "application/json"
     }
   ],
-  "stac_extensions": [],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json"
+  ],
+  "item_assets": {
+    "heat_content": {
+      "title": "Ocean Heat Content anomalies from WOA09",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_halosteric_sea_level": {
+      "title": "Mean halosteric sea level anomalies from WOA09",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_salinity": {
+      "title": "Mean salinity anomalies from WOA09",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_temperature": {
+      "title": "Mean temperature anomalies from WOA09",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_thermosteric_sea_level": {
+      "title": "Mean thermosteric sea level anomalies from WOA09",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_total_steric_sea_level": {
+      "title": "Mean total steric sea level anomalies from WOA09",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ]
+    }
+  },
   "title": "Global Ocean Heat Content CDR",
   "extent": {
     "spatial": {
