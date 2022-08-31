@@ -90,8 +90,6 @@ def cogify(
                 with MemoryFile() as memory_file:
                     with memory_file.open(**GTIFF_PROFILE) as open_memory_file:
                         open_memory_file.write(values, 1)
-                        # TODO save the month offset and time resolution in the TIFF
-                        # tags for later discovery
                         rasterio.shutil.copy(
                             open_memory_file, output_path, **COG_PROFILE
                         )
