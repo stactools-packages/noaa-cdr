@@ -4,6 +4,7 @@ from typing import List, Optional, Type
 
 from pystac import Asset, CatalogType, Collection, Item
 from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
+from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 
 from .cdr import Cdr
@@ -79,12 +80,22 @@ def create_collection(
                         title = asset.title.split(" : ")[0]
                     else:
                         title = None
-                    asset_definitions[key] = AssetDefinition.create(
+                    asset_definition = AssetDefinition.create(
                         title=title,
                         description=asset.description,
                         media_type=asset.media_type,
                         roles=asset.roles,
                     )
+                    try:
+                        raster = RasterExtension.ext(asset)
+                    except ValueError:
+                        pass
+                    else:
+                        if raster.bands:
+                            asset_definition.properties["raster:bands"] = [
+                                band.to_dict() for band in raster.bands
+                            ]
+                    asset_definitions[key] = asset_definition
         collection.add_items(items)
         collection.update_extent_from_items()
         item_assets = ItemAssetsExtension.ext(collection, add_if_missing=True)
