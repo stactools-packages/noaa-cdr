@@ -355,5 +355,5 @@ class OceanHeatContent(Cdr):
             target="https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/"
             "Ocean_Heat_Content/UseAgreement_01B-41.pdf",
             media_type=MediaType.PDF,
-            title="CDR Open Data Blurb",
+            title="NOAA CDR Ocean Heat Content Use Agreement",
         )
