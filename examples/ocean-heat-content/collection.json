@@ -88,6 +88,13 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
+      ],
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "10^18 joules"
+        }
       ]
     },
     "mean_halosteric_sea_level": {
@@ -95,6 +102,13 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
+      ],
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "millimeters"
+        }
       ]
     },
     "mean_salinity": {
@@ -102,6 +116,13 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
+      ],
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "unitless"
+        }
       ]
     },
     "mean_temperature": {
@@ -109,6 +130,13 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
+      ],
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "degrees Celsius"
+        }
       ]
     },
     "mean_thermosteric_sea_level": {
@@ -116,6 +144,13 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
+      ],
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "millimeters"
+        }
       ]
     },
     "mean_total_steric_sea_level": {
@@ -123,6 +158,13 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
+      ],
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "millimeters"
+        }
       ]
     }
   },
