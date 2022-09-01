@@ -5,7 +5,7 @@
   "properties": {
     "start_datetime": "1972-03-01T00:00:00Z",
     "end_datetime": "1972-03-31T23:59:59Z",
-    "created": "2022-09-01T09:31:01.068304Z",
+    "created": "2022-09-01T09:55:20.538577Z",
     "proj:epsg": 4326,
     "proj:shape": [
       180,
@@ -72,7 +72,7 @@
     "heat_content": {
       "href": "./heat_content_anomaly_0-700_monthly_1972-03.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-700 m monthly 1.00 degree 1972-03",
+      "title": "Ocean Heat Content anomalies from WOA09 : 0-700m 1972-03",
       "created": "2022-04-18T00:00:00Z",
       "updated": "2022-04-18T00:00:00Z",
       "raster:bands": [
