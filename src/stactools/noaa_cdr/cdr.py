@@ -180,7 +180,7 @@ class Cdr(ABC):
                 proj.transform = cog.transform
                 items_as_dict[id] = item
             item = items_as_dict[id]
-            title = f"{cog.attributes['title']} {cog.time_interval_as_str()}"
+            title = cls.cog_asset_title(cog)
             asset = Asset(
                 href=cog.path, title=title, media_type=MediaType.COG, roles=["data"]
             )
@@ -257,6 +257,14 @@ class Cdr(ABC):
             Link: The license link.
         """
         ...
+
+    @staticmethod
+    def cog_asset_title(cog: Cog) -> str:
+        """Returns the asset title for a COG.
+
+        There's a default implementation, but CDRs can override.
+        """
+        return f"{cog.attributes['title']} {cog.time_interval_as_str()}"
 
 
 class OceanHeatContent(Cdr):
@@ -357,3 +365,10 @@ class OceanHeatContent(Cdr):
             media_type=MediaType.PDF,
             title="NOAA CDR Ocean Heat Content Use Agreement",
         )
+
+    @staticmethod
+    def cog_asset_title(cog: Cog) -> str:
+        title = cog.attributes["title"].split(" : ")[0]
+        min_depth = int(cog.attributes["geospatial_vertical_min"])
+        max_depth = int(cog.attributes["geospatial_vertical_max"])
+        return f"{title} : {min_depth}-{max_depth}m {cog.time_interval_as_str()}"

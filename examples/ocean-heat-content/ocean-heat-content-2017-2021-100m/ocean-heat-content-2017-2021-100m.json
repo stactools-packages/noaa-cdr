@@ -5,7 +5,7 @@
   "properties": {
     "start_datetime": "2017-01-01T00:00:00Z",
     "end_datetime": "2021-12-31T23:59:59Z",
-    "created": "2022-09-01T09:31:02.882102Z",
+    "created": "2022-09-01T09:55:22.156160Z",
     "proj:epsg": 4326,
     "proj:shape": [
       180,
@@ -72,7 +72,7 @@
     "mean_salinity": {
       "href": "./mean_salinity_anomaly_0-100_pentad_2017-2021.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-100 m pentad 1.00 degree 2017-2021",
+      "title": "Mean salinity anomalies from WOA09 : 0-100m 2017-2021",
       "created": "2022-01-07T00:00:00Z",
       "updated": "2022-01-07T00:00:00Z",
       "raster:bands": [
@@ -89,7 +89,7 @@
     "mean_temperature": {
       "href": "./mean_temperature_anomaly_0-100_pentad_2017-2021.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-100 m pentad 1.00 degree 2017-2021",
+      "title": "Mean temperature anomalies from WOA09 : 0-100m 2017-2021",
       "created": "2022-01-07T00:00:00Z",
       "updated": "2022-01-07T00:00:00Z",
       "raster:bands": [
