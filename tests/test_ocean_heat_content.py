@@ -1,18 +1,20 @@
 import datetime
+import os.path
 from tempfile import TemporaryDirectory
 
+import pytest
 from dateutil.tz import tzutc
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 
-from stactools.noaa_cdr import stac
-from stactools.noaa_cdr.cdr import OceanHeatContent
-from tests import test_data
+from stactools.noaa_cdr import ocean_heat_content
+
+from . import test_data
 
 
 def test_create_collection() -> None:
-    collection = stac.create_collection(OceanHeatContent)
+    collection = ocean_heat_content.create_collection()
     assert collection.id == "noaa-cdr-ocean-heat-content"
     assert len(collection.assets) == 44
     for asset in collection.assets.values():
@@ -32,7 +34,7 @@ def test_create_collection() -> None:
 def test_create_items_one_netcdf() -> None:
     path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
     with TemporaryDirectory() as temporary_directory:
-        items = stac.create_items(OceanHeatContent, temporary_directory, [path])
+        items = ocean_heat_content.create_items(temporary_directory, [path])
     assert len(items) == 17
     for item in items:
         assert len(item.assets) == 1
@@ -75,7 +77,7 @@ def test_create_items_two_netcdfs_same_items() -> None:
         ),
     ]
     with TemporaryDirectory() as temporary_directory:
-        items = stac.create_items(OceanHeatContent, temporary_directory, paths)
+        items = ocean_heat_content.create_items(temporary_directory, paths)
     assert len(items) == 17
     for item in items:
         assert len(item.assets) == 2
@@ -90,7 +92,7 @@ def test_create_items_two_netcdfs_different_items() -> None:
         ),
     ]
     with TemporaryDirectory() as temporary_directory:
-        items = stac.create_items(OceanHeatContent, temporary_directory, paths)
+        items = ocean_heat_content.create_items(temporary_directory, paths)
     assert len(items) == 80
     for item in items:
         assert len(item.assets) == 1
@@ -100,8 +102,53 @@ def test_create_items_two_netcdfs_different_items() -> None:
 def test_create_items_one_netcdf_latest_only() -> None:
     path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
     with TemporaryDirectory() as temporary_directory:
-        items = stac.create_items(
-            OceanHeatContent, temporary_directory, [path], latest_only=True
+        items = ocean_heat_content.create_items(
+            temporary_directory, [path], latest_only=True
         )
     assert len(items) == 1
     items[0].validate()
+
+
+@pytest.mark.parametrize(
+    "infile,num_cogs",
+    [
+        ("heat_content_anomaly_0-700_yearly.nc", 67),
+        ("heat_content_anomaly_0-2000_monthly.nc", 207),
+        ("heat_content_anomaly_0-2000_pentad.nc", 63),
+        ("heat_content_anomaly_0-2000_seasonal.nc", 69),
+        ("heat_content_anomaly_0-2000_yearly.nc", 17),
+        ("mean_halosteric_sea_level_anomaly_0-2000_yearly.nc", 17),
+        ("mean_salinity_anomaly_0-2000_yearly.nc", 17),
+        ("mean_temperature_anomaly_0-2000_yearly.nc", 17),
+        ("mean_thermosteric_sea_level_anomaly_0-2000_yearly.nc", 17),
+        ("mean_total_steric_sea_level_anomaly_0-2000_yearly.nc", 17),
+    ],
+)
+def test_cogify(infile: str, num_cogs: int) -> None:
+    external_data_path = test_data.get_external_data(infile)
+    with TemporaryDirectory() as temporary_directory:
+        cogs = ocean_heat_content.cogify(external_data_path, temporary_directory)
+        assert len(cogs) == num_cogs
+        for cog in cogs:
+            assert os.path.exists(cog.path)
+
+
+def test_cogify_href() -> None:
+    href = (
+        "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data"
+        "/0164586/derived/heat_content_anomaly_0-2000_yearly.nc"
+    )
+    with TemporaryDirectory() as temporary_directory:
+        cogs = ocean_heat_content.cogify(href, temporary_directory)
+        assert len(cogs) == 17
+        for cog in cogs:
+            assert os.path.exists(cog.path)
+
+
+def test_cogify_href_no_output_directory() -> None:
+    href = (
+        "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data"
+        "/0164586/derived/heat_content_anomaly_0-2000_yearly.nc"
+    )
+    with pytest.raises(Exception):
+        ocean_heat_content.cogify(href)
