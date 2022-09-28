@@ -1,12 +1,6 @@
 import stactools.core
 from stactools.cli.registry import Registry
 
-from stactools.noaa_cdr.cdr import Cdr
-from stactools.noaa_cdr.cogify import cogify
-from stactools.noaa_cdr.stac import create_collection
-
-__all__ = ["create_collection", "cogify", "Cdr"]
-
 stactools.core.use_fsspec()
 
 

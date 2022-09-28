@@ -12,9 +12,7 @@ from click import Command, Group, Path
 from pystac import CatalogType, ItemCollection
 from tqdm import tqdm
 
-import stactools.noaa_cdr
-from stactools.noaa_cdr import stac
-from stactools.noaa_cdr.cdr import Cdr
+import stactools.noaa_cdr.ocean_heat_content
 
 logger = logging.getLogger(__name__)
 click_logging.basic_config(logger)
@@ -30,11 +28,17 @@ def create_noaa_cdr_command(cli: Group) -> Command:
     def noaa_cdr() -> None:
         pass
 
-    @noaa_cdr.command(
+    @noaa_cdr.group(
+        "ocean-heat-content",
+        short_help=("Commands for working with the Ocean Heat Content CDR"),
+    )
+    def ocean_heat_content() -> None:
+        pass
+
+    @ocean_heat_content.command(
         "create-collection",
         short_help="Creates a STAC collection",
     )
-    @click.argument("cdr-name")
     @click.argument("destination")
     @click.option(
         "-c",
@@ -59,19 +63,16 @@ def create_noaa_cdr_command(cli: Group) -> Command:
         "servers (only used if --create-items is True)",
     )
     @click_logging.simple_verbosity_option(logger)  # type: ignore
-    def create_collection_command(
-        cdr_name: str,
+    def create_ocean_heat_content_collection_command(
         destination: str,
         create_items: bool,
         latest_only: bool,
         local_directory: Optional[str],
     ) -> None:
-        """Creates a STAC Collection
+        """Creates a STAC Collection for the Ocean Heat Content CDR.
 
         \b
         Args:
-            cdr_name (str): The name of a CDR. Use `stac noaa-cdr list` to see a
-                list of available names.
             destination (str): An HREF for the Collection JSON
             create_items (bool): Create items and include them in this
                 collection. Defaults to False.
@@ -81,11 +82,9 @@ def create_noaa_cdr_command(cli: Group) -> Command:
                 directory instead of from NOAA's servers. Only used if
                 --create-items is true.
         """
-        cdr = Cdr.from_slug(cdr_name)
         if create_items:
             with TemporaryDirectory() as temporary_directory:
-                collection = stac.create_collection(
-                    cdr,
+                collection = stactools.noaa_cdr.ocean_heat_content.create_collection(
                     catalog_type=CatalogType.SELF_CONTAINED,
                     cog_directory=temporary_directory,
                     latest_only=latest_only,
@@ -99,39 +98,40 @@ def create_noaa_cdr_command(cli: Group) -> Command:
                     ignore_conflicts=True,
                 )
         else:
-            collection = stac.create_collection(
-                cdr, catalog_type=CatalogType.SELF_CONTAINED
+            collection = stactools.noaa_cdr.ocean_heat_content.create_collection(
+                catalog_type=CatalogType.SELF_CONTAINED
             )
         collection.set_self_href(destination)
         collection.save()
         return None
 
-    @noaa_cdr.command("create-items", short_help="Create STAC items from a NetCDF")
-    @click.argument("name")
+    @ocean_heat_content.command(
+        "create-items", short_help="Create STAC items from a NetCDF"
+    )
     @click.argument("source", nargs=-1)
     @click.argument("destination", nargs=1)
     @click.option(
         "-c", "--cog-directory", help="The directory in which to store the COGs"
     )
-    def create_item_command(
-        name: str, source: List[str], destination: str, cog_directory: Optional[str]
+    def create_ocean_heat_content_items_command(
+        source: List[str], destination: str, cog_directory: Optional[str]
     ) -> None:
         """Creates a STAC ItemCollection for the provided NetCDFs.
 
         \b
         Args:
-            name (str): The CDR name.
             source (str): HREF of the Asset associated with the Item.
             destination (str): The destination file that will hold the item collection.
             cog_directory (str): The folder that will hold the COGs. If not
                 provided, the COGs will be stored in the same directory as the item
                 collection.
         """
-        cdr = Cdr.from_slug(name)
         if not cog_directory:
             cog_directory = os.path.dirname(destination)
         os.makedirs(cog_directory, exist_ok=True)
-        items = stac.create_items(cdr, cog_directory, source)
+        items = stactools.noaa_cdr.ocean_heat_content.create_items(
+            cog_directory, source
+        )
         for item in items:
             for key, asset in item.assets.items():
                 asset.href = pystac.utils.make_relative_href(asset.href, destination)
@@ -139,10 +139,11 @@ def create_noaa_cdr_command(cli: Group) -> Command:
         item_collection = ItemCollection(items)
         item_collection.save_object(destination)
 
-    @noaa_cdr.command("download", short_help="Download data from NOAA's HTTP server")
-    @click.argument("name")
+    @ocean_heat_content.command(
+        "download", short_help="Download data from NOAA's HTTP server"
+    )
     @click.argument("destination")
-    def create_download_command(name: str, destination: str) -> None:
+    def create_ocean_heat_content_download_command(destination: str) -> None:
         """Downloads data from NOAA's HTTP server.
 
         \b
@@ -151,9 +152,8 @@ def create_noaa_cdr_command(cli: Group) -> Command:
                 a list of available CDRs.
             destination (str): The directory in which to store the CDR data.
         """
-        cdr = Cdr.from_slug(name)
         os.makedirs(destination, exist_ok=True)
-        for href in cdr.hrefs():
+        for href in stactools.noaa_cdr.ocean_heat_content.noaa_hrefs():
             path = os.path.join(destination, os.path.basename(href))
             if os.path.exists(path):
                 print(f"File already downloaded, skipping: {path}")
@@ -168,19 +168,15 @@ def create_noaa_cdr_command(cli: Group) -> Command:
                 for chunk in response.iter_content(chunk_size=4096):
                     fout.write(chunk)
 
-    @noaa_cdr.command("list", short_help="List the names of all supported CDRs")
-    def create_list_command() -> None:
-        """Prints the names of all supported CDRs."""
-        for slug in Cdr.slugs():
-            print(slug)
-
-    @noaa_cdr.command(
+    @ocean_heat_content.command(
         "cogify",
         short_help="Create a Cloud-Optimized GeoTIFF (COG) from a CDR NetCDF file",
     )
     @click.argument("infile", type=Path(exists=True))
     @click.option("-o", "--outdir", help="The output directory")
-    def create_cog_command(infile: str, outdir: Optional[Path]) -> None:
+    def create_ocean_heat_content_cogify_command(
+        infile: str, outdir: Optional[Path]
+    ) -> None:
         """Creates a Cloud-Optimized GeoTIFF (COG) from a CDR NetCDF file.
 
         The COG will have the same file name but with a .tif extension.
@@ -194,7 +190,7 @@ def create_noaa_cdr_command(cli: Group) -> Command:
         """
         if outdir:
             os.makedirs(str(outdir), exist_ok=True)
-        cogs = stactools.noaa_cdr.cogify(
+        cogs = stactools.noaa_cdr.ocean_heat_content.cogify(
             infile, None if outdir is None else str(outdir)
         )
         print(f"Wrote {len(cogs)} COGs to {os.path.dirname(cogs[0].path)}")
