@@ -8,7 +8,8 @@ it on the fly.
 Progress and status are printed to stderr, so you can redirect stdout to a file.
 
 Usage:
-    scripts/extract_netcdf_asset_metadata.py > src/stactools/noaa_cdr/ocean-heat-content.json
+    scripts/extract_netcdf_asset_metadata.py > \
+        src/stactools/noaa_cdr/ocean-heat-content/asset-metadata.json
 """
 
 import json
@@ -23,7 +24,7 @@ from tqdm import tqdm
 import stactools.noaa_cdr.ocean_heat_content
 
 metadata: Dict[str, Dict[str, str]] = {}
-for href in tqdm(list(stactools.noaa_cdr.ocean_heat_content.noaa_hrefs())):
+for href in tqdm(list(stactools.noaa_cdr.ocean_heat_content.iter_noaa_hrefs())):
     key = os.path.splitext(os.path.basename(href))[0]
     with fsspec.open(href) as file:
         with xarray.open_dataset(file, decode_times=False) as dataset:
