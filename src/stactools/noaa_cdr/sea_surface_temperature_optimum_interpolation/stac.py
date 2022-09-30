@@ -1,29 +1,29 @@
-import copy
 import os.path
 from typing import Optional
 
 import dateutil.parser
 import fsspec
 import xarray
-from pystac import Asset, Collection, Item
+from pystac import Asset, CatalogType, Collection, Item
 
-from .. import dataset, time
+from .. import time
 from ..constants import (
     DEFAULT_CATALOG_TYPE,
     LICENSE,
     PROCESSING_EXTENSION_SCHEMA,
     PROVIDERS,
 )
-from .constants import BBOX, DESCRIPTION, EXTENT, GEOMETRY, ID, PROFILE, TITLE
+from . import cog
+from .constants import BBOX, DESCRIPTION, EXTENT, GEOMETRY, ID, TITLE
 
 
-def create_collection() -> Collection:
+def create_collection(catalog_type: CatalogType = DEFAULT_CATALOG_TYPE) -> Collection:
     return Collection(
         id=ID,
         description=DESCRIPTION,
         extent=EXTENT,
         title=TITLE,
-        catalog_type=DEFAULT_CATALOG_TYPE,
+        catalog_type=catalog_type,
         license=LICENSE,
         keywords=[],
         providers=PROVIDERS,
@@ -62,21 +62,9 @@ def create_item(
             asset.common_metadata.updated = dateutil.parser.parse(ds.date_modified)
             item.assets["netcdf"] = asset
 
-            if cogify:
-                if not cog_directory:
-                    cog_directory = os.path.basename(href)
-                for variable in dataset.data_variable_names(ds):
-                    ds[variable].assign_coords(lon=(((ds.lon + 180) % 360) - 180))
-                    values = ds[variable].values.squeeze()
-                    profile = copy.deepcopy(PROFILE)
-                    profile.unit = ds[variable].units.replace("_", " ")
-                    # TODO check datatype, scale, offset, and bounds
-                    path = os.path.join(cog_directory, f"{id}-{variable}.tif")
-                    asset = dataset.write_cog(
-                        values,
-                        path,
-                        profile,
-                    )
-                    item.assets[variable] = asset
+    if cogify:
+        assets = cog.cogify(href, cog_directory)
+        for key, value in assets.items():
+            item.add_asset(key, value)
 
     return item

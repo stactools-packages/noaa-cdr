@@ -13,7 +13,7 @@ from pystac import CatalogType, ItemCollection
 from . import cog, stac
 
 
-def create_ocean_heat_content_command(noaa_cdr: Group) -> Command:
+def create_command(noaa_cdr: Group) -> Command:
     @noaa_cdr.group(
         "ocean-heat-content",
         short_help=("Commands for working with the Ocean Heat Content CDR"),
@@ -48,7 +48,7 @@ def create_ocean_heat_content_command(noaa_cdr: Group) -> Command:
         help="Read NetCDFs from this local directory instead of from NOAA's HTTP "
         "servers (only used if --create-items is True)",
     )
-    def create_ocean_heat_content_collection_command(
+    def create_collection_command(
         destination: str,
         create_items: bool,
         latest_only: bool,
@@ -96,7 +96,7 @@ def create_ocean_heat_content_command(noaa_cdr: Group) -> Command:
     @click.option(
         "-c", "--cog-directory", help="The directory in which to store the COGs"
     )
-    def create_ocean_heat_content_items_command(
+    def create_items_command(
         source: List[str], destination: str, cog_directory: Optional[str]
     ) -> None:
         """Creates a STAC ItemCollection for the provided NetCDFs.
@@ -124,7 +124,7 @@ def create_ocean_heat_content_command(noaa_cdr: Group) -> Command:
         "download", short_help="Download data from NOAA's HTTP server"
     )
     @click.argument("destination")
-    def create_ocean_heat_content_download_command(destination: str) -> None:
+    def download_command(destination: str) -> None:
         """Downloads data from NOAA's HTTP server.
 
         \b
@@ -155,9 +155,7 @@ def create_ocean_heat_content_command(noaa_cdr: Group) -> Command:
     )
     @click.argument("infile", type=Path(exists=True))
     @click.option("-o", "--outdir", help="The output directory")
-    def create_ocean_heat_content_cogify_command(
-        infile: str, outdir: Optional[Path]
-    ) -> None:
+    def cogify_command(infile: str, outdir: Optional[Path]) -> None:
         """Creates a Cloud-Optimized GeoTIFF (COG) from a CDR NetCDF file.
 
         The COG will have the same file name but with a .tif extension.
