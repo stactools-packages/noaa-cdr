@@ -6,15 +6,14 @@ import fsspec
 import xarray
 from pystac import Asset, CatalogType, Collection, Item
 
-from .. import time
+from .. import cog, time
 from ..constants import (
     DEFAULT_CATALOG_TYPE,
     LICENSE,
     PROCESSING_EXTENSION_SCHEMA,
     PROVIDERS,
 )
-from . import cog
-from .constants import BBOX, DESCRIPTION, EXTENT, GEOMETRY, ID, TITLE
+from .constants import BBOX, DESCRIPTION, EXTENT, GEOMETRY, ID, PROFILE, TITLE
 
 
 def create_collection(catalog_type: CatalogType = DEFAULT_CATALOG_TYPE) -> Collection:
@@ -63,7 +62,7 @@ def create_item(
             item.assets["netcdf"] = asset
 
     if cogify:
-        assets = cog.cogify(href, cog_directory)
+        assets = cog.cogify(href, PROFILE, cog_directory)
         for key, value in assets.items():
             item.add_asset(key, value)
 
