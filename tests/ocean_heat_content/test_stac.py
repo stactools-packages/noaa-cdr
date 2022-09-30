@@ -10,7 +10,7 @@ from pystac.extensions.scientific import ScientificExtension
 
 from stactools.noaa_cdr.ocean_heat_content import cog, stac
 
-from . import test_data
+from .. import test_data
 
 
 def test_create_collection() -> None:
