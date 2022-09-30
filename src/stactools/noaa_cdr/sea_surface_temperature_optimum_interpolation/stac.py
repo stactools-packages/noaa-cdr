@@ -12,8 +12,8 @@ from pystac import Asset, Item
 from pystac.extensions.raster import DataType
 from rasterio import Affine
 
-from . import dataset, time
-from .profile import Profile
+from .. import dataset, time
+from ..profile import Profile
 
 BASE_DATETIME = datetime.datetime(1978, 1, 1, 12, 0, 0, tzinfo=tzutc())
 BBOX = [-180.0, -90.0, 180.0, 90.0]

@@ -4,13 +4,13 @@ from tempfile import TemporaryDirectory
 
 from dateutil.tz import tzutc
 
-from stactools.noaa_cdr import sea_surface_temperature_optimum_interpolation
+from stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation import stac
 from tests import test_data
 
 
 def test_create_item() -> None:
     path = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
-    item = sea_surface_temperature_optimum_interpolation.create_item(path)
+    item = stac.create_item(path)
     assert item.id == "oisst-avhrr-v02r01.20220913"
     assert item.datetime == datetime.datetime(2022, 9, 13, 12, 0, 0, tzinfo=tzutc())
     assert item.common_metadata.start_datetime == datetime.datetime(
@@ -43,9 +43,7 @@ def test_create_item() -> None:
 def test_create_item_with_cog() -> None:
     path = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
     with TemporaryDirectory() as temporary_directory:
-        item = sea_surface_temperature_optimum_interpolation.create_item(
-            path, cogify=True, cog_directory=temporary_directory
-        )
+        item = stac.create_item(path, cogify=True, cog_directory=temporary_directory)
         assert len(item.assets) == 5
         asset = item.assets["sst"]
         assert asset.href == os.path.join(
