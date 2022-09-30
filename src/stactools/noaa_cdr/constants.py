@@ -1,0 +1,28 @@
+import shapely.geometry
+from pystac import CatalogType, Provider, ProviderRole, SpatialExtent
+
+BBOX = [-180.0, -90.0, 180.0, 90.0]
+GEOMETRY = shapely.geometry.mapping(shapely.geometry.box(*BBOX))
+SPATIAL_EXTENT = SpatialExtent(bboxes=BBOX)
+PROVIDERS = [
+    Provider(
+        name="National Centers for Environmental Information",
+        description="NCEI is the Nation's leading authority for environmental data, and manage "
+        "one of the largest archives of atmospheric, coastal, geophysical, and "
+        "oceanic research in the world. NCEI contributes to the NESDIS mission "
+        "by developing new products and services that span the science disciplines "
+        "and enable better data discovery.",
+        roles=[
+            ProviderRole.PRODUCER,
+            ProviderRole.PROCESSOR,
+            ProviderRole.LICENSOR,
+            ProviderRole.HOST,
+        ],
+        url="https://www.ncei.noaa.gov/",
+    )
+]
+LICENSE = "proprietary"
+DEFAULT_CATALOG_TYPE = CatalogType.SELF_CONTAINED
+PROCESSING_EXTENSION_SCHEMA = (
+    "https://stac-extensions.github.io/processing/v1.1.0/schema.json"
+)

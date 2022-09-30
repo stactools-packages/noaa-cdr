@@ -8,6 +8,15 @@ from stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation import sta
 from tests import test_data
 
 
+def test_create_collection() -> None:
+    collection = stac.create_collection()
+    assert collection.extent.temporal.intervals == [
+        [datetime.datetime(1981, 9, 1, tzinfo=tzutc()), None]
+    ]
+    collection.set_self_href("")
+    collection.validate()
+
+
 def test_create_item() -> None:
     path = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
     item = stac.create_item(path)

@@ -10,23 +10,19 @@ from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 
+from ..constants import BBOX, DEFAULT_CATALOG_TYPE, GEOMETRY, LICENSE, PROVIDERS
 from . import cog, iter_noaa_hrefs
 from .cog import Cog
 from .constants import (
     ASSET_METADATA,
-    BBOX,
     CITATION,
-    DEFAULT_CATALOG_TYPE,
     DESCRIPTION,
     DOI,
     EXTENT,
     GDAL_TRANSFORM,
-    GEOMETRY,
     ID,
-    LICENSE,
     LICENSE_LINK,
     PROFILE,
-    PROVIDERS,
     TITLE,
 )
 
