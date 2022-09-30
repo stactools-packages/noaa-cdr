@@ -1,0 +1,26 @@
+{
+  "type": "Catalog",
+  "id": "noaa-cdr",
+  "stac_version": "1.0.0",
+  "description": "NOAA CDR example catalog",
+  "links": [
+    {
+      "rel": "root",
+      "href": "./catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "child",
+      "href": "./noaa-cdr-ocean-heat-content/collection.json",
+      "type": "application/json",
+      "title": "Global Ocean Heat Content CDR"
+    },
+    {
+      "rel": "child",
+      "href": "./noaa-cdr-sea-surface-temperature-optimum-interpolation/collection.json",
+      "type": "application/json",
+      "title": "Sea Surface Temperature - Optimum Interpolation CDR"
+    }
+  ],
+  "stac_extensions": []
+}

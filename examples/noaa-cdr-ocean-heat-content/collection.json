@@ -6,9 +6,8 @@
   "links": [
     {
       "rel": "root",
-      "href": "./collection.json",
-      "type": "application/json",
-      "title": "Global Ocean Heat Content CDR"
+      "href": "../catalog.json",
+      "type": "application/json"
     },
     {
       "rel": "license",
@@ -73,6 +72,11 @@
     {
       "rel": "item",
       "href": "./ocean-heat-content-2021-100m/ocean-heat-content-2021-100m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
       "type": "application/json"
     }
   ],
