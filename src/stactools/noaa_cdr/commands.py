@@ -3,8 +3,11 @@ import logging
 import click_logging
 from click import Command, Group
 
-from stactools.noaa_cdr.ocean_heat_content.commands import (
-    create_ocean_heat_content_command,
+from .ocean_heat_content.commands import (
+    create_command as create_ocean_heat_content_command,
+)
+from .sea_surface_temperature_optimum_interpolation.commands import (
+    create_command as create_sea_surface_temperature_optimum_interpolation_command,
 )
 
 logger = logging.getLogger(__name__)
@@ -23,5 +26,6 @@ def create_noaa_cdr_command(cli: Group) -> Command:
         pass
 
     create_ocean_heat_content_command(noaa_cdr)
+    create_sea_surface_temperature_optimum_interpolation_command(noaa_cdr)
 
     return noaa_cdr
