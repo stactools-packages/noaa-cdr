@@ -6,11 +6,15 @@ import fsspec
 import xarray
 from pystac import Asset
 
-from .. import dataset
-from .constants import PROFILE
+from . import dataset
+from .profile import Profile
 
 
-def cogify(path: str, directory: Optional[str]) -> Dict[str, Asset]:
+def cogify(path: str, profile: Profile, directory: Optional[str]) -> Dict[str, Asset]:
+    """Creates COGs for each COG-able variable in a NetCDF file.
+
+    COG-able variables are found using :py:func:`dataset.data_variable_names`.
+    """
     if not directory:
         directory = os.path.basename(path)
     os.makedirs(directory, exist_ok=True)
@@ -19,11 +23,9 @@ def cogify(path: str, directory: Optional[str]) -> Dict[str, Asset]:
     with fsspec.open(path) as file:
         with xarray.open_dataset(file) as ds:
             for variable in dataset.data_variable_names(ds):
-                ds[variable].assign_coords(lon=(((ds.lon + 180) % 360) - 180))
                 values = ds[variable].values.squeeze()
-                profile = copy.deepcopy(PROFILE)
+                profile = copy.deepcopy(profile)
                 profile.unit = ds[variable].units.replace("_", " ")
-                # TODO check datatype, scale, offset, and bounds
                 path = os.path.join(directory, f"{file_name}-{variable}.tif")
                 asset = dataset.write_cog(
                     values,
