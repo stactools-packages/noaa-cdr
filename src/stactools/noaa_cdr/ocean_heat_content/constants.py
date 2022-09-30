@@ -3,20 +3,12 @@ import importlib.resources
 import json
 
 import numpy
-import shapely.geometry
-from pystac import (
-    CatalogType,
-    Extent,
-    Link,
-    MediaType,
-    Provider,
-    ProviderRole,
-    SpatialExtent,
-    TemporalExtent,
-)
+from dateutil.tz import tzutc
+from pystac import Extent, Link, MediaType, TemporalExtent
 from pystac.extensions.raster import DataType
 from rasterio import Affine
 
+from ..constants import SPATIAL_EXTENT
 from ..profile import Profile
 
 ID = "noaa-cdr-ocean-heat-content"
@@ -31,31 +23,9 @@ DESCRIPTION = (
     "the global ocean and each of the major basins (Atlantic, Pacific, "
     "and Indian) divided by hemisphere (Northern, Southern)."
 )
-BBOX = [-180.0, -90.0, 180.0, 90.0]
-GEOMETRY = shapely.geometry.mapping(shapely.geometry.box(*BBOX))
-SPATIAL_EXTENT = SpatialExtent(bboxes=BBOX)
-TEMPORAL_EXTENT = TemporalExtent(intervals=[[datetime.datetime(1955, 1, 1), None]])
+BASE_TIME = datetime.datetime(1955, 1, 1, tzinfo=tzutc())
+TEMPORAL_EXTENT = TemporalExtent(intervals=[[BASE_TIME, None]])
 EXTENT = Extent(SPATIAL_EXTENT, TEMPORAL_EXTENT)
-PROVIDERS = [
-    Provider(
-        name="National Centers for Environmental Information",
-        description="NCEI is the Nation's leading authority for environmental data, and manage "
-        "one of the largest archives of atmospheric, coastal, geophysical, and "
-        "oceanic research in the world. NCEI contributes to the NESDIS mission "
-        "by developing new products and services that span the science disciplines "
-        "and enable better data discovery.",
-        roles=[
-            ProviderRole.PRODUCER,
-            ProviderRole.PROCESSOR,
-            ProviderRole.LICENSOR,
-            ProviderRole.HOST,
-        ],
-        url="https://www.ncei.noaa.gov/",
-    )
-]
-LICENSE = "proprietary"
-BASE_TIME = datetime.datetime(1955, 1, 1)
-DEFAULT_CATALOG_TYPE = CatalogType.SELF_CONTAINED
 LICENSE_LINK = Link(
     rel="license",
     target="https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/"
