@@ -11,12 +11,10 @@ from tests import test_data
 
 
 class CommandsTest(CliTestCase):
-    netcdf_path_for_cogify: str
-
     def create_subcommand_functions(self) -> List[Callable[[Group], Command]]:
         return [create_noaa_cdr_command]
 
-    def test_create_ocean_heat_content_collection(self) -> None:
+    def test_create_collection(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             destination = os.path.join(temporary_directory, "collection.json")
             result = self.run_command(
@@ -29,7 +27,7 @@ class CommandsTest(CliTestCase):
             assert collection.id == "noaa-cdr-ocean-heat-content"
             collection.validate()
 
-    def test_create_ocean_heat_content_items(self) -> None:
+    def test_create_items(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             destination = os.path.join(temporary_directory, "item-collection.json")
             infile = test_data.get_external_data(
@@ -50,11 +48,11 @@ class CommandsTest(CliTestCase):
             for item in item_collection:
                 item.validate()
 
-    def test_download_ocean_heat_content(self) -> None:
+    def test_download(self) -> None:
         result = self.run_command("noaa-cdr ocean-heat-content download --help")
         assert result.exit_code == 0
 
-    def test_cogify_ocean_heat_content(self) -> None:
+    def test_cogify(self) -> None:
         path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
         with TemporaryDirectory() as temporary_directory:
             result = self.run_command(
