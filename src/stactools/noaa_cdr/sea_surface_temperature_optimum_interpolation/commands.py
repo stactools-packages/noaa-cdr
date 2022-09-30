@@ -6,7 +6,9 @@ import pystac.utils
 from click import Command, Group, Path
 from pystac import CatalogType
 
-from . import cog, stac
+from .. import cog
+from . import stac
+from .constants import PROFILE
 
 
 def create_command(noaa_cdr: Group) -> Command:
@@ -99,7 +101,7 @@ def create_command(noaa_cdr: Group) -> Command:
             directory = str(outdir)
         else:
             directory = None
-        assets = cog.cogify(infile, directory)
+        assets = cog.cogify(infile, PROFILE, directory)
         print(f"Wrote {len(assets)} COGs to {directory}")
 
     return sea_surface_temperature_optimum_interpolation
