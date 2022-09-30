@@ -1,11 +1,11 @@
 {
   "type": "Feature",
   "stac_version": "1.0.0",
-  "id": "ocean-heat-content-1972-03-2000m",
+  "id": "ocean-heat-content-2017-2021-100m",
   "properties": {
-    "start_datetime": "1972-03-01T00:00:00Z",
-    "end_datetime": "1972-03-31T23:59:59Z",
-    "created": "2022-09-28T11:49:03.321445Z",
+    "start_datetime": "2017-01-01T00:00:00Z",
+    "end_datetime": "2021-12-31T23:59:59Z",
+    "created": "2022-09-30T12:32:59.312199Z",
     "proj:epsg": 4326,
     "proj:shape": [
       180,
@@ -19,7 +19,7 @@
       0.0,
       1.0
     ],
-    "datetime": "1972-03-16T12:00:00Z"
+    "datetime": "2019-07-01T00:00:00Z"
   },
   "geometry": {
     "type": "Polygon",
@@ -51,9 +51,8 @@
   "links": [
     {
       "rel": "root",
-      "href": "../collection.json",
-      "type": "application/json",
-      "title": "Global Ocean Heat Content CDR"
+      "href": "../../catalog.json",
+      "type": "application/json"
     },
     {
       "rel": "collection",
@@ -69,17 +68,30 @@
     }
   ],
   "assets": {
-    "heat_content": {
-      "href": "./heat_content_anomaly_0-2000_monthly_1972-03.tif",
+    "mean_salinity": {
+      "href": "./mean_salinity_anomaly_0-100_pentad_2017-2021.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Ocean Heat Content anomalies from WOA09 : 0-2000m 1972-03",
-      "created": "2022-04-18T00:00:00Z",
-      "updated": "2022-04-18T00:00:00Z",
+      "title": "Mean salinity anomalies from WOA09 : 0-100m 2017-2021",
       "raster:bands": [
         {
           "nodata": "nan",
           "data_type": "float32",
-          "unit": "10^18 joules"
+          "unit": "unitless"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_temperature": {
+      "href": "./mean_temperature_anomaly_0-100_pentad_2017-2021.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Mean temperature anomalies from WOA09 : 0-100m 2017-2021",
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "degrees Celsius"
         }
       ],
       "roles": [

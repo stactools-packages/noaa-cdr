@@ -1,0 +1,60 @@
+{
+  "type": "Collection",
+  "id": "noaa-cdr-sea-surface-temperature-optimum-interpolation",
+  "stac_version": "1.0.0",
+  "description": "The NOAA 1/4° daily Optimum Interpolation Sea Surface Temperature (or daily OISST) Climate Data Record (CDR) provides complete ocean temperature fields constructed by combining bias-adjusted observations from different platforms (satellites, ships, buoys) on a regular global grid, with gaps filled in by interpolation. The main input source is satellite data from the Advanced Very High Resolution Radiometer (AVHRR), which provides high temporal-spatial coverage from late 1981-present. This input must be adjusted to the buoys due to erroneous cold SST data following the Mt Pinatubo and El Chichon eruptions. Applications include climate modeling, resource management, ecological studies on annual to daily scales.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./oisst-avhrr-v02r01.20220913/oisst-avhrr-v02r01.20220913.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json"
+    }
+  ],
+  "stac_extensions": [],
+  "title": "Sea Surface Temperature - Optimum Interpolation CDR",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1981-09-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "keywords": [],
+  "providers": [
+    {
+      "name": "National Centers for Environmental Information",
+      "description": "NCEI is the Nation's leading authority for environmental data, and manage one of the largest archives of atmospheric, coastal, geophysical, and oceanic research in the world. NCEI contributes to the NESDIS mission by developing new products and services that span the science disciplines and enable better data discovery.",
+      "roles": [
+        "producer",
+        "processor",
+        "licensor",
+        "host"
+      ],
+      "url": "https://www.ncei.noaa.gov/"
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 {
   "type": "Feature",
   "stac_version": "1.0.0",
-  "id": "ocean-heat-content-2021-2000m",
+  "id": "ocean-heat-content-2022-Q1-2000m",
   "properties": {
-    "start_datetime": "2021-01-01T00:00:00Z",
-    "end_datetime": "2021-12-31T23:59:59Z",
-    "created": "2022-09-28T11:49:03.713891Z",
+    "start_datetime": "2022-01-01T00:00:00Z",
+    "end_datetime": "2022-03-31T23:59:59Z",
+    "created": "2022-09-30T12:32:58.541040Z",
     "proj:epsg": 4326,
     "proj:shape": [
       180,
@@ -19,7 +19,7 @@
       0.0,
       1.0
     ],
-    "datetime": "2021-07-01T00:00:00Z"
+    "datetime": "2022-02-15T00:00:00Z"
   },
   "geometry": {
     "type": "Polygon",
@@ -51,9 +51,8 @@
   "links": [
     {
       "rel": "root",
-      "href": "../collection.json",
-      "type": "application/json",
-      "title": "Global Ocean Heat Content CDR"
+      "href": "../../catalog.json",
+      "type": "application/json"
     },
     {
       "rel": "collection",
@@ -70,11 +69,9 @@
   ],
   "assets": {
     "heat_content": {
-      "href": "./heat_content_anomaly_0-2000_yearly_2021.tif",
+      "href": "./heat_content_anomaly_0-2000_seasonal_2022-Q1.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Ocean Heat Content anomalies from WOA09 : 0-2000m 2021",
-      "created": "2022-01-07T00:00:00Z",
-      "updated": "2022-01-07T00:00:00Z",
+      "title": "Ocean Heat Content anomalies from WOA09 : 0-2000m 2022-Q1",
       "raster:bands": [
         {
           "nodata": "nan",
@@ -87,11 +84,9 @@
       ]
     },
     "mean_halosteric_sea_level": {
-      "href": "./mean_halosteric_sea_level_anomaly_0-2000_yearly_2021.tif",
+      "href": "./mean_halosteric_sea_level_anomaly_0-2000_seasonal_2022-Q1.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Mean halosteric sea level anomalies from WOA09 : 0-2000m 2021",
-      "created": "2022-01-07T00:00:00Z",
-      "updated": "2022-01-07T00:00:00Z",
+      "title": "Mean halosteric sea level anomalies from WOA09 : 0-2000m 2022-Q1",
       "raster:bands": [
         {
           "nodata": "nan",
@@ -104,11 +99,9 @@
       ]
     },
     "mean_salinity": {
-      "href": "./mean_salinity_anomaly_0-2000_yearly_2021.tif",
+      "href": "./mean_salinity_anomaly_0-2000_seasonal_2022-Q1.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Mean salinity anomalies from WOA09 : 0-2000m 2021",
-      "created": "2022-01-07T00:00:00Z",
-      "updated": "2022-01-07T00:00:00Z",
+      "title": "Mean salinity anomalies from WOA09 : 0-2000m 2022-Q1",
       "raster:bands": [
         {
           "nodata": "nan",
@@ -121,11 +114,9 @@
       ]
     },
     "mean_temperature": {
-      "href": "./mean_temperature_anomaly_0-2000_yearly_2021.tif",
+      "href": "./mean_temperature_anomaly_0-2000_seasonal_2022-Q1.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Mean temperature anomalies from WOA09 : 0-2000m 2021",
-      "created": "2022-01-07T00:00:00Z",
-      "updated": "2022-01-07T00:00:00Z",
+      "title": "Mean temperature anomalies from WOA09 : 0-2000m 2022-Q1",
       "raster:bands": [
         {
           "nodata": "nan",
@@ -138,11 +129,9 @@
       ]
     },
     "mean_thermosteric_sea_level": {
-      "href": "./mean_thermosteric_sea_level_anomaly_0-2000_yearly_2021.tif",
+      "href": "./mean_thermosteric_sea_level_anomaly_0-2000_seasonal_2022-Q1.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Mean thermosteric sea level anomalies from WOA09 : 0-2000m 2021",
-      "created": "2022-01-07T00:00:00Z",
-      "updated": "2022-01-07T00:00:00Z",
+      "title": "Mean thermosteric sea level anomalies from WOA09 : 0-2000m 2022-Q1",
       "raster:bands": [
         {
           "nodata": "nan",
@@ -155,11 +144,9 @@
       ]
     },
     "mean_total_steric_sea_level": {
-      "href": "./mean_total_steric_sea_level_anomaly_0-2000_yearly_2021.tif",
+      "href": "./mean_total_steric_sea_level_anomaly_0-2000_seasonal_2022-Q1.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Mean total steric sea level anomalies from WOA09 : 0-2000m 2021",
-      "created": "2022-01-07T00:00:00Z",
-      "updated": "2022-01-07T00:00:00Z",
+      "title": "Mean total steric sea level anomalies from WOA09 : 0-2000m 2022-Q1",
       "raster:bands": [
         {
           "nodata": "nan",
