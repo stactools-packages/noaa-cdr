@@ -5,9 +5,18 @@ from stactools.testing.test_data import TestData
 
 from stactools.noaa_cdr import ocean_heat_content
 
-external_data: Dict[str, Any] = dict()
+external_data: Dict[str, Any] = {
+    "oisst-avhrr-v02r01.20220913.nc": {
+        "url": (
+            "https://www.ncei.noaa.gov/data/"
+            "sea-surface-temperature-optimum-interpolation/v2.1/"
+            "access/avhrr/202209/oisst-avhrr-v02r01.20220913.nc"
+        )
+    }
+}
 
-for href in ocean_heat_content.noaa_hrefs():
+for href in ocean_heat_content.iter_noaa_hrefs():
     external_data[os.path.basename(href)] = {"url": href}
+
 
 test_data = TestData(__file__, external_data)
