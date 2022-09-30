@@ -1,33 +1,33 @@
 import copy
-import datetime
 import os.path
 from typing import Optional
 
 import dateutil.parser
 import fsspec
-import shapely.geometry
 import xarray
-from dateutil.tz import tzutc
-from pystac import Asset, Item
-from pystac.extensions.raster import DataType
-from rasterio import Affine
+from pystac import Asset, Collection, Item
 
 from .. import dataset, time
-from ..profile import Profile
+from ..constants import (
+    DEFAULT_CATALOG_TYPE,
+    LICENSE,
+    PROCESSING_EXTENSION_SCHEMA,
+    PROVIDERS,
+)
+from .constants import BBOX, DESCRIPTION, EXTENT, GEOMETRY, ID, PROFILE, TITLE
 
-BASE_DATETIME = datetime.datetime(1978, 1, 1, 12, 0, 0, tzinfo=tzutc())
-BBOX = [-180.0, -90.0, 180.0, 90.0]
-GEOMETRY = shapely.geometry.mapping(shapely.geometry.box(*BBOX))
-PROCESSING_EXTENSION_SCHEMA = (
-    "https://stac-extensions.github.io/processing/v1.1.0/schema.json"
-)
-PROFILE = Profile(
-    width=1440,
-    height=720,
-    data_type=DataType.INT16,
-    transform=Affine(0.25, 0.0, 0.0, 0.0, -0.25, 90.0),
-    nodata=-999,
-)
+
+def create_collection() -> Collection:
+    return Collection(
+        id=ID,
+        description=DESCRIPTION,
+        extent=EXTENT,
+        title=TITLE,
+        catalog_type=DEFAULT_CATALOG_TYPE,
+        license=LICENSE,
+        keywords=[],
+        providers=PROVIDERS,
+    )
 
 
 def create_item(
