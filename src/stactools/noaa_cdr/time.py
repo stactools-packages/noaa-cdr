@@ -4,6 +4,8 @@ from enum import Enum
 from typing import Tuple
 
 import dateutil.relativedelta
+import numpy
+from dateutil.tz import tzutc
 
 
 def add_months_to_datetime(
@@ -33,6 +35,15 @@ def add_months_to_datetime(
         )
     else:
         return time
+
+
+def datetime64_to_datetime(datetime64: numpy.datetime64) -> datetime.datetime:
+    # https://stackoverflow.com/a/46921593/732529
+    unix_epoch = numpy.datetime64(0, "s")
+    one_second = numpy.timedelta64(1, "s")
+    seconds_since_epoch = float((datetime64 - unix_epoch) / one_second)
+    dt = datetime.datetime.utcfromtimestamp(seconds_since_epoch)
+    return dt.replace(tzinfo=tzutc())
 
 
 class TimeResolution(str, Enum):

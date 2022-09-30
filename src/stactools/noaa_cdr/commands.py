@@ -130,7 +130,7 @@ def create_noaa_cdr_command(cli: Group) -> Command:
             cog_directory = os.path.dirname(destination)
         os.makedirs(cog_directory, exist_ok=True)
         items = stactools.noaa_cdr.ocean_heat_content.create_items(
-            cog_directory, source
+            source, cog_directory
         )
         for item in items:
             for key, asset in item.assets.items():
@@ -153,7 +153,7 @@ def create_noaa_cdr_command(cli: Group) -> Command:
             destination (str): The directory in which to store the CDR data.
         """
         os.makedirs(destination, exist_ok=True)
-        for href in stactools.noaa_cdr.ocean_heat_content.noaa_hrefs():
+        for href in stactools.noaa_cdr.ocean_heat_content.iter_noaa_hrefs():
             path = os.path.join(destination, os.path.basename(href))
             if os.path.exists(path):
                 print(f"File already downloaded, skipping: {path}")
@@ -193,6 +193,6 @@ def create_noaa_cdr_command(cli: Group) -> Command:
         cogs = stactools.noaa_cdr.ocean_heat_content.cogify(
             infile, None if outdir is None else str(outdir)
         )
-        print(f"Wrote {len(cogs)} COGs to {os.path.dirname(cogs[0].path)}")
+        print(f"Wrote {len(cogs)} COGs to {os.path.dirname(cogs[0].asset.href)}")
 
     return noaa_cdr

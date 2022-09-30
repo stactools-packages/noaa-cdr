@@ -34,7 +34,7 @@ def test_create_collection() -> None:
 def test_create_items_one_netcdf() -> None:
     path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
     with TemporaryDirectory() as temporary_directory:
-        items = ocean_heat_content.create_items(temporary_directory, [path])
+        items = ocean_heat_content.create_items([path], temporary_directory)
     assert len(items) == 17
     for item in items:
         assert len(item.assets) == 1
@@ -55,9 +55,6 @@ def test_create_items_one_netcdf() -> None:
         assert proj.transform == [-180, 1.0, 0.0, -90.0, 0.0, 1.0]
 
         for asset in item.assets.values():
-            assert asset.common_metadata.created
-            assert asset.common_metadata.updated
-
             raster = RasterExtension.ext(asset)
             assert raster.bands
             assert len(raster.bands) == 1
@@ -77,7 +74,7 @@ def test_create_items_two_netcdfs_same_items() -> None:
         ),
     ]
     with TemporaryDirectory() as temporary_directory:
-        items = ocean_heat_content.create_items(temporary_directory, paths)
+        items = ocean_heat_content.create_items(paths, temporary_directory)
     assert len(items) == 17
     for item in items:
         assert len(item.assets) == 2
@@ -92,7 +89,7 @@ def test_create_items_two_netcdfs_different_items() -> None:
         ),
     ]
     with TemporaryDirectory() as temporary_directory:
-        items = ocean_heat_content.create_items(temporary_directory, paths)
+        items = ocean_heat_content.create_items(paths, temporary_directory)
     assert len(items) == 80
     for item in items:
         assert len(item.assets) == 1
@@ -103,7 +100,7 @@ def test_create_items_one_netcdf_latest_only() -> None:
     path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
     with TemporaryDirectory() as temporary_directory:
         items = ocean_heat_content.create_items(
-            temporary_directory, [path], latest_only=True
+            [path], temporary_directory, latest_only=True
         )
     assert len(items) == 1
     items[0].validate()
@@ -130,7 +127,7 @@ def test_cogify(infile: str, num_cogs: int) -> None:
         cogs = ocean_heat_content.cogify(external_data_path, temporary_directory)
         assert len(cogs) == num_cogs
         for cog in cogs:
-            assert os.path.exists(cog.path)
+            assert os.path.exists(cog.asset.href)
 
 
 def test_cogify_href() -> None:
@@ -142,7 +139,7 @@ def test_cogify_href() -> None:
         cogs = ocean_heat_content.cogify(href, temporary_directory)
         assert len(cogs) == 17
         for cog in cogs:
-            assert os.path.exists(cog.path)
+            assert os.path.exists(cog.asset.href)
 
 
 def test_cogify_href_no_output_directory() -> None:

@@ -3,16 +3,13 @@ import datetime
 import importlib
 import json
 import logging
-import math
 import os.path
 from dataclasses import dataclass
-from typing import Any, Dict, Hashable, Iterator, List, Optional, Union
+from typing import Any, Dict, Hashable, Iterator, List, Optional
 
-import dateutil.parser
 import fsspec
 import numpy
 import pystac.utils
-import rasterio.shutil
 import shapely.geometry
 import xarray
 from pystac import (
@@ -30,16 +27,13 @@ from pystac import (
 )
 from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
 from pystac.extensions.projection import ProjectionExtension
-from pystac.extensions.raster import (
-    DataType,
-    NoDataStrings,
-    RasterBand,
-    RasterExtension,
-)
+from pystac.extensions.raster import DataType, RasterExtension
 from pystac.extensions.scientific import ScientificExtension
-from rasterio import Affine, MemoryFile
+from rasterio import Affine
 
-from . import time, utils
+from stactools.noaa_cdr.profile import Profile
+
+from . import dataset, time
 from .time import TimeResolution
 
 logger = logging.getLogger(__name__)
@@ -56,8 +50,6 @@ DESCRIPTION = (
     "the global ocean and each of the major basins (Atlantic, Pacific, "
     "and Indian) divided by hemisphere (Northern, Southern)."
 )
-EPSG = 4326
-GDAL_TRANFORM = [-180.0, 1.0, 0.0, -90.0, 0.0, 1.0]
 BBOX = [-180.0, -90.0, 180.0, 90.0]
 GEOMETRY = shapely.geometry.mapping(shapely.geometry.box(*BBOX))
 SPATIAL_EXTENT = SpatialExtent(bboxes=BBOX)
@@ -82,17 +74,6 @@ PROVIDERS = [
 ]
 LICENSE = "proprietary"
 BASE_TIME = datetime.datetime(1955, 1, 1)
-GTIFF_PROFILE = {
-    "crs": f"epsg:{EPSG}",
-    "width": 360,
-    "height": 180,
-    "dtype": DataType.FLOAT32,
-    "nodata": numpy.nan,
-    "count": 1,
-    "transform": Affine.from_gdal(*GDAL_TRANFORM),
-    "driver": "GTiff",
-}
-COG_PROFILE = {"compress": "deflate", "blocksize": 512, "driver": "COG"}
 DEFAULT_CATALOG_TYPE = CatalogType.SELF_CONTAINED
 LICENSE_LINK = Link(
     rel="license",
@@ -116,9 +97,50 @@ CITATION = (
     "NOAA National Centers for Environmental Information. Dataset. "
     "https://doi.org/10.7289/v53f4mvp. Accessed [date]."
 )
+GDAL_TRANSFORM = [-180.0, 1.0, 0.0, -90.0, 0.0, 1.0]
+PROFILE = Profile(
+    width=360,
+    height=180,
+    data_type=DataType.FLOAT32,
+    transform=Affine.from_gdal(*GDAL_TRANSFORM),
+    nodata=numpy.nan,
+)
 
 
-def noaa_hrefs() -> Iterator[str]:
+@dataclass(frozen=True)
+class Cog:
+    """Dataclass to hold the result of a cogification operation."""
+
+    asset: Asset
+    time_resolution: TimeResolution
+    start_datetime: datetime.datetime
+    end_datetime: datetime.datetime
+    datetime: datetime.datetime
+    attributes: Dict[Hashable, Any]
+
+    def time_interval_as_str(self) -> str:
+        """Returns this COG's time interval as a string."""
+        return self.time_resolution.as_str(self.datetime)
+
+    def item_id(self) -> str:
+        """Returns the item id."""
+        depth = int(self.attributes["geospatial_vertical_max"])
+        return f"ocean-heat-content-{self.time_interval_as_str()}-{depth}m"
+
+    def asset_key(self) -> str:
+        """Returns this COG's asset key."""
+        parts = []
+        for part in self.attributes["id"].split("_"):
+            if part == "anomaly":
+                break
+            else:
+                parts.append(part)
+        return "_".join(parts)
+
+
+def iter_noaa_hrefs() -> Iterator[str]:
+    """Iterates over NOAA hrefs for this CDR."""
+
     for variable in [
         "heat_content",
         "mean_halosteric_sea_level",
@@ -149,6 +171,7 @@ def create_collection(
     local_directory: Optional[str] = None,
 ) -> Collection:
     """Creates a STAC Collection for the provided CDR.
+
     Args:
         cdr (Cdr): The CDR.
         catalog_type (CatalogType): The type of catalog to create.
@@ -160,6 +183,7 @@ def create_collection(
         local_directory (Optional[str]): Read netcdf files from this local
             directory instead of from NOAA's servers. Only used if
             cog_directory is not None.
+
     Returns:
         Collection: STAC Collection object
     """
@@ -174,7 +198,7 @@ def create_collection(
         catalog_type=catalog_type,
     )
     collection.add_link(LICENSE_LINK)
-    for href in noaa_hrefs():
+    for href in iter_noaa_hrefs():
         key = os.path.splitext(os.path.basename(href))[0]
         collection.add_asset(
             key,
@@ -193,7 +217,7 @@ def create_collection(
         hrefs = []
         if local_directory:
             hrefs = list(_local_hrefs(local_directory))
-        items = create_items(cog_directory, hrefs=hrefs, latest_only=latest_only)
+        items = create_items(hrefs, cog_directory, latest_only=latest_only)
         asset_definitions = dict()
         for item in items:
             for key, asset in item.assets.items():
@@ -227,10 +251,15 @@ def create_collection(
 
 
 def create_items(
-    directory: str, hrefs: List[str], latest_only: bool = False
+    hrefs: List[str], directory: str, latest_only: bool = False
 ) -> List[Item]:
+    """Creates items from the netcdf files located at hrefs.
+
+    If HREFs is an empty list, all NOAA hrefs (see `iter_noaa_hrefs`) will be used.
+    """
+
     if not hrefs:
-        hrefs = list(noaa_hrefs())
+        hrefs = list(iter_noaa_hrefs())
     items: List[Item] = []
     for i, href in enumerate(hrefs):
         logger.info(f"Creating COGs for {href} ({i + 1} / {len(hrefs)})")
@@ -239,36 +268,10 @@ def create_items(
     return items
 
 
-@dataclass(frozen=True)
-class Cog:
-    path: str
-    time_resolution: TimeResolution
-    start_datetime: datetime.datetime
-    end_datetime: datetime.datetime
-    datetime: datetime.datetime
-    epsg: int
-    shape: List[int]
-    transform: List[float]
-    nodata: float
-    data_type: DataType
-    unit: str
-    attributes: Dict[Hashable, Any]
-
-    def time_interval_as_str(self) -> str:
-        """Returns this COGs time resolution and datetime as a string.
-
-        Returns:
-            str: The time interval
-        """
-        return self.time_resolution.as_str(self.datetime)
-
-
 def _update_items(items: List[Item], cogs: List[Cog]) -> List[Item]:
     items_as_dict = dict((item.id, item) for item in items)
     for cog in cogs:
-        time_interval_as_str = cog.time_interval_as_str()
-        depth = int(cog.attributes["geospatial_vertical_max"])
-        id = f"ocean-heat-content-{time_interval_as_str}-{depth}m"
+        id = cog.item_id()
         if id not in items_as_dict:
             item = Item(
                 id=id,
@@ -282,40 +285,21 @@ def _update_items(items: List[Item], cogs: List[Cog]) -> List[Item]:
                 },
             )
             proj = ProjectionExtension.ext(item, add_if_missing=True)
-            proj.epsg = cog.epsg
-            proj.shape = cog.shape
-            proj.transform = cog.transform
+            proj.epsg = PROFILE.epsg
+            proj.shape = PROFILE.shape
+            proj.transform = GDAL_TRANSFORM
             items_as_dict[id] = item
         item = items_as_dict[id]
         title = cog.attributes["title"].split(" : ")[0]
         min_depth = int(cog.attributes["geospatial_vertical_min"])
         max_depth = int(cog.attributes["geospatial_vertical_max"])
-        title = f"{title} : {min_depth}-{max_depth}m {cog.time_interval_as_str()}"
-        asset = Asset(
-            href=cog.path, title=title, media_type=MediaType.COG, roles=["data"]
+        cog.asset.title = (
+            f"{title} : {min_depth}-{max_depth}m {cog.time_interval_as_str()}"
         )
-        asset.common_metadata.created = dateutil.parser.parse(
-            cog.attributes["date_created"]
-        )
-        asset.common_metadata.updated = dateutil.parser.parse(
-            cog.attributes["date_modified"]
-        )
-        parts = []
-        for part in cog.attributes["id"].split("_"):
-            if part == "anomaly":
-                break
-            else:
-                parts.append(part)
-        asset_key = "_".join(parts)
-        item.add_asset(asset_key, asset)
-        raster = RasterExtension.ext(asset, add_if_missing=True)
-        if math.isnan(cog.nodata):
-            nodata: Union[NoDataStrings, float] = NoDataStrings.NAN
-        else:
-            nodata = cog.nodata
-        raster.bands = [
-            RasterBand.create(nodata=nodata, data_type=cog.data_type, unit=cog.unit)
-        ]
+        item.add_asset(cog.asset_key(), cog.asset)
+        # The asset has the raster extension, but we need to make sure the item
+        # has the schema url.
+        _ = RasterExtension.ext(cog.asset, add_if_missing=True)
         items_as_dict[id] = item
     return list(items_as_dict.values())
 
@@ -324,56 +308,44 @@ def cogify(
     href: str, outdir: Optional[str] = None, latest_only: bool = False
 ) -> List[Cog]:
     if outdir is None:
-        if href.startswith("http"):
-            raise ValueError(f"Output directory is required for http hrefs: {href}")
         outdir = os.path.dirname(href)
     cogs = list()
     with fsspec.open(href) as file:
-        with xarray.open_dataset(file, decode_times=False) as dataset:
-            time_resolution = TimeResolution.from_value(
-                dataset.time_coverage_resolution
-            )
-            variable = utils.data_variable_name(dataset)
-            num_records = len(dataset[variable].time)
-            for i, month_offset in enumerate(dataset[variable].time):
+        with xarray.open_dataset(file, decode_times=False) as ds:
+            time_resolution = TimeResolution.from_value(ds.time_coverage_resolution)
+            variable = dataset.data_variable_name(ds)
+            num_records = len(ds[variable].time)
+            for i, month_offset in enumerate(ds[variable].time):
                 if latest_only and i < (num_records - 1):
                     continue
                 dt = time.add_months_to_datetime(BASE_TIME, month_offset)
                 start_datetime, end_datetime = time_resolution.datetime_bounds(dt)
                 suffix = time_resolution.as_str(dt)
-                output_path = os.path.join(
+                path = os.path.join(
                     outdir,
                     f"{os.path.splitext(os.path.basename(href))[0]}_{suffix}.tif",
                 )
-                values = dataset[variable].isel(time=i).values.squeeze()
-                profile = copy.deepcopy(GTIFF_PROFILE)
-                unit = dataset[variable].units.replace("_", " ")
-                profile["unit"] = unit
-                with MemoryFile() as memory_file:
-                    with memory_file.open(**GTIFF_PROFILE) as open_memory_file:
-                        open_memory_file.write(values, 1)
-                        rasterio.shutil.copy(
-                            open_memory_file, output_path, **COG_PROFILE
-                        )
+                values = ds[variable].isel(time=i).values.squeeze()
+                profile = copy.deepcopy(PROFILE)
+                profile.unit = ds[variable].units.replace("_", " ")
+                asset = dataset.write_cog(
+                    values,
+                    path,
+                    profile,
+                )
                 cogs.append(
                     Cog(
-                        output_path,
-                        time_resolution,
+                        asset=asset,
+                        time_resolution=time_resolution,
                         datetime=dt,
                         start_datetime=start_datetime,
                         end_datetime=end_datetime,
-                        epsg=EPSG,
-                        shape=[GTIFF_PROFILE["height"], GTIFF_PROFILE["width"]],
-                        transform=GDAL_TRANFORM,
-                        nodata=GTIFF_PROFILE["nodata"],
-                        data_type=GTIFF_PROFILE["dtype"],
-                        unit=unit,
-                        attributes=dataset.attrs,
+                        attributes=ds.attrs,
                     )
                 )
     return cogs
 
 
 def _local_hrefs(directory: str) -> Iterator[str]:
-    for href in noaa_hrefs():
+    for href in iter_noaa_hrefs():
         yield os.path.join(directory, os.path.basename(href))
