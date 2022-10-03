@@ -16,7 +16,10 @@ from .constants import PROCESSING_EXTENSION_SCHEMA
 def create_item(href: str, remap_longitudes: bool = False) -> Item:
     with fsspec.open(href) as file:
         with xarray.open_dataset(file) as ds:
-            id = os.path.splitext(ds.id)[0]
+            if "id" in ds.attrs:
+                id = os.path.splitext(ds.id)[0]
+            else:
+                id = os.path.splitext(os.path.basename(href))[0]
             xmin = float(ds.geospatial_lon_min)
             xmax = float(ds.geospatial_lon_max)
             if remap_longitudes and xmin == 0 and xmax == 360:
