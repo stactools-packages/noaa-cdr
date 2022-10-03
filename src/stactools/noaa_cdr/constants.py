@@ -1,9 +1,9 @@
 import shapely.geometry
 from pystac import CatalogType, Provider, ProviderRole, SpatialExtent
 
-BBOX = [-180.0, -90.0, 180.0, 90.0]
-GEOMETRY = shapely.geometry.mapping(shapely.geometry.box(*BBOX))
-SPATIAL_EXTENT = SpatialExtent(bboxes=BBOX)
+GLOBAL_BBOX = [-180.0, -90.0, 180.0, 90.0]
+GLOBAL_GEOMETRY = shapely.geometry.mapping(shapely.geometry.box(*GLOBAL_BBOX))
+GLOBAL_SPATIAL_EXTENT = SpatialExtent(bboxes=GLOBAL_BBOX)
 PROVIDERS = [
     Provider(
         name="National Centers for Environmental Information",

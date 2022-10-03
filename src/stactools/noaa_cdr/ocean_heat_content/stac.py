@@ -10,7 +10,13 @@ from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 
-from ..constants import BBOX, DEFAULT_CATALOG_TYPE, GEOMETRY, LICENSE, PROVIDERS
+from ..constants import (
+    DEFAULT_CATALOG_TYPE,
+    GLOBAL_BBOX,
+    GLOBAL_GEOMETRY,
+    LICENSE,
+    PROVIDERS,
+)
 from . import cog, iter_noaa_hrefs
 from .cog import Cog
 from .constants import (
@@ -140,8 +146,8 @@ def _update_items(items: List[Item], cogs: List[Cog]) -> List[Item]:
         if id not in items_as_dict:
             item = Item(
                 id=id,
-                geometry=GEOMETRY,
-                bbox=BBOX,
+                geometry=GLOBAL_GEOMETRY,
+                bbox=GLOBAL_BBOX,
                 datetime=c.datetime,
                 properties={
                     "start_datetime": pystac.utils.datetime_to_str(c.start_datetime),
