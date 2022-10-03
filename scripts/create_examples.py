@@ -32,8 +32,30 @@ untracked_data = str(root / "data")
 data_files = str(root / "tests" / "data-files")
 external_data = str(root / "tests" / "data-files" / "external")
 
+description = (
+    "NOAA's Climate Data Records (CDRs) are robust, sustainable, "
+    "and scientifically sound climate records that provide trustworthy "
+    "information on how, where, and to what extent the land, oceans, atmosphere "
+    "and ice sheets are changing. These datasets are thoroughly vetted time "
+    "series measurements with the longevity, consistency, and continuity to "
+    "assess and measure climate variability and change. NOAA CDRs are vetted "
+    "using standards established by the "
+    "[National Research Council (NRC)]"
+    "(http://www.nap.edu/catalog.php?record_id=10944).\n\n"
+    "NOAA developed CDRs by applying modern data analysis methods to "
+    "historical global satellite data. This process can clarify the "
+    "underlying climate trends within the data and allows researchers "
+    "and other users to identify economic and scientific value in these "
+    "records. NCEI maintains and extends CDRs by applying the same methods "
+    "to present-day and future satellite measurements.\n\n"
+    "CDRs can be used to manage natural resources and agriculture, measure "
+    "environmental impacts on human health and community preparedness, and "
+    "inform policy development and decision making for other sectors and "
+    "interest groups."
+)
+
 with TemporaryDirectory() as temporary_directory:
-    catalog = Catalog("noaa-cdr", "NOAA CDR example catalog")
+    catalog = Catalog("noaa-cdr", description, "Climate Data Records")
 
     print("Creating Ocean Heat Content collection...")
     ocean_heat_content = ocean_heat_content_stac.create_collection(
