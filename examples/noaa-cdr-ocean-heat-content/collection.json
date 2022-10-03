@@ -1,0 +1,608 @@
+{
+  "type": "Collection",
+  "id": "noaa-cdr-ocean-heat-content",
+  "stac_version": "1.0.0",
+  "description": "The Ocean Heat Content Climate Data Record (CDR) is a set of ocean heat content anomaly (OHCA) time-series for 1955-present on 3-monthly, yearly, and pentadal (five-yearly) scales. This CDR quantifies ocean heat content change over time, which is an essential metric for understanding climate change and the Earth's energy budget. It provides time-series for multiple depth ranges in the global ocean and each of the major basins (Atlantic, Pacific, and Indian) divided by hemisphere (Northern, Southern).",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "license",
+      "href": "https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/Ocean_Heat_Content/UseAgreement_01B-41.pdf",
+      "type": "application/pdf",
+      "title": "NOAA CDR Ocean Heat Content Use Agreement"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.7289/v53f4mvp"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-1972-03-700m/ocean-heat-content-1972-03-700m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2017-2021-700m/ocean-heat-content-2017-2021-700m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2022-Q1-700m/ocean-heat-content-2022-Q1-700m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2021-700m/ocean-heat-content-2021-700m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-1972-03-2000m/ocean-heat-content-1972-03-2000m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2017-2021-2000m/ocean-heat-content-2017-2021-2000m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2022-Q1-2000m/ocean-heat-content-2022-Q1-2000m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2021-2000m/ocean-heat-content-2021-2000m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2017-2021-100m/ocean-heat-content-2017-2021-100m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2022-Q1-100m/ocean-heat-content-2022-Q1-100m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./ocean-heat-content-2021-100m/ocean-heat-content-2021-100m.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json"
+  ],
+  "sci:doi": "10.7289/v53f4mvp",
+  "sci:citation": "Levitus, Sydney; Antonov, John I.; Boyer, Tim P.; Baranova, Olga K.; García, Hernán E.; Locarnini, Ricardo A.; Mishonov, Alexey V.; Reagan, James R.; [Seidov, Dan; Yarosh, Evgeney; Zweng, Melissa M. (2017). NCEI ocean heat content, temperature anomalies, salinity anomalies, thermosteric sea level anomalies, halosteric sea level anomalies, and total steric sea level anomalies from 1955 to present calculated from in situ oceanographic subsurface profile data (NCEI Accession 0164586). [indicate subset used]. NOAA National Centers for Environmental Information. Dataset. https://doi.org/10.7289/v53f4mvp. Accessed [date].",
+  "item_assets": {
+    "heat_content": {
+      "title": "Ocean Heat Content anomalies from WOA09",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ],
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "10^18 joules"
+        }
+      ]
+    },
+    "mean_halosteric_sea_level": {
+      "title": "Mean halosteric sea level anomalies from WOA09",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ],
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "millimeters"
+        }
+      ]
+    },
+    "mean_salinity": {
+      "title": "Mean salinity anomalies from WOA09",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ],
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "unitless"
+        }
+      ]
+    },
+    "mean_temperature": {
+      "title": "Mean temperature anomalies from WOA09",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ],
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "degrees Celsius"
+        }
+      ]
+    },
+    "mean_thermosteric_sea_level": {
+      "title": "Mean thermosteric sea level anomalies from WOA09",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ],
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "millimeters"
+        }
+      ]
+    },
+    "mean_total_steric_sea_level": {
+      "title": "Mean total steric sea level anomalies from WOA09",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ],
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "millimeters"
+        }
+      ]
+    }
+  },
+  "title": "Global Ocean Heat Content CDR",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1972-03-01T00:00:00Z",
+          "2022-03-31T23:59:59Z"
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "providers": [
+    {
+      "name": "National Centers for Environmental Information",
+      "description": "NCEI is the Nation's leading authority for environmental data, and manage one of the largest archives of atmospheric, coastal, geophysical, and oceanic research in the world. NCEI contributes to the NESDIS mission by developing new products and services that span the science disciplines and enable better data discovery.",
+      "roles": [
+        "producer",
+        "processor",
+        "licensor",
+        "host"
+      ],
+      "url": "https://www.ncei.noaa.gov/"
+    }
+  ],
+  "assets": {
+    "heat_content_anomaly_0-700_monthly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/heat_content_anomaly_0-700_monthly.nc",
+      "type": "application/netcdf",
+      "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-700 m monthly 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "heat_content_anomaly_0-700_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/heat_content_anomaly_0-700_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-700 m pentad 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "heat_content_anomaly_0-700_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/heat_content_anomaly_0-700_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-700 m seasonal 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "heat_content_anomaly_0-700_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/heat_content_anomaly_0-700_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-700 m yearly 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "heat_content_anomaly_0-2000_monthly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/heat_content_anomaly_0-2000_monthly.nc",
+      "type": "application/netcdf",
+      "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-2000 m monthly 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "heat_content_anomaly_0-2000_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/heat_content_anomaly_0-2000_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-2000 m pentad 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "heat_content_anomaly_0-2000_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/heat_content_anomaly_0-2000_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-2000 m seasonal 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "heat_content_anomaly_0-2000_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/heat_content_anomaly_0-2000_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-2000 m yearly 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_halosteric_sea_level_anomaly_0-700_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_halosteric_sea_level_anomaly_0-700_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Mean halosteric sea level anomalies from WOA09 : mean_halosteric_sea_level_anomaly 0-700 m pentad 1.00 degree",
+      "description": "Mean halosteric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_halosteric_sea_level_anomaly_0-700_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_halosteric_sea_level_anomaly_0-700_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Mean halosteric sea level anomalies from WOA09 : mean_halosteric_sea_level_anomaly 0-700 m seasonal 1.00 degree",
+      "description": "Mean halosteric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_halosteric_sea_level_anomaly_0-700_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_halosteric_sea_level_anomaly_0-700_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Mean halosteric sea level anomalies from WOA09 : mean_halosteric_sea_level_anomaly 0-700 m yearly 1.00 degree",
+      "description": "Mean halosteric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_halosteric_sea_level_anomaly_0-2000_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_halosteric_sea_level_anomaly_0-2000_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Mean halosteric sea level anomalies from WOA09 : mean_halosteric_sea_level_anomaly 0-2000 m pentad 1.00 degree",
+      "description": "Mean halosteric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_halosteric_sea_level_anomaly_0-2000_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_halosteric_sea_level_anomaly_0-2000_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Mean halosteric sea level anomalies from WOA09 : mean_halosteric_sea_level_anomaly 0-2000 m seasonal 1.00 degree",
+      "description": "Mean halosteric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_halosteric_sea_level_anomaly_0-2000_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_halosteric_sea_level_anomaly_0-2000_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Mean halosteric sea level anomalies from WOA09 : mean_halosteric_sea_level_anomaly 0-2000 m yearly 1.00 degree",
+      "description": "Mean halosteric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_salinity_anomaly_0-100_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_salinity_anomaly_0-100_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-100 m pentad 1.00 degree",
+      "description": "Mean ocean salinity anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_salinity_anomaly_0-100_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_salinity_anomaly_0-100_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-100 m seasonal 1.00 degree",
+      "description": "Mean ocean salinity anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_salinity_anomaly_0-100_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_salinity_anomaly_0-100_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-100 m yearly 1.00 degree",
+      "description": "Mean ocean salinity anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_salinity_anomaly_0-700_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_salinity_anomaly_0-700_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-700 m pentad 1.00 degree",
+      "description": "Mean ocean salinity anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_salinity_anomaly_0-700_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_salinity_anomaly_0-700_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-700 m seasonal 1.00 degree",
+      "description": "Mean ocean salinity anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_salinity_anomaly_0-700_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_salinity_anomaly_0-700_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-700 m yearly 1.00 degree",
+      "description": "Mean ocean salinity anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_salinity_anomaly_0-2000_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_salinity_anomaly_0-2000_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-2000 m pentad 1.00 degree",
+      "description": "Mean ocean salinity anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_salinity_anomaly_0-2000_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_salinity_anomaly_0-2000_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-2000 m seasonal 1.00 degree",
+      "description": "Mean ocean salinity anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_salinity_anomaly_0-2000_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_salinity_anomaly_0-2000_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-2000 m yearly 1.00 degree",
+      "description": "Mean ocean salinity anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_temperature_anomaly_0-100_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_temperature_anomaly_0-100_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-100 m pentad 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_temperature_anomaly_0-100_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_temperature_anomaly_0-100_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-100 m seasonal 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_temperature_anomaly_0-100_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_temperature_anomaly_0-100_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-100 m yearly 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_temperature_anomaly_0-700_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_temperature_anomaly_0-700_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-700 m pentad 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_temperature_anomaly_0-700_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_temperature_anomaly_0-700_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-700 m seasonal 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_temperature_anomaly_0-700_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_temperature_anomaly_0-700_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-700 m yearly 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_temperature_anomaly_0-2000_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_temperature_anomaly_0-2000_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-2000 m pentad 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_temperature_anomaly_0-2000_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_temperature_anomaly_0-2000_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-2000 m seasonal 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_temperature_anomaly_0-2000_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_temperature_anomaly_0-2000_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-2000 m yearly 1.00 degree",
+      "description": "Mean ocean variable anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_thermosteric_sea_level_anomaly_0-700_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_thermosteric_sea_level_anomaly_0-700_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Mean thermosteric sea level anomalies from WOA09 : mean_thermosteric_sea_level_anomaly 0-700 m pentad 1.00 degree",
+      "description": "Mean thermosteric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_thermosteric_sea_level_anomaly_0-700_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_thermosteric_sea_level_anomaly_0-700_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Mean thermosteric sea level anomalies from WOA09 : mean_thermosteric_sea_level_anomaly 0-700 m seasonal 1.00 degree",
+      "description": "Mean thermosteric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_thermosteric_sea_level_anomaly_0-700_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_thermosteric_sea_level_anomaly_0-700_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Mean thermosteric sea level anomalies from WOA09 : mean_thermosteric_sea_level_anomaly 0-700 m yearly 1.00 degree",
+      "description": "Mean thermosteric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_thermosteric_sea_level_anomaly_0-2000_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_thermosteric_sea_level_anomaly_0-2000_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Mean thermosteric sea level anomalies from WOA09 : mean_thermosteric_sea_level_anomaly 0-2000 m pentad 1.00 degree",
+      "description": "Mean thermosteric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_thermosteric_sea_level_anomaly_0-2000_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_thermosteric_sea_level_anomaly_0-2000_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Mean thermosteric sea level anomalies from WOA09 : mean_thermosteric_sea_level_anomaly 0-2000 m seasonal 1.00 degree",
+      "description": "Mean thermosteric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_thermosteric_sea_level_anomaly_0-2000_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_thermosteric_sea_level_anomaly_0-2000_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Mean thermosteric sea level anomalies from WOA09 : mean_thermosteric_sea_level_anomaly 0-2000 m yearly 1.00 degree",
+      "description": "Mean thermosteric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_total_steric_sea_level_anomaly_0-700_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_total_steric_sea_level_anomaly_0-700_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Mean total steric sea level anomalies from WOA09 : mean_total_steric_sea_level_anomaly 0-700 m pentad 1.00 degree",
+      "description": "Mean total steric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_total_steric_sea_level_anomaly_0-700_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_total_steric_sea_level_anomaly_0-700_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Mean total steric sea level anomalies from WOA09 : mean_total_steric_sea_level_anomaly 0-700 m seasonal 1.00 degree",
+      "description": "Mean total steric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_total_steric_sea_level_anomaly_0-700_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_total_steric_sea_level_anomaly_0-700_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Mean total steric sea level anomalies from WOA09 : mean_total_steric_sea_level_anomaly 0-700 m yearly 1.00 degree",
+      "description": "Mean total steric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_total_steric_sea_level_anomaly_0-2000_pentad": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_total_steric_sea_level_anomaly_0-2000_pentad.nc",
+      "type": "application/netcdf",
+      "title": "Mean total steric sea level anomalies from WOA09 : mean_total_steric_sea_level_anomaly 0-2000 m pentad 1.00 degree",
+      "description": "Mean total steric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_total_steric_sea_level_anomaly_0-2000_seasonal": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_total_steric_sea_level_anomaly_0-2000_seasonal.nc",
+      "type": "application/netcdf",
+      "title": "Mean total steric sea level anomalies from WOA09 : mean_total_steric_sea_level_anomaly 0-2000 m seasonal 1.00 degree",
+      "description": "Mean total steric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_total_steric_sea_level_anomaly_0-2000_yearly": {
+      "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/mean_total_steric_sea_level_anomaly_0-2000_yearly.nc",
+      "type": "application/netcdf",
+      "title": "Mean total steric sea level anomalies from WOA09 : mean_total_steric_sea_level_anomaly 0-2000 m yearly 1.00 degree",
+      "description": "Mean total steric sea level anomaly from in situ profile data",
+      "roles": [
+        "data"
+      ]
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "id": "ocean-heat-content-2017-2021-100m",
+  "properties": {
+    "start_datetime": "2017-01-01T00:00:00Z",
+    "end_datetime": "2021-12-31T23:59:59Z",
+    "created": "2022-10-03T13:00:48.034622Z",
+    "proj:epsg": 4326,
+    "proj:shape": [
+      180,
+      360
+    ],
+    "proj:transform": [
+      -180.0,
+      1.0,
+      0.0,
+      -90.0,
+      0.0,
+      1.0
+    ],
+    "datetime": "2019-07-01T00:00:00Z"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          180.0,
+          -90.0
+        ],
+        [
+          180.0,
+          90.0
+        ],
+        [
+          -180.0,
+          90.0
+        ],
+        [
+          -180.0,
+          -90.0
+        ],
+        [
+          180.0,
+          -90.0
+        ]
+      ]
+    ]
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "Global Ocean Heat Content CDR"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "Global Ocean Heat Content CDR"
+    }
+  ],
+  "assets": {
+    "mean_salinity": {
+      "href": "../../../../../../../../var/folders/9z/lnsvqfqj4gs2d1j1nw3vynrm0000gn/T/tmp3t0n5ap_/mean_salinity_anomaly_0-100_pentad_2017-2021.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Mean salinity anomalies from WOA09 : 0-100m 2017-2021",
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "unitless"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "mean_temperature": {
+      "href": "../../../../../../../../var/folders/9z/lnsvqfqj4gs2d1j1nw3vynrm0000gn/T/tmp3t0n5ap_/mean_temperature_anomaly_0-100_pentad_2017-2021.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Mean temperature anomalies from WOA09 : 0-100m 2017-2021",
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "degrees Celsius"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "bbox": [
+    -180.0,
+    -90.0,
+    180.0,
+    90.0
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.1.0/schema.json"
+  ],
+  "collection": "noaa-cdr-ocean-heat-content"
+}

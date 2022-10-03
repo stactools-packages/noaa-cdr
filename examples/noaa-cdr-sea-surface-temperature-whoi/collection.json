@@ -1,0 +1,54 @@
+{
+  "type": "Collection",
+  "id": "noaa-cdr-sea-surface-temperature-whoi",
+  "stac_version": "1.0.0",
+  "description": "The Sea Surface Temperature-Woods Hole Oceanographic Institution (WHOI) Climate Data Record (CDR) is one of three CDRs which combine to form the NOAA Ocean Surface Bundle (OSB) CDR. The resultant sea surface temperature (SST) data are produced through modeling the diurnal variability in combination with AVHRR SST observations. The final record is output to a 3-hourly 0.25° resolution grid over the global ice-free oceans from January 1988—present.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.7289/V5FB510W"
+    },
+    {
+      "rel": "item",
+      "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223/SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
+  ],
+  "sci:doi": "10.7289/V5FB510W",
+  "sci:citation": "Clayson, Carol Anne; Brown, Jeremiah; and NOAA CDR Program (2016). NOAA Climate Data Record (CDR) of Sea Surface Temperature - WHOI, Version 2. [indicate subset used]. NOAA National Climatic Data Center. doi:10.7289/V5FB510W [access date].",
+  "title": "Sea Surface Temperature - WHOI CDR",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1988-01-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "license": "proprietary"
+}

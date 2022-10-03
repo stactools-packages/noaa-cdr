@@ -1,0 +1,150 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "id": "oisst-avhrr-v02r01.20220913",
+  "properties": {
+    "start_datetime": "2022-09-13T00:00:00Z",
+    "end_datetime": "2022-09-13T23:59:59Z",
+    "processing:level": "L4",
+    "proj:epsg": 4326,
+    "proj:shape": [
+      720,
+      1440
+    ],
+    "proj:transform": [
+      0.25,
+      0,
+      -180,
+      0,
+      -0.25,
+      90.0
+    ],
+    "datetime": "2022-09-13T12:00:00Z"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          180.0,
+          -90.0
+        ],
+        [
+          180.0,
+          90.0
+        ],
+        [
+          -180.0,
+          90.0
+        ],
+        [
+          -180.0,
+          -90.0
+        ],
+        [
+          180.0,
+          -90.0
+        ]
+      ]
+    ]
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "Sea Surface Temperature - Optimum Interpolation CDR"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "Sea Surface Temperature - Optimum Interpolation CDR"
+    }
+  ],
+  "assets": {
+    "netcdf": {
+      "href": "../../../tests/data-files/external/oisst-avhrr-v02r01.20220913.nc",
+      "type": "application/netcdf",
+      "title": "NOAA/NCEI 1/4 Degree Daily Optimum Interpolation Sea Surface Temperature (OISST) Analysis, Version 2.1 - Final NetCDF",
+      "description": "NOAAs 1/4-degree Daily Optimum Interpolation Sea Surface Temperature (OISST) (sometimes referred to as Reynolds SST, which however also refers to earlier products at different resolution), currently available as version v02r01, is created by interpolating and extrapolating SST observations from different sources, resulting in a smoothed complete field. The sources of data are satellite (AVHRR) and in situ platforms (i.e., ships and buoys), and the specific datasets employed may change over time. At the marginal ice zone, sea ice concentrations are used to generate proxy SSTs.  A preliminary version of this file is produced in near-real time (1-day latency), and then replaced with a final version after 2 weeks. Note that this is the AVHRR-ONLY DOISST, available from Oct 1981, but there is a companion DOISST product that includes microwave satellite data, available from June 2002",
+      "created": "2022-09-28T09:14:00Z",
+      "updated": "2022-09-28T09:14:00Z",
+      "roles": [
+        "data"
+      ]
+    },
+    "sst": {
+      "href": "../../../../../../../../var/folders/9z/lnsvqfqj4gs2d1j1nw3vynrm0000gn/T/tmp3t0n5ap_/oisst-avhrr-v02r01.20220913-sst.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": -999,
+          "data_type": "int16",
+          "unit": "Celsius"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "anom": {
+      "href": "../../../../../../../../var/folders/9z/lnsvqfqj4gs2d1j1nw3vynrm0000gn/T/tmp3t0n5ap_/oisst-avhrr-v02r01.20220913-anom.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": -999,
+          "data_type": "int16",
+          "unit": "Celsius"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "err": {
+      "href": "../../../../../../../../var/folders/9z/lnsvqfqj4gs2d1j1nw3vynrm0000gn/T/tmp3t0n5ap_/oisst-avhrr-v02r01.20220913-err.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": -999,
+          "data_type": "int16",
+          "unit": "Celsius"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "ice": {
+      "href": "../../../../../../../../var/folders/9z/lnsvqfqj4gs2d1j1nw3vynrm0000gn/T/tmp3t0n5ap_/oisst-avhrr-v02r01.20220913-ice.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": -999,
+          "data_type": "int16",
+          "unit": "%"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "bbox": [
+    -180,
+    -90.0,
+    180,
+    90.0
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/processing/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+  ],
+  "collection": "noaa-cdr-sea-surface-temperature-optimum-interpolation"
+}
