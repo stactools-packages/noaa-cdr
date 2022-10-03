@@ -2,14 +2,12 @@ import datetime
 import importlib.resources
 import json
 
-import numpy
+import pyproj
 from dateutil.tz import tzutc
 from pystac import Extent, Link, MediaType, TemporalExtent
-from pystac.extensions.raster import DataType
 from rasterio import Affine
 
 from ..constants import GLOBAL_SPATIAL_EXTENT
-from ..profile import Profile
 
 ID = "noaa-cdr-ocean-heat-content"
 TITLE = "Global Ocean Heat Content CDR"
@@ -50,11 +48,6 @@ CITATION = (
     "NOAA National Centers for Environmental Information. Dataset. "
     "https://doi.org/10.7289/v53f4mvp. Accessed [date]."
 )
-GDAL_TRANSFORM = [-180.0, 1.0, 0.0, -90.0, 0.0, 1.0]
-PROFILE = Profile(
-    width=360,
-    height=180,
-    data_type=DataType.FLOAT32,
-    transform=Affine.from_gdal(*GDAL_TRANSFORM),
-    nodata=numpy.nan,
-)
+TRANSFORM = Affine(1.0, 0.0, -180.0, 0.0, -1.0, 90.0)
+EPSG = 4326
+CRS = pyproj.CRS(f"EPSG:{EPSG}")

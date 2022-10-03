@@ -1,14 +1,13 @@
 import os
-from typing import Optional
 
 import click
 import pystac.utils
 from click import Command, Group, Path
-from pystac import CatalogType
+from pystac import CatalogType, Item
 
-from .. import cog
+import stactools.noaa_cdr.stac
+
 from . import stac
-from .constants import PROFILE
 
 
 def create_command(noaa_cdr: Group) -> Command:
@@ -46,62 +45,31 @@ def create_command(noaa_cdr: Group) -> Command:
     )
     @click.argument("source")
     @click.argument("destination")
-    @click.option(
-        "-c",
-        "--cogify",
-        is_flag=True,
-        show_default=True,
-        help="Cogify the netcdf",
-        default=False,
-    )
-    @click.option(
-        "-d", "--cog-directory", help="The directory in which to store the COGs"
-    )
-    def create_item_command(
-        source: str, destination: str, cogify: bool, cog_directory: Optional[str]
-    ) -> None:
+    def create_item_command(source: str, destination: str) -> None:
         """Creates a STAC Item from the provided NetCDF.
 
         \b
         Args:
             source (str): HREF of the Asset associated with the Item.
             destination (str): The destination file.
-            cog_directory (str): The folder that will hold the COGs. If not
-                provided, the COGs will be stored in the same directory as the item
-                collection.
         """
-        if not cog_directory:
-            cog_directory = os.path.dirname(destination)
-        os.makedirs(cog_directory, exist_ok=True)
-        item = stac.create_item(source, cogify, cog_directory)
+        item = stac.create_item(source)
         for key, asset in item.assets.items():
             asset.href = pystac.utils.make_relative_href(asset.href, destination)
             item.assets[key] = asset
         item.save_object(include_self_link=False, dest_href=destination)
 
     @sea_surface_temperature_optimum_interpolation.command(
-        "cogify",
+        "add-cogs",
         short_help="Create a Cloud-Optimized GeoTIFF (COG) from a CDR NetCDF file",
     )
     @click.argument("infile", type=Path(exists=True))
-    @click.option("-o", "--outdir", help="The output directory")
-    def cogify_command(infile: str, outdir: Optional[Path]) -> None:
-        """Creates a Cloud-Optimized GeoTIFF (COG) from a CDR NetCDF file.
-
-        The COG will have the same file name but with a .tif extension.
-
-        \b
-        Args:
-            infile (str): The input NetCDF file.
-            outdir (click.Path, optional): The output directory. If not
-                provided, the tif will be created in the same directory as the
-                NetCDF.
-        """
-        if outdir:
-            directory = str(outdir)
-        else:
-            directory = None
-        assets = cog.cogify(infile, PROFILE, directory)
-        print(f"Wrote {len(assets)} COGs to {directory}")
+    def add_cogs_command(infile: str) -> None:
+        item = Item.from_file(infile)
+        item = stactools.noaa_cdr.stac.add_cogs(
+            item,
+            os.path.dirname(infile),
+        )
+        item.save_object(include_self_link=False)
 
     return sea_surface_temperature_optimum_interpolation

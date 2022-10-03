@@ -24,12 +24,12 @@ from .constants import (
     CITATION,
     DESCRIPTION,
     DOI,
+    EPSG,
     EXTENT,
-    GDAL_TRANSFORM,
     ID,
     LICENSE_LINK,
-    PROFILE,
     TITLE,
+    TRANSFORM,
 )
 
 logger = logging.getLogger(__name__)
@@ -155,10 +155,10 @@ def _update_items(items: List[Item], cogs: List[Cog]) -> List[Item]:
                     "created": pystac.utils.datetime_to_str(datetime.datetime.now()),
                 },
             )
-            proj = ProjectionExtension.ext(item, add_if_missing=True)
-            proj.epsg = PROFILE.epsg
-            proj.shape = PROFILE.shape
-            proj.transform = GDAL_TRANSFORM
+            projection = ProjectionExtension.ext(item, add_if_missing=True)
+            projection.epsg = EPSG
+            projection.shape = c.profile.shape
+            projection.transform = list(TRANSFORM)[0:6]
             items_as_dict[id] = item
         item = items_as_dict[id]
         title = c.attributes["title"].split(" : ")[0]

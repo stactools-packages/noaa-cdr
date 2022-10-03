@@ -9,9 +9,10 @@ from pyproj import CRS
 from pyproj.enums import WktVersion
 from pystac import Asset, Item
 from pystac.extensions.projection import ProjectionExtension
+from rasterio import Affine
 
-from . import time
-from .constants import PROCESSING_EXTENSION_SCHEMA
+from . import cog, time
+from .constants import NETCDF_ASSET_KEY, PROCESSING_EXTENSION_SCHEMA
 
 
 def create_item(
@@ -55,7 +56,7 @@ def create_item(
             asset.common_metadata.created = dateutil.parser.parse(ds.date_created)
             if "date_modified" in ds.attrs:
                 asset.common_metadata.updated = dateutil.parser.parse(ds.date_modified)
-            item.assets["netcdf"] = asset
+            item.assets[NETCDF_ASSET_KEY] = asset
 
             projection = ProjectionExtension.ext(item, add_if_missing=True)
             if "projection" in ds.variables:
@@ -91,4 +92,20 @@ def create_item(
                     ymax,
                 ]
 
+    return item
+
+
+def add_cogs(item: Item, directory: str) -> Item:
+    href = item.assets[NETCDF_ASSET_KEY].href
+    projection = ProjectionExtension.ext(item)
+    assert projection.shape
+    assert projection.transform
+    assets = cog.cogify(
+        href,
+        directory,
+        crs=CRS(projection.crs_string),
+        transform=Affine(*projection.transform),
+    )
+    for key, value in assets.items():
+        item.add_asset(key, value)
     return item

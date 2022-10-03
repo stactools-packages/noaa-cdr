@@ -5,6 +5,7 @@ from tempfile import TemporaryDirectory
 from dateutil.tz import tzutc
 from pystac.extensions.projection import ProjectionExtension
 
+import stactools.noaa_cdr.stac
 from stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation import stac
 from tests import test_data
 
@@ -56,10 +57,11 @@ def test_create_item() -> None:
     item.validate()
 
 
-def test_create_item_with_cog() -> None:
+def test_add_items() -> None:
     path = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
+    item = stac.create_item(path)
     with TemporaryDirectory() as temporary_directory:
-        item = stac.create_item(path, cogify=True, cog_directory=temporary_directory)
+        item = stactools.noaa_cdr.stac.add_cogs(item, temporary_directory)
         assert len(item.assets) == 5
         asset = item.assets["sst"]
         assert asset.href == os.path.join(

@@ -2,11 +2,8 @@ import datetime
 
 from dateutil.tz import tzutc
 from pystac import Extent, TemporalExtent
-from pystac.extensions.raster import DataType
-from rasterio import Affine
 
 from ..constants import GLOBAL_SPATIAL_EXTENT
-from ..profile import Profile
 
 ID = "noaa-cdr-sea-surface-temperature-optimum-interpolation"
 TITLE = "Sea Surface Temperature - Optimum Interpolation CDR"
@@ -25,13 +22,6 @@ DESCRIPTION = (
     "management, ecological studies on annual to daily scales."
 )
 BASE_DATETIME = datetime.datetime(1978, 1, 1, 12, 0, 0, tzinfo=tzutc())
-PROFILE = Profile(
-    width=1440,
-    height=720,
-    data_type=DataType.INT16,
-    transform=Affine(0.25, 0.0, 0.0, 0.0, -0.25, 90.0),
-    nodata=-999,
-)
 EXTENT = Extent(
     spatial=GLOBAL_SPATIAL_EXTENT,
     temporal=TemporalExtent([[datetime.datetime(1981, 9, 1, tzinfo=tzutc()), None]]),
