@@ -10,6 +10,9 @@ def test_create_item() -> None:
         "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.nc"
     )
     item = stac.create_item(path)
+
+    assert item.bbox == [-180, -90, 180, 90]
+
     item.validate()
 
 

@@ -7,7 +7,7 @@ from .constants import CITATION, DESCRIPTION, DOI, EXTENT, ID, TITLE
 
 
 def create_item(href: str) -> Item:
-    return stac.create_item(href)
+    return stac.create_item(href, remap_longitudes=True)
 
 
 def create_collection() -> Collection:
