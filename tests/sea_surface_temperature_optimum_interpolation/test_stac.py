@@ -3,6 +3,7 @@ import os.path
 from tempfile import TemporaryDirectory
 
 from dateutil.tz import tzutc
+from pystac.extensions.projection import ProjectionExtension
 
 from stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation import stac
 from tests import test_data
@@ -46,6 +47,12 @@ def test_create_item() -> None:
     assert asset.common_metadata.updated == datetime.datetime(
         2022, 9, 28, 9, 14, 0, tzinfo=tzutc()
     )
+
+    projection = ProjectionExtension.ext(item)
+    assert projection.epsg == 4326
+    assert projection.shape == [720, 1440]
+    assert projection.transform == [0.25, 0.0, -180, 0.0, -0.25, 90.0]
+
     item.validate()
 
 
