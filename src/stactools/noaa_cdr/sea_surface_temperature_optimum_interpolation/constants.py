@@ -1,12 +1,11 @@
 import datetime
 
-import shapely.geometry
 from dateutil.tz import tzutc
 from pystac import Extent, TemporalExtent
 from pystac.extensions.raster import DataType
 from rasterio import Affine
 
-from ..constants import SPATIAL_EXTENT
+from ..constants import GLOBAL_SPATIAL_EXTENT
 from ..profile import Profile
 
 ID = "noaa-cdr-sea-surface-temperature-optimum-interpolation"
@@ -26,8 +25,6 @@ DESCRIPTION = (
     "management, ecological studies on annual to daily scales."
 )
 BASE_DATETIME = datetime.datetime(1978, 1, 1, 12, 0, 0, tzinfo=tzutc())
-BBOX = [-180.0, -90.0, 180.0, 90.0]
-GEOMETRY = shapely.geometry.mapping(shapely.geometry.box(*BBOX))
 PROFILE = Profile(
     width=1440,
     height=720,
@@ -36,6 +33,6 @@ PROFILE = Profile(
     nodata=-999,
 )
 EXTENT = Extent(
-    spatial=SPATIAL_EXTENT,
+    spatial=GLOBAL_SPATIAL_EXTENT,
     temporal=TemporalExtent([[datetime.datetime(1981, 9, 1, tzinfo=tzutc()), None]]),
 )

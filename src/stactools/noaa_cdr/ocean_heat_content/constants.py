@@ -8,7 +8,7 @@ from pystac import Extent, Link, MediaType, TemporalExtent
 from pystac.extensions.raster import DataType
 from rasterio import Affine
 
-from ..constants import SPATIAL_EXTENT
+from ..constants import GLOBAL_SPATIAL_EXTENT
 from ..profile import Profile
 
 ID = "noaa-cdr-ocean-heat-content"
@@ -25,7 +25,7 @@ DESCRIPTION = (
 )
 BASE_TIME = datetime.datetime(1955, 1, 1, tzinfo=tzutc())
 TEMPORAL_EXTENT = TemporalExtent(intervals=[[BASE_TIME, None]])
-EXTENT = Extent(SPATIAL_EXTENT, TEMPORAL_EXTENT)
+EXTENT = Extent(GLOBAL_SPATIAL_EXTENT, TEMPORAL_EXTENT)
 LICENSE_LINK = Link(
     rel="license",
     target="https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/"
