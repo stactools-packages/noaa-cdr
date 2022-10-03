@@ -1,19 +1,10 @@
-import os.path
 from typing import Optional
 
-import dateutil.parser
-import fsspec
-import xarray
-from pystac import Asset, CatalogType, Collection, Item
+from pystac import CatalogType, Collection, Item
 
-from .. import cog, time
-from ..constants import (
-    DEFAULT_CATALOG_TYPE,
-    LICENSE,
-    PROCESSING_EXTENSION_SCHEMA,
-    PROVIDERS,
-)
-from .constants import BBOX, DESCRIPTION, EXTENT, GEOMETRY, ID, PROFILE, TITLE
+from .. import cog, stac
+from ..constants import DEFAULT_CATALOG_TYPE, LICENSE, PROVIDERS
+from .constants import DESCRIPTION, EXTENT, ID, PROFILE, TITLE
 
 
 def create_collection(catalog_type: CatalogType = DEFAULT_CATALOG_TYPE) -> Collection:
@@ -32,35 +23,7 @@ def create_collection(catalog_type: CatalogType = DEFAULT_CATALOG_TYPE) -> Colle
 def create_item(
     href: str, cogify: bool = False, cog_directory: Optional[str] = None
 ) -> Item:
-    with fsspec.open(href) as file:
-        with xarray.open_dataset(file) as ds:
-            id = os.path.splitext(ds.id)[0]
-            item = Item(
-                id=id,
-                geometry=GEOMETRY,
-                bbox=BBOX,
-                datetime=time.datetime64_to_datetime(ds.time.data[0]),
-                properties={},
-            )
-            item.common_metadata.start_datetime = dateutil.parser.parse(
-                ds.time_coverage_start
-            )
-            item.common_metadata.end_datetime = dateutil.parser.parse(
-                ds.time_coverage_end
-            )
-            item.stac_extensions.append(PROCESSING_EXTENSION_SCHEMA)
-            item.properties["processing:level"] = "L4"
-            asset = Asset(
-                href=href,
-                title=f"{ds.title} NetCDF",
-                description=ds.summary,
-                media_type="application/netcdf",
-                roles=["data"],
-            )
-            asset.common_metadata.created = dateutil.parser.parse(ds.date_created)
-            asset.common_metadata.updated = dateutil.parser.parse(ds.date_modified)
-            item.assets["netcdf"] = asset
-
+    item = stac.create_item(href, remap_longitudes=True)
     if cogify:
         assets = cog.cogify(href, PROFILE, cog_directory)
         for key, value in assets.items():
