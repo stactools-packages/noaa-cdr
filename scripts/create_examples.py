@@ -71,9 +71,13 @@ with TemporaryDirectory() as temporary_directory:
 
     print("Saving catalog...")
     catalog.normalize_hrefs(examples)
-    stactools.core.copy.move_all_assets(
-        catalog, make_hrefs_relative=True, copy=True, ignore_conflicts=True
-    )
+    for item in catalog.get_all_items():
+        for asset in item.assets.values():
+            if asset.href.startswith(temporary_directory):
+                stactools.core.copy.move_asset_file_to_item(
+                    item, asset.href, copy=False, ignore_conflicts=True
+                )
+        item.make_asset_hrefs_relative()
     catalog.save(catalog_type=CatalogType.SELF_CONTAINED)
 
     print("Done!")
