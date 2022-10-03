@@ -1,4 +1,4 @@
-from typing import Any, Iterator
+from typing import Any, List
 
 import rasterio.shutil
 from numpy.typing import NDArray
@@ -27,18 +27,20 @@ def data_variable_name(dataset: Dataset) -> str:
         )
 
 
-def data_variable_names(dataset: Dataset) -> Iterator[str]:
-    """Returns an iterator over the variable names that point to a
+def data_variable_names(dataset: Dataset) -> List[str]:
+    """Returns a list of the variable names that point to a
     four-dimensional data array.
 
     Args:
         dataset (xarray.Dataset): An open xarray Dataset
     Returns:
-        Iterator[str]: Iterator over the variable names.
+        List[str]: List of the variable names.
     """
-    for variable in dataset.variables:
-        if len(dataset[variable].sizes) == 4:
-            yield str(variable)
+    return list(
+        str(variable)
+        for variable in dataset.variables
+        if len(dataset[variable].sizes) == 4
+    )
 
 
 def write_cog(
