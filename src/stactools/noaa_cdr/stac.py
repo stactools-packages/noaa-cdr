@@ -1,4 +1,5 @@
 import os.path
+from typing import Optional
 
 import dateutil.parser
 import fsspec
@@ -13,13 +14,16 @@ from . import time
 from .constants import PROCESSING_EXTENSION_SCHEMA
 
 
-def create_item(href: str, remap_longitudes: bool = False) -> Item:
+def create_item(
+    href: str, remap_longitudes: bool = False, id: Optional[str] = None
+) -> Item:
     with fsspec.open(href) as file:
         with xarray.open_dataset(file) as ds:
-            if "id" in ds.attrs:
-                id = os.path.splitext(ds.id)[0]
-            else:
-                id = os.path.splitext(os.path.basename(href))[0]
+            if id is None:
+                if "id" in ds.attrs:
+                    id = os.path.splitext(ds.id)[0]
+                else:
+                    id = os.path.splitext(os.path.basename(href))[0]
             xmin = float(ds.geospatial_lon_min)
             xmax = float(ds.geospatial_lon_max)
             if remap_longitudes and xmin == 0 and xmax == 360:

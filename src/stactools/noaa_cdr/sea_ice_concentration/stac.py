@@ -1,3 +1,5 @@
+import os.path
+
 from pystac import Collection, Item
 from pystac.extensions.scientific import ScientificExtension
 
@@ -7,7 +9,9 @@ from .constants import CITATION, DESCRIPTION, DOI, EXTENT, TITLE
 
 
 def create_item(href: str) -> Item:
-    return stac.create_item(href)
+    # We have to manually override the id because the `id` attribute in the
+    # netcdf is set to the DOI.
+    return stac.create_item(href, id=os.path.splitext(os.path.basename(href))[0])
 
 
 def create_collection() -> Collection:

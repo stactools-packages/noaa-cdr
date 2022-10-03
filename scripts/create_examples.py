@@ -20,13 +20,16 @@ import stactools.core.copy
 from pystac import Catalog, CatalogType
 
 from stactools.noaa_cdr.ocean_heat_content import stac as ocean_heat_content_stac
+from stactools.noaa_cdr.sea_ice_concentration import stac as sea_ice_concentration_stac
 from stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation import (
     stac as oisst_stac,
 )
+from stactools.noaa_cdr.sea_surface_temperature_whoi import stac as whoi_sst_stac
 
 root = Path(__file__).parent.parent
 examples = str(root / "examples")
 untracked_data = str(root / "data")
+data_files = str(root / "tests" / "data-files")
 external_data = str(root / "tests" / "data-files" / "external")
 
 with TemporaryDirectory() as temporary_directory:
@@ -49,6 +52,22 @@ with TemporaryDirectory() as temporary_directory:
     )
     oisst.add_item(oisst_item)
     catalog.add_child(oisst)
+
+    print("Creating Sea Surface Temperature - WHOI collection...")
+    whoi_sst = whoi_sst_stac.create_collection()
+    whoi_sst_item = whoi_sst_stac.create_item(
+        os.path.join(external_data, "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.nc")
+    )
+    whoi_sst.add_item(whoi_sst_item)
+    catalog.add_child(whoi_sst)
+
+    print("Creating Sea Ice Concentration collection...")
+    sea_ice_concentration = sea_ice_concentration_stac.create_collection()
+    sea_ice_concentration_item = sea_ice_concentration_stac.create_item(
+        os.path.join(data_files, "seaice_conc_daily_nh_20211231_f17_v04r00.nc")
+    )
+    sea_ice_concentration.add_item(sea_ice_concentration_item)
+    catalog.add_child(sea_ice_concentration)
 
     print("Saving catalog...")
     catalog.normalize_hrefs(examples)
