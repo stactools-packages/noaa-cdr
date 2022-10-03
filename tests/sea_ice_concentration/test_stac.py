@@ -3,6 +3,7 @@ from typing import List
 import pyproj
 import pytest
 from pystac.extensions.projection import ProjectionExtension
+from pystac.extensions.scientific import ScientificExtension
 
 from stactools.noaa_cdr.sea_ice_concentration import stac
 
@@ -44,3 +45,15 @@ def test_create_item(file_name: str, shape: List[int], transform: List[float]) -
     assert projection.transform == transform
 
     item.validate()
+
+
+def test_create_collection() -> None:
+    collection = stac.create_collection()
+    assert collection.id == "noaa-cdr-sea-ice-concentration"
+
+    scientific = ScientificExtension.ext(collection)
+    assert scientific.doi == "10.7265/efmz-2t65"
+    assert scientific.citation
+
+    collection.set_self_href("")
+    collection.validate()

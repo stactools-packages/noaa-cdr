@@ -28,4 +28,19 @@ def create_command(noaa_cdr: Group) -> Command:
         item = stac.create_item(source)
         item.save_object(include_self_link=False, dest_href=destination)
 
+    @sea_ice_concentration.command(
+        "create-collection", short_help="Create a STAC collection from a NetCDF"
+    )
+    @click.argument("destination")
+    def create_collection_command(destination: str) -> None:
+        """Creates a STAC Collection.
+
+        \b
+        Args:
+            destination (str): The destination file.
+        """
+        collection = stac.create_collection()
+        collection.set_self_href(destination)
+        collection.save()
+
     return sea_ice_concentration
