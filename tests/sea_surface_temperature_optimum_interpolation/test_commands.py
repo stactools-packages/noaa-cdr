@@ -34,10 +34,13 @@ def test_create_items(tmp_path: Path) -> None:
     item.validate()
 
 
-def test_cogify(tmp_path: Path) -> None:
+def test_add_cogs(tmp_path: Path) -> None:
     path = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
     result = run_command(
         "noaa-cdr sea-surface-temperature-optimum-interpolation "
-        f"cogify {path} -o {tmp_path}"
+        f"create-item {path} {tmp_path}/out.json"
+    )
+    result = run_command(
+        f"noaa-cdr sea-surface-temperature-optimum-interpolation add-cogs {tmp_path}/out.json"
     )
     assert result.exit_code == 0

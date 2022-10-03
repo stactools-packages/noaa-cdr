@@ -52,7 +52,7 @@ def test_create_items_one_netcdf() -> None:
         proj = ProjectionExtension.ext(item)
         assert proj.epsg == 4326
         assert proj.shape == [180, 360]
-        assert proj.transform == [-180, 1.0, 0.0, -90.0, 0.0, 1.0]
+        assert proj.transform == [1.0, 0, -180, 0, -1, 90]
 
         for asset in item.assets.values():
             raster = RasterExtension.ext(asset)

@@ -26,3 +26,4 @@ DEFAULT_CATALOG_TYPE = CatalogType.SELF_CONTAINED
 PROCESSING_EXTENSION_SCHEMA = (
     "https://stac-extensions.github.io/processing/v1.1.0/schema.json"
 )
+NETCDF_ASSET_KEY = "netcdf"

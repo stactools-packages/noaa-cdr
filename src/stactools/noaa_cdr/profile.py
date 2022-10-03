@@ -2,8 +2,11 @@ import math
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
+import numpy
+from pyproj import CRS
 from pystac.extensions.raster import DataType, NoDataStrings, RasterBand
 from rasterio import Affine
+from xarray import DataArray
 
 
 @dataclass
@@ -13,10 +16,49 @@ class Profile:
     data_type: DataType
     transform: Affine
     nodata: Any
-    unit: Optional[str] = None
-    scale: Optional[float] = None
-    offset: Optional[float] = None
-    epsg: int = 4326
+    crs: str
+    unit: str
+    scale: Optional[float]
+    offset: Optional[float]
+
+    @classmethod
+    def build(
+        cls,
+        data_array: DataArray,
+        crs: CRS,
+        transform: Affine,
+        nan_nodata: bool = False,
+    ) -> "Profile":
+        data_type = next(
+            (d for d in DataType if d.lower() == str(data_array.dtype)), None
+        )
+        if not data_type:
+            raise ValueError(
+                f"No raster extension DataType found for numpy dtype: {data_array.dtype}"
+            )
+        if nan_nodata:
+            nodata: Any = numpy.nan
+        else:
+            nodata = float(data_array._FillValue)
+        if "scale_factor" in data_array.attrs:
+            scale = float(data_array.scale_factor)
+        else:
+            scale = None
+        if "add_offset" in data_array.attrs:
+            offset = float(data_array.add_offset)
+        else:
+            offset = None
+        return Profile(
+            height=data_array.shape[0],
+            width=data_array.shape[1],
+            data_type=data_type,
+            transform=transform,
+            nodata=nodata,
+            crs=crs,
+            scale=scale,
+            offset=offset,
+            unit=data_array.units.replace("_", " "),
+        )
 
     def gtiff(self) -> Dict[str, Any]:
         return {
@@ -36,8 +78,7 @@ class Profile:
         else:
             nodata = self.nodata
         band = RasterBand.create(nodata=nodata, data_type=self.data_type)
-        if self.unit:
-            band.unit = self.unit
+        band.unit = self.unit
         if self.scale:
             band.scale = self.scale
         if self.offset:
@@ -50,7 +91,3 @@ class Profile:
     @property
     def shape(self) -> List[int]:
         return [self.height, self.width]
-
-    @property
-    def crs(self) -> str:
-        return f"EPSG:{self.epsg}"

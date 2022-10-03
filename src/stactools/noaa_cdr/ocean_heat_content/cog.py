@@ -1,4 +1,3 @@
-import copy
 import datetime
 import os.path
 from dataclasses import dataclass
@@ -9,8 +8,9 @@ import xarray
 from pystac import Asset
 
 from .. import dataset, time
+from ..profile import Profile
 from ..time import TimeResolution
-from .constants import BASE_TIME, PROFILE
+from .constants import BASE_TIME, CRS, TRANSFORM
 
 
 @dataclass(frozen=True)
@@ -18,6 +18,7 @@ class Cog:
     """Dataclass to hold the result of a cogification operation."""
 
     asset: Asset
+    profile: Profile
     time_resolution: TimeResolution
     start_datetime: datetime.datetime
     end_datetime: datetime.datetime
@@ -65,9 +66,10 @@ def cogify(
                     outdir,
                     f"{os.path.splitext(os.path.basename(href))[0]}_{suffix}.tif",
                 )
+                profile = Profile.build(
+                    ds[variable].isel(time=i).squeeze(), CRS, TRANSFORM, nan_nodata=True
+                )
                 values = ds[variable].isel(time=i).values.squeeze()
-                profile = copy.deepcopy(PROFILE)
-                profile.unit = ds[variable].units.replace("_", " ")
                 asset = dataset.write_cog(
                     values,
                     path,
@@ -76,6 +78,7 @@ def cogify(
                 cogs.append(
                     Cog(
                         asset=asset,
+                        profile=profile,
                         time_resolution=time_resolution,
                         datetime=dt,
                         start_datetime=start_datetime,
