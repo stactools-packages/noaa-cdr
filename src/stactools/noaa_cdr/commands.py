@@ -12,6 +12,9 @@ from .sea_ice_concentration.commands import (
 from .sea_surface_temperature_optimum_interpolation.commands import (
     create_command as create_sea_surface_temperature_optimum_interpolation_command,
 )
+from .sea_surface_temperature_whoi.commands import (
+    create_command as create_sea_surface_temperature_whoi_command,
+)
 
 logger = logging.getLogger(__name__)
 click_logging.basic_config(logger)
@@ -31,5 +34,6 @@ def create_noaa_cdr_command(cli: Group) -> Command:
     create_ocean_heat_content_command(noaa_cdr)
     create_sea_ice_concentration_command(noaa_cdr)
     create_sea_surface_temperature_optimum_interpolation_command(noaa_cdr)
+    create_sea_surface_temperature_whoi_command(noaa_cdr)
 
     return noaa_cdr
