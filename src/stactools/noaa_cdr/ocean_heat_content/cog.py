@@ -7,7 +7,7 @@ import fsspec
 import xarray
 from pystac import Asset
 
-from .. import dataset, time
+from .. import cog, dataset, time
 from ..profile import BandProfile
 from ..time import TimeResolution
 from .constants import BASE_TIME
@@ -70,7 +70,7 @@ def cogify(
                     ds, variable, lambda d: d.isel(time=i).squeeze()
                 )
                 values = ds[variable].isel(time=i).values.squeeze()
-                asset = dataset.write_cog(
+                asset = cog.write(
                     values,
                     path,
                     profile,
