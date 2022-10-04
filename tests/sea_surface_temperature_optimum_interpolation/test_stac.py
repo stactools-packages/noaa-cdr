@@ -1,6 +1,5 @@
 import datetime
-import os.path
-from tempfile import TemporaryDirectory
+from pathlib import Path
 
 from dateutil.tz import tzutc
 from pystac.extensions.projection import ProjectionExtension
@@ -57,26 +56,17 @@ def test_create_item() -> None:
     item.validate()
 
 
-def test_add_items() -> None:
+def test_add_items(tmp_path: Path) -> None:
     path = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
     item = stac.create_item(path)
-    with TemporaryDirectory() as temporary_directory:
-        item = stactools.noaa_cdr.stac.add_cogs(item, temporary_directory)
-        assert len(item.assets) == 5
-        asset = item.assets["sst"]
-        assert asset.href == os.path.join(
-            temporary_directory, "oisst-avhrr-v02r01.20220913-sst.tif"
-        )
-        asset = item.assets["anom"]
-        assert asset.href == os.path.join(
-            temporary_directory, "oisst-avhrr-v02r01.20220913-anom.tif"
-        )
-        asset = item.assets["err"]
-        assert asset.href == os.path.join(
-            temporary_directory, "oisst-avhrr-v02r01.20220913-err.tif"
-        )
-        asset = item.assets["ice"]
-        assert asset.href == os.path.join(
-            temporary_directory, "oisst-avhrr-v02r01.20220913-ice.tif"
-        )
-        item.validate()
+    item = stactools.noaa_cdr.stac.add_cogs(item, str(tmp_path))
+    assert len(item.assets) == 5
+    asset = item.assets["sst"]
+    assert asset.href == str(tmp_path / "oisst-avhrr-v02r01.20220913-sst.tif")
+    asset = item.assets["anom"]
+    assert asset.href == str(tmp_path / "oisst-avhrr-v02r01.20220913-anom.tif")
+    asset = item.assets["err"]
+    assert asset.href == str(tmp_path / "oisst-avhrr-v02r01.20220913-err.tif")
+    asset = item.assets["ice"]
+    assert asset.href == str(tmp_path / "oisst-avhrr-v02r01.20220913-ice.tif")
+    item.validate()

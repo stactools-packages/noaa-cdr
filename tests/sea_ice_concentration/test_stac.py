@@ -1,4 +1,3 @@
-import os.path
 from pathlib import Path
 from typing import List
 
@@ -41,7 +40,7 @@ from .. import test_data
 def test_create_item(file_name: str, shape: List[int], transform: List[float]) -> None:
     path = test_data.get_path(f"data-files/{file_name}")
     item = stac.create_item(path)
-    assert item.id == os.path.splitext(file_name)[0]
+    assert item.id == Path(file_name).stem
 
     projection = ProjectionExtension.ext(item)
     _ = pyproj.CRS(projection.wkt2)
