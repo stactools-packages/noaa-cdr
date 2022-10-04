@@ -20,7 +20,7 @@ def test_create_collection(tmp_path: Path) -> None:
     collection.validate()
 
 
-def test_create_items(tmp_path: Path) -> None:
+def test_create_item(tmp_path: Path) -> None:
     destination = os.path.join(tmp_path, "item.json")
     infile = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
     result = run_command(
@@ -34,13 +34,10 @@ def test_create_items(tmp_path: Path) -> None:
     item.validate()
 
 
-def test_add_cogs(tmp_path: Path) -> None:
+def test_create_item_with_cogs(tmp_path: Path) -> None:
     path = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
     result = run_command(
         "noaa-cdr sea-surface-temperature-optimum-interpolation "
-        f"create-item {path} {tmp_path}/out.json"
-    )
-    result = run_command(
-        f"noaa-cdr sea-surface-temperature-optimum-interpolation add-cogs {tmp_path}/out.json"
+        f"create-item --cogs {path} {tmp_path}/out.json"
     )
     assert result.exit_code == 0
