@@ -1,5 +1,5 @@
 import datetime
-import os.path
+from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import pytest
@@ -66,15 +66,14 @@ def test_create_items_one_netcdf() -> None:
         item.validate()
 
 
-def test_create_items_two_netcdfs_same_items() -> None:
+def test_create_items_two_netcdfs_same_items(tmp_path: Path) -> None:
     paths = [
         test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc"),
         test_data.get_external_data(
             "mean_halosteric_sea_level_anomaly_0-2000_yearly.nc"
         ),
     ]
-    with TemporaryDirectory() as temporary_directory:
-        items = stac.create_items(paths, temporary_directory)
+    items = stac.create_items(paths, str(tmp_path))
     assert len(items) == 17
     for item in items:
         assert len(item.assets) == 2
@@ -96,10 +95,9 @@ def test_create_items_two_netcdfs_different_items() -> None:
         item.validate()
 
 
-def test_create_items_one_netcdf_latest_only() -> None:
+def test_create_items_one_netcdf_latest_only(tmp_path: Path) -> None:
     path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
-    with TemporaryDirectory() as temporary_directory:
-        items = stac.create_items([path], temporary_directory, latest_only=True)
+    items = stac.create_items([path], str(tmp_path), latest_only=True)
     assert len(items) == 1
     items[0].validate()
 
@@ -119,25 +117,23 @@ def test_create_items_one_netcdf_latest_only() -> None:
         ("mean_total_steric_sea_level_anomaly_0-2000_yearly.nc", 17),
     ],
 )
-def test_cogify(infile: str, num_cogs: int) -> None:
+def test_cogify(tmp_path: Path, infile: str, num_cogs: int) -> None:
     external_data_path = test_data.get_external_data(infile)
-    with TemporaryDirectory() as temporary_directory:
-        cogs = cog.cogify(external_data_path, temporary_directory)
-        assert len(cogs) == num_cogs
-        for c in cogs:
-            assert os.path.exists(c.asset.href)
+    cogs = cog.cogify(external_data_path, str(tmp_path))
+    assert len(cogs) == num_cogs
+    for c in cogs:
+        assert Path(c.asset.href).exists()
 
 
-def test_cogify_href() -> None:
+def test_cogify_href(tmp_path: Path) -> None:
     href = (
         "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data"
         "/0164586/derived/heat_content_anomaly_0-2000_yearly.nc"
     )
-    with TemporaryDirectory() as temporary_directory:
-        cogs = cog.cogify(href, temporary_directory)
-        assert len(cogs) == 17
-        for c in cogs:
-            assert os.path.exists(c.asset.href)
+    cogs = cog.cogify(href, str(tmp_path))
+    assert len(cogs) == 17
+    for c in cogs:
+        assert Path(c.asset.href).exists()
 
 
 def test_cogify_href_no_output_directory() -> None:
