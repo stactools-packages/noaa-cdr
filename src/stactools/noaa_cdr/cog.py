@@ -1,9 +1,12 @@
 import os
-from typing import Dict
+from typing import Any, Dict
 
 import fsspec
+import rasterio.shutil
 import xarray
-from pystac import Asset
+from numpy.typing import NDArray
+from pystac import Asset, MediaType
+from rasterio import MemoryFile
 
 from . import dataset
 from .profile import BandProfile
@@ -20,10 +23,24 @@ def cogify(path: str, directory: str) -> Dict[str, Asset]:
                 profile = BandProfile.build(ds, variable)
                 values = ds[variable].values.squeeze()
                 path = os.path.join(directory, f"{file_name}-{variable}.tif")
-                asset = dataset.write_cog(
+                asset = write(
                     values,
                     path,
                     profile,
                 )
                 assets[variable] = asset
     return assets
+
+
+def write(
+    values: NDArray[Any],
+    path: str,
+    profile: BandProfile,
+) -> Asset:
+    with MemoryFile() as memory_file:
+        with memory_file.open(**profile.gtiff()) as open_memory_file:
+            open_memory_file.write(values, 1)
+            rasterio.shutil.copy(open_memory_file, path, **profile.cog())
+    asset = Asset(href=path, media_type=MediaType.COG, roles=["data"])
+    asset.extra_fields["raster:bands"] = [profile.raster_band().to_dict()]
+    return asset
