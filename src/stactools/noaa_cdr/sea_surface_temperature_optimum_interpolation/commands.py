@@ -2,8 +2,8 @@ import os
 
 import click
 import pystac.utils
-from click import Command, Group, Path
-from pystac import CatalogType, Item
+from click import Command, Group
+from pystac import CatalogType
 
 import stactools.noaa_cdr.stac
 
@@ -26,7 +26,7 @@ def create_command(noaa_cdr: Group) -> Command:
         short_help="Creates a STAC collection",
     )
     @click.argument("destination")
-    def create_collection_command(
+    def create_collection(
         destination: str,
     ) -> None:
         """Creates a STAC Collection.
@@ -45,31 +45,21 @@ def create_command(noaa_cdr: Group) -> Command:
     )
     @click.argument("source")
     @click.argument("destination")
-    def create_item_command(source: str, destination: str) -> None:
-        """Creates a STAC Item from the provided NetCDF.
-
-        \b
-        Args:
-            source (str): HREF of the Asset associated with the Item.
-            destination (str): The destination file.
-        """
+    @click.option(
+        "--cogs/--no-cogs",
+        help="Create COGs for this NetCDF file next to the item",
+        default=False,
+        show_default=True,
+    )
+    def create_item(source: str, destination: str, cogs: bool) -> None:
         item = stac.create_item(source)
+        if cogs:
+            directory = os.path.dirname(destination)
+            os.makedirs(directory, exist_ok=True)
+            stactools.noaa_cdr.stac.add_cogs(item, directory)
         for key, asset in item.assets.items():
             asset.href = pystac.utils.make_relative_href(asset.href, destination)
             item.assets[key] = asset
         item.save_object(include_self_link=False, dest_href=destination)
-
-    @sea_surface_temperature_optimum_interpolation.command(
-        "add-cogs",
-        short_help="Create a Cloud-Optimized GeoTIFF (COG) from a CDR NetCDF file",
-    )
-    @click.argument("infile", type=Path(exists=True))
-    def add_cogs_command(infile: str) -> None:
-        item = Item.from_file(infile)
-        item = stactools.noaa_cdr.stac.add_cogs(
-            item,
-            os.path.dirname(infile),
-        )
-        item.save_object(include_self_link=False)
 
     return sea_surface_temperature_optimum_interpolation
