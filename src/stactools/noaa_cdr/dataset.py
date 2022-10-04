@@ -6,7 +6,7 @@ from pystac import Asset, MediaType
 from rasterio import MemoryFile
 from xarray import Dataset
 
-from .profile import Profile
+from .profile import BandProfile
 
 
 def data_variable_name(dataset: Dataset) -> str:
@@ -46,7 +46,7 @@ def data_variable_names(dataset: Dataset) -> List[str]:
 def write_cog(
     values: NDArray[Any],
     path: str,
-    profile: Profile,
+    profile: BandProfile,
 ) -> Asset:
     with MemoryFile() as memory_file:
         with memory_file.open(**profile.gtiff()) as open_memory_file:

@@ -3,15 +3,13 @@ from typing import Dict
 
 import fsspec
 import xarray
-from pyproj import CRS
 from pystac import Asset
-from rasterio import Affine
 
 from . import dataset
-from .profile import Profile
+from .profile import BandProfile
 
 
-def cogify(path: str, directory: str, crs: CRS, transform: Affine) -> Dict[str, Asset]:
+def cogify(path: str, directory: str) -> Dict[str, Asset]:
     os.makedirs(directory, exist_ok=True)
     file_name = os.path.splitext(os.path.basename(path))[0]
     assets = dict()
@@ -19,7 +17,7 @@ def cogify(path: str, directory: str, crs: CRS, transform: Affine) -> Dict[str, 
         with xarray.open_dataset(file, mask_and_scale=False) as ds:
             for variable in dataset.data_variable_names(ds):
                 # TODO remap > 180 longitudes
-                profile = Profile.build(ds[variable], crs, transform)
+                profile = BandProfile.build(ds, variable)
                 values = ds[variable].values.squeeze()
                 path = os.path.join(directory, f"{file_name}-{variable}.tif")
                 asset = dataset.write_cog(
