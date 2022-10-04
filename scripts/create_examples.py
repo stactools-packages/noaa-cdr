@@ -19,6 +19,7 @@ from tempfile import TemporaryDirectory
 import stactools.core.copy
 from pystac import Catalog, CatalogType
 
+import stactools.noaa_cdr.stac
 from stactools.noaa_cdr.ocean_heat_content import stac as ocean_heat_content_stac
 from stactools.noaa_cdr.sea_ice_concentration import stac as sea_ice_concentration_stac
 from stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation import (
@@ -69,9 +70,8 @@ with TemporaryDirectory() as temporary_directory:
     oisst = oisst_stac.create_collection()
     oisst_item = oisst_stac.create_item(
         os.path.join(external_data, "oisst-avhrr-v02r01.20220913.nc"),
-        cogify=True,
-        cog_directory=temporary_directory,
     )
+    oisst_item = stactools.noaa_cdr.stac.add_cogs(oisst_item, temporary_directory)
     oisst.add_item(oisst_item)
     catalog.add_child(oisst)
 
@@ -80,6 +80,7 @@ with TemporaryDirectory() as temporary_directory:
     whoi_sst_item = whoi_sst_stac.create_item(
         os.path.join(external_data, "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.nc")
     )
+    whoi_sst_item = stactools.noaa_cdr.stac.add_cogs(whoi_sst_item, temporary_directory)
     whoi_sst.add_item(whoi_sst_item)
     catalog.add_child(whoi_sst)
 
@@ -87,6 +88,9 @@ with TemporaryDirectory() as temporary_directory:
     sea_ice_concentration = sea_ice_concentration_stac.create_collection()
     sea_ice_concentration_item = sea_ice_concentration_stac.create_item(
         os.path.join(data_files, "seaice_conc_daily_nh_20211231_f17_v04r00.nc")
+    )
+    sea_ice_concentration_item = stactools.noaa_cdr.stac.add_cogs(
+        sea_ice_concentration_item, temporary_directory
     )
     sea_ice_concentration.add_item(sea_ice_concentration_item)
     catalog.add_child(sea_ice_concentration)
