@@ -8,9 +8,9 @@ import xarray
 from pystac import Asset
 
 from .. import dataset, time
-from ..profile import Profile
+from ..profile import BandProfile
 from ..time import TimeResolution
-from .constants import BASE_TIME, CRS, TRANSFORM
+from .constants import BASE_TIME
 
 
 @dataclass(frozen=True)
@@ -18,7 +18,7 @@ class Cog:
     """Dataclass to hold the result of a cogification operation."""
 
     asset: Asset
-    profile: Profile
+    profile: BandProfile
     time_resolution: TimeResolution
     start_datetime: datetime.datetime
     end_datetime: datetime.datetime
@@ -66,8 +66,8 @@ def cogify(
                     outdir,
                     f"{os.path.splitext(os.path.basename(href))[0]}_{suffix}.tif",
                 )
-                profile = Profile.build(
-                    ds[variable].isel(time=i).squeeze(), CRS, TRANSFORM, nan_nodata=True
+                profile = BandProfile.build(
+                    ds, variable, lambda d: d.isel(time=i).squeeze()
                 )
                 values = ds[variable].isel(time=i).values.squeeze()
                 asset = dataset.write_cog(
