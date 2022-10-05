@@ -3,6 +3,7 @@ from typing import List
 
 import dateutil.relativedelta
 import fsspec
+import numpy
 import xarray
 from pystac import Collection, Item
 from pystac.extensions.scientific import ScientificExtension
@@ -24,7 +25,9 @@ def create_items(href: str, directory: str) -> List[Item]:
             variables = dataset.data_variable_names(ds)
             profiles = dict()
             for variable in variables:
-                profiles[variable] = BandProfile.build(ds, variable)
+                profiles[variable] = BandProfile.build(
+                    ds, variable, lambda d: d.isel(time=0).squeeze()
+                )
             for i, dt in enumerate(
                 time.datetime64_to_datetime(dt) for dt in ds.time.values
             ):
@@ -44,7 +47,8 @@ def create_items(href: str, directory: str) -> List[Item]:
                     )
                 )
                 for variable in variables:
-                    values = ds[variable].isel(time=i).values.squeeze()
+                    values = numpy.flipud(ds[variable].isel(time=i).values.squeeze())
+                    values = numpy.roll(values, int(profiles[variable].width / 2), 1)
                     path = Path(directory) / f"{item.id}-{variable}.tif"
                     asset = cog.write(values, str(path), profiles[variable])
                     item.assets[variable] = asset
