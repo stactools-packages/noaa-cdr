@@ -1,4 +1,5 @@
 import os.path
+from pathlib import Path
 from typing import List
 
 import pyproj
@@ -6,6 +7,7 @@ import pytest
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.scientific import ScientificExtension
 
+from stactools.noaa_cdr import cog
 from stactools.noaa_cdr.sea_ice_concentration import stac
 
 from .. import test_data
@@ -47,6 +49,12 @@ def test_create_item(file_name: str, shape: List[int], transform: List[float]) -
     assert projection.transform == transform
 
     item.validate()
+
+
+def test_cogify(tmp_path: Path) -> None:
+    path = test_data.get_path("data-files/seaice_conc_daily_nh_20211231_f17_v04r00.nc")
+    assets = cog.cogify(path, str(tmp_path))
+    assert len(assets) == 8
 
 
 def test_create_collection() -> None:
