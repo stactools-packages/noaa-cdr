@@ -1,10 +1,10 @@
-import os
+from pathlib import Path
 
 import click
 import pystac.utils
 from click import Command, Group
+from pystac import ItemCollection
 
-import stactools.noaa_cdr.stac
 from stactools.noaa_cdr.sea_surface_temperature_whoi import stac
 
 
@@ -17,26 +17,18 @@ def create_command(noaa_cdr: Group) -> Command:
         pass
 
     @sea_surface_temperature_whoi.command(
-        "create-item", short_help="Create a STAC item from a NetCDF"
+        "create-items", short_help="Create a STAC item collection from a NetCDF"
     )
     @click.argument("source")
     @click.argument("destination")
-    @click.option(
-        "--cogs/--no-cogs",
-        help="Create COGs for this NetCDF file next to the item",
-        default=False,
-        show_default=True,
-    )
-    def create_item(source: str, destination: str, cogs: bool) -> None:
-        item = stac.create_item(source)
-        if cogs:
-            directory = os.path.dirname(destination)
-            os.makedirs(directory, exist_ok=True)
-            stactools.noaa_cdr.stac.add_cogs(item, directory)
-        for key, asset in item.assets.items():
-            asset.href = pystac.utils.make_relative_href(asset.href, destination)
-            item.assets[key] = asset
-        item.save_object(include_self_link=False, dest_href=destination)
+    def create_items(source: str, destination: str) -> None:
+        items = stac.create_items(source, str(Path(destination).parent))
+        for item in items:
+            for key, asset in item.assets.items():
+                asset.href = pystac.utils.make_relative_href(asset.href, destination)
+                item.assets[key] = asset
+        item_collection = ItemCollection(items)
+        item_collection.save_object(dest_href=destination)
 
     @sea_surface_temperature_whoi.command(
         "create-collection", short_help="Create a STAC collection"
