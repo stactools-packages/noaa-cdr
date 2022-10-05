@@ -85,7 +85,7 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "raster:bands": [
         {
-          "nodata": 255.0,
+          "nodata": 255,
           "data_type": "uint8",
           "unit": "1",
           "scale": 0.009999999776482582
@@ -100,7 +100,7 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "raster:bands": [
         {
-          "nodata": 255.0,
+          "nodata": 255,
           "data_type": "uint8",
           "unit": "1"
         }
@@ -114,7 +114,7 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "raster:bands": [
         {
-          "nodata": 255.0,
+          "nodata": 255,
           "data_type": "uint8",
           "unit": "1",
           "scale": 0.009999999776482582
@@ -129,7 +129,7 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "raster:bands": [
         {
-          "nodata": 255.0,
+          "nodata": 255,
           "data_type": "uint8",
           "unit": "1",
           "scale": 0.009999999776482582
@@ -144,7 +144,7 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "raster:bands": [
         {
-          "nodata": 0.0,
+          "nodata": 0,
           "data_type": "uint8"
         }
       ],
@@ -157,7 +157,7 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "raster:bands": [
         {
-          "nodata": 0.0,
+          "nodata": 0,
           "data_type": "uint8"
         }
       ],
@@ -183,7 +183,7 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "raster:bands": [
         {
-          "nodata": 0.0,
+          "nodata": 0,
           "data_type": "uint8"
         }
       ],
