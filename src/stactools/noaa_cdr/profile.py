@@ -107,7 +107,7 @@ class BandProfile:
         modifier: Optional[Callable[[DataArray], DataArray]] = None,
     ) -> "BandProfile":
         dataset_profile = DatasetProfile.build(dataset)
-        data_array = dataset[variable]
+        data_array = dataset[variable].squeeze()
         if modifier:
             data_array = modifier(data_array)
         data_type = next(
