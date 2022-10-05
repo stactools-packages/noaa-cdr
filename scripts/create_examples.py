@@ -80,7 +80,7 @@ with TemporaryDirectory() as temporary_directory:
     whoi_sst_item = whoi_sst_stac.create_item(
         os.path.join(external_data, "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.nc")
     )
-    whoi_sst_item = stactools.noaa_cdr.stac.add_cogs(whoi_sst_item, temporary_directory)
+    # whoi_sst_item = stactools.noaa_cdr.stac.add_cogs(whoi_sst_item, temporary_directory)
     whoi_sst.add_item(whoi_sst_item)
     catalog.add_child(whoi_sst)
 

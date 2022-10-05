@@ -7,7 +7,8 @@
     {
       "rel": "root",
       "href": "../catalog.json",
-      "type": "application/json"
+      "type": "application/json",
+      "title": "Climate Data Records"
     },
     {
       "rel": "item",
@@ -17,7 +18,8 @@
     {
       "rel": "parent",
       "href": "../catalog.json",
-      "type": "application/json"
+      "type": "application/json",
+      "title": "Climate Data Records"
     }
   ],
   "stac_extensions": [],

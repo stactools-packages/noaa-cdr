@@ -5,19 +5,19 @@
   "properties": {
     "start_datetime": "1972-03-01T00:00:00Z",
     "end_datetime": "1972-03-31T23:59:59Z",
-    "created": "2022-10-03T13:00:46.885496Z",
+    "created": "2022-10-05T09:09:16.420031Z",
     "proj:epsg": 4326,
     "proj:shape": [
       180,
       360
     ],
     "proj:transform": [
-      -180.0,
       1.0,
       0.0,
-      -90.0,
+      -180.0,
       0.0,
-      1.0
+      -1.0,
+      90.0
     ],
     "datetime": "1972-03-16T12:00:00Z"
   },
@@ -52,7 +52,8 @@
     {
       "rel": "root",
       "href": "../../catalog.json",
-      "type": "application/json"
+      "type": "application/json",
+      "title": "Climate Data Records"
     },
     {
       "rel": "collection",
@@ -69,7 +70,7 @@
   ],
   "assets": {
     "heat_content": {
-      "href": "../../../../../../../../var/folders/9z/lnsvqfqj4gs2d1j1nw3vynrm0000gn/T/tmp3t0n5ap_/heat_content_anomaly_0-2000_monthly_1972-03.tif",
+      "href": "./heat_content_anomaly_0-2000_monthly_1972-03.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Ocean Heat Content anomalies from WOA09 : 0-2000m 1972-03",
       "raster:bands": [
