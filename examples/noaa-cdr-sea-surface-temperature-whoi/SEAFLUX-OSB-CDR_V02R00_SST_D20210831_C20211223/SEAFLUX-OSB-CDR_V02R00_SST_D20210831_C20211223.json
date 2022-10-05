@@ -13,9 +13,9 @@
     ],
     "proj:transform": [
       0.25,
-      0,
-      -180,
-      0,
+      0.0,
+      -180.0,
+      0.0,
       -0.25,
       90.0
     ],
@@ -52,7 +52,8 @@
     {
       "rel": "root",
       "href": "../../catalog.json",
-      "type": "application/json"
+      "type": "application/json",
+      "title": "Climate Data Records"
     },
     {
       "rel": "collection",

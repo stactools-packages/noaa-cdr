@@ -5,19 +5,19 @@
   "properties": {
     "start_datetime": "2017-01-01T00:00:00Z",
     "end_datetime": "2021-12-31T23:59:59Z",
-    "created": "2022-10-03T13:00:46.996807Z",
+    "created": "2022-10-05T09:09:16.520557Z",
     "proj:epsg": 4326,
     "proj:shape": [
       180,
       360
     ],
     "proj:transform": [
-      -180.0,
       1.0,
       0.0,
-      -90.0,
+      -180.0,
       0.0,
-      1.0
+      -1.0,
+      90.0
     ],
     "datetime": "2019-07-01T00:00:00Z"
   },
@@ -52,7 +52,8 @@
     {
       "rel": "root",
       "href": "../../catalog.json",
-      "type": "application/json"
+      "type": "application/json",
+      "title": "Climate Data Records"
     },
     {
       "rel": "collection",
@@ -69,7 +70,7 @@
   ],
   "assets": {
     "heat_content": {
-      "href": "../../../../../../../../var/folders/9z/lnsvqfqj4gs2d1j1nw3vynrm0000gn/T/tmp3t0n5ap_/heat_content_anomaly_0-2000_pentad_2017-2021.tif",
+      "href": "./heat_content_anomaly_0-2000_pentad_2017-2021.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Ocean Heat Content anomalies from WOA09 : 0-2000m 2017-2021",
       "raster:bands": [
@@ -84,7 +85,7 @@
       ]
     },
     "mean_halosteric_sea_level": {
-      "href": "../../../../../../../../var/folders/9z/lnsvqfqj4gs2d1j1nw3vynrm0000gn/T/tmp3t0n5ap_/mean_halosteric_sea_level_anomaly_0-2000_pentad_2017-2021.tif",
+      "href": "./mean_halosteric_sea_level_anomaly_0-2000_pentad_2017-2021.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Mean halosteric sea level anomalies from WOA09 : 0-2000m 2017-2021",
       "raster:bands": [
@@ -99,7 +100,7 @@
       ]
     },
     "mean_salinity": {
-      "href": "../../../../../../../../var/folders/9z/lnsvqfqj4gs2d1j1nw3vynrm0000gn/T/tmp3t0n5ap_/mean_salinity_anomaly_0-2000_pentad_2017-2021.tif",
+      "href": "./mean_salinity_anomaly_0-2000_pentad_2017-2021.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Mean salinity anomalies from WOA09 : 0-2000m 2017-2021",
       "raster:bands": [
@@ -114,7 +115,7 @@
       ]
     },
     "mean_temperature": {
-      "href": "../../../../../../../../var/folders/9z/lnsvqfqj4gs2d1j1nw3vynrm0000gn/T/tmp3t0n5ap_/mean_temperature_anomaly_0-2000_pentad_2017-2021.tif",
+      "href": "./mean_temperature_anomaly_0-2000_pentad_2017-2021.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Mean temperature anomalies from WOA09 : 0-2000m 2017-2021",
       "raster:bands": [
@@ -129,7 +130,7 @@
       ]
     },
     "mean_thermosteric_sea_level": {
-      "href": "../../../../../../../../var/folders/9z/lnsvqfqj4gs2d1j1nw3vynrm0000gn/T/tmp3t0n5ap_/mean_thermosteric_sea_level_anomaly_0-2000_pentad_2017-2021.tif",
+      "href": "./mean_thermosteric_sea_level_anomaly_0-2000_pentad_2017-2021.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Mean thermosteric sea level anomalies from WOA09 : 0-2000m 2017-2021",
       "raster:bands": [
@@ -144,7 +145,7 @@
       ]
     },
     "mean_total_steric_sea_level": {
-      "href": "../../../../../../../../var/folders/9z/lnsvqfqj4gs2d1j1nw3vynrm0000gn/T/tmp3t0n5ap_/mean_total_steric_sea_level_anomaly_0-2000_pentad_2017-2021.tif",
+      "href": "./mean_total_steric_sea_level_anomaly_0-2000_pentad_2017-2021.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Mean total steric sea level anomalies from WOA09 : 0-2000m 2017-2021",
       "raster:bands": [
