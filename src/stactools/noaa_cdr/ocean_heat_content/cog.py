@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import Any, Dict, Hashable, List, Optional
 
 import fsspec
+import numpy
 import xarray
 from pystac import Asset
 
@@ -69,7 +70,7 @@ def cogify(
                 profile = BandProfile.build(
                     ds, variable, lambda d: d.isel(time=i).squeeze()
                 )
-                values = ds[variable].isel(time=i).values.squeeze()
+                values = numpy.flipud(ds[variable].isel(time=i).values.squeeze())
                 asset = cog.write(
                     values,
                     path,

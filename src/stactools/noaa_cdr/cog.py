@@ -2,6 +2,7 @@ import os
 from typing import Any, Dict
 
 import fsspec
+import numpy
 import rasterio.shutil
 import xarray
 from numpy.typing import NDArray
@@ -19,9 +20,11 @@ def cogify(path: str, directory: str) -> Dict[str, Asset]:
     with fsspec.open(path) as file:
         with xarray.open_dataset(file, mask_and_scale=False) as ds:
             for variable in dataset.data_variable_names(ds):
-                # TODO remap > 180 longitudes
                 profile = BandProfile.build(ds, variable)
-                values = ds[variable].values.squeeze()
+                data = ds[variable]
+                values = numpy.flipud(data.values.squeeze())
+                if profile.needs_longitude_remap:
+                    values = numpy.roll(values, int(profile.width / 2), 1)
                 path = os.path.join(directory, f"{file_name}-{variable}.tif")
                 asset = write(
                     values,

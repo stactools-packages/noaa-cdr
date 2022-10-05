@@ -24,16 +24,19 @@ class DatasetProfile:
     wkt2: Optional[str]
     shape: List[int]
     transform: Affine
+    needs_longitude_remap: bool
 
     @classmethod
     def build(cls, dataset: Dataset) -> "DatasetProfile":
         xmin = float(dataset.geospatial_lon_min)
         xmax = float(dataset.geospatial_lon_max)
+        needs_longitude_remap = False
         if xmin == 0 and xmax == 360:
             # This is a special case where global datasets choose to not go
             # negative with longitudes
             xmin = -180
             xmax = 180
+            needs_longitude_remap = True
         ymin = float(dataset.geospatial_lat_min)
         ymax = float(dataset.geospatial_lat_max)
 
@@ -74,6 +77,7 @@ class DatasetProfile:
             wkt2=wkt2,
             shape=shape,
             transform=transform,
+            needs_longitude_remap=needs_longitude_remap,
         )
 
     @property
@@ -98,6 +102,7 @@ class BandProfile:
     unit: str
     scale: Optional[float]
     offset: Optional[float]
+    needs_longitude_remap: bool
 
     @classmethod
     def build(
@@ -143,6 +148,7 @@ class BandProfile:
             scale=scale,
             offset=offset,
             unit=unit,
+            needs_longitude_remap=dataset_profile.needs_longitude_remap,
         )
 
     def gtiff(self) -> Dict[str, Any]:
