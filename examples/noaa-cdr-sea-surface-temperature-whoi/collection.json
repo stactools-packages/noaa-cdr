@@ -16,7 +16,42 @@
     },
     {
       "rel": "item",
-      "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223/SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.json",
+      "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-0/SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-0.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-1/SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-1.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-2/SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-2.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-3/SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-3.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-4/SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-4.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-5/SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-5.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-6/SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-6.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-7/SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-7.json",
       "type": "application/json"
     },
     {

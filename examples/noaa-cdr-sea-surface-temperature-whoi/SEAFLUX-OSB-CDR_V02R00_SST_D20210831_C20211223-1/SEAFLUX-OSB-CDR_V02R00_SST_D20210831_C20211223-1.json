@@ -1,10 +1,10 @@
 {
   "type": "Feature",
   "stac_version": "1.0.0",
-  "id": "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223",
+  "id": "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-1",
   "properties": {
-    "start_datetime": "2021-08-31T01:30:00Z",
-    "end_datetime": "2021-08-31T22:30:00Z",
+    "start_datetime": "2021-08-31T03:00:00Z",
+    "end_datetime": "2021-08-31T06:00:00Z",
     "processing:level": "L4",
     "proj:epsg": 4326,
     "proj:shape": [
@@ -19,7 +19,7 @@
       -0.25,
       90.0
     ],
-    "datetime": "2021-08-31T01:30:00Z"
+    "datetime": "2021-08-31T04:30:00Z"
   },
   "geometry": {
     "type": "Polygon",
@@ -75,6 +75,33 @@
       "title": "NOAA Climate Data Record of Sea Surface Temperature - WHOI NetCDF",
       "description": "SeaFlux Ocean Surface Bundle (OSB) Climate Data Record (CDR) of Sea Surface Temperature",
       "created": "2021-12-23T18:47:13Z",
+      "roles": [
+        "data"
+      ]
+    },
+    "sea_surface_temperature": {
+      "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-1-sea_surface_temperature.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "unit": "degree Celsius"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "fill_missing_qc": {
+      "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-1-fill_missing_qc.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32"
+        }
+      ],
       "roles": [
         "data"
       ]
