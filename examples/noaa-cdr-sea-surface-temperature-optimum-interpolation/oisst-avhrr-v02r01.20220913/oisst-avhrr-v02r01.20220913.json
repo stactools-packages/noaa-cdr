@@ -85,7 +85,7 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "raster:bands": [
         {
-          "nodata": -999.0,
+          "nodata": -999,
           "data_type": "int16",
           "unit": "Celsius",
           "scale": 0.009999999776482582
@@ -100,7 +100,7 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "raster:bands": [
         {
-          "nodata": -999.0,
+          "nodata": -999,
           "data_type": "int16",
           "unit": "Celsius",
           "scale": 0.009999999776482582
@@ -115,7 +115,7 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "raster:bands": [
         {
-          "nodata": -999.0,
+          "nodata": -999,
           "data_type": "int16",
           "unit": "Celsius",
           "scale": 0.009999999776482582
@@ -130,7 +130,7 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "raster:bands": [
         {
-          "nodata": -999.0,
+          "nodata": -999,
           "data_type": "int16",
           "unit": "%",
           "scale": 0.009999999776482582
