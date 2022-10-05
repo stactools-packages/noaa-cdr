@@ -129,6 +129,10 @@ class BandProfile:
             offset = float(data_array.add_offset)
         else:
             offset = None
+        if "units" in data_array.attrs:
+            unit = data_array.units.replace("_", " ")
+        else:
+            unit = None
         return cls(
             height=data_array.shape[0],
             width=data_array.shape[1],
@@ -138,7 +142,7 @@ class BandProfile:
             crs=dataset_profile.crs,
             scale=scale,
             offset=offset,
-            unit=data_array.units.replace("_", " "),
+            unit=unit,
         )
 
     def gtiff(self) -> Dict[str, Any]:
