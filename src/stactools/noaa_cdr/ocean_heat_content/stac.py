@@ -1,4 +1,3 @@
-import datetime
 import logging
 import os.path
 from typing import Iterator, List, Optional
@@ -152,7 +151,6 @@ def _update_items(items: List[Item], cogs: List[Cog]) -> List[Item]:
                 properties={
                     "start_datetime": pystac.utils.datetime_to_str(c.start_datetime),
                     "end_datetime": pystac.utils.datetime_to_str(c.end_datetime),
-                    "created": pystac.utils.datetime_to_str(datetime.datetime.now()),
                 },
             )
             projection = ProjectionExtension.ext(item, add_if_missing=True)
