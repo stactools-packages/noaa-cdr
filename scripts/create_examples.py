@@ -12,6 +12,7 @@ Assumptions:
 - The test suite has been run, so all external data have been downloaded.
 """
 
+import shutil
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -96,11 +97,12 @@ with TemporaryDirectory() as temporary_directory:
 
     print("Saving catalog...")
     catalog.normalize_hrefs(str(examples))
+    shutil.rmtree(examples)
     for item in catalog.get_all_items():
         for asset in item.assets.values():
             if asset.href.startswith(temporary_directory):
                 href = stactools.core.copy.move_asset_file_to_item(
-                    item, asset.href, copy=False, ignore_conflicts=True
+                    item, asset.href, copy=False
                 )
                 asset.href = href
         item.make_asset_hrefs_relative()
