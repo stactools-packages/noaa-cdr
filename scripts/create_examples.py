@@ -12,7 +12,6 @@ Assumptions:
 - The test suite has been run, so all external data have been downloaded.
 """
 
-import os.path
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -28,10 +27,10 @@ from stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation import (
 from stactools.noaa_cdr.sea_surface_temperature_whoi import stac as whoi_sst_stac
 
 root = Path(__file__).parent.parent
-examples = str(root / "examples")
-untracked_data = str(root / "data")
-data_files = str(root / "tests" / "data-files")
-external_data = str(root / "tests" / "data-files" / "external")
+examples = root / "examples"
+untracked_data = root / "data"
+data_files = root / "tests" / "data-files"
+external_data = root / "tests" / "data-files" / "external"
 
 description = (
     "NOAA's Climate Data Records (CDRs) are robust, sustainable, "
@@ -62,14 +61,14 @@ with TemporaryDirectory() as temporary_directory:
     ocean_heat_content = ocean_heat_content_stac.create_collection(
         cog_directory=temporary_directory,
         latest_only=True,
-        local_directory=untracked_data,
+        local_directory=str(untracked_data),
     )
     catalog.add_child(ocean_heat_content)
 
     print("Creating Sea Surface Temperature Optimum Interpolation collection...")
     oisst = oisst_stac.create_collection()
     oisst_item = oisst_stac.create_item(
-        os.path.join(external_data, "oisst-avhrr-v02r01.20220913.nc"),
+        str(external_data / "oisst-avhrr-v02r01.20220913.nc"),
     )
     oisst_item = stactools.noaa_cdr.stac.add_cogs(oisst_item, temporary_directory)
     oisst.add_item(oisst_item)
@@ -77,17 +76,17 @@ with TemporaryDirectory() as temporary_directory:
 
     print("Creating Sea Surface Temperature - WHOI collection...")
     whoi_sst = whoi_sst_stac.create_collection()
-    whoi_sst_item = whoi_sst_stac.create_item(
-        os.path.join(external_data, "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.nc")
+    whoi_sst_items = whoi_sst_stac.create_items(
+        str(external_data / "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.nc"),
+        temporary_directory,
     )
-    # whoi_sst_item = stactools.noaa_cdr.stac.add_cogs(whoi_sst_item, temporary_directory)
-    whoi_sst.add_item(whoi_sst_item)
+    whoi_sst.add_items(whoi_sst_items)
     catalog.add_child(whoi_sst)
 
     print("Creating Sea Ice Concentration collection...")
     sea_ice_concentration = sea_ice_concentration_stac.create_collection()
     sea_ice_concentration_item = sea_ice_concentration_stac.create_item(
-        os.path.join(data_files, "seaice_conc_daily_nh_20211231_f17_v04r00.nc")
+        str(data_files / "seaice_conc_daily_nh_20211231_f17_v04r00.nc")
     )
     sea_ice_concentration_item = stactools.noaa_cdr.stac.add_cogs(
         sea_ice_concentration_item, temporary_directory
@@ -96,7 +95,7 @@ with TemporaryDirectory() as temporary_directory:
     catalog.add_child(sea_ice_concentration)
 
     print("Saving catalog...")
-    catalog.normalize_hrefs(examples)
+    catalog.normalize_hrefs(str(examples))
     for item in catalog.get_all_items():
         for asset in item.assets.values():
             if asset.href.startswith(temporary_directory):
