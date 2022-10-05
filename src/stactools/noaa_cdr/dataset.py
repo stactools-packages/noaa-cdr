@@ -4,7 +4,8 @@ from xarray import Dataset
 
 
 def data_variable_name(dataset: Dataset) -> str:
-    """Returns the variable name that points to a four-dimensional data array.
+    """Returns the variable name that points to a three or four-dimensional data array.
+
     Args:
         dataset (xarray.Dataset): An open xarray Dataset
     Returns:
@@ -23,7 +24,7 @@ def data_variable_name(dataset: Dataset) -> str:
 
 def data_variable_names(dataset: Dataset) -> List[str]:
     """Returns a list of the variable names that point to a
-    four-dimensional data array.
+    three or four dimensional data array.
 
     Args:
         dataset (xarray.Dataset): An open xarray Dataset
@@ -33,5 +34,5 @@ def data_variable_names(dataset: Dataset) -> List[str]:
     return list(
         str(variable)
         for variable in dataset.variables
-        if len(dataset[variable].sizes) == 4
+        if len(dataset[variable].sizes) in (3, 4)
     )
