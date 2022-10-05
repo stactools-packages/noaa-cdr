@@ -120,7 +120,7 @@ class BandProfile:
         if data_type.startswith("float"):
             nodata: Any = numpy.nan
         else:
-            nodata = float(data_array._FillValue)
+            nodata = int(data_array._FillValue)
         if "scale_factor" in data_array.attrs:
             scale = float(data_array.scale_factor)
         else:
