@@ -10,6 +10,8 @@ from pystac.extensions.raster import DataType, NoDataStrings, RasterBand
 from rasterio import Affine
 from xarray import DataArray, Dataset
 
+UNITLESS = ["unitless"]
+
 
 @dataclass
 class DatasetProfile:
@@ -138,6 +140,8 @@ class BandProfile:
             offset = None
         if "units" in data_array.attrs:
             unit = data_array.units.replace("_", " ")
+            if unit in UNITLESS:
+                unit = None
         else:
             unit = None
         return cls(
