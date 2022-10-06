@@ -142,3 +142,9 @@ def test_cogify_href_no_output_directory() -> None:
     )
     with pytest.raises(Exception):
         cog.cogify(href)
+
+
+def test_unitless(tmp_path: Path) -> None:
+    path = test_data.get_external_data("mean_salinity_anomaly_0-2000_yearly.nc")
+    cogs = cog.cogify(path, str(tmp_path))
+    assert "unit" not in cogs[0].asset.extra_fields["raster:bands"][0]

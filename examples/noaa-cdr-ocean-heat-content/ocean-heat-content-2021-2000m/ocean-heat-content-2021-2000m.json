@@ -105,8 +105,7 @@
       "raster:bands": [
         {
           "nodata": "nan",
-          "data_type": "float32",
-          "unit": "unitless"
+          "data_type": "float32"
         }
       ],
       "roles": [
