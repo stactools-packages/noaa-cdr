@@ -19,4 +19,4 @@ def create_collection(catalog_type: CatalogType = DEFAULT_CATALOG_TYPE) -> Colle
 
 
 def create_item(href: str) -> Item:
-    return stac.create_item(href, remap_longitudes=True)
+    return stac.create_item(href)
