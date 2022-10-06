@@ -89,7 +89,7 @@ with TemporaryDirectory() as temporary_directory:
     sea_ice_concentration_item = sea_ice_concentration_stac.create_item(
         str(data_files / "seaice_conc_daily_nh_20211231_f17_v04r00.nc")
     )
-    sea_ice_concentration_item = stactools.noaa_cdr.stac.add_cogs(
+    sea_ice_concentration_item = sea_ice_concentration_stac.add_cogs(
         sea_ice_concentration_item, temporary_directory
     )
     sea_ice_concentration.add_item(sea_ice_concentration_item)

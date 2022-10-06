@@ -1,5 +1,5 @@
 import os
-from typing import Any, Dict
+from typing import Any, Dict, Type
 
 import fsspec
 import numpy
@@ -13,14 +13,18 @@ from . import dataset
 from .profile import BandProfile
 
 
-def cogify(path: str, directory: str) -> Dict[str, Asset]:
+def cogify(
+    path: str,
+    directory: str,
+    band_profile_class: Type[BandProfile] = BandProfile,
+) -> Dict[str, Asset]:
     os.makedirs(directory, exist_ok=True)
     file_name = os.path.splitext(os.path.basename(path))[0]
     assets = dict()
     with fsspec.open(path) as file:
         with xarray.open_dataset(file, mask_and_scale=False) as ds:
             for variable in dataset.data_variable_names(ds):
-                profile = BandProfile.build(ds, variable)
+                profile = band_profile_class.build(ds, variable)
                 data = ds[variable]
                 values = data.values.squeeze()
                 if profile.needs_vertical_flip:
@@ -33,6 +37,7 @@ def cogify(path: str, directory: str) -> Dict[str, Asset]:
                     path,
                     profile,
                 )
+                asset = profile.update_cog_asset(variable, asset)
                 assets[variable] = asset
     return assets
 

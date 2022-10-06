@@ -1,11 +1,12 @@
 import math
 from dataclasses import dataclass
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, Hashable, List, Optional
 
 import numpy
 import shapely.geometry
 from pyproj import CRS
 from pyproj.enums import WktVersion
+from pystac import Asset
 from pystac.extensions.raster import DataType, NoDataStrings, RasterBand
 from rasterio import Affine
 from xarray import DataArray, Dataset
@@ -106,6 +107,7 @@ class BandProfile:
     unit: str
     scale: Optional[float]
     offset: Optional[float]
+    attrs: Dict[Hashable, Any]
     dataset_profile: DatasetProfile
 
     @classmethod
@@ -152,6 +154,7 @@ class BandProfile:
             scale=scale,
             offset=offset,
             unit=unit,
+            attrs=data_array.attrs,
             dataset_profile=dataset_profile,
         )
 
@@ -166,6 +169,9 @@ class BandProfile:
             "transform": self.transform,
             "driver": "GTiff",
         }
+
+    def update_cog_asset(self, key: str, asset: Asset) -> Asset:
+        return asset
 
     def raster_band(self) -> RasterBand:
         if math.isnan(self.nodata):

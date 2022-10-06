@@ -90,6 +90,28 @@
           "scale": 0.009999999776482582
         }
       ],
+      "classification:classes": [
+        {
+          "value": 251,
+          "name": "pole_hole"
+        },
+        {
+          "value": 252,
+          "name": "lakes"
+        },
+        {
+          "value": 253,
+          "name": "coastal"
+        },
+        {
+          "value": 254,
+          "name": "land_mask"
+        },
+        {
+          "value": 255,
+          "name": "missing_data"
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -115,6 +137,28 @@
           "nodata": 255,
           "data_type": "uint8",
           "scale": 0.009999999776482582
+        }
+      ],
+      "classification:classes": [
+        {
+          "value": 251,
+          "name": "pole_hole"
+        },
+        {
+          "value": 252,
+          "name": "unused"
+        },
+        {
+          "value": 253,
+          "name": "coastal"
+        },
+        {
+          "value": 254,
+          "name": "land_mask"
+        },
+        {
+          "value": 255,
+          "name": "missing_data"
         }
       ],
       "roles": [
@@ -144,6 +188,128 @@
           "data_type": "uint8"
         }
       ],
+      "classification:bitfields": [
+        {
+          "name": "BT_weather_filter_applied",
+          "offset": 0,
+          "length": 1,
+          "classes": [
+            {
+              "name": "BT_weather_filter_not_applied",
+              "value": 0
+            },
+            {
+              "name": "BT_weather_filter_applied",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "NT_weather_filter_applied",
+          "offset": 1,
+          "length": 1,
+          "classes": [
+            {
+              "name": "NT_weather_filter_not_applied",
+              "value": 0
+            },
+            {
+              "name": "NT_weather_filter_applied",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "BT_land_spillover_filter_applied",
+          "offset": 2,
+          "length": 1,
+          "classes": [
+            {
+              "name": "BT_land_spillover_filter_not_applied",
+              "value": 0
+            },
+            {
+              "name": "BT_land_spillover_filter_applied",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "NT_land_spillover_filter_applied",
+          "offset": 3,
+          "length": 1,
+          "classes": [
+            {
+              "name": "NT_land_spillover_filter_not_applied",
+              "value": 0
+            },
+            {
+              "name": "NT_land_spillover_filter_applied",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "valid_ice_mask_applied",
+          "offset": 4,
+          "length": 1,
+          "classes": [
+            {
+              "name": "valid_ice_mask_not_applied",
+              "value": 0
+            },
+            {
+              "name": "valid_ice_mask_applied",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "spatial_interpolation_applied",
+          "offset": 5,
+          "length": 1,
+          "classes": [
+            {
+              "name": "spatial_interpolation_not_applied",
+              "value": 0
+            },
+            {
+              "name": "spatial_interpolation_applied",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "temporal_interpolation_applied",
+          "offset": 6,
+          "length": 1,
+          "classes": [
+            {
+              "name": "temporal_interpolation_not_applied",
+              "value": 0
+            },
+            {
+              "name": "temporal_interpolation_applied",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "melt_start_detected",
+          "offset": 7,
+          "length": 1,
+          "classes": [
+            {
+              "name": "melt_start_not_detected",
+              "value": 0
+            },
+            {
+              "name": "melt_start_detected",
+              "value": 1
+            }
+          ]
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -155,6 +321,98 @@
         {
           "nodata": 0,
           "data_type": "uint8"
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "19v_tb_value_interpolated",
+          "offset": 0,
+          "length": 1,
+          "classes": [
+            {
+              "name": "19v_tb_value_not_interpolated",
+              "value": 0
+            },
+            {
+              "name": "19v_tb_value_interpolated",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "19h_tb_value_interpolated",
+          "offset": 1,
+          "length": 1,
+          "classes": [
+            {
+              "name": "19h_tb_value_not_interpolated",
+              "value": 0
+            },
+            {
+              "name": "19h_tb_value_interpolated",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "22v_tb_value_interpolated",
+          "offset": 2,
+          "length": 1,
+          "classes": [
+            {
+              "name": "22v_tb_value_not_interpolated",
+              "value": 0
+            },
+            {
+              "name": "22v_tb_value_interpolated",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "37v_tb_value_interpolated",
+          "offset": 3,
+          "length": 1,
+          "classes": [
+            {
+              "name": "37v_tb_value_not_interpolated",
+              "value": 0
+            },
+            {
+              "name": "37v_tb_value_interpolated",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "37h_tb_value_interpolated",
+          "offset": 4,
+          "length": 1,
+          "classes": [
+            {
+              "name": "37h_tb_value_not_interpolated",
+              "value": 0
+            },
+            {
+              "name": "37h_tb_value_interpolated",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "pole_hole_value_interpolated",
+          "offset": 5,
+          "length": 1,
+          "classes": [
+            {
+              "name": "pole_hole_value_not_interpolated",
+              "value": 0
+            },
+            {
+              "name": "pole_hole_value_interpolated",
+              "value": 1
+            }
+          ]
         }
       ],
       "roles": [
@@ -170,6 +428,28 @@
           "data_type": "float32"
         }
       ],
+      "classification:classes": [
+        {
+          "value": 251,
+          "name": "pole_hole"
+        },
+        {
+          "value": 252,
+          "name": "lakes"
+        },
+        {
+          "value": 253,
+          "name": "coastal"
+        },
+        {
+          "value": 254,
+          "name": "land_mask"
+        },
+        {
+          "value": 255,
+          "name": "missing_data"
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -181,6 +461,68 @@
         {
           "nodata": 0,
           "data_type": "uint8"
+        }
+      ],
+      "classification:classes": [
+        {
+          "value": 1,
+          "name": "1_day_following"
+        },
+        {
+          "value": 2,
+          "name": "2_days_following"
+        },
+        {
+          "value": 3,
+          "name": "3_days_following"
+        },
+        {
+          "value": 4,
+          "name": "4_days_following"
+        },
+        {
+          "value": 5,
+          "name": "5_days_following"
+        },
+        {
+          "value": 10,
+          "name": "1_day_prior"
+        },
+        {
+          "value": 11,
+          "name": "mean_of_prior_and_following_1_day"
+        },
+        {
+          "value": 20,
+          "name": "2_days_prior"
+        },
+        {
+          "value": 22,
+          "name": "mean_of_prior_and_following_2_days"
+        },
+        {
+          "value": 30,
+          "name": "3_days_prior"
+        },
+        {
+          "value": 33,
+          "name": "mean_of_prior_and_following_3_days"
+        },
+        {
+          "value": 40,
+          "name": "4_days_prior"
+        },
+        {
+          "value": 44,
+          "name": "mean_of_prior_and_following_4_days"
+        },
+        {
+          "value": 50,
+          "name": "5_days_prior"
+        },
+        {
+          "value": 55,
+          "name": "mean_of_prior_and_following_5_days"
         }
       ],
       "roles": [
@@ -196,7 +538,8 @@
   ],
   "stac_extensions": [
     "https://stac-extensions.github.io/processing/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/classification/v1.1.0/schema.json"
   ],
   "collection": "noaa-cdr-sea-ice-concentration"
 }
