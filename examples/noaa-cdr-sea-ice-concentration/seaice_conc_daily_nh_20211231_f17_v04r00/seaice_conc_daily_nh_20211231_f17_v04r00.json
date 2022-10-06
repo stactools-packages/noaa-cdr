@@ -87,7 +87,6 @@
         {
           "nodata": 255,
           "data_type": "uint8",
-          "unit": "1",
           "scale": 0.009999999776482582
         }
       ],
@@ -101,8 +100,7 @@
       "raster:bands": [
         {
           "nodata": 255,
-          "data_type": "uint8",
-          "unit": "1"
+          "data_type": "uint8"
         }
       ],
       "roles": [
@@ -116,7 +114,6 @@
         {
           "nodata": 255,
           "data_type": "uint8",
-          "unit": "1",
           "scale": 0.009999999776482582
         }
       ],
@@ -131,7 +128,6 @@
         {
           "nodata": 255,
           "data_type": "uint8",
-          "unit": "1",
           "scale": 0.009999999776482582
         }
       ],

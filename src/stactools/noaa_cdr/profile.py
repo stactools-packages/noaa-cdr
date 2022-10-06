@@ -10,7 +10,7 @@ from pystac.extensions.raster import DataType, NoDataStrings, RasterBand
 from rasterio import Affine
 from xarray import DataArray, Dataset
 
-UNITLESS = ["unitless"]
+UNITLESS = ["unitless", "1"]
 
 
 @dataclass

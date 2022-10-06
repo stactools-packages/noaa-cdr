@@ -66,3 +66,9 @@ def test_create_collection() -> None:
 
     collection.set_self_href("")
     collection.validate()
+
+
+def test_unitless(tmp_path: Path) -> None:
+    path = test_data.get_path("data-files/seaice_conc_daily_nh_20211231_f17_v04r00.nc")
+    assets = cog.cogify(path, str(tmp_path))
+    assert "unit" not in assets["cdr_seaice_conc"].extra_fields["raster:bands"][0]
