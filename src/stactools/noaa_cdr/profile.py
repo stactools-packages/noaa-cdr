@@ -100,14 +100,11 @@ class BandProfile:
     width: int
     height: int
     data_type: DataType
-    transform: Affine
     nodata: Any
-    crs: str
     unit: str
     scale: Optional[float]
     offset: Optional[float]
-    needs_longitude_remap: bool
-    needs_vertical_flip: bool
+    dataset_profile: DatasetProfile
 
     @classmethod
     def build(
@@ -147,14 +144,11 @@ class BandProfile:
             height=data_array.shape[0],
             width=data_array.shape[1],
             data_type=data_type,
-            transform=dataset_profile.transform,
             nodata=nodata,
-            crs=dataset_profile.crs,
             scale=scale,
             offset=offset,
             unit=unit,
-            needs_longitude_remap=dataset_profile.needs_longitude_remap,
-            needs_vertical_flip=dataset_profile.needs_vertical_flip,
+            dataset_profile=dataset_profile,
         )
 
     def gtiff(self) -> Dict[str, Any]:
@@ -188,6 +182,22 @@ class BandProfile:
     @property
     def shape(self) -> List[int]:
         return [self.height, self.width]
+
+    @property
+    def transform(self) -> Affine:
+        return self.dataset_profile.transform
+
+    @property
+    def crs(self) -> CRS:
+        return self.dataset_profile.crs
+
+    @property
+    def needs_longitude_remap(self) -> bool:
+        return self.dataset_profile.needs_longitude_remap
+
+    @property
+    def needs_vertical_flip(self) -> bool:
+        return self.dataset_profile.needs_vertical_flip
 
 
 def _parse_resolution(value: Any) -> float:
