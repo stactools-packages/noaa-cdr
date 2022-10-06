@@ -12,9 +12,7 @@ from .constants import NETCDF_ASSET_KEY, PROCESSING_EXTENSION_SCHEMA
 from .profile import DatasetProfile
 
 
-def create_item(
-    href: str, remap_longitudes: bool = False, id: Optional[str] = None
-) -> Item:
+def create_item(href: str, id: Optional[str] = None) -> Item:
     with fsspec.open(href) as file:
         with xarray.open_dataset(file) as ds:
             if id is None:
