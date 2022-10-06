@@ -25,6 +25,7 @@ class DatasetProfile:
     shape: List[int]
     transform: Affine
     needs_longitude_remap: bool
+    needs_vertical_flip: bool
 
     @classmethod
     def build(cls, dataset: Dataset) -> "DatasetProfile":
@@ -53,6 +54,7 @@ class DatasetProfile:
             transform = Affine.from_gdal(
                 *list(float(s) for s in dataset.projection.GeoTransform.split(" "))
             )
+            needs_vertical_flip = False
         else:
             epsg = 4326
             crs = CRS("EPSG:4326")
@@ -66,6 +68,7 @@ class DatasetProfile:
                 -_parse_resolution(dataset.geospatial_lat_resolution),
                 ymax,
             )
+            needs_vertical_flip = True
 
         return DatasetProfile(
             xmin=xmin,
@@ -78,6 +81,7 @@ class DatasetProfile:
             shape=shape,
             transform=transform,
             needs_longitude_remap=needs_longitude_remap,
+            needs_vertical_flip=needs_vertical_flip,
         )
 
     @property
@@ -103,6 +107,7 @@ class BandProfile:
     scale: Optional[float]
     offset: Optional[float]
     needs_longitude_remap: bool
+    needs_vertical_flip: bool
 
     @classmethod
     def build(
@@ -149,6 +154,7 @@ class BandProfile:
             offset=offset,
             unit=unit,
             needs_longitude_remap=dataset_profile.needs_longitude_remap,
+            needs_vertical_flip=dataset_profile.needs_vertical_flip,
         )
 
     def gtiff(self) -> Dict[str, Any]:

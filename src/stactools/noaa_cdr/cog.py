@@ -22,7 +22,9 @@ def cogify(path: str, directory: str) -> Dict[str, Asset]:
             for variable in dataset.data_variable_names(ds):
                 profile = BandProfile.build(ds, variable)
                 data = ds[variable]
-                values = numpy.flipud(data.values.squeeze())
+                values = data.values.squeeze()
+                if profile.needs_vertical_flip:
+                    values = numpy.flipud(values)
                 if profile.needs_longitude_remap:
                     values = numpy.roll(values, int(profile.width / 2), 1)
                 path = os.path.join(directory, f"{file_name}-{variable}.tif")
