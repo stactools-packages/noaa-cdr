@@ -45,7 +45,6 @@ def create_items(href: str, directory: str) -> List[Item]:
             ):
                 item = base_item.clone()
                 item.id = f"{item.id}-{i}"
-                item.datetime = dt
                 item.common_metadata.start_datetime = (
                     dt
                     - dateutil.relativedelta.relativedelta(

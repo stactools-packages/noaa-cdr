@@ -16,6 +16,7 @@ def test_create_items(tmp_path: Path) -> None:
     for i, item in enumerate(items):
         assert item.id == f"SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-{i}"
         assert item.bbox == [-180, -90, 180, 90]
+        assert item.datetime is None
         assert len(item.assets) == 3
         assert "fill_missing_qc" in item.assets
         assert "sea_surface_temperature" in item.assets
