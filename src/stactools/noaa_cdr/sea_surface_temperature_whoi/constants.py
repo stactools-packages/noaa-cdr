@@ -1,7 +1,11 @@
 import datetime
+import importlib.resources
 
+import orjson
 from dateutil.tz import tzutc
-from pystac import Extent, SpatialExtent, TemporalExtent
+from pystac import Extent, Link, MediaType, SpatialExtent, TemporalExtent
+
+from ..constants import COMMON_KEYWORDS
 
 ID = "noaa-cdr-sea-surface-temperature-whoi"
 TITLE = "Sea Surface Temperature - WHOI CDR"
@@ -27,4 +31,23 @@ CITATION = (
     "Program (2016). NOAA Climate Data Record (CDR) of Sea Surface "
     "Temperature - WHOI, Version 2. [indicate subset used]. NOAA "
     "National Climatic Data Center. doi:10.7289/V5FB510W [access date]."
+)
+
+LICENSE_LINK = Link(
+    "license",
+    (
+        "https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/"
+        "Sea%20Surface%20Temperature%20-%20WHOI/UseAgreement_01B-27a.pdf"
+    ),
+    MediaType.PDF,
+    "NOAA CDR Sea Surface Temperature - WHOI Use Agreement",
+)
+
+KEYWORDS = COMMON_KEYWORDS + ["Ocean", "Temperature"]
+
+ITEM_ASSETS = orjson.loads(
+    importlib.resources.read_text(
+        "stactools.noaa_cdr.sea_surface_temperature_whoi",
+        "item-assets.json",
+    )
 )

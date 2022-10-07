@@ -18,6 +18,7 @@ from stactools.noaa_cdr.sea_ice_concentration import stac as sea_ice_stac
 from stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation import (
     stac as oisst_stac,
 )
+from stactools.noaa_cdr.sea_surface_temperature_whoi import stac as whoi_stac
 
 root = Path(__file__).parent.parent
 test_data = root / "tests" / "data-files"
@@ -29,6 +30,10 @@ oisst_data_path = external_test_data / "oisst-avhrr-v02r01.20220913.nc"
 oisst_item_assets_path = (
     src / "sea_surface_temperature_optimum_interpolation" / "item-assets.json"
 )
+whoi_data_path = (
+    external_test_data / "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.nc"
+)
+whoi_item_assets_path = src / "sea_surface_temperature_whoi" / "item-assets.json"
 
 
 def write_item_assets(item: Item, path: Path) -> None:
@@ -54,3 +59,7 @@ item = oisst_stac.create_item(str(oisst_data_path))
 with TemporaryDirectory() as temporary_directory:
     item = stactools.noaa_cdr.stac.add_cogs(item, temporary_directory)
 write_item_assets(item, oisst_item_assets_path)
+
+with TemporaryDirectory() as temporary_directory:
+    items = whoi_stac.create_items(str(whoi_data_path), temporary_directory)
+write_item_assets(items[0], whoi_item_assets_path)

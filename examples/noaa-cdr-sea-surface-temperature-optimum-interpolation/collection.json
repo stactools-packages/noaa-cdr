@@ -11,6 +11,16 @@
       "title": "Climate Data Records"
     },
     {
+      "rel": "license",
+      "href": "https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/Sea_Surface_Temperature_Optimum_Interpolation/UseAgreement_01B-09.pdf",
+      "type": "application/pdf",
+      "title": "NOAA CDR Sea Surface Temperature - Optimum Interpolation Use Agreement"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.25921/RE9P-PT57"
+    },
+    {
       "rel": "item",
       "href": "./oisst-avhrr-v02r01.20220913/oisst-avhrr-v02r01.20220913.json",
       "type": "application/json"
@@ -22,7 +32,79 @@
       "title": "Climate Data Records"
     }
   ],
-  "stac_extensions": [],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
+  ],
+  "item_assets": {
+    "netcdf": {
+      "type": "application/netcdf",
+      "title": "NOAA/NCEI 1/4 Degree Daily Optimum Interpolation Sea Surface Temperature (OISST) Analysis, Version 2.1 - Final NetCDF",
+      "description": "NOAAs 1/4-degree Daily Optimum Interpolation Sea Surface Temperature (OISST) (sometimes referred to as Reynolds SST, which however also refers to earlier products at different resolution), currently available as version v02r01, is created by interpolating and extrapolating SST observations from different sources, resulting in a smoothed complete field. The sources of data are satellite (AVHRR) and in situ platforms (i.e., ships and buoys), and the specific datasets employed may change over time. At the marginal ice zone, sea ice concentrations are used to generate proxy SSTs.  A preliminary version of this file is produced in near-real time (1-day latency), and then replaced with a final version after 2 weeks. Note that this is the AVHRR-ONLY DOISST, available from Oct 1981, but there is a companion DOISST product that includes microwave satellite data, available from June 2002",
+      "updated": "2022-09-28T09:14:00Z",
+      "roles": [
+        "data"
+      ]
+    },
+    "sst": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": -999,
+          "data_type": "int16",
+          "unit": "Celsius",
+          "scale": 0.009999999776482582
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "anom": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": -999,
+          "data_type": "int16",
+          "unit": "Celsius",
+          "scale": 0.009999999776482582
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "err": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": -999,
+          "data_type": "int16",
+          "unit": "Celsius",
+          "scale": 0.009999999776482582
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "ice": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": -999,
+          "data_type": "int16",
+          "unit": "%",
+          "scale": 0.009999999776482582
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "sci:doi": "10.25921/RE9P-PT57",
+  "sci:citation": "Huang, Boyin; Liu, Chunying; Banzon, Viva F.; Freeman, Eric; Graham, Garrett; Hankins, Bill; Smith, Thomas M.; Zhang, Huai-Min. (2020): NOAA 0.25-degree Daily Optimum Interpolation Sea Surface Temperature (OISST), Version 2.1. [indicate subset used]. NOAA National Centers for Environmental Information. https://doi.org/10.25921/RE9P-PT57. Accessed [date].",
   "title": "Sea Surface Temperature - Optimum Interpolation CDR",
   "extent": {
     "spatial": {
@@ -45,7 +127,13 @@
     }
   },
   "license": "proprietary",
-  "keywords": [],
+  "keywords": [
+    "Global",
+    "Climate",
+    "NOAA",
+    "Temperature",
+    "Ocean"
+  ],
   "providers": [
     {
       "name": "National Centers for Environmental Information",
