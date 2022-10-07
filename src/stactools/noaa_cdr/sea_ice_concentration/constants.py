@@ -15,6 +15,7 @@ from pystac import (
 
 from ..constants import COMMON_KEYWORDS
 
+ID = "noaa-cdr-sea-ice-concentration"
 TITLE = "Sea Ice Concentration CDR"
 DESCRIPTION = (
     "The Sea Ice Concentration Climate Data "
@@ -74,7 +75,7 @@ LICENSE_LINK = Link(
         "Sea_Ice_Concentration/UseAgreement_01B-11.pdf"
     ),
     MediaType.PDF,
-    "NOAA CDR Sea Ice Concentration Use Agreemen",
+    "NOAA CDR Sea Ice Concentration Use Agreement",
 )
 KEYWORDS = COMMON_KEYWORDS + ["Sea ice", "Polar"]
 KEYWORDS.remove("Global")
