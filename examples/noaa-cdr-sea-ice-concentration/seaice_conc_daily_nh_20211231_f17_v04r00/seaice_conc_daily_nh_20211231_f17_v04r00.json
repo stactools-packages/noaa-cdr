@@ -83,6 +83,7 @@
     "cdr_seaice_conc": {
       "href": "./seaice_conc_daily_nh_20211231_f17_v04r00-cdr_seaice_conc.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "NOAA/NSIDC Climate Data Record of Passive Microwave Daily Northern Hemisphere Sea Ice Concentration",
       "raster:bands": [
         {
           "nodata": 255,
@@ -119,6 +120,7 @@
     "melt_onset_day_cdr_seaice_conc": {
       "href": "./seaice_conc_daily_nh_20211231_f17_v04r00-melt_onset_day_cdr_seaice_conc.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Day of Snow Melt Onset Over Sea Ice",
       "raster:bands": [
         {
           "nodata": 255,
@@ -132,6 +134,7 @@
     "nsidc_bt_seaice_conc": {
       "href": "./seaice_conc_daily_nh_20211231_f17_v04r00-nsidc_bt_seaice_conc.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Passive Microwave Daily Northern Hemisphere Sea Ice Concentration by Bootstrap algorithm processed by NSIDC",
       "raster:bands": [
         {
           "nodata": 255,
@@ -168,6 +171,7 @@
     "nsidc_nt_seaice_conc": {
       "href": "./seaice_conc_daily_nh_20211231_f17_v04r00-nsidc_nt_seaice_conc.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Passive Microwave Daily Northern Hemisphere Sea Ice Concentration by NASA Team algorithm processed by NSIDC",
       "raster:bands": [
         {
           "nodata": 255,
@@ -182,6 +186,7 @@
     "qa_of_cdr_seaice_conc": {
       "href": "./seaice_conc_daily_nh_20211231_f17_v04r00-qa_of_cdr_seaice_conc.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Passive Microwave Daily Northern Hemisphere Sea Ice Concentration QC flags",
       "raster:bands": [
         {
           "nodata": 0,
@@ -317,6 +322,7 @@
     "spatial_interpolation_flag": {
       "href": "./seaice_conc_daily_nh_20211231_f17_v04r00-spatial_interpolation_flag.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Passive Microwave Daily Northern Hemisphere Sea Ice Concentration spatial interpolation flags",
       "raster:bands": [
         {
           "nodata": 0,
@@ -422,6 +428,7 @@
     "stdev_of_cdr_seaice_conc": {
       "href": "./seaice_conc_daily_nh_20211231_f17_v04r00-stdev_of_cdr_seaice_conc.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Passive Microwave Daily Northern Hemisphere Sea Ice Concentration Source Estimated Standard Deviation",
       "raster:bands": [
         {
           "nodata": "nan",
@@ -457,6 +464,7 @@
     "temporal_interpolation_flag": {
       "href": "./seaice_conc_daily_nh_20211231_f17_v04r00-temporal_interpolation_flag.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Passive Microwave Daily Northern Hemisphere Sea Ice Concentration temporal interpolation flags",
       "raster:bands": [
         {
           "nodata": 0,

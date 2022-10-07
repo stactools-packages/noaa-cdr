@@ -82,6 +82,7 @@
     "sea_surface_temperature": {
       "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-2-sea_surface_temperature.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "NOAA CDR of sea surface temperature",
       "raster:bands": [
         {
           "nodata": "nan",
@@ -96,6 +97,7 @@
     "fill_missing_qc": {
       "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-2-fill_missing_qc.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Quality flag for missing data",
       "raster:bands": [
         {
           "nodata": "nan",

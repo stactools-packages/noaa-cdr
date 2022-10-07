@@ -83,6 +83,7 @@
     "sst": {
       "href": "./oisst-avhrr-v02r01.20220913-sst.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Daily sea surface temperature",
       "raster:bands": [
         {
           "nodata": -999,
@@ -98,6 +99,7 @@
     "anom": {
       "href": "./oisst-avhrr-v02r01.20220913-anom.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Daily sea surface temperature anomalies",
       "raster:bands": [
         {
           "nodata": -999,
@@ -113,6 +115,7 @@
     "err": {
       "href": "./oisst-avhrr-v02r01.20220913-err.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Estimated error standard deviation of analysed_sst",
       "raster:bands": [
         {
           "nodata": -999,
@@ -128,6 +131,7 @@
     "ice": {
       "href": "./oisst-avhrr-v02r01.20220913-ice.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Sea ice concentration",
       "raster:bands": [
         {
           "nodata": -999,
