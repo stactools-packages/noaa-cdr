@@ -1,8 +1,6 @@
 {
   "netcdf": {
     "type": "application/netcdf",
-    "title": "NOAA/NCEI 1/4 Degree Daily Optimum Interpolation Sea Surface Temperature (OISST) Analysis, Version 2.1 - Final NetCDF",
-    "description": "NOAAs 1/4-degree Daily Optimum Interpolation Sea Surface Temperature (OISST) (sometimes referred to as Reynolds SST, which however also refers to earlier products at different resolution), currently available as version v02r01, is created by interpolating and extrapolating SST observations from different sources, resulting in a smoothed complete field. The sources of data are satellite (AVHRR) and in situ platforms (i.e., ships and buoys), and the specific datasets employed may change over time. At the marginal ice zone, sea ice concentrations are used to generate proxy SSTs.  A preliminary version of this file is produced in near-real time (1-day latency), and then replaced with a final version after 2 weeks. Note that this is the AVHRR-ONLY DOISST, available from Oct 1981, but there is a companion DOISST product that includes microwave satellite data, available from June 2002",
     "updated": "2022-09-28T09:14:00Z",
     "roles": [
       "data"
@@ -10,7 +8,6 @@
   },
   "sst": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-    "title": "Daily sea surface temperature",
     "raster:bands": [
       {
         "nodata": -999,
@@ -25,7 +22,6 @@
   },
   "anom": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-    "title": "Daily sea surface temperature anomalies",
     "raster:bands": [
       {
         "nodata": -999,
@@ -40,7 +36,6 @@
   },
   "err": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-    "title": "Estimated error standard deviation of analysed_sst",
     "raster:bands": [
       {
         "nodata": -999,
@@ -55,7 +50,6 @@
   },
   "ice": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-    "title": "Sea ice concentration",
     "raster:bands": [
       {
         "nodata": -999,
