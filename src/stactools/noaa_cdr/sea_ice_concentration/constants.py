@@ -89,3 +89,4 @@ HOMEPAGE_LINK = Link(
     media_type=MediaType.HTML,
     title="Sea Ice Concentration CDR",
 )
+SPATIAL_RESOLUTION = 25000.0

@@ -62,6 +62,8 @@ def test_cogify(tmp_path: Path) -> None:
     path = test_data.get_path("data-files/seaice_conc_daily_nh_20211231_f17_v04r00.nc")
     assets = cog.cogify(path, str(tmp_path))
     assert len(assets) == 8
+    for asset in assets.values():
+        assert asset.extra_fields["raster:bands"][0]["spatial_resolution"]
     for key in [
         "cdr_seaice_conc",
         "nsidc_bt_seaice_conc",

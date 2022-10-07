@@ -4,6 +4,7 @@ from pystac import Asset
 
 from .. import cog
 from ..profile import BandProfile
+from .constants import SPATIAL_RESOLUTION
 
 KEYS_WITH_CLASSES = [
     "cdr_seaice_conc",
@@ -20,6 +21,7 @@ def cogify(href: str, directory: str) -> Dict[str, Asset]:
 
 class SeaIceConcentrationBandProfile(BandProfile):
     def update_cog_asset(self, key: str, asset: Asset) -> Asset:
+        asset.extra_fields["raster:bands"][0]["spatial_resolution"] = SPATIAL_RESOLUTION
         if key in KEYS_WITH_CLASSES:
             asset.extra_fields["classification:classes"] = self.classes()
         elif key in KEYS_WITH_BITFIELDS:
