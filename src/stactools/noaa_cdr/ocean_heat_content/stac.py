@@ -81,7 +81,7 @@ def create_collection(
                 title=ASSET_METADATA[key]["title"],
                 description=ASSET_METADATA[key]["description"],
                 media_type="application/netcdf",
-                roles=["data"],
+                roles=["data", "source"],
             ),
         )
     scientific = ScientificExtension.ext(collection, add_if_missing=True)

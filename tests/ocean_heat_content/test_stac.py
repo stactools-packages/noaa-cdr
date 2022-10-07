@@ -21,7 +21,8 @@ def test_create_collection() -> None:
         assert asset.title is not None
         assert asset.description is not None
         assert asset.media_type == "application/netcdf"
-        assert asset.roles == ["data"]
+        assert asset.roles
+        assert set(asset.roles) == {"data", "source"}
 
     scientific = ScientificExtension.ext(collection)
     assert scientific.doi == "10.7289/v53f4mvp"
