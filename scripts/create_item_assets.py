@@ -41,6 +41,10 @@ def write_item_assets(item: Item, path: Path) -> None:
     for key, asset in item.assets.items():
         asset_dict = asset.to_dict()
         del asset_dict["href"]
+        if "title" in asset_dict:
+            del asset_dict["title"]
+        if "description" in asset_dict:
+            del asset_dict["description"]
         if "created" in asset_dict:
             del asset_dict["created"]
         item_assets[key] = asset_dict

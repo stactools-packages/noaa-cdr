@@ -1,15 +1,12 @@
 {
   "netcdf": {
     "type": "application/netcdf",
-    "title": "NOAA/NSIDC Climate Data Record of Passive Microwave Sea Ice Concentration Version 4 NetCDF",
-    "description": "This data set provides a passive microwave sea ice concentration climate data record (CDR) based on gridded brightness temperatures (TBs) from the Defense Meteorological Satellite Program (DMSP) series of passive microwave radiometers: the Nimbus-7 Scanning Multichannel Microwave Radiometer (SMMR), the Special Sensor Microwave Imager (SSM/I) and the Special Sensor Microwave Imager/Sounder (SSMIS). The sea ice concentration CDR is an estimate of sea ice concentration that is produced by combining concentration estimates from two algorithms developed at the NASA Goddard Space Flight Center (GSFC): the NASA Team algorithm and the Bootstrap algorithm. The individual algorithms are used to process and combine brightness temperatures at NSIDC. This product is designed to provide a consistent time series of sea ice concentrations (the fraction, or percentage, of ocean area covered by sea ice) from November 1978 to the present which spans the coverage of several passive microwave instruments. The data are gridded on the NSIDC polar stereographic grid with 25 x 25 km grid cells, and are available in NetCDF file format. Each file contains a variable with the CDR concentration values as well as variables that hold the NASA Team and Bootstrap processed concentrations for reference. Variables containing standard deviation, quality flags, and projection information are also included. Data are available via FTP.",
     "roles": [
       "data"
     ]
   },
   "cdr_seaice_conc": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-    "title": "NOAA/NSIDC Climate Data Record of Passive Microwave Daily Southern Hemisphere Sea Ice Concentration",
     "raster:bands": [
       {
         "nodata": 255,
@@ -45,7 +42,6 @@
   },
   "nsidc_bt_seaice_conc": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-    "title": "Passive Microwave Daily Southern Hemisphere Sea Ice Concentration by Bootstrap algorithm processed by NSIDC",
     "raster:bands": [
       {
         "nodata": 255,
@@ -81,7 +77,6 @@
   },
   "nsidc_nt_seaice_conc": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-    "title": "Passive Microwave Daily Southern Hemisphere Sea Ice Concentration by NASA Team algorithm processed by NSIDC",
     "raster:bands": [
       {
         "nodata": 255,
@@ -95,7 +90,6 @@
   },
   "qa_of_cdr_seaice_conc": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-    "title": "Passive Microwave Daily Southern Hemisphere Sea Ice Concentration QC flags",
     "raster:bands": [
       {
         "nodata": 0,
@@ -230,7 +224,6 @@
   },
   "spatial_interpolation_flag": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-    "title": "Passive Microwave Daily Southern Hemisphere Sea Ice Concentration spatial interpolation flags",
     "raster:bands": [
       {
         "nodata": 0,
@@ -335,7 +328,6 @@
   },
   "stdev_of_cdr_seaice_conc": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-    "title": "Passive Microwave Daily Southern Hemisphere Sea Ice Concentration Source Estimated Standard Deviation",
     "raster:bands": [
       {
         "nodata": "nan",
@@ -370,7 +362,6 @@
   },
   "temporal_interpolation_flag": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-    "title": "Passive Microwave Daily Southern Hemisphere Sea Ice Concentration temporal interpolation flags",
     "raster:bands": [
       {
         "nodata": 0,

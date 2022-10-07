@@ -74,15 +74,12 @@
   "item_assets": {
     "netcdf": {
       "type": "application/netcdf",
-      "title": "NOAA Climate Data Record of Sea Surface Temperature - WHOI NetCDF",
-      "description": "SeaFlux Ocean Surface Bundle (OSB) Climate Data Record (CDR) of Sea Surface Temperature",
       "roles": [
         "data"
       ]
     },
     "sea_surface_temperature": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "NOAA CDR of sea surface temperature",
       "raster:bands": [
         {
           "nodata": "nan",
@@ -96,7 +93,6 @@
     },
     "fill_missing_qc": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Quality flag for missing data",
       "raster:bands": [
         {
           "nodata": "nan",
