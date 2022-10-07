@@ -19,9 +19,15 @@
 ## STAC Examples
 
 - Collections
-  - [Ocean heat content](examples/ocean-heat-content/collection.json)
+  - [Ocean heat content](examples/noaa-cdr-ocean-heat-content/collection.json)
+  - [Sea ice concentration](examples/noaa-cdr-sea-ice-concentration/collection.json)
+  - [Sea surface temperature - optimum interpolation](examples/noaa-cdr-sea-surface-temperature-optimum-interpolation/collection.json)
+  - [Sea surface temperature - WHOI](examples/noaa-cdr-sea-surface-temperature-whoi/collection.json)
 - Items
-  - [Ocean heat content, yearly for 2021, 2000m depth](examples/ocean-heat-content/ocean-heat-content-2021-2000m/ocean-heat-content-2021-2000m.json)
+  - [Ocean heat content, yearly for 2021, 2000m depth](examples/noaa-cdr-ocean-heat-content/ocean-heat-content-2021-2000m/ocean-heat-content-2021-2000m.json)
+  - [Sea ice concentration, daily, northern hemisphere](examples/noaa-cdr-sea-ice-concentration/seaice_conc_daily_nh_20211231_f17_v04r00/seaice_conc_daily_nh_20211231_f17_v04r00.json)
+  - [Sea surface temperature - optimum interpolation](examples/noaa-cdr-sea-surface-temperature-optimum-interpolation/oisst-avhrr-v02r01.20220913/oisst-avhrr-v02r01.20220913.json)
+  - [Sea surface temperature - WHOI](examples/noaa-cdr-sea-surface-temperature-whoi/SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-0/SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-0.json)
 
 ### Layout
 
@@ -83,4 +89,21 @@ To run the tests:
 
 ```shell
 pytest
+```
+
+### Updating static resources
+
+There are several .json files in the source tree that are used to populate
+metadata when creating collections and items.
+There are two helper scripts in the `scripts/` directory that update these files.
+
+```sh
+scripts/create_item_assets.py
+scripts/extract_netcdf_asset_metadata.py
+```
+
+Additionally, there is a script to create the `examples/` directory:
+
+```sh
+scripts/create_examples.py
 ```
