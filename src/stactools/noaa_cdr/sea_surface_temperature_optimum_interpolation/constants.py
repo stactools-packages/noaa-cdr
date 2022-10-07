@@ -1,9 +1,11 @@
 import datetime
+import importlib.resources
 
+import orjson
 from dateutil.tz import tzutc
-from pystac import Extent, TemporalExtent
+from pystac import Extent, Link, MediaType, TemporalExtent
 
-from ..constants import GLOBAL_SPATIAL_EXTENT
+from ..constants import COMMON_KEYWORDS, GLOBAL_SPATIAL_EXTENT
 
 ID = "noaa-cdr-sea-surface-temperature-optimum-interpolation"
 TITLE = "Sea Surface Temperature - Optimum Interpolation CDR"
@@ -26,3 +28,29 @@ EXTENT = Extent(
     spatial=GLOBAL_SPATIAL_EXTENT,
     temporal=TemporalExtent([[datetime.datetime(1981, 9, 1, tzinfo=tzutc()), None]]),
 )
+CITATION = (
+    "Huang, Boyin; Liu, Chunying; Banzon, Viva F.; Freeman, Eric; Graham, "
+    "Garrett; Hankins, Bill; Smith, Thomas M.; Zhang, Huai-Min. (2020): NOAA "
+    "0.25-degree Daily Optimum Interpolation Sea Surface Temperature (OISST), Version "
+    "2.1. [indicate subset used]. NOAA National Centers for Environmental "
+    "Information. https://doi.org/10.25921/RE9P-PT57. Accessed [date]."
+)
+DOI = "10.25921/RE9P-PT57"
+LICENSE_LINK = Link(
+    "license",
+    (
+        "https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/"
+        "Sea_Surface_Temperature_Optimum_Interpolation/UseAgreement_01B-09.pdf"
+    ),
+    MediaType.PDF,
+    "NOAA CDR Sea Surface Temperature - Optimum Interpolation Use Agreement",
+)
+
+ITEM_ASSETS = orjson.loads(
+    importlib.resources.read_text(
+        "stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation",
+        "item-assets.json",
+    )
+)
+
+KEYWORDS = COMMON_KEYWORDS + ["Temperature", "Ocean"]

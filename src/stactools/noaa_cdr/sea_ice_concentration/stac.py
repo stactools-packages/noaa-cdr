@@ -16,6 +16,7 @@ from .constants import (
     DESCRIPTION,
     DOI,
     EXTENT,
+    ID,
     ITEM_ASSETS,
     KEYWORDS,
     LICENSE_LINK,
@@ -41,7 +42,7 @@ def add_cogs(item: Item, directory: str) -> Item:
 
 def create_collection() -> Collection:
     collection = Collection(
-        id="noaa-cdr-sea-ice-concentration",
+        id=ID,
         description=DESCRIPTION,
         extent=EXTENT,
         title=TITLE,
