@@ -32,8 +32,8 @@ CITATION = (
     "Huang, Boyin; Liu, Chunying; Banzon, Viva F.; Freeman, Eric; Graham, "
     "Garrett; Hankins, Bill; Smith, Thomas M.; Zhang, Huai-Min. (2020): NOAA "
     "0.25-degree Daily Optimum Interpolation Sea Surface Temperature (OISST), Version "
-    "2.1. [indicate subset used]. NOAA National Centers for Environmental "
-    "Information. https://doi.org/10.25921/RE9P-PT57. Accessed [date]."
+    "2.1. NOAA National Centers for Environmental "
+    "Information. https://doi.org/10.25921/RE9P-PT57."
 )
 DOI = "10.25921/RE9P-PT57"
 LICENSE_LINK = Link(

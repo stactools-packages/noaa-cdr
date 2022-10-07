@@ -50,9 +50,9 @@ CITATION = (
     "NCEI ocean heat content, temperature anomalies, salinity anomalies, thermosteric "
     "sea level anomalies, halosteric sea level anomalies, and total steric sea level "
     "anomalies from 1955 to present calculated from in situ oceanographic subsurface "
-    "profile data (NCEI Accession 0164586). [indicate subset used]. "
+    "profile data (NCEI Accession 0164586)."
     "NOAA National Centers for Environmental Information. Dataset. "
-    "https://doi.org/10.7289/v53f4mvp. Accessed [date]."
+    "https://doi.org/10.7289/v53f4mvp."
 )
 TRANSFORM = Affine(1.0, 0.0, -180.0, 0.0, -1.0, 90.0)
 EPSG = 4326
