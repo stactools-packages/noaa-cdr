@@ -1,7 +1,19 @@
 import datetime
+import importlib.resources
 
+import orjson
 from dateutil.tz import tzutc
-from pystac import Extent, SpatialExtent, TemporalExtent
+from pystac import (
+    Extent,
+    Link,
+    MediaType,
+    Provider,
+    ProviderRole,
+    SpatialExtent,
+    TemporalExtent,
+)
+
+from ..constants import COMMON_KEYWORDS
 
 TITLE = "Sea Ice Concentration CDR"
 DESCRIPTION = (
@@ -33,4 +45,41 @@ CITATION = (
     "[Indicate subset used]. Boulder, Colorado USA. NSIDC: National "
     "Snow and Ice Data Center https://doi.org/10.7265/efmz-2t65. "
     "[Date Accessed]."
+)
+PROVIDERS = [
+    Provider(
+        "National Snow and Ice Data Center",
+        (
+            "The National Snow and Ice Data Center (NSIDC) at the "
+            "University of Colorado Boulder (CU Boulder), part "
+            "of the CU Boulder Cooperative Institute for Research "
+            "in Environmental Sciences (CIRES), conducts "
+            "innovative research and provides open data to "
+            "understand how the frozen parts of Earth affect the "
+            "rest of the planet and impact society."
+        ),
+        [
+            ProviderRole.PRODUCER,
+            ProviderRole.PROCESSOR,
+            ProviderRole.LICENSOR,
+            ProviderRole.HOST,
+        ],
+        "https://nsidc.org/data/g02202/versions/4",
+    )
+]
+LICENSE_LINK = Link(
+    "license",
+    (
+        "https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/"
+        "Sea_Ice_Concentration/UseAgreement_01B-11.pdf"
+    ),
+    MediaType.PDF,
+    "NOAA CDR Sea Ice Concentration Use Agreemen",
+)
+KEYWORDS = COMMON_KEYWORDS + ["Sea ice", "Polar"]
+KEYWORDS.remove("Global")
+ITEM_ASSETS = orjson.loads(
+    importlib.resources.read_text(
+        "stactools.noaa_cdr.sea_ice_concentration", "item-assets.json"
+    )
 )

@@ -1,6 +1,7 @@
 import os.path
 
-from pystac import Collection, Item, Link, MediaType, Provider, ProviderRole
+from pystac import Collection, Item
+from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
 from pystac.extensions.scientific import ScientificExtension
 
 from .. import stac
@@ -10,7 +11,17 @@ from ..constants import (
     NETCDF_ASSET_KEY,
 )
 from . import cog
-from .constants import CITATION, DESCRIPTION, DOI, EXTENT, TITLE
+from .constants import (
+    CITATION,
+    DESCRIPTION,
+    DOI,
+    EXTENT,
+    ITEM_ASSETS,
+    KEYWORDS,
+    LICENSE_LINK,
+    PROVIDERS,
+    TITLE,
+)
 
 
 def create_item(href: str) -> Item:
@@ -35,39 +46,15 @@ def create_collection() -> Collection:
         extent=EXTENT,
         title=TITLE,
         catalog_type=DEFAULT_CATALOG_TYPE,
-        providers=[
-            Provider(
-                "National Snow and Ice Data Center",
-                (
-                    "The National Snow and Ice Data Center (NSIDC) at the "
-                    "University of Colorado Boulder (CU Boulder), part "
-                    "of the CU Boulder Cooperative Institute for Research "
-                    "in Environmental Sciences (CIRES), conducts "
-                    "innovative research and provides open data to "
-                    "understand how the frozen parts of Earth affect the "
-                    "rest of the planet and impact society."
-                ),
-                [
-                    ProviderRole.PRODUCER,
-                    ProviderRole.PROCESSOR,
-                    ProviderRole.LICENSOR,
-                    ProviderRole.HOST,
-                ],
-                "https://nsidc.org/data/g02202/versions/4",
-            )
-        ],
+        providers=PROVIDERS,
+        keywords=KEYWORDS,
     )
 
-    collection.links.append(
-        Link(
-            "license",
-            (
-                "https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/"
-                "Sea_Ice_Concentration/UseAgreement_01B-11.pdf"
-            ),
-            MediaType.PDF,
-            "NOAA CDR Sea Ice Concentration Use Agreemen",
-        )
+    collection.links.append(LICENSE_LINK)
+
+    item_assets = ItemAssetsExtension.ext(collection, add_if_missing=True)
+    item_assets.item_assets = dict(
+        (k, AssetDefinition(v)) for (k, v) in ITEM_ASSETS.items()
     )
 
     scientific = ScientificExtension.ext(collection, add_if_missing=True)
