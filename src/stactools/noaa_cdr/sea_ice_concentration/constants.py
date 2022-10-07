@@ -45,7 +45,6 @@ CITATION = (
     "Passive Microwave Sea Ice Concentration, Version 4. "
     "[Indicate subset used]. Boulder, Colorado USA. NSIDC: National "
     "Snow and Ice Data Center https://doi.org/10.7265/efmz-2t65. "
-    "[Date Accessed]."
 )
 PROVIDERS = [
     Provider(

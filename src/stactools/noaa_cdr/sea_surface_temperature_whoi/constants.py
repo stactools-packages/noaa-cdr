@@ -29,8 +29,8 @@ DOI = "10.7289/V5FB510W"
 CITATION = (
     "Clayson, Carol Anne; Brown, Jeremiah; and NOAA CDR "
     "Program (2016). NOAA Climate Data Record (CDR) of Sea Surface "
-    "Temperature - WHOI, Version 2. [indicate subset used]. NOAA "
-    "National Climatic Data Center. doi:10.7289/V5FB510W [access date]."
+    "Temperature - WHOI, Version 2. NOAA "
+    "National Climatic Data Center. doi:10.7289/V5FB510W"
 )
 
 LICENSE_LINK = Link(
