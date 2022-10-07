@@ -20,7 +20,7 @@
       -25000.0,
       5850000.0
     ],
-    "datetime": "2021-12-31T00:00:00Z"
+    "datetime": null
   },
   "geometry": {
     "type": "Polygon",

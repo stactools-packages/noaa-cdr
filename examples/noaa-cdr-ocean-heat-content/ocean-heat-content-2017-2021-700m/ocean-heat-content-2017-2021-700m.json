@@ -18,7 +18,7 @@
       -1.0,
       90.0
     ],
-    "datetime": "2019-07-01T00:00:00Z"
+    "datetime": null
   },
   "geometry": {
     "type": "Polygon",
