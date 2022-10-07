@@ -26,6 +26,7 @@ from .constants import (
     EPSG,
     EXTENT,
     ID,
+    KEYWORDS,
     LICENSE_LINK,
     TITLE,
     TRANSFORM,
@@ -66,6 +67,7 @@ def create_collection(
         providers=PROVIDERS,
         extent=EXTENT,
         catalog_type=catalog_type,
+        keywords=KEYWORDS,
     )
     collection.add_link(LICENSE_LINK)
     for href in iter_noaa_hrefs():

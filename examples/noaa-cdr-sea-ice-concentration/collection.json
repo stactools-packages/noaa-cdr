@@ -11,6 +11,12 @@
       "title": "Climate Data Records"
     },
     {
+      "rel": "license",
+      "href": "https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/Sea_Ice_Concentration/UseAgreement_01B-11.pdf",
+      "type": "application/pdf",
+      "title": "NOAA CDR Sea Ice Concentration Use Agreemen"
+    },
+    {
       "rel": "cite-as",
       "href": "https://doi.org/10.7265/efmz-2t65"
     },
@@ -64,5 +70,18 @@
       ]
     }
   },
-  "license": "proprietary"
+  "license": "proprietary",
+  "providers": [
+    {
+      "name": "National Snow and Ice Data Center",
+      "description": "The National Snow and Ice Data Center (NSIDC) at the University of Colorado Boulder (CU Boulder), part of the CU Boulder Cooperative Institute for Research in Environmental Sciences (CIRES), conducts innovative research and provides open data to understand how the frozen parts of Earth affect the rest of the planet and impact society.",
+      "roles": [
+        "producer",
+        "processor",
+        "licensor",
+        "host"
+      ],
+      "url": "https://nsidc.org/data/g02202/versions/4"
+    }
+  ]
 }

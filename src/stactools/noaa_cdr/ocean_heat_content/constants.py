@@ -7,7 +7,7 @@ from dateutil.tz import tzutc
 from pystac import Extent, Link, MediaType, TemporalExtent
 from rasterio import Affine
 
-from ..constants import GLOBAL_SPATIAL_EXTENT
+from ..constants import COMMON_KEYWORDS, GLOBAL_SPATIAL_EXTENT
 
 ID = "noaa-cdr-ocean-heat-content"
 TITLE = "Global Ocean Heat Content CDR"
@@ -51,3 +51,4 @@ CITATION = (
 TRANSFORM = Affine(1.0, 0.0, -180.0, 0.0, -1.0, 90.0)
 EPSG = 4326
 CRS = pyproj.CRS(f"EPSG:{EPSG}")
+KEYWORDS = COMMON_KEYWORDS + ["Water", "Temperature", "Ocean"]
