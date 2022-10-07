@@ -30,3 +30,4 @@ CLASSIFICATION_EXTENSION_SCHEMA = (
     "https://stac-extensions.github.io/classification/v1.1.0/schema.json"
 )
 NETCDF_ASSET_KEY = "netcdf"
+COMMON_KEYWORDS = ["Global", "Climate", "NOAA"]

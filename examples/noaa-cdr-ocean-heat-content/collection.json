@@ -195,6 +195,14 @@
     }
   },
   "license": "proprietary",
+  "keywords": [
+    "Global",
+    "Climate",
+    "NOAA",
+    "Water",
+    "Temperature",
+    "Ocean"
+  ],
   "providers": [
     {
       "name": "National Centers for Environmental Information",

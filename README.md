@@ -12,6 +12,7 @@
   - [proj](https://github.com/stac-extensions/projection)
   - [raster](https://github.com/stac-extensions/raster)
   - [scientific](https://github.com/stac-extensions/scientific)
+  - [classification](https://github.com/stac-extensions/classification)
 - Extra fields: None
 - [Browse the example in human-readable form](https://radiantearth.github.io/stac-browser/#/external/raw.githubusercontent.com/stactools-packages/noaa-cdr/main/examples/catalog.json)
 
@@ -27,22 +28,7 @@
 Each Climate Data Record can have multiple subdatasets, which themselves can be
 organized by time intervals and other attributes. We have chosen to create one
 STAC collection for each CDR, and to organize items in that collection by time
-interval and time window. Subdatasets are included as COG assets. Not all time
-intervals, time windows, and other attributes are represented in each
-subdataset, so any given item may only have a subset of available subdatasets.
-Tables of the time windows and other attributes for each supported CDR are
-included below.
-
-#### Ocean heat content
-
-| Subdataset | Depths | Time intervals |
-| -- | -- | -- |
-| heat-content | 0-700, 0-2000 | monthly, seasonal, yearly, pentadal |
-| mean-halosteric-sea-level | 0-700, 0-2000 | seasonal, yearly, pentadal |
-| mean-salinity | 0-100, 0-700, 0-2000 | seasonal, yearly, pentadal |
-| mean-temperature | 0-100, 0-700, 0-2000 | seasonal, yearly, pentadal |
-| mean-thermosteric-sea-level | 0-700, 0-2000 | seasonal, yearly, pentadal |
-| mean-total-steric-sea-level | 0-700, 0-2000 | seasonal, yearly, pentadal |
+interval and time window. Subdatasets are included as COG assets.
 
 ## Installation
 
@@ -55,24 +41,26 @@ pip install stactools-noaa-cdr
 To create a collection, e.g. for the [Ocean heat content CDR](https://www.ncei.noaa.gov/products/climate-data-records/global-ocean-heat-content):
 
 ```sh
-stac noaa-cdr create-collection \
-  ocean-heat-content examples/ocean-heat-content/collection.json
+stac noaa-cdr ocean-heat-content create-collection examples/ocean-heat-content/collection.json
 ```
 
 To create COGs and items:
 
 ```sh
-stac noaa-cdr create-collection --create-items \
-  ocean-heat-content examples/ocean-heat-content/collection.json
+stac noaa-cdr ocean-heat-content create-collection --create-items \
+  examples/ocean-heat-content/collection.json
 ```
 
 To only create COGs and items for the latest data (e.g. to create a small
 example collection):
 
 ```sh
-stac noaa-cdr create-collection --create-items --latest-only \
-  ocean-heat-content examples/ocean-heat-content/collection.json
+stac noaa-cdr ocean-heat-content create-collection --create-items --latest-only \
+  examples/ocean-heat-content/collection.json
 ```
+
+Each CDR has its own flavor of command line interface; use `stac noaa-cdr
+--help` to see a list of supported CDRs.
 
 ## Contributing
 
