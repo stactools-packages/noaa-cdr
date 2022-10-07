@@ -108,6 +108,7 @@ class BandProfile:
     scale: Optional[float]
     offset: Optional[float]
     attrs: Dict[Hashable, Any]
+    title: str
     dataset_profile: DatasetProfile
 
     @classmethod
@@ -146,6 +147,7 @@ class BandProfile:
                 unit = None
         else:
             unit = None
+        title = data_array.long_name
         return cls(
             height=data_array.shape[0],
             width=data_array.shape[1],
@@ -155,6 +157,7 @@ class BandProfile:
             offset=offset,
             unit=unit,
             attrs=data_array.attrs,
+            title=title,
             dataset_profile=dataset_profile,
         )
 
