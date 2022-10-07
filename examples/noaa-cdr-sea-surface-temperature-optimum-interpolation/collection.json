@@ -48,6 +48,7 @@
     },
     "sst": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Daily sea surface temperature",
       "raster:bands": [
         {
           "nodata": -999,
@@ -62,6 +63,7 @@
     },
     "anom": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Daily sea surface temperature anomalies",
       "raster:bands": [
         {
           "nodata": -999,
@@ -76,6 +78,7 @@
     },
     "err": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Estimated error standard deviation of analysed_sst",
       "raster:bands": [
         {
           "nodata": -999,
@@ -90,6 +93,7 @@
     },
     "ice": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Sea ice concentration",
       "raster:bands": [
         {
           "nodata": -999,

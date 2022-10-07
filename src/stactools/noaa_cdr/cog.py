@@ -51,6 +51,8 @@ def write(
         with memory_file.open(**profile.gtiff()) as open_memory_file:
             open_memory_file.write(values, 1)
             rasterio.shutil.copy(open_memory_file, path, **profile.cog())
-    asset = Asset(href=path, media_type=MediaType.COG, roles=["data"])
+    asset = Asset(
+        title=profile.title, href=path, media_type=MediaType.COG, roles=["data"]
+    )
     asset.extra_fields["raster:bands"] = [profile.raster_band().to_dict()]
     return asset

@@ -47,6 +47,7 @@
     },
     "cdr_seaice_conc": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "NOAA/NSIDC Climate Data Record of Passive Microwave Daily Southern Hemisphere Sea Ice Concentration",
       "raster:bands": [
         {
           "nodata": 255,
@@ -82,6 +83,7 @@
     },
     "nsidc_bt_seaice_conc": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Passive Microwave Daily Southern Hemisphere Sea Ice Concentration by Bootstrap algorithm processed by NSIDC",
       "raster:bands": [
         {
           "nodata": 255,
@@ -117,6 +119,7 @@
     },
     "nsidc_nt_seaice_conc": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Passive Microwave Daily Southern Hemisphere Sea Ice Concentration by NASA Team algorithm processed by NSIDC",
       "raster:bands": [
         {
           "nodata": 255,
@@ -130,6 +133,7 @@
     },
     "qa_of_cdr_seaice_conc": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Passive Microwave Daily Southern Hemisphere Sea Ice Concentration QC flags",
       "raster:bands": [
         {
           "nodata": 0,
@@ -264,6 +268,7 @@
     },
     "spatial_interpolation_flag": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Passive Microwave Daily Southern Hemisphere Sea Ice Concentration spatial interpolation flags",
       "raster:bands": [
         {
           "nodata": 0,
@@ -368,6 +373,7 @@
     },
     "stdev_of_cdr_seaice_conc": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Passive Microwave Daily Southern Hemisphere Sea Ice Concentration Source Estimated Standard Deviation",
       "raster:bands": [
         {
           "nodata": "nan",
@@ -402,6 +408,7 @@
     },
     "temporal_interpolation_flag": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Passive Microwave Daily Southern Hemisphere Sea Ice Concentration temporal interpolation flags",
       "raster:bands": [
         {
           "nodata": 0,

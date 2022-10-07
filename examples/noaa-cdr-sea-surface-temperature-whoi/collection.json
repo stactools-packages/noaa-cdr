@@ -82,6 +82,7 @@
     },
     "sea_surface_temperature": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "NOAA CDR of sea surface temperature",
       "raster:bands": [
         {
           "nodata": "nan",
@@ -95,6 +96,7 @@
     },
     "fill_missing_qc": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Quality flag for missing data",
       "raster:bands": [
         {
           "nodata": "nan",
