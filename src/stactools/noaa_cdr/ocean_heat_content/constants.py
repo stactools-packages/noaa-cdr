@@ -51,4 +51,4 @@ CITATION = (
 TRANSFORM = Affine(1.0, 0.0, -180.0, 0.0, -1.0, 90.0)
 EPSG = 4326
 CRS = pyproj.CRS(f"EPSG:{EPSG}")
-KEYWORDS = COMMON_KEYWORDS + ["Water", "Temperature", "Ocean"]
+KEYWORDS = COMMON_KEYWORDS + ["Temperature", "Ocean"]
