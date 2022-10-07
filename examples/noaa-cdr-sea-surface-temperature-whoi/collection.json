@@ -17,6 +17,12 @@
       "title": "NOAA CDR Sea Surface Temperature - WHOI Use Agreement"
     },
     {
+      "rel": "about",
+      "href": "https://www.ncei.noaa.gov/products/climate-data-records/sea-surface-temperature-whoi",
+      "type": "text/html",
+      "title": "Sea Surface Temperature - WHOI CDR"
+    },
+    {
       "rel": "cite-as",
       "href": "https://doi.org/10.7289/V5FB510W"
     },

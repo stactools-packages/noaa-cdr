@@ -31,6 +31,12 @@ LICENSE_LINK = Link(
     media_type=MediaType.PDF,
     title="NOAA CDR Ocean Heat Content Use Agreement",
 )
+HOMEPAGE_LINK = Link(
+    rel="about",
+    target="https://www.ncei.noaa.gov/products/climate-data-records/global-ocean-heat-content",
+    media_type=MediaType.HTML,
+    title="Global Ocean Heat Content CDR",
+)
 ASSET_METADATA = json.loads(
     importlib.resources.read_text(
         "stactools.noaa_cdr.ocean_heat_content", "asset-metadata.json"

@@ -51,3 +51,9 @@ ITEM_ASSETS = orjson.loads(
         "item-assets.json",
     )
 )
+HOMEPAGE_LINK = Link(
+    rel="about",
+    target="https://www.ncei.noaa.gov/products/climate-data-records/sea-surface-temperature-whoi",
+    media_type=MediaType.HTML,
+    title="Sea Surface Temperature - WHOI CDR",
+)

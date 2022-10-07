@@ -25,6 +25,7 @@ from .constants import (
     DOI,
     EPSG,
     EXTENT,
+    HOMEPAGE_LINK,
     ID,
     KEYWORDS,
     LICENSE_LINK,
@@ -70,6 +71,7 @@ def create_collection(
         keywords=KEYWORDS,
     )
     collection.add_link(LICENSE_LINK)
+    collection.add_link(HOMEPAGE_LINK)
     for href in iter_noaa_hrefs():
         key = os.path.splitext(os.path.basename(href))[0]
         collection.add_asset(

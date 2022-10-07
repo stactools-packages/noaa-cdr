@@ -17,6 +17,12 @@
       "title": "NOAA CDR Sea Surface Temperature - Optimum Interpolation Use Agreement"
     },
     {
+      "rel": "about",
+      "href": "https://www.ncei.noaa.gov/products/climate-data-records/sea-surface-temperature-optimum-interpolation",
+      "type": "text/html",
+      "title": "Sea Surface Temperature - Optimum Interpolation CDR"
+    },
+    {
       "rel": "cite-as",
       "href": "https://doi.org/10.25921/RE9P-PT57"
     },

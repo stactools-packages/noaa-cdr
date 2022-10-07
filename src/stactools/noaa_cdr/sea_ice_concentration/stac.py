@@ -16,6 +16,7 @@ from .constants import (
     DESCRIPTION,
     DOI,
     EXTENT,
+    HOMEPAGE_LINK,
     ID,
     ITEM_ASSETS,
     KEYWORDS,
@@ -51,7 +52,8 @@ def create_collection() -> Collection:
         keywords=KEYWORDS,
     )
 
-    collection.links.append(LICENSE_LINK)
+    collection.add_link(LICENSE_LINK)
+    collection.add_link(HOMEPAGE_LINK)
 
     item_assets = ItemAssetsExtension.ext(collection, add_if_missing=True)
     item_assets.item_assets = dict(

@@ -54,3 +54,12 @@ ITEM_ASSETS = orjson.loads(
 )
 
 KEYWORDS = COMMON_KEYWORDS + ["Temperature", "Ocean"]
+HOMEPAGE_LINK = Link(
+    rel="about",
+    target=(
+        "https://www.ncei.noaa.gov/products/climate-data-records"
+        "/sea-surface-temperature-optimum-interpolation"
+    ),
+    media_type=MediaType.HTML,
+    title="Sea Surface Temperature - Optimum Interpolation CDR",
+)

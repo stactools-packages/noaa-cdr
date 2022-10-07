@@ -84,3 +84,9 @@ ITEM_ASSETS = orjson.loads(
         "stactools.noaa_cdr.sea_ice_concentration", "item-assets.json"
     )
 )
+HOMEPAGE_LINK = Link(
+    rel="about",
+    target="https://www.ncei.noaa.gov/products/climate-data-records/sea-ice-concentration",
+    media_type=MediaType.HTML,
+    title="Sea Ice Concentration CDR",
+)

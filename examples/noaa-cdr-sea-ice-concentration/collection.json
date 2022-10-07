@@ -17,6 +17,12 @@
       "title": "NOAA CDR Sea Ice Concentration Use Agreement"
     },
     {
+      "rel": "about",
+      "href": "https://www.ncei.noaa.gov/products/climate-data-records/sea-ice-concentration",
+      "type": "text/html",
+      "title": "Sea Ice Concentration CDR"
+    },
+    {
       "rel": "cite-as",
       "href": "https://doi.org/10.7265/efmz-2t65"
     },
