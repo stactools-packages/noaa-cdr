@@ -93,7 +93,7 @@
     "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json"
   ],
   "sci:doi": "10.7289/v53f4mvp",
-  "sci:citation": "Levitus, Sydney; Antonov, John I.; Boyer, Tim P.; Baranova, Olga K.; García, Hernán E.; Locarnini, Ricardo A.; Mishonov, Alexey V.; Reagan, James R.; [Seidov, Dan; Yarosh, Evgeney; Zweng, Melissa M. (2017). NCEI ocean heat content, temperature anomalies, salinity anomalies, thermosteric sea level anomalies, halosteric sea level anomalies, and total steric sea level anomalies from 1955 to present calculated from in situ oceanographic subsurface profile data (NCEI Accession 0164586). [indicate subset used]. NOAA National Centers for Environmental Information. Dataset. https://doi.org/10.7289/v53f4mvp. Accessed [date].",
+  "sci:citation": "Levitus, Sydney; Antonov, John I.; Boyer, Tim P.; Baranova, Olga K.; García, Hernán E.; Locarnini, Ricardo A.; Mishonov, Alexey V.; Reagan, James R.; [Seidov, Dan; Yarosh, Evgeney; Zweng, Melissa M. (2017). NCEI ocean heat content, temperature anomalies, salinity anomalies, thermosteric sea level anomalies, halosteric sea level anomalies, and total steric sea level anomalies from 1955 to present calculated from in situ oceanographic subsurface profile data (NCEI Accession 0164586).NOAA National Centers for Environmental Information. Dataset. https://doi.org/10.7289/v53f4mvp.",
   "item_assets": {
     "heat_content": {
       "title": "Ocean Heat Content anomalies from WOA09",
@@ -228,7 +228,8 @@
       "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-700 m monthly 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "heat_content_anomaly_0-700_pentad": {
@@ -237,7 +238,8 @@
       "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-700 m pentad 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "heat_content_anomaly_0-700_seasonal": {
@@ -246,7 +248,8 @@
       "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-700 m seasonal 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "heat_content_anomaly_0-700_yearly": {
@@ -255,7 +258,8 @@
       "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-700 m yearly 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "heat_content_anomaly_0-2000_monthly": {
@@ -264,7 +268,8 @@
       "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-2000 m monthly 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "heat_content_anomaly_0-2000_pentad": {
@@ -273,7 +278,8 @@
       "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-2000 m pentad 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "heat_content_anomaly_0-2000_seasonal": {
@@ -282,7 +288,8 @@
       "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-2000 m seasonal 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "heat_content_anomaly_0-2000_yearly": {
@@ -291,7 +298,8 @@
       "title": "Ocean Heat Content anomalies from WOA09 : heat_content_anomaly 0-2000 m yearly 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_halosteric_sea_level_anomaly_0-700_pentad": {
@@ -300,7 +308,8 @@
       "title": "Mean halosteric sea level anomalies from WOA09 : mean_halosteric_sea_level_anomaly 0-700 m pentad 1.00 degree",
       "description": "Mean halosteric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_halosteric_sea_level_anomaly_0-700_seasonal": {
@@ -309,7 +318,8 @@
       "title": "Mean halosteric sea level anomalies from WOA09 : mean_halosteric_sea_level_anomaly 0-700 m seasonal 1.00 degree",
       "description": "Mean halosteric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_halosteric_sea_level_anomaly_0-700_yearly": {
@@ -318,7 +328,8 @@
       "title": "Mean halosteric sea level anomalies from WOA09 : mean_halosteric_sea_level_anomaly 0-700 m yearly 1.00 degree",
       "description": "Mean halosteric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_halosteric_sea_level_anomaly_0-2000_pentad": {
@@ -327,7 +338,8 @@
       "title": "Mean halosteric sea level anomalies from WOA09 : mean_halosteric_sea_level_anomaly 0-2000 m pentad 1.00 degree",
       "description": "Mean halosteric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_halosteric_sea_level_anomaly_0-2000_seasonal": {
@@ -336,7 +348,8 @@
       "title": "Mean halosteric sea level anomalies from WOA09 : mean_halosteric_sea_level_anomaly 0-2000 m seasonal 1.00 degree",
       "description": "Mean halosteric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_halosteric_sea_level_anomaly_0-2000_yearly": {
@@ -345,7 +358,8 @@
       "title": "Mean halosteric sea level anomalies from WOA09 : mean_halosteric_sea_level_anomaly 0-2000 m yearly 1.00 degree",
       "description": "Mean halosteric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_salinity_anomaly_0-100_pentad": {
@@ -354,7 +368,8 @@
       "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-100 m pentad 1.00 degree",
       "description": "Mean ocean salinity anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_salinity_anomaly_0-100_seasonal": {
@@ -363,7 +378,8 @@
       "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-100 m seasonal 1.00 degree",
       "description": "Mean ocean salinity anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_salinity_anomaly_0-100_yearly": {
@@ -372,7 +388,8 @@
       "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-100 m yearly 1.00 degree",
       "description": "Mean ocean salinity anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_salinity_anomaly_0-700_pentad": {
@@ -381,7 +398,8 @@
       "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-700 m pentad 1.00 degree",
       "description": "Mean ocean salinity anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_salinity_anomaly_0-700_seasonal": {
@@ -390,7 +408,8 @@
       "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-700 m seasonal 1.00 degree",
       "description": "Mean ocean salinity anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_salinity_anomaly_0-700_yearly": {
@@ -399,7 +418,8 @@
       "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-700 m yearly 1.00 degree",
       "description": "Mean ocean salinity anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_salinity_anomaly_0-2000_pentad": {
@@ -408,7 +428,8 @@
       "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-2000 m pentad 1.00 degree",
       "description": "Mean ocean salinity anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_salinity_anomaly_0-2000_seasonal": {
@@ -417,7 +438,8 @@
       "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-2000 m seasonal 1.00 degree",
       "description": "Mean ocean salinity anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_salinity_anomaly_0-2000_yearly": {
@@ -426,7 +448,8 @@
       "title": "Mean salinity anomalies from WOA09 : mean_salinity_anomaly 0-2000 m yearly 1.00 degree",
       "description": "Mean ocean salinity anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_temperature_anomaly_0-100_pentad": {
@@ -435,7 +458,8 @@
       "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-100 m pentad 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_temperature_anomaly_0-100_seasonal": {
@@ -444,7 +468,8 @@
       "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-100 m seasonal 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_temperature_anomaly_0-100_yearly": {
@@ -453,7 +478,8 @@
       "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-100 m yearly 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_temperature_anomaly_0-700_pentad": {
@@ -462,7 +488,8 @@
       "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-700 m pentad 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_temperature_anomaly_0-700_seasonal": {
@@ -471,7 +498,8 @@
       "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-700 m seasonal 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_temperature_anomaly_0-700_yearly": {
@@ -480,7 +508,8 @@
       "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-700 m yearly 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_temperature_anomaly_0-2000_pentad": {
@@ -489,7 +518,8 @@
       "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-2000 m pentad 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_temperature_anomaly_0-2000_seasonal": {
@@ -498,7 +528,8 @@
       "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-2000 m seasonal 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_temperature_anomaly_0-2000_yearly": {
@@ -507,7 +538,8 @@
       "title": "Mean temperature anomalies from WOA09 : mean_temperature_anomaly 0-2000 m yearly 1.00 degree",
       "description": "Mean ocean variable anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_thermosteric_sea_level_anomaly_0-700_pentad": {
@@ -516,7 +548,8 @@
       "title": "Mean thermosteric sea level anomalies from WOA09 : mean_thermosteric_sea_level_anomaly 0-700 m pentad 1.00 degree",
       "description": "Mean thermosteric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_thermosteric_sea_level_anomaly_0-700_seasonal": {
@@ -525,7 +558,8 @@
       "title": "Mean thermosteric sea level anomalies from WOA09 : mean_thermosteric_sea_level_anomaly 0-700 m seasonal 1.00 degree",
       "description": "Mean thermosteric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_thermosteric_sea_level_anomaly_0-700_yearly": {
@@ -534,7 +568,8 @@
       "title": "Mean thermosteric sea level anomalies from WOA09 : mean_thermosteric_sea_level_anomaly 0-700 m yearly 1.00 degree",
       "description": "Mean thermosteric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_thermosteric_sea_level_anomaly_0-2000_pentad": {
@@ -543,7 +578,8 @@
       "title": "Mean thermosteric sea level anomalies from WOA09 : mean_thermosteric_sea_level_anomaly 0-2000 m pentad 1.00 degree",
       "description": "Mean thermosteric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_thermosteric_sea_level_anomaly_0-2000_seasonal": {
@@ -552,7 +588,8 @@
       "title": "Mean thermosteric sea level anomalies from WOA09 : mean_thermosteric_sea_level_anomaly 0-2000 m seasonal 1.00 degree",
       "description": "Mean thermosteric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_thermosteric_sea_level_anomaly_0-2000_yearly": {
@@ -561,7 +598,8 @@
       "title": "Mean thermosteric sea level anomalies from WOA09 : mean_thermosteric_sea_level_anomaly 0-2000 m yearly 1.00 degree",
       "description": "Mean thermosteric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_total_steric_sea_level_anomaly_0-700_pentad": {
@@ -570,7 +608,8 @@
       "title": "Mean total steric sea level anomalies from WOA09 : mean_total_steric_sea_level_anomaly 0-700 m pentad 1.00 degree",
       "description": "Mean total steric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_total_steric_sea_level_anomaly_0-700_seasonal": {
@@ -579,7 +618,8 @@
       "title": "Mean total steric sea level anomalies from WOA09 : mean_total_steric_sea_level_anomaly 0-700 m seasonal 1.00 degree",
       "description": "Mean total steric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_total_steric_sea_level_anomaly_0-700_yearly": {
@@ -588,7 +628,8 @@
       "title": "Mean total steric sea level anomalies from WOA09 : mean_total_steric_sea_level_anomaly 0-700 m yearly 1.00 degree",
       "description": "Mean total steric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_total_steric_sea_level_anomaly_0-2000_pentad": {
@@ -597,7 +638,8 @@
       "title": "Mean total steric sea level anomalies from WOA09 : mean_total_steric_sea_level_anomaly 0-2000 m pentad 1.00 degree",
       "description": "Mean total steric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_total_steric_sea_level_anomaly_0-2000_seasonal": {
@@ -606,7 +648,8 @@
       "title": "Mean total steric sea level anomalies from WOA09 : mean_total_steric_sea_level_anomaly 0-2000 m seasonal 1.00 degree",
       "description": "Mean total steric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     },
     "mean_total_steric_sea_level_anomaly_0-2000_yearly": {
@@ -615,7 +658,8 @@
       "title": "Mean total steric sea level anomalies from WOA09 : mean_total_steric_sea_level_anomaly 0-2000 m yearly 1.00 degree",
       "description": "Mean total steric sea level anomaly from in situ profile data",
       "roles": [
-        "data"
+        "data",
+        "source"
       ]
     }
   }
