@@ -151,7 +151,7 @@ def _update_items(items: List[Item], cogs: List[Cog]) -> List[Item]:
                 id=id,
                 geometry=GLOBAL_GEOMETRY,
                 bbox=GLOBAL_BBOX,
-                datetime=c.datetime,
+                datetime=None,
                 properties={
                     "start_datetime": pystac.utils.datetime_to_str(c.start_datetime),
                     "end_datetime": pystac.utils.datetime_to_str(c.end_datetime),

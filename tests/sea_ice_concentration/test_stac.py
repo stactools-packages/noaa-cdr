@@ -41,6 +41,7 @@ def test_create_item(file_name: str, shape: List[int], transform: List[float]) -
     path = test_data.get_path(f"data-files/{file_name}")
     item = stac.create_item(path)
     assert item.id == Path(file_name).stem
+    assert item.datetime is None
 
     projection = ProjectionExtension.ext(item)
     _ = pyproj.CRS(projection.wkt2)

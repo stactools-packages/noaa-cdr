@@ -22,7 +22,7 @@ def test_create_item() -> None:
     path = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
     item = stac.create_item(path)
     assert item.id == "oisst-avhrr-v02r01.20220913"
-    assert item.datetime == datetime.datetime(2022, 9, 13, 12, 0, 0, tzinfo=tzutc())
+    assert item.datetime is None
     assert item.common_metadata.start_datetime == datetime.datetime(
         2022, 9, 13, 0, 0, 0, tzinfo=tzutc()
     )

@@ -7,7 +7,7 @@ import xarray
 from pystac import Asset, Item
 from pystac.extensions.projection import ProjectionExtension
 
-from . import cog, time
+from . import cog
 from .constants import NETCDF_ASSET_KEY, PROCESSING_EXTENSION_SCHEMA
 from .profile import DatasetProfile
 
@@ -25,7 +25,7 @@ def create_item(href: str, id: Optional[str] = None) -> Item:
                 id=id,
                 geometry=profile.geometry,
                 bbox=profile.bbox,
-                datetime=time.datetime64_to_datetime(ds.time.data[0]),
+                datetime=None,
                 properties={
                     "start_datetime": ds.time_coverage_start,
                     "end_datetime": ds.time_coverage_end,

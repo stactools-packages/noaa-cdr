@@ -39,8 +39,9 @@ def test_create_items_one_netcdf() -> None:
     assert len(items) == 17
     for item in items:
         assert len(item.assets) == 1
-        assert item.datetime
-        year = item.datetime.year
+        assert item.datetime is None
+        assert item.common_metadata.start_datetime
+        year = item.common_metadata.start_datetime.year
         assert item.common_metadata.start_datetime == datetime.datetime(
             year, 1, 1, tzinfo=tzutc()
         )
