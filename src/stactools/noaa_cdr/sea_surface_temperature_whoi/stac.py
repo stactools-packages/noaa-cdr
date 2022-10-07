@@ -6,13 +6,24 @@ import fsspec
 import numpy
 import xarray
 from pystac import Collection, Item
+from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
 from pystac.extensions.scientific import ScientificExtension
 
 from stactools.noaa_cdr.profile import BandProfile
 
 from .. import cog, dataset, stac, time
-from ..constants import DEFAULT_CATALOG_TYPE
-from .constants import CITATION, DESCRIPTION, DOI, EXTENT, ID, TITLE
+from ..constants import DEFAULT_CATALOG_TYPE, LICENSE, PROVIDERS
+from .constants import (
+    CITATION,
+    DESCRIPTION,
+    DOI,
+    EXTENT,
+    ID,
+    ITEM_ASSETS,
+    KEYWORDS,
+    LICENSE_LINK,
+    TITLE,
+)
 
 TIME_WINDOW_HALF_WIDTH_IN_MINUTES = int(3 * 60 / 2)
 
@@ -64,6 +75,16 @@ def create_collection() -> Collection:
         extent=EXTENT,
         title=TITLE,
         catalog_type=DEFAULT_CATALOG_TYPE,
+        license=LICENSE,
+        keywords=KEYWORDS,
+        providers=PROVIDERS,
+    )
+
+    collection.links.append(LICENSE_LINK)
+
+    item_assets = ItemAssetsExtension.ext(collection, add_if_missing=True)
+    item_assets.item_assets = dict(
+        (k, AssetDefinition(v)) for (k, v) in ITEM_ASSETS.items()
     )
 
     scientific = ScientificExtension.ext(collection, add_if_missing=True)
