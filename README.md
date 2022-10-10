@@ -5,7 +5,7 @@
 - Name: noaa-cdr
 - Package: `stactools.noaa_cdr`
 - [stactools-noaa-cdr on PyPI](https://pypi.org/project/stactools-noaa-cdr/)
-- Owner: @gadomski
+- Owner: [@gadomski](https://github.com/gadomski)
 - [Dataset homepage](https://www.ncei.noaa.gov/products/climate-data-records/)
 - STAC extensions used:
   - [item assets](https://github.com/stac-extensions/item-assets)
