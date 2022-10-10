@@ -36,6 +36,46 @@ organized by time intervals and other attributes. We have chosen to create one
 STAC collection for each CDR, and to organize items in that collection by time
 interval and time window. Subdatasets are included as COG assets.
 
+Because each CDR has a different data layout in its NetCDFs, the mapping from
+NetCDF(s) to STAC Collections and Items varies from CDR to CDR.
+The diagram below is an abstract representation of those layouts.  Note that the
+class names do not directly correspond to code entities; this is strictly a
+conceptual diagram.  Note too the 8-1 relationship between
+`SeaSurfaceTemperatureWHOIItem` and `SeaSurfaceTemperatureWHOINetCDF`; each
+SST-WHOI NetCDF contains eight timesteps, and so breaks apart into eight STAC
+items per NetCDF.
+
+```mermaid
+classDiagram
+  direction LR
+
+  class OceanHeatContent
+  <<Collection>> OceanHeatContent
+
+  class SeaIceConcentration
+  <<Collection>> SeaIceConcentration
+
+  class SeaSurfaceTemperatureOptimumInterpolation
+  <<Collection>> SeaSurfaceTemperatureOptimumInterpolation
+
+  class SeaSurfaceTemperatureWHOI
+  <<Collection>> SeaSurfaceTemperatureWHOI
+
+
+  OceanHeatContent "1" --> "n" OceanHeatContentNetCDF
+  OceanHeatContent "1" --> "0..n" OceanHeatContentItem
+
+  SeaIceConcentration "1" --> "0..n" SeaIceConcentrationItem
+  SeaIceConcentrationItem "1" --> "1" SeaIceConcentrationNetCDF
+
+  SeaSurfaceTemperatureOptimumInterpolation "1" --> "0..n" SeaSurfaceTemperatureOptimumInterpolationItem
+  SeaSurfaceTemperatureOptimumInterpolationItem "1" --> "1" SeaSurfaceTemperatureOptimumInterpolationNetCDF
+
+  SeaSurfaceTemperatureWHOI "1" --> "0..n" SeaSurfaceTemperatureWHOIItem
+  SeaSurfaceTemperatureWHOIItem "8" --> "1" SeaSurfaceTemperatureWHOINetCDF
+
+```
+
 ## Installation
 
 ```shell
