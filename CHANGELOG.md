@@ -25,4 +25,9 @@ number as needed.
 
 - Nothing.
 
+## [0.1.0] - 2022-10-10
+
+Initial release.
+
 [Unreleased]: <https://github.com/stactools-packages/noaa-cdr/tree/main/>
+[0.1.0]: <https://github.com/stactools-packages/noaa-cdr/releases/tag/v0.1.0>
