@@ -1,10 +1,4 @@
 {
-  "netcdf": {
-    "type": "application/netcdf",
-    "roles": [
-      "data"
-    ]
-  },
   "sea_surface_temperature": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
     "raster:bands": [

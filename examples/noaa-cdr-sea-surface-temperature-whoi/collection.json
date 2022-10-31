@@ -78,12 +78,6 @@
     "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
   ],
   "item_assets": {
-    "netcdf": {
-      "type": "application/netcdf",
-      "roles": [
-        "data"
-      ]
-    },
     "sea_surface_temperature": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "raster:bands": [

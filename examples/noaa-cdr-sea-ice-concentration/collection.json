@@ -55,7 +55,8 @@
         {
           "nodata": 255,
           "data_type": "uint8",
-          "scale": 0.009999999776482582
+          "scale": 0.009999999776482582,
+          "spatial_resolution": 25000.0
         }
       ],
       "classification:classes": [
@@ -90,7 +91,8 @@
         {
           "nodata": 255,
           "data_type": "uint8",
-          "scale": 0.009999999776482582
+          "scale": 0.009999999776482582,
+          "spatial_resolution": 25000.0
         }
       ],
       "classification:classes": [
@@ -125,7 +127,8 @@
         {
           "nodata": 255,
           "data_type": "uint8",
-          "scale": 0.009999999776482582
+          "scale": 0.009999999776482582,
+          "spatial_resolution": 25000.0
         }
       ],
       "roles": [
@@ -137,7 +140,8 @@
       "raster:bands": [
         {
           "nodata": 0,
-          "data_type": "uint8"
+          "data_type": "uint8",
+          "spatial_resolution": 25000.0
         }
       ],
       "classification:bitfields": [
@@ -271,7 +275,8 @@
       "raster:bands": [
         {
           "nodata": 0,
-          "data_type": "uint8"
+          "data_type": "uint8",
+          "spatial_resolution": 25000.0
         }
       ],
       "classification:bitfields": [
@@ -375,7 +380,8 @@
       "raster:bands": [
         {
           "nodata": "nan",
-          "data_type": "float32"
+          "data_type": "float32",
+          "spatial_resolution": 25000.0
         }
       ],
       "classification:classes": [
@@ -409,7 +415,8 @@
       "raster:bands": [
         {
           "nodata": 0,
-          "data_type": "uint8"
+          "data_type": "uint8",
+          "spatial_resolution": 25000.0
         }
       ],
       "classification:classes": [
