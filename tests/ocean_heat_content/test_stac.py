@@ -121,7 +121,8 @@ def test_create_items_one_netcdf_latest_only(tmp_path: Path) -> None:
 def test_cogify(tmp_path: Path, infile: str, num_cogs: int) -> None:
     external_data_path = test_data.get_external_data(infile)
     cogs = cog.cogify(external_data_path, str(tmp_path))
-    assert len(cogs) == num_cogs
+    # Because these netcdfs grow in place, we can never be sure of how many there should be.
+    assert len(cogs) >= num_cogs
     for c in cogs:
         assert Path(c.asset.href).exists()
 
