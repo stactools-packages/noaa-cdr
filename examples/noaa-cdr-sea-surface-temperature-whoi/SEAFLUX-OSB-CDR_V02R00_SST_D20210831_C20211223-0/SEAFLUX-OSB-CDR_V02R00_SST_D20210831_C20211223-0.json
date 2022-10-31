@@ -69,16 +69,6 @@
     }
   ],
   "assets": {
-    "netcdf": {
-      "href": "../../../tests/data-files/external/SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.nc",
-      "type": "application/netcdf",
-      "title": "NOAA Climate Data Record of Sea Surface Temperature - WHOI NetCDF",
-      "description": "SeaFlux Ocean Surface Bundle (OSB) Climate Data Record (CDR) of Sea Surface Temperature",
-      "created": "2021-12-23T18:47:13Z",
-      "roles": [
-        "data"
-      ]
-    },
     "sea_surface_temperature": {
       "href": "./SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-0-sea_surface_temperature.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",

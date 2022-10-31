@@ -77,7 +77,7 @@ with TemporaryDirectory() as temporary_directory:
 
     print("Creating Sea Surface Temperature - WHOI collection...")
     whoi_sst = whoi_sst_stac.create_collection()
-    whoi_sst_items = whoi_sst_stac.create_items(
+    whoi_sst_items = whoi_sst_stac.create_cog_items(
         str(external_data / "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.nc"),
         temporary_directory,
     )
