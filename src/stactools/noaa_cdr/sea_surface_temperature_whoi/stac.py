@@ -29,8 +29,9 @@ from .constants import (
 TIME_WINDOW_HALF_WIDTH_IN_MINUTES = int(3 * 60 / 2)
 
 
-def create_items(href: str, directory: str) -> List[Item]:
+def create_cog_items(href: str, directory: str) -> List[Item]:
     base_item = stac.create_item(href)
+    del base_item.assets["netcdf"]
     items = list()
     with fsspec.open(href) as file:
         with xarray.open_dataset(file) as ds:

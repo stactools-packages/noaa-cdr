@@ -17,12 +17,12 @@ def create_command(noaa_cdr: Group) -> Command:
         pass
 
     @sea_surface_temperature_whoi.command(
-        "create-items", short_help="Create a STAC item collection from a NetCDF"
+        "create-cog-items", short_help="Create a STAC item collection from a NetCDF"
     )
     @click.argument("source")
     @click.argument("destination")
-    def create_items(source: str, destination: str) -> None:
-        items = stac.create_items(source, str(Path(destination).parent))
+    def create_cog_items(source: str, destination: str) -> None:
+        items = stac.create_cog_items(source, str(Path(destination).parent))
         for item in items:
             for key, asset in item.assets.items():
                 asset.href = pystac.utils.make_relative_href(asset.href, destination)
