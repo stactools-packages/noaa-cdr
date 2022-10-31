@@ -7,20 +7,19 @@ from stactools.noaa_cdr.sea_surface_temperature_whoi import stac
 from .. import test_data
 
 
-def test_create_items(tmp_path: Path) -> None:
+def test_create_cog_items(tmp_path: Path) -> None:
     path = test_data.get_external_data(
         "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.nc"
     )
-    items = stac.create_items(path, str(tmp_path))
+    items = stac.create_cog_items(path, str(tmp_path))
     assert len(items) == 8
     for i, item in enumerate(items):
         assert item.id == f"SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223-{i}"
         assert item.bbox == [-180, -90, 180, 90]
         assert item.datetime is None
-        assert len(item.assets) == 3
+        assert len(item.assets) == 2
         assert "fill_missing_qc" in item.assets
         assert "sea_surface_temperature" in item.assets
-        assert "netcdf" in item.assets
         item.validate()
 
 
