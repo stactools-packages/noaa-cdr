@@ -65,5 +65,5 @@ with TemporaryDirectory() as temporary_directory:
 write_item_assets(item, oisst_item_assets_path)
 
 with TemporaryDirectory() as temporary_directory:
-    items = whoi_stac.create_items(str(whoi_data_path), temporary_directory)
+    items = whoi_stac.create_cog_items(str(whoi_data_path), temporary_directory)
 write_item_assets(items[0], whoi_item_assets_path)

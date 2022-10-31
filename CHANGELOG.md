@@ -19,7 +19,7 @@ number as needed.
 
 ### Removed
 
-- Nothing.
+- NetCDF assets from WHOI items ([#37](https://github.com/stactools-packages/noaa-cdr/pull/37))
 
 ### Fixed
 
