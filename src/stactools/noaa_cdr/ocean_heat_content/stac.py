@@ -128,6 +128,7 @@ def create_collection(
 def create_items(
     hrefs: List[str],
     directory: str,
+    cog_hrefs: Optional[List[str]] = None,
     latest_only: bool = False,
     read_href_modifier: Optional[ReadHrefModifier] = None,
 ) -> List[Item]:
@@ -144,6 +145,7 @@ def create_items(
         cogs = cog.cogify(
             href,
             directory,
+            cog_hrefs=cog_hrefs,
             latest_only=latest_only,
             read_href_modifier=read_href_modifier,
         )
@@ -175,11 +177,12 @@ def _update_items(items: List[Item], cogs: List[Cog]) -> List[Item]:
         title = c.attributes["title"].split(" : ")[0]
         min_depth = int(c.attributes["geospatial_vertical_min"])
         max_depth = int(c.attributes["geospatial_vertical_max"])
-        c.asset.title = f"{title} : {min_depth}-{max_depth}m {c.time_interval_as_str()}"
-        item.add_asset(c.asset_key(), c.asset)
+        asset = c.asset()
+        asset.title = f"{title} : {min_depth}-{max_depth}m {c.time_interval_as_str()}"
+        item.add_asset(c.asset_key(), asset)
         # The asset has the raster extension, but we need to make sure the item
         # has the schema url.
-        _ = RasterExtension.ext(c.asset, add_if_missing=True)
+        _ = RasterExtension.ext(asset, add_if_missing=True)
         items_as_dict[id] = item
     return list(items_as_dict.values())
 
