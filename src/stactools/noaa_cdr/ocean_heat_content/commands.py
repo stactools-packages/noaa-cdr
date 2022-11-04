@@ -170,6 +170,6 @@ def create_command(noaa_cdr: Group) -> Command:
         if outdir:
             os.makedirs(str(outdir), exist_ok=True)
         cogs = cog.cogify(infile, None if outdir is None else str(outdir))
-        print(f"Wrote {len(cogs)} COGs to {os.path.dirname(cogs[0].asset.href)}")
+        print(f"Wrote {len(cogs)} COGs to {os.path.dirname(cogs[0].asset().href)}")
 
     return ocean_heat_content

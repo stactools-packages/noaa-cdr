@@ -6,7 +6,7 @@ import numpy
 import rasterio.shutil
 import xarray
 from numpy.typing import NDArray
-from pystac import Asset, MediaType
+from pystac import Asset
 from rasterio import MemoryFile
 
 from . import dataset
@@ -32,13 +32,12 @@ def cogify(
                 if profile.needs_longitude_remap:
                     values = numpy.roll(values, int(profile.width / 2), 1)
                 path = os.path.join(directory, f"{file_name}-{variable}.tif")
-                asset = write(
+                write(
                     values,
                     path,
                     profile,
                 )
-                asset = profile.update_cog_asset(variable, asset)
-                assets[variable] = asset
+                assets[variable] = profile.cog_asset(path)
     return assets
 
 
@@ -46,13 +45,8 @@ def write(
     values: NDArray[Any],
     path: str,
     profile: BandProfile,
-) -> Asset:
+) -> None:
     with MemoryFile() as memory_file:
         with memory_file.open(**profile.gtiff()) as open_memory_file:
             open_memory_file.write(values, 1)
             rasterio.shutil.copy(open_memory_file, path, **profile.cog())
-    asset = Asset(
-        title=profile.title, href=path, media_type=MediaType.COG, roles=["data"]
-    )
-    asset.extra_fields["raster:bands"] = [profile.raster_band().to_dict()]
-    return asset

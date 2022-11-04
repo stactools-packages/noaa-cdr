@@ -62,8 +62,8 @@ def create_cog_items(href: str, directory: str) -> List[Item]:
                     values = numpy.flipud(ds[variable].isel(time=i).values.squeeze())
                     values = numpy.roll(values, int(profiles[variable].width / 2), 1)
                     path = Path(directory) / f"{item.id}-{variable}.tif"
-                    asset = cog.write(values, str(path), profiles[variable])
-                    item.assets[variable] = asset
+                    cog.write(values, str(path), profiles[variable])
+                    item.assets[variable] = profiles[variable].cog_asset(str(path))
                 items.append(item)
 
     return items

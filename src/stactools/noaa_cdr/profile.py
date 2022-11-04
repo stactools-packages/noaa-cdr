@@ -6,7 +6,7 @@ import numpy
 import shapely.geometry
 from pyproj import CRS
 from pyproj.enums import WktVersion
-from pystac import Asset
+from pystac import Asset, MediaType
 from pystac.extensions.raster import DataType, NoDataStrings, RasterBand
 from rasterio import Affine
 from xarray import DataArray, Dataset
@@ -110,6 +110,7 @@ class BandProfile:
     attrs: Dict[Hashable, Any]
     title: str
     dataset_profile: DatasetProfile
+    variable: str
 
     @classmethod
     def build(
@@ -159,7 +160,15 @@ class BandProfile:
             attrs=data_array.attrs,
             title=title,
             dataset_profile=dataset_profile,
+            variable=variable,
         )
+
+    def cog_asset(self, href: str) -> Asset:
+        asset = Asset(
+            title=self.title, href=href, media_type=MediaType.COG, roles=["data"]
+        )
+        asset.extra_fields["raster:bands"] = [self.raster_band().to_dict()]
+        return asset
 
     def gtiff(self) -> Dict[str, Any]:
         return {
@@ -172,9 +181,6 @@ class BandProfile:
             "transform": self.transform,
             "driver": "GTiff",
         }
-
-    def update_cog_asset(self, key: str, asset: Asset) -> Asset:
-        return asset
 
     def raster_band(self) -> RasterBand:
         if math.isnan(self.nodata):

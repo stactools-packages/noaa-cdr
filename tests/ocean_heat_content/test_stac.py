@@ -1,4 +1,6 @@
 import datetime
+import os
+import shutil
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -32,10 +34,9 @@ def test_create_collection() -> None:
     collection.validate_all()
 
 
-def test_create_items_one_netcdf() -> None:
+def test_create_items_one_netcdf(tmp_path: Path) -> None:
     path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
-    with TemporaryDirectory() as temporary_directory:
-        items = stac.create_items([path], temporary_directory)
+    items = stac.create_items([path], str(tmp_path))
     assert len(items) == 17
     for item in items:
         assert len(item.assets) == 1
@@ -65,6 +66,22 @@ def test_create_items_one_netcdf() -> None:
             assert band.unit == "10^18 joules"
 
         item.validate()
+
+
+def test_create_items_one_netcdf_cog_hrefs(tmp_path: Path) -> None:
+    path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
+    items = stac.create_items([path], str(tmp_path))
+    subdirectory = tmp_path / "subdirectory"
+    subdirectory.mkdir()
+    new_paths = list()
+    for p in tmp_path.iterdir():
+        if p.suffix == ".tif":
+            new_path = subdirectory / p.name
+            p.rename(new_path)
+            new_paths.append(str(new_path))
+    new_items = stac.create_items([path], str(tmp_path), cog_hrefs=new_paths)
+    assert not any(p.suffix == ".tif" for p in tmp_path.iterdir())
+    assert len(new_items) == len(items)
 
 
 def test_create_items_two_netcdfs_same_items(tmp_path: Path) -> None:
@@ -124,7 +141,7 @@ def test_cogify(tmp_path: Path, infile: str, num_cogs: int) -> None:
     # Because these netcdfs grow in place, we can never be sure of how many there should be.
     assert len(cogs) >= num_cogs
     for c in cogs:
-        assert Path(c.asset.href).exists()
+        assert Path(c.asset().href).exists()
 
 
 def test_cogify_href(tmp_path: Path) -> None:
@@ -135,7 +152,7 @@ def test_cogify_href(tmp_path: Path) -> None:
     cogs = cog.cogify(href, str(tmp_path))
     assert len(cogs) == 17
     for c in cogs:
-        assert Path(c.asset.href).exists()
+        assert Path(c.asset().href).exists()
 
 
 def test_cogify_href_no_output_directory() -> None:
@@ -150,4 +167,24 @@ def test_cogify_href_no_output_directory() -> None:
 def test_unitless(tmp_path: Path) -> None:
     path = test_data.get_external_data("mean_salinity_anomaly_0-2000_yearly.nc")
     cogs = cog.cogify(path, str(tmp_path))
-    assert "unit" not in cogs[0].asset.extra_fields["raster:bands"][0]
+    assert "unit" not in cogs[0].asset().extra_fields["raster:bands"][0]
+
+
+def test_cogify_cog_href(tmp_path: Path) -> None:
+    path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
+    cogs = cog.cogify(path, str(tmp_path))
+    href = cogs[0].asset().href
+    subdirectory = tmp_path / "subdirectory"
+    subdirectory.mkdir()
+    href = shutil.move(href, subdirectory)
+    for p in tmp_path.iterdir():
+        if p.suffix == ".tif":
+            p.unlink()
+    new_cogs = cog.cogify(path, str(tmp_path), cog_hrefs=[href])
+    assert not (tmp_path / os.path.basename(href)).exists()
+    assert (
+        sum(1 for f in os.listdir(tmp_path) if os.path.splitext(f)[1] == ".tif")
+        == len(new_cogs) - 1
+    )
+    assert os.path.exists(href)
+    assert href in [new_cog.asset().href for new_cog in new_cogs]

@@ -6,13 +6,13 @@ from .. import cog
 from ..profile import BandProfile
 from .constants import SPATIAL_RESOLUTION
 
-KEYS_WITH_CLASSES = [
+VARIABLES_WITH_CLASSES = [
     "cdr_seaice_conc",
     "nsidc_bt_seaice_conc",
     "stdev_of_cdr_seaice_conc",
     "temporal_interpolation_flag",
 ]
-KEYS_WITH_BITFIELDS = ["qa_of_cdr_seaice_conc", "spatial_interpolation_flag"]
+VARIABLES_WITH_BITFIELDS = ["qa_of_cdr_seaice_conc", "spatial_interpolation_flag"]
 
 
 def cogify(href: str, directory: str) -> Dict[str, Asset]:
@@ -20,11 +20,12 @@ def cogify(href: str, directory: str) -> Dict[str, Asset]:
 
 
 class SeaIceConcentrationBandProfile(BandProfile):
-    def update_cog_asset(self, key: str, asset: Asset) -> Asset:
+    def cog_asset(self, href: str) -> Asset:
+        asset = super().cog_asset(href)
         asset.extra_fields["raster:bands"][0]["spatial_resolution"] = SPATIAL_RESOLUTION
-        if key in KEYS_WITH_CLASSES:
+        if self.variable in VARIABLES_WITH_CLASSES:
             asset.extra_fields["classification:classes"] = self.classes()
-        elif key in KEYS_WITH_BITFIELDS:
+        elif self.variable in VARIABLES_WITH_BITFIELDS:
             asset.extra_fields["classification:bitfields"] = self.bitfield()
         return asset
 
