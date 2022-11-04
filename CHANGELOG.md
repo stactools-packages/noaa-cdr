@@ -12,6 +12,8 @@ number as needed.
 ### Added
 
 - `read_href_modifier` for ocean-heat-content ([#38](https://github.com/stactools-packages/noaa-cdr/pull/38))
+- `cog_hrefs` argument for Ocean Heat Content's cogify, to allow skipping of COG
+  creation ([#39](https://github.com/stactools-packages/noaa-cdr/pull/39))
 
 ### Deprecated
 
