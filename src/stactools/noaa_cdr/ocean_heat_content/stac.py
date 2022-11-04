@@ -8,6 +8,7 @@ from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
+from stactools.core.io import ReadHrefModifier
 
 from ..constants import (
     DEFAULT_CATALOG_TYPE,
@@ -125,7 +126,10 @@ def create_collection(
 
 
 def create_items(
-    hrefs: List[str], directory: str, latest_only: bool = False
+    hrefs: List[str],
+    directory: str,
+    latest_only: bool = False,
+    read_href_modifier: Optional[ReadHrefModifier] = None,
 ) -> List[Item]:
     """Creates items from the netcdf files located at hrefs.
 
@@ -137,7 +141,12 @@ def create_items(
     items: List[Item] = []
     for i, href in enumerate(hrefs):
         logger.info(f"Creating COGs for {href} ({i + 1} / {len(hrefs)})")
-        cogs = cog.cogify(href, directory, latest_only=latest_only)
+        cogs = cog.cogify(
+            href,
+            directory,
+            latest_only=latest_only,
+            read_href_modifier=read_href_modifier,
+        )
         items = _update_items(items, cogs)
     return items
 

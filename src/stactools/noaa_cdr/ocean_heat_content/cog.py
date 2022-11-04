@@ -7,6 +7,7 @@ import fsspec
 import numpy
 import xarray
 from pystac import Asset
+from stactools.core.io import ReadHrefModifier
 
 from .. import cog, dataset, time
 from ..profile import BandProfile
@@ -47,12 +48,19 @@ class Cog:
 
 
 def cogify(
-    href: str, outdir: Optional[str] = None, latest_only: bool = False
+    href: str,
+    outdir: Optional[str] = None,
+    latest_only: bool = False,
+    read_href_modifier: Optional[ReadHrefModifier] = None,
 ) -> List[Cog]:
     if outdir is None:
         outdir = os.path.dirname(href)
     cogs = list()
-    with fsspec.open(href) as file:
+    if read_href_modifier:
+        maybe_modified_href = read_href_modifier(href)
+    else:
+        maybe_modified_href = href
+    with fsspec.open(maybe_modified_href) as file:
         with xarray.open_dataset(file, decode_times=False) as ds:
             time_resolution = TimeResolution.from_value(ds.time_coverage_resolution)
             variable = dataset.data_variable_name(ds)
