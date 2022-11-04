@@ -11,7 +11,7 @@ number as needed.
 
 ### Added
 
-- Nothing.
+- `read_href_modifier` for ocean-heat-content ([#38](https://github.com/stactools-packages/noaa-cdr/pull/38))
 
 ### Deprecated
 
