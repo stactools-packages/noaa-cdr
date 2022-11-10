@@ -15,6 +15,7 @@ number as needed.
 - `cog_hrefs` argument for Ocean Heat Content's cogify, to allow skipping of COG
   creation ([#39](https://github.com/stactools-packages/noaa-cdr/pull/39))
 - `decode_times` argument to `create_item` ([#40](https://github.com/stactools-packages/noaa-cdr/pull/40))
+- Support for `time_coverage_duration` when creating items for NetCDFs ([#41](https://github.com/stactools-packages/noaa-cdr/pull/41))
 
 ### Deprecated
 
