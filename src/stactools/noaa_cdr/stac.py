@@ -3,6 +3,7 @@ from typing import Optional
 
 import dateutil.parser
 import fsspec
+import pystac.utils
 import xarray
 from pystac import Asset, Item
 from pystac.extensions.projection import ProjectionExtension
@@ -10,6 +11,7 @@ from pystac.extensions.projection import ProjectionExtension
 from . import cog
 from .constants import NETCDF_ASSET_KEY, PROCESSING_EXTENSION_SCHEMA
 from .profile import DatasetProfile
+from .time import TimeDuration
 
 
 def create_item(href: str, id: Optional[str] = None, decode_times: bool = True) -> Item:
@@ -21,15 +23,26 @@ def create_item(href: str, id: Optional[str] = None, decode_times: bool = True) 
                 else:
                     id = os.path.splitext(os.path.basename(href))[0]
             profile = DatasetProfile.build(ds)
+            if "time_coverage_start" in ds.attrs:
+                if "time_coverage_end" in ds.attrs:
+                    properties = {
+                        "start_datetime": ds.time_coverage_start,
+                        "end_datetime": ds.time_coverage_end,
+                    }
+                elif "time_coverage_duration" in ds.attrs:
+                    time_duration = TimeDuration.parse(ds.time_coverage_duration)
+                    start_datetime = dateutil.parser.parse(ds.time_coverage_start)
+                    end_datetime = time_duration.end_datetime(start_datetime)
+                    properties = {
+                        "start_datetime": pystac.utils.datetime_to_str(start_datetime),
+                        "end_datetime": pystac.utils.datetime_to_str(end_datetime),
+                    }
             item = Item(
                 id=id,
                 geometry=profile.geometry,
                 bbox=profile.bbox,
                 datetime=None,
-                properties={
-                    "start_datetime": ds.time_coverage_start,
-                    "end_datetime": ds.time_coverage_end,
-                },
+                properties=properties,
             )
             item.stac_extensions.append(PROCESSING_EXTENSION_SCHEMA)
             item.properties["processing:level"] = f"L{ds.processing_level[-1]}"

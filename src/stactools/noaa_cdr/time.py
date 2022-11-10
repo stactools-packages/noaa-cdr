@@ -1,5 +1,6 @@
 import datetime
 import math
+from dataclasses import dataclass
 from enum import Enum
 from typing import Tuple
 
@@ -154,6 +155,33 @@ class TimeResolution(str, Enum):
             return f"{dt.year - 2}-{dt.year + 2}"
         else:
             raise NotImplementedError
+
+
+@dataclass
+class TimeDuration:
+    """Used to parse ``time_coverage_duration`` in NetCDF files.
+    We _could_ use a real datetime package, e.g. pandas's Timedelta, but since
+    we only need to handle four cases, this simple structure seemed easier.
+    """
+
+    count: int
+    unit: str
+
+    @classmethod
+    def parse(cls, s: str) -> "TimeDuration":
+        assert s.startswith("P")
+        count = int(s[1:-1])
+        unit = s[-1]
+        return TimeDuration(count=count, unit=unit)
+
+    def end_datetime(self, start_datetime: datetime.datetime) -> datetime.datetime:
+        if self.unit == "Y":
+            delta = dateutil.relativedelta.relativedelta(years=self.count)
+        elif self.unit == "M":
+            delta = dateutil.relativedelta.relativedelta(months=self.count)
+        else:
+            raise ValueError(f"Unrecognized time duration unit: {self.unit}")
+        return start_datetime + delta - dateutil.relativedelta.relativedelta(seconds=1)
 
 
 def _month_to_season(month: int) -> str:
