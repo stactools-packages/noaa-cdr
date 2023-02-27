@@ -38,7 +38,7 @@ def test_create_collection() -> None:
 def test_create_items_one_netcdf(tmp_path: Path) -> None:
     path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
     items = stac.create_items([path], str(tmp_path))
-    assert len(items) == 17
+    assert len(items) >= 17
     for item in items:
         assert len(item.assets) == 1
         assert item.datetime is None
@@ -93,7 +93,7 @@ def test_create_items_two_netcdfs_same_items(tmp_path: Path) -> None:
         ),
     ]
     items = stac.create_items(paths, str(tmp_path))
-    assert len(items) == 17
+    assert len(items) >= 17
     for item in items:
         assert len(item.assets) == 2
         item.validate()
@@ -108,7 +108,7 @@ def test_create_items_two_netcdfs_different_items() -> None:
     ]
     with TemporaryDirectory() as temporary_directory:
         items = stac.create_items(paths, temporary_directory)
-    assert len(items) == 80
+    assert len(items) >= 80
     for item in items:
         assert len(item.assets) == 1
         item.validate()
@@ -139,7 +139,8 @@ def test_create_items_one_netcdf_latest_only(tmp_path: Path) -> None:
 def test_cogify(tmp_path: Path, infile: str, num_cogs: int) -> None:
     external_data_path = test_data.get_external_data(infile)
     cogs = cog.cogify(external_data_path, str(tmp_path))
-    # Because these netcdfs grow in place, we can never be sure of how many there should be.
+    # Because these netcdfs grow in place, we can never be sure of how many
+    # there should be.
     assert len(cogs) >= num_cogs
     for c in cogs:
         assert Path(c.asset().href).exists()
@@ -151,7 +152,9 @@ def test_cogify_href(tmp_path: Path) -> None:
         "/0164586/derived/heat_content_anomaly_0-2000_yearly.nc"
     )
     cogs = cog.cogify(href, str(tmp_path))
-    assert len(cogs) == 17
+    # Because these netcdfs grow in place, we can never be sure of how many
+    # there should be.
+    assert len(cogs) >= 17
     for c in cogs:
         assert Path(c.asset().href).exists()
 
