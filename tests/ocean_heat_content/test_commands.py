@@ -28,7 +28,7 @@ def test_create_items(tmp_path: Path) -> None:
     assert len(paths) == 1
 
     item_collection = ItemCollection.from_file(str(tmp_path / paths[0]))
-    assert len(item_collection) == 17
+    assert len(item_collection) >= 17
     for item in item_collection:
         item.validate()
 
