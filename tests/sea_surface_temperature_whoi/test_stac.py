@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 
 from stactools.noaa_cdr.sea_surface_temperature_whoi import stac
@@ -30,6 +31,8 @@ def test_create_collection() -> None:
     scientific = ScientificExtension.ext(collection)
     assert scientific.doi == "10.7289/V5FB510W"
     assert scientific.citation
+
+    RasterExtension.validate_has_extension(collection, add_if_missing=False)
 
     collection.set_self_href("")
     collection.validate()

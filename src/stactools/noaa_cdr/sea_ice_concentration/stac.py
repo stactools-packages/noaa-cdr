@@ -2,6 +2,7 @@ import os.path
 
 from pystac import Collection, Item
 from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
+from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 
 from .. import stac
@@ -63,5 +64,7 @@ def create_collection() -> Collection:
     scientific = ScientificExtension.ext(collection, add_if_missing=True)
     scientific.doi = DOI
     scientific.citation = CITATION
+
+    RasterExtension.add_to(collection)
 
     return collection

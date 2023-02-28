@@ -4,6 +4,7 @@ from typing import List
 import pyproj
 import pytest
 from pystac.extensions.projection import ProjectionExtension
+from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 
 from stactools.noaa_cdr.constants import CLASSIFICATION_EXTENSION_SCHEMA
@@ -85,6 +86,8 @@ def test_create_collection() -> None:
     scientific = ScientificExtension.ext(collection)
     assert scientific.doi == "10.7265/efmz-2t65"
     assert scientific.citation
+
+    RasterExtension.validate_has_extension(collection, add_if_missing=False)
 
     collection.set_self_href("")
     collection.validate()
