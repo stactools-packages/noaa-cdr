@@ -88,6 +88,7 @@ def create_collection(
     scientific = ScientificExtension.ext(collection, add_if_missing=True)
     scientific.doi = DOI
     scientific.citation = CITATION
+    has_raster_extension = False
     if cog_directory:
         hrefs = []
         if local_directory:
@@ -112,11 +113,16 @@ def create_collection(
                     except ValueError:
                         pass
                     else:
+                        has_raster_extension = True
                         if raster.bands:
                             asset_definition.properties["raster:bands"] = [
                                 band.to_dict() for band in raster.bands
                             ]
                     asset_definitions[key] = asset_definition
+
+        if has_raster_extension:
+            RasterExtension.add_to(collection)
+
         collection.add_items(items)
         collection.update_extent_from_items()
         item_assets = ItemAssetsExtension.ext(collection, add_if_missing=True)

@@ -3,6 +3,7 @@ from pathlib import Path
 
 from dateutil.tz import tzutc
 from pystac.extensions.projection import ProjectionExtension
+from pystac.extensions.raster import RasterExtension
 
 import stactools.noaa_cdr.stac
 from stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation import stac
@@ -14,6 +15,7 @@ def test_create_collection() -> None:
     assert collection.extent.temporal.intervals == [
         [datetime.datetime(1981, 9, 1, tzinfo=tzutc()), None]
     ]
+    RasterExtension.validate_has_extension(collection, add_if_missing=False)
     collection.set_self_href("")
     collection.validate()
 
