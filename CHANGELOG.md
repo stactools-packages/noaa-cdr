@@ -16,6 +16,7 @@ number as needed.
   creation ([#39](https://github.com/stactools-packages/noaa-cdr/pull/39))
 - `decode_times` argument to `create_item` ([#40](https://github.com/stactools-packages/noaa-cdr/pull/40))
 - Support for `time_coverage_duration` when creating items for NetCDFs ([#41](https://github.com/stactools-packages/noaa-cdr/pull/41))
+- Raster extension to collections ([#43](https://github.com/stactools-packages/noaa-cdr/pull/43))
 
 ### Deprecated
 
