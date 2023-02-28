@@ -10,4 +10,4 @@ def register_plugin(registry: Registry) -> None:
     registry.register_subcommand(commands.create_noaa_cdr_command)
 
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"

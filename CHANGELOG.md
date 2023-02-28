@@ -9,6 +9,8 @@ number as needed.
 
 ## [Unreleased]
 
+## [0.2.0] - 2023-02-28
+
 ### Added
 
 - `read_href_modifier` for ocean-heat-content ([#38](https://github.com/stactools-packages/noaa-cdr/pull/38))
@@ -18,21 +20,14 @@ number as needed.
 - Support for `time_coverage_duration` when creating items for NetCDFs ([#41](https://github.com/stactools-packages/noaa-cdr/pull/41))
 - Raster extension to collections ([#43](https://github.com/stactools-packages/noaa-cdr/pull/43))
 
-### Deprecated
-
-- Nothing.
-
 ### Removed
 
 - NetCDF assets from WHOI items ([#37](https://github.com/stactools-packages/noaa-cdr/pull/37))
-
-### Fixed
-
-- Nothing.
 
 ## [0.1.0] - 2022-10-10
 
 Initial release.
 
-[Unreleased]: <https://github.com/stactools-packages/noaa-cdr/tree/main/>
+[Unreleased]: <https://github.com/stactools-packages/noaa-cdr/compare/v0.2.0..main>
+[0.2.0]: <https://github.com/stactools-packages/noaa-cdr/compare/v0.1.0...v0.2.0>
 [0.1.0]: <https://github.com/stactools-packages/noaa-cdr/releases/tag/v0.1.0>
