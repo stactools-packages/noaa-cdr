@@ -5,6 +5,7 @@
   "properties": {
     "start_datetime": "1972-03-01T00:00:00Z",
     "end_datetime": "1972-03-31T23:59:59Z",
+    "noaa_cdr:interval": "monthly",
     "proj:epsg": 4326,
     "proj:shape": [
       180,
@@ -91,7 +92,7 @@
     90.0
   ],
   "stac_extensions": [
-    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
     "https://stac-extensions.github.io/raster/v1.1.0/schema.json"
   ],
   "collection": "noaa-cdr-ocean-heat-content"

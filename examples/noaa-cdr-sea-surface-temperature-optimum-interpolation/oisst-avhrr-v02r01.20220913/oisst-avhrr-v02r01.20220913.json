@@ -153,7 +153,7 @@
   ],
   "stac_extensions": [
     "https://stac-extensions.github.io/processing/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json"
   ],
   "collection": "noaa-cdr-sea-surface-temperature-optimum-interpolation"
 }
