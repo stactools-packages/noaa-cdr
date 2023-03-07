@@ -49,6 +49,10 @@ class Cog:
                 parts.append(part)
         return "_".join(parts)
 
+    def interval(self) -> str:
+        """Returns this cog's interval, e.g. "yearly"."""
+        return self.time_resolution.to_interval()
+
 
 def cogify(
     href: str,

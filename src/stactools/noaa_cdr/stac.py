@@ -9,9 +9,13 @@ from pystac import Asset, Item
 from pystac.extensions.projection import ProjectionExtension
 
 from . import cog
-from .constants import NETCDF_ASSET_KEY, PROCESSING_EXTENSION_SCHEMA
+from .constants import (
+    INTERVAL_ATTRIBUTE_NAME,
+    NETCDF_ASSET_KEY,
+    PROCESSING_EXTENSION_SCHEMA,
+)
 from .profile import DatasetProfile
-from .time import TimeDuration
+from .time import TimeDuration, TimeResolution
 
 
 def create_item(href: str, id: Optional[str] = None, decode_times: bool = True) -> Item:
@@ -37,6 +41,11 @@ def create_item(href: str, id: Optional[str] = None, decode_times: bool = True) 
                         "start_datetime": pystac.utils.datetime_to_str(start_datetime),
                         "end_datetime": pystac.utils.datetime_to_str(end_datetime),
                     }
+            if "time_coverage_resolution" in ds.attrs:
+                time_resolution = TimeResolution.from_value(ds.time_coverage_resolution)
+                interval = time_resolution.to_interval()
+            else:
+                interval = None
             item = Item(
                 id=id,
                 geometry=profile.geometry,
@@ -44,6 +53,8 @@ def create_item(href: str, id: Optional[str] = None, decode_times: bool = True) 
                 datetime=None,
                 properties=properties,
             )
+            if interval:
+                item.properties[INTERVAL_ATTRIBUTE_NAME] = interval
             item.stac_extensions.append(PROCESSING_EXTENSION_SCHEMA)
             item.properties["processing:level"] = f"L{ds.processing_level[-1]}"
             asset = Asset(

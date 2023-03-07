@@ -52,6 +52,8 @@ def test_create_items_one_netcdf(tmp_path: Path) -> None:
         )
         assert item.common_metadata.updated is None
 
+        assert item.properties["noaa_cdr:interval"] == "yearly"
+
         proj = ProjectionExtension.ext(item)
         assert proj.epsg == 4326
         assert proj.shape == [180, 360]
@@ -195,15 +197,15 @@ def test_cogify_cog_href(tmp_path: Path) -> None:
 
 
 @pytest.mark.parametrize(
-    "infile,year",
+    "infile,year,interval",
     [
-        ("heat_content_anomaly_0-700_yearly.nc", 1955),
-        ("heat_content_anomaly_0-2000_monthly.nc", 2005),
-        ("heat_content_anomaly_0-2000_pentad.nc", 1955),
-        ("heat_content_anomaly_0-2000_seasonal.nc", 2005),
+        ("heat_content_anomaly_0-700_yearly.nc", 1955, "yearly"),
+        ("heat_content_anomaly_0-2000_monthly.nc", 2005, "monthly"),
+        ("heat_content_anomaly_0-2000_pentad.nc", 1955, "pentadal"),
+        ("heat_content_anomaly_0-2000_seasonal.nc", 2005, "seasonal"),
     ],
 )
-def test_create_netcdf_item(infile: str, year: int) -> None:
+def test_create_netcdf_item(infile: str, year: int, interval: str) -> None:
     path = test_data.get_external_data(infile)
     item = stactools.noaa_cdr.stac.create_item(path, decode_times=False)
     assert item.common_metadata.start_datetime == datetime.datetime(
@@ -211,4 +213,5 @@ def test_create_netcdf_item(infile: str, year: int) -> None:
     )
     assert item.common_metadata.end_datetime
     assert item.common_metadata.end_datetime.year != year
+    assert item.properties["noaa_cdr:interval"] == interval
     item.validate()

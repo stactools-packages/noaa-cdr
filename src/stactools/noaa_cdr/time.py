@@ -53,6 +53,8 @@ class TimeResolution(str, Enum):
     we only need to handle four cases, this simple structure seemed easier.
     """
 
+    ThreeHourly = "PT3H"
+    Daily = "P1D"
     Monthly = "P01M"
     Seasonal = "P03M"
     Yearly = "P01Y"
@@ -73,9 +75,13 @@ class TimeResolution(str, Enum):
             None,
         )
         if time_resolution is None:
-            raise ValueError(
-                "Encountered unexpected time_coverage_resolution: " f"{value}"
-            )
+            # Sea ice uses P1M for monthly instead of P01M
+            if value == "P1M":
+                return TimeResolution.Monthly
+            else:
+                raise ValueError(
+                    "Encountered unexpected time_coverage_resolution: " f"{value}"
+                )
         else:
             return time_resolution
 
@@ -153,6 +159,31 @@ class TimeResolution(str, Enum):
             return dt.strftime("%Y")
         elif self is TimeResolution.Pentadal:
             return f"{dt.year - 2}-{dt.year + 2}"
+        elif self is TimeResolution.Daily:
+            return dt.strftime(r"%Y-%m-%d")
+        else:
+            raise NotImplementedError
+
+    def to_interval(self) -> str:
+        """Returns this time resolution as a slug-like string.
+
+        Used for the `noaa_cdr:interval` attribute on items.
+
+        Returns:
+            str: This time resolution as a string.
+        """
+        if self is TimeResolution.Monthly:
+            return "monthly"
+        elif self is TimeResolution.Seasonal:
+            return "seasonal"
+        elif self is TimeResolution.Yearly:
+            return "yearly"
+        elif self is TimeResolution.Pentadal:
+            return "pentadal"
+        elif self is TimeResolution.Daily:
+            return "daily"
+        elif self is TimeResolution.ThreeHourly:
+            return "three-hourly"
         else:
             raise NotImplementedError
 

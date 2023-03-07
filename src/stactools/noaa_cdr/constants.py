@@ -7,7 +7,8 @@ GLOBAL_SPATIAL_EXTENT = SpatialExtent(bboxes=GLOBAL_BBOX)
 PROVIDERS = [
     Provider(
         name="National Centers for Environmental Information",
-        description="NCEI is the Nation's leading authority for environmental data, and manage "
+        description="NCEI is the Nation's leading authority for environmental data,"
+        " and manage "
         "one of the largest archives of atmospheric, coastal, geophysical, and "
         "oceanic research in the world. NCEI contributes to the NESDIS mission "
         "by developing new products and services that span the science disciplines "
@@ -31,3 +32,4 @@ CLASSIFICATION_EXTENSION_SCHEMA = (
 )
 NETCDF_ASSET_KEY = "netcdf"
 COMMON_KEYWORDS = ["Global", "Climate", "NOAA"]
+INTERVAL_ATTRIBUTE_NAME = "noaa_cdr:interval"

@@ -14,6 +14,7 @@ from ..constants import (
     DEFAULT_CATALOG_TYPE,
     GLOBAL_BBOX,
     GLOBAL_GEOMETRY,
+    INTERVAL_ATTRIBUTE_NAME,
     LICENSE,
     PROVIDERS,
 )
@@ -172,6 +173,7 @@ def _update_items(items: List[Item], cogs: List[Cog]) -> List[Item]:
                 properties={
                     "start_datetime": pystac.utils.datetime_to_str(c.start_datetime),
                     "end_datetime": pystac.utils.datetime_to_str(c.end_datetime),
+                    INTERVAL_ATTRIBUTE_NAME: c.interval(),
                 },
             )
             projection = ProjectionExtension.ext(item, add_if_missing=True)
