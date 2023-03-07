@@ -1,6 +1,6 @@
 import datetime
-import importlib.resources
 
+import importlib_resources
 import orjson
 from dateutil.tz import tzutc
 from pystac import Extent, Link, MediaType, TemporalExtent
@@ -47,10 +47,11 @@ LICENSE_LINK = Link(
 )
 
 ITEM_ASSETS = orjson.loads(
-    importlib.resources.read_text(
-        "stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation",
-        "item-assets.json",
+    importlib_resources.files(
+        "stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation"
     )
+    .joinpath("item-assets.json")
+    .read_text()
 )
 
 KEYWORDS = COMMON_KEYWORDS + ["Temperature", "Ocean"]

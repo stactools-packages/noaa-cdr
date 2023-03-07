@@ -1,6 +1,6 @@
 import datetime
-import importlib.resources
 
+import importlib_resources
 import orjson
 from dateutil.tz import tzutc
 from pystac import (
@@ -79,9 +79,9 @@ LICENSE_LINK = Link(
 KEYWORDS = COMMON_KEYWORDS + ["Sea ice", "Polar"]
 KEYWORDS.remove("Global")
 ITEM_ASSETS = orjson.loads(
-    importlib.resources.read_text(
-        "stactools.noaa_cdr.sea_ice_concentration", "item-assets.json"
-    )
+    importlib_resources.files("stactools.noaa_cdr.sea_ice_concentration")
+    .joinpath("item-assets.json")
+    .read_text()
 )
 HOMEPAGE_LINK = Link(
     rel="about",
