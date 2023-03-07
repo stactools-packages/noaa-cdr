@@ -13,7 +13,10 @@
   - [raster](https://github.com/stac-extensions/raster)
   - [scientific](https://github.com/stac-extensions/scientific)
   - [classification](https://github.com/stac-extensions/classification)
-- Extra fields: None
+- Extra fields:
+  - `noaa_cdr:interval`: The time resolution (derived from the
+    `time_coverage_resolution` field) of the dataset. Useful for filtering
+    multi-temporal-resolution CDRs, such as ocean heat content.
 - [Browse the example in human-readable form](https://radiantearth.github.io/stac-browser/#/external/raw.githubusercontent.com/stactools-packages/noaa-cdr/main/examples/catalog.json)
 
 ## STAC Examples
