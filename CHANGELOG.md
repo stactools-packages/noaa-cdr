@@ -1,5 +1,7 @@
 # Changelog
 
+<!-- markdownlint-disable MD024 -->
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
@@ -8,6 +10,10 @@ This project attempts to match the major and minor versions of
 number as needed.
 
 ## [Unreleased]
+
+### Added
+
+- Time intervals to NetCDF items and ocean heat content COG items ([#46](https://github.com/stactools-packages/noaa-cdr/pull/46))
 
 ## [0.2.0] - 2023-02-28
 
