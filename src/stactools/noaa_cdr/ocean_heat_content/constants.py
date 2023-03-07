@@ -1,7 +1,7 @@
 import datetime
-import importlib.resources
 import json
 
+import importlib_resources
 import pyproj
 from dateutil.tz import tzutc
 from pystac import Extent, Link, MediaType, TemporalExtent
@@ -38,9 +38,9 @@ HOMEPAGE_LINK = Link(
     title="Global Ocean Heat Content CDR",
 )
 ASSET_METADATA = json.loads(
-    importlib.resources.read_text(
-        "stactools.noaa_cdr.ocean_heat_content", "asset-metadata.json"
-    )
+    importlib_resources.files("stactools.noaa_cdr.ocean_heat_content")
+    .joinpath("asset-metadata.json")
+    .read_text()
 )
 DOI = "10.7289/v53f4mvp"
 CITATION = (
