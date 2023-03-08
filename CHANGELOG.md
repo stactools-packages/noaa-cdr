@@ -14,6 +14,7 @@ number as needed.
 ### Added
 
 - Time intervals to NetCDF items and ocean heat content COG items ([#46](https://github.com/stactools-packages/noaa-cdr/pull/46))
+- Max depth for ocean heat content ([#47](https://github.com/stactools-packages/noaa-cdr/pull/47))
 
 ## [0.2.0] - 2023-02-28
 

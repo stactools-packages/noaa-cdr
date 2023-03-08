@@ -6,6 +6,7 @@
     "start_datetime": "2022-01-01T00:00:00Z",
     "end_datetime": "2022-03-31T23:59:59Z",
     "noaa_cdr:interval": "seasonal",
+    "noaa_cdr:max_depth": 2000,
     "proj:epsg": 4326,
     "proj:shape": [
       180,

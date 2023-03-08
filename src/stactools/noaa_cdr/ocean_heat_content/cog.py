@@ -36,8 +36,7 @@ class Cog:
 
     def item_id(self) -> str:
         """Returns the item id."""
-        depth = int(self.attributes["geospatial_vertical_max"])
-        return f"ocean-heat-content-{self.time_interval_as_str()}-{depth}m"
+        return f"ocean-heat-content-{self.time_interval_as_str()}-{self.max_depth()}m"
 
     def asset_key(self) -> str:
         """Returns this COG's asset key."""
@@ -52,6 +51,10 @@ class Cog:
     def interval(self) -> str:
         """Returns this cog's interval, e.g. "yearly"."""
         return self.time_resolution.to_interval()
+
+    def max_depth(self) -> int:
+        """Returns this cog's max depth."""
+        return int(self.attributes["geospatial_vertical_max"])
 
 
 def cogify(
