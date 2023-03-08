@@ -33,3 +33,4 @@ CLASSIFICATION_EXTENSION_SCHEMA = (
 NETCDF_ASSET_KEY = "netcdf"
 COMMON_KEYWORDS = ["Global", "Climate", "NOAA"]
 INTERVAL_ATTRIBUTE_NAME = "noaa_cdr:interval"
+MAX_DEPTH_ATTRIBUTE_NAME = "noaa_cdr:max_depth"

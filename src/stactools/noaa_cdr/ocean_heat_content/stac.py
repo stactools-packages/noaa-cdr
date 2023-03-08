@@ -16,6 +16,7 @@ from ..constants import (
     GLOBAL_GEOMETRY,
     INTERVAL_ATTRIBUTE_NAME,
     LICENSE,
+    MAX_DEPTH_ATTRIBUTE_NAME,
     PROVIDERS,
 )
 from . import cog, iter_noaa_hrefs
@@ -174,6 +175,7 @@ def _update_items(items: List[Item], cogs: List[Cog]) -> List[Item]:
                     "start_datetime": pystac.utils.datetime_to_str(c.start_datetime),
                     "end_datetime": pystac.utils.datetime_to_str(c.end_datetime),
                     INTERVAL_ATTRIBUTE_NAME: c.interval(),
+                    MAX_DEPTH_ATTRIBUTE_NAME: c.max_depth(),
                 },
             )
             projection = ProjectionExtension.ext(item, add_if_missing=True)

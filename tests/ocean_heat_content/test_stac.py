@@ -53,6 +53,7 @@ def test_create_items_one_netcdf(tmp_path: Path) -> None:
         assert item.common_metadata.updated is None
 
         assert item.properties["noaa_cdr:interval"] == "yearly"
+        assert item.properties["noaa_cdr:max_depth"] == 2000
 
         proj = ProjectionExtension.ext(item)
         assert proj.epsg == 4326
