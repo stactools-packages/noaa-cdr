@@ -142,7 +142,7 @@ There are two helper scripts in the `scripts/` directory that update these files
 
 ```sh
 scripts/create_item_assets.py
-scripts/extract_netcdf_asset_metadata.py
+scripts/extract_netcdf_asset_metadata.py > src/stactools/noaa_cdr/ocean-heat-content/asset-metadata.json
 ```
 
 Additionally, there is a script to create the `examples/` directory:
