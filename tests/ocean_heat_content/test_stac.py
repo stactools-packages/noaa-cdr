@@ -27,6 +27,23 @@ def test_create_collection() -> None:
         assert asset.roles
         assert set(asset.roles) == {"data", "source"}
 
+    intervals = collection.summaries.get_list("noaa_cdr:interval")
+    assert intervals
+    assert set(intervals) == {
+        "monthly",
+        "seasonal",
+        "yearly",
+        "pentadal",
+    }
+
+    max_depth = collection.summaries.get_list("noaa_cdr:max_depth")
+    assert max_depth
+    assert set(max_depth) == {
+        100,
+        700,
+        2000,
+    }
+
     scientific = ScientificExtension.ext(collection)
     assert scientific.doi == "10.7289/v53f4mvp"
     assert scientific.citation

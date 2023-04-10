@@ -19,6 +19,7 @@ from ..constants import (
     MAX_DEPTH_ATTRIBUTE_NAME,
     PROVIDERS,
 )
+from ..time import TimeResolution
 from . import cog, iter_noaa_hrefs
 from .cog import Cog
 from .constants import (
@@ -87,6 +88,17 @@ def create_collection(
                 roles=["data", "source"],
             ),
         )
+    collection.summaries.add(
+        INTERVAL_ATTRIBUTE_NAME,
+        [
+            TimeResolution.Monthly.to_interval(),
+            TimeResolution.Seasonal.to_interval(),
+            TimeResolution.Yearly.to_interval(),
+            TimeResolution.Pentadal.to_interval(),
+        ],
+    )
+    collection.summaries.add(MAX_DEPTH_ATTRIBUTE_NAME, [100, 700, 2000])
+
     scientific = ScientificExtension.ext(collection, add_if_missing=True)
     scientific.doi = DOI
     scientific.citation = CITATION
