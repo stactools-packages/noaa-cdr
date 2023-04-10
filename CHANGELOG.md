@@ -9,6 +9,10 @@ number as needed.
 
 ## [Unreleased]
 
+### Added
+
+- Summaries for the ocean heat content collection ([#50](https://github.com/stactools-packages/noaa-cdr/pull/50))
+
 ## [0.2.1] - 2023-03-31
 
 ### Added
