@@ -222,6 +222,19 @@
       "url": "https://www.ncei.noaa.gov/"
     }
   ],
+  "summaries": {
+    "noaa_cdr:interval": [
+      "monthly",
+      "seasonal",
+      "yearly",
+      "pentadal"
+    ],
+    "noaa_cdr:max_depth": [
+      100,
+      700,
+      2000
+    ]
+  },
   "assets": {
     "heat_content_anomaly_0-700_monthly": {
       "href": "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data/0164586/derived/heat_content_anomaly_0-700_monthly.nc",
