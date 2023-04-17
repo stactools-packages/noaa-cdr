@@ -7,6 +7,7 @@ import pystac.utils
 import xarray
 from pystac import Asset, Item
 from pystac.extensions.projection import ProjectionExtension
+from stactools.core.io import ReadHrefModifier
 
 from . import cog
 from .constants import (
@@ -18,8 +19,17 @@ from .profile import DatasetProfile
 from .time import TimeDuration, TimeResolution
 
 
-def create_item(href: str, id: Optional[str] = None, decode_times: bool = True) -> Item:
-    with fsspec.open(href) as file:
+def create_item(
+    href: str,
+    id: Optional[str] = None,
+    decode_times: bool = True,
+    read_href_modifier: Optional[ReadHrefModifier] = None,
+) -> Item:
+    if read_href_modifier:
+        read_href = read_href_modifier(href)
+    else:
+        read_href = href
+    with fsspec.open(read_href) as file:
         with xarray.open_dataset(file, decode_times=decode_times) as ds:
             if id is None:
                 if "id" in ds.attrs:
