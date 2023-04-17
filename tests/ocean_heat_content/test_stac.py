@@ -10,7 +10,6 @@ from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 
-import stactools.noaa_cdr.stac
 from stactools.noaa_cdr.ocean_heat_content import cog, stac
 
 from .. import test_data
@@ -215,21 +214,24 @@ def test_cogify_cog_href(tmp_path: Path) -> None:
 
 
 @pytest.mark.parametrize(
-    "infile,year,interval",
+    "infile,year,interval,max_depth",
     [
-        ("heat_content_anomaly_0-700_yearly.nc", 1955, "yearly"),
-        ("heat_content_anomaly_0-2000_monthly.nc", 2005, "monthly"),
-        ("heat_content_anomaly_0-2000_pentad.nc", 1955, "pentadal"),
-        ("heat_content_anomaly_0-2000_seasonal.nc", 2005, "seasonal"),
+        ("heat_content_anomaly_0-700_yearly.nc", 1955, "yearly", 700),
+        ("heat_content_anomaly_0-2000_monthly.nc", 2005, "monthly", 2000),
+        ("heat_content_anomaly_0-2000_pentad.nc", 1955, "pentadal", 2000),
+        ("heat_content_anomaly_0-2000_seasonal.nc", 2005, "seasonal", 2000),
     ],
 )
-def test_create_netcdf_item(infile: str, year: int, interval: str) -> None:
+def test_create_netcdf_item(
+    infile: str, year: int, interval: str, max_depth: int
+) -> None:
     path = test_data.get_external_data(infile)
-    item = stactools.noaa_cdr.stac.create_item(path, decode_times=False)
+    item = stac.create_netcdf_item(path)
     assert item.common_metadata.start_datetime == datetime.datetime(
         year, 1, 1, tzinfo=tzutc()
     )
     assert item.common_metadata.end_datetime
     assert item.common_metadata.end_datetime.year != year
     assert item.properties["noaa_cdr:interval"] == interval
+    assert item.properties["noaa_cdr:max_depth"] == max_depth
     item.validate()

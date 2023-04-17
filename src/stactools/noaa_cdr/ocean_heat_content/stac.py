@@ -2,7 +2,9 @@ import logging
 import os.path
 from typing import Iterator, List, Optional
 
+import fsspec
 import pystac.utils
+import xarray
 from pystac import Asset, CatalogType, Collection, Item
 from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
 from pystac.extensions.projection import ProjectionExtension
@@ -10,6 +12,7 @@ from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 from stactools.core.io import ReadHrefModifier
 
+from .. import stac
 from ..constants import (
     DEFAULT_CATALOG_TYPE,
     GLOBAL_BBOX,
@@ -171,6 +174,22 @@ def create_items(
         )
         items = _update_items(items, cogs)
     return items
+
+
+def create_netcdf_item(
+    href: str,
+    read_href_modifier: Optional[ReadHrefModifier] = None,
+) -> Item:
+    item = stac.create_item(
+        href=href, decode_times=False, read_href_modifier=read_href_modifier
+    )
+    if read_href_modifier:
+        href = read_href_modifier(href)
+    with fsspec.open(href) as file:
+        with xarray.open_dataset(file, decode_times=False) as dataset:
+            max_depth = int(dataset.attrs["geospatial_vertical_max"])
+    item.properties[MAX_DEPTH_ATTRIBUTE_NAME] = max_depth
+    return item
 
 
 def _update_items(items: List[Item], cogs: List[Cog]) -> List[Item]:
