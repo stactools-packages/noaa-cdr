@@ -12,6 +12,7 @@ number as needed.
 ### Added
 
 - Summaries for the ocean heat content collection ([#50](https://github.com/stactools-packages/noaa-cdr/pull/50))
+- `max_depth` to ocean heat content netcdf items ([#52](https://github.com/stactools-packages/noaa-cdr/pull/52))
 
 ## [0.2.1] - 2023-03-31
 
