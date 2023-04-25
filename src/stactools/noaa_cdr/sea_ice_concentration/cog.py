@@ -46,9 +46,9 @@ class SeaIceConcentrationBandProfile(BandProfile):
 
     def bitfield(self) -> List[Dict[str, Any]]:
         if "flag_mask_meanings" in self.attrs:
-            meanings = self.attrs["flag_mask_meanings"].split(" ")
+            meanings = self.attrs["flag_mask_meanings"].strip().split(" ")
         elif "flag_meanings" in self.attrs:
-            meanings = self.attrs["flag_meanings"].split(" ")
+            meanings = self.attrs["flag_meanings"].strip().split(" ")
         else:
             raise ValueError(
                 "could not find 'flag_mask_meanings' or 'flag_meanings' in self.attrs"
