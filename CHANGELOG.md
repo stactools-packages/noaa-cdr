@@ -17,6 +17,7 @@ number as needed.
 ### Removed
 
 - Spurious bitfield for sea ice concentration ([#53](https://github.com/stactools-packages/noaa-cdr/pull/53))
+- `updated` from collections' item assets ([#54](https://github.com/stactools-packages/noaa-cdr/pull/54))
 
 ## [0.2.1] - 2023-03-31
 
