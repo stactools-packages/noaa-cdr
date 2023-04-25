@@ -47,6 +47,8 @@ def write_item_assets(item: Item, path: Path) -> None:
             del asset_dict["description"]
         if "created" in asset_dict:
             del asset_dict["created"]
+        if "updated" in asset_dict:
+            del asset_dict["updated"]
         item_assets[key] = asset_dict
     with open(path, "w") as file:
         file.write(
