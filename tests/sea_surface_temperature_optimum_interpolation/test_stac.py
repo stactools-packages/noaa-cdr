@@ -40,7 +40,7 @@ def test_create_item() -> None:
     assert len(item.assets) == 1
     asset = item.assets["netcdf"]
     assert asset.href == path
-    assert asset.media_type == "application/netcdf"
+    assert asset.media_type == "application/x-netcdf"
     assert asset.roles
     assert set(asset.roles) == {"data"}
     assert asset.common_metadata.created == datetime.datetime(

@@ -71,7 +71,7 @@ def create_item(
                 href=href,
                 title=f"{ds.title} NetCDF",
                 description=ds.summary,
-                media_type="application/netcdf",
+                media_type="application/x-netcdf",
                 roles=["data"],
             )
             asset.common_metadata.created = dateutil.parser.parse(ds.date_created)

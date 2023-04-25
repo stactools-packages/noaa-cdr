@@ -87,7 +87,7 @@ def create_collection(
                 href=href,
                 title=ASSET_METADATA[key]["title"],
                 description=ASSET_METADATA[key]["description"],
-                media_type="application/netcdf",
+                media_type="application/x-netcdf",
                 roles=["data", "source"],
             ),
         )
