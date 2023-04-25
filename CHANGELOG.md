@@ -14,6 +14,10 @@ number as needed.
 - Summaries for the ocean heat content collection ([#50](https://github.com/stactools-packages/noaa-cdr/pull/50))
 - `max_depth` to ocean heat content netcdf items ([#52](https://github.com/stactools-packages/noaa-cdr/pull/52))
 
+### Removed
+
+- Spurious bitfield for sea ice concentration ([#53](https://github.com/stactools-packages/noaa-cdr/pull/53))
+
 ## [0.2.1] - 2023-03-31
 
 ### Added
