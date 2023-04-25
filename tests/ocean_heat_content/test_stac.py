@@ -22,7 +22,7 @@ def test_create_collection() -> None:
     for asset in collection.assets.values():
         assert asset.title is not None
         assert asset.description is not None
-        assert asset.media_type == "application/netcdf"
+        assert asset.media_type == "application/x-netcdf"
         assert asset.roles
         assert set(asset.roles) == {"data", "source"}
 
