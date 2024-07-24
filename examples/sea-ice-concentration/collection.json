@@ -125,6 +125,16 @@
       "rel": "item",
       "href": "./south/seaice_conc_daily_sh_2005_v04r00.json",
       "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2023_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2022_v04r00.json",
+      "type": "application/json"
     }
   ],
   "stac_extensions": [
