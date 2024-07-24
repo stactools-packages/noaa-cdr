@@ -50,7 +50,20 @@
       ]
     ]
   },
-  "links": [],
+  "links": [
+    {
+      "rel": "root",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "Sea Ice Concentration CDR"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "Sea Ice Concentration CDR"
+    }
+  ],
   "assets": {
     "netcdf": {
       "href": "https://noaadata.apps.nsidc.org/NOAA/G02202_V4/north/aggregate/seaice_conc_monthly_nh_197811_202312_v04r00.nc",
