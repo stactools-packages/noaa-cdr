@@ -135,6 +135,21 @@
       "rel": "item",
       "href": "./north/seaice_conc_daily_nh_2022_v04r00.json",
       "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./seaice_conc_daily_sh_1978_v04r00/seaice_conc_daily_sh_1978_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./seaice_conc_daily_sh_1979_v04r00/seaice_conc_daily_sh_1979_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./seaice_conc_daily_sh_1980_v04r00/seaice_conc_daily_sh_1980_v04r00.json",
+      "type": "application/json"
     }
   ],
   "stac_extensions": [
@@ -588,7 +603,7 @@
     "temporal": {
       "interval": [
         [
-          "1978-11-01T00:00:00Z",
+          "1978-10-25T00:00:00Z",
           "2023-12-31T23:59:59Z"
         ]
       ]
