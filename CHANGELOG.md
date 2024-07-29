@@ -13,6 +13,7 @@ number as needed.
 
 - Summaries for the ocean heat content collection ([#50](https://github.com/stactools-packages/noaa-cdr/pull/50))
 - `max_depth` to ocean heat content netcdf items ([#52](https://github.com/stactools-packages/noaa-cdr/pull/52))
+- Aggregate examples for sea ice concentration, add `common_metadata` to items
 
 ### Changed
 

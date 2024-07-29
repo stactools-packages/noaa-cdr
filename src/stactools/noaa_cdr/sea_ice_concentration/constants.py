@@ -82,7 +82,7 @@ KEYWORDS = COMMON_KEYWORDS + [
     "Polar",
     "Earth Science",
     "Cryosphere",
-    "Sea ice concentration"
+    "Sea ice concentration",
 ]
 KEYWORDS.remove("Global")
 ITEM_ASSETS = orjson.loads(

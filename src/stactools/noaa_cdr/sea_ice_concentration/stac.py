@@ -14,10 +14,10 @@ from ..constants import (
 from . import cog
 from .constants import (
     CITATION,
+    DATA_HOMEPAGE_LINK,
     DESCRIPTION,
     DOI,
     EXTENT,
-    DATA_HOMEPAGE_LINK,
     HOMEPAGE_LINK,
     ID,
     ITEM_ASSETS,
