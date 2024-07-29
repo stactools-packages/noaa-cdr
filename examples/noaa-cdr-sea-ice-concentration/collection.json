@@ -492,7 +492,7 @@
       "type": "application/json"
     },
     {
-      "rel":"parent",
+      "rel": "parent",
       "href": "../catalog.json",
       "type": "application/json",
       "title": "Climate Data Records"
