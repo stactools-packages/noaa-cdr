@@ -1,0 +1,78 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "id": "seaice_conc_daily_sh_1993_v04r00",
+  "properties": {
+    "start_datetime": "1993-01-01T00:00:00Z",
+    "end_datetime": "1993-12-31T23:59:59Z",
+    "noaa_cdr:interval": "daily",
+    "processing:level": "L3",
+    "proj:epsg": null,
+    "proj:wkt2": "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"unknown\",ELLIPSOID[\"unknown\",6378273,298.279411123064,LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Polar Stereographic (variant B)\",ID[\"EPSG\",9829]],PARAMETER[\"Latitude of standard parallel\",-70,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8832]],PARAMETER[\"Longitude of origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8833]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",north,MERIDIAN[90,ANGLEUNIT[\"degree\",0.0174532925199433,ID[\"EPSG\",9122]]],ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,MERIDIAN[0,ANGLEUNIT[\"degree\",0.0174532925199433,ID[\"EPSG\",9122]]],ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]",
+    "proj:shape": [
+      332,
+      316
+    ],
+    "proj:transform": [
+      25000.0,
+      0.0,
+      -3950000.0,
+      0.0,
+      -25000.0,
+      4350000.0
+    ],
+    "datetime": null
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          180.0,
+          -90.0
+        ],
+        [
+          180.0,
+          -41.45
+        ],
+        [
+          -180.0,
+          -41.45
+        ],
+        [
+          -180.0,
+          -90.0
+        ],
+        [
+          180.0,
+          -90.0
+        ]
+      ]
+    ]
+  },
+  "links": [],
+  "assets": {
+    "netcdf": {
+      "href": "https://noaadata.apps.nsidc.org/NOAA/G02202_V4/south/aggregate/seaice_conc_daily_sh_1993_v04r00.nc",
+      "type": "application/x-netcdf",
+      "title": "NOAA/NSIDC Climate Data Record of Passive Microwave Sea Ice Concentration Version 4 NetCDF",
+      "description": "This data set provides a passive microwave sea ice concentration climate data record (CDR) based on gridded brightness temperatures (TBs) from the Defense Meteorological Satellite Program (DMSP) series of passive microwave radiometers: the Nimbus-7 Scanning Multichannel Microwave Radiometer (SMMR), the Special Sensor Microwave Imager (SSM/I) and the Special Sensor Microwave Imager/Sounder (SSMIS). The sea ice concentration CDR is an estimate of sea ice concentration that is produced by combining concentration estimates from two algorithms developed at the NASA Goddard Space Flight Center (GSFC): the NASA Team algorithm and the Bootstrap algorithm. The individual algorithms are used to process and combine brightness temperatures at NSIDC. This product is designed to provide a consistent time series of sea ice concentrations (the fraction, or percentage, of ocean area covered by sea ice) from November 1978 to the present which spans the coverage of several passive microwave instruments. The data are gridded on the NSIDC polar stereographic grid with 25 x 25 km grid cells, and are available in NetCDF file format. Each file contains a variable with the CDR concentration values as well as variables that hold the NASA Team and Bootstrap processed concentrations for reference. Variables containing standard deviation, quality flags, and projection information are also included. Data are available via FTP.",
+      "created": "2021-06-21T21:53:33Z",
+      "platform": "DMSP 5D-2/F11 > Defense Meteorological Satellite Program-F11",
+      "instruments": "SSM/I > Special Sensor Microwave/Imager",
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "bbox": [
+    -180.0,
+    -90.0,
+    180.0,
+    -41.45
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/processing/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json"
+  ]
+}

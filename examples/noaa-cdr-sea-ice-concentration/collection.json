@@ -138,6 +138,86 @@
     },
     {
       "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1999_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1998_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1997_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1996_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1995_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1994_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1993_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1992_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1991_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1990_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1989_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1988_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1987_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1986_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1985_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1984_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
       "href": "./south/seaice_conc_daily_sh_1983_v04r00.json",
       "type": "application/json"
     },
@@ -283,7 +363,122 @@
     },
     {
       "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2001_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2000_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1999_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1998_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1997_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
       "href": "./north/seaice_conc_daily_nh_1996_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1995_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1994_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1993_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1992_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1991_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1990_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1989_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1988_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1987_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1986_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1985_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1984_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1983_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1982_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1981_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1980_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1979_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1978_v04r00.json",
       "type": "application/json"
     },
     {
