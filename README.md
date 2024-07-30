@@ -110,6 +110,21 @@ stac noaa-cdr ocean-heat-content create-collection --create-items --latest-only 
   examples/ocean-heat-content/collection.json
 ```
 
+To create an item for sea-ice-concentration (without COGS):
+
+```sh
+stac noaa-cdr sea-ice-concentration create-item
+ https://noaadata.apps.nsidc.org/NOAA/G02202_V4/north/daily/2023/seaice_conc_daily_nh_20230203_f17_v04r00.nc
+ noaa-cdr-sea-ice-concentration/north/seaice_conc_daily_nh_20230203_f17_v04r00.json
+```
+
+To add an item to a catalog:
+
+```sh
+stac add examples/sea-ice-concentration/north/seaice_conc_daily_20230203_f17_v0400.json
+ examples/noaa-cdr-sea-ice-concentration/collection.json
+```
+
 Each CDR has its own flavor of command line interface; use `stac noaa-cdr
 --help` to see a list of supported CDRs.
 
