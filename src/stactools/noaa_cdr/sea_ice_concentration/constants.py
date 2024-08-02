@@ -67,16 +67,6 @@ PROVIDERS = [
         "https://nsidc.org/data/g02202/versions/4",
     )
 ]
-# This link is invalid
-# LICENSE_LINK = Link(
-#     "license",
-#     (
-#         "https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/"
-#         "Sea_Ice_Concentration/UseAgreement_01B-11.pdf"
-#     ),
-#     MediaType.PDF,
-#     "NOAA CDR Sea Ice Concentration Use Agreement",
-# )
 KEYWORDS = COMMON_KEYWORDS + [
     "Sea ice",
     "Polar",
