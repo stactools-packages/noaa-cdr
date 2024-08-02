@@ -100,7 +100,7 @@ HOMEPAGE_LINK = Link(
 DATA_HOMEPAGE_LINK = Link(
     target=("https://nsidc.org/data/g02202/versions/4"),
     rel="about",
-    media_type="MediaType.HTML",
+    media_type=MediaType.HTML,
     title="CDR Homepage",
 )
 SPATIAL_RESOLUTION = 25000.0
