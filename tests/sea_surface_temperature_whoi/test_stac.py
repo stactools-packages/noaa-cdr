@@ -1,13 +1,14 @@
 from pathlib import Path
 
+import pytest
 from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
-
 from stactools.noaa_cdr.sea_surface_temperature_whoi import stac
 
 from .. import test_data
 
 
+@pytest.mark.external_data
 def test_create_cog_items(tmp_path: Path) -> None:
     path = test_data.get_external_data(
         "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.nc"

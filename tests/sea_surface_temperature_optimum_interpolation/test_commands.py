@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import pytest
 from pystac import Collection, Item
 
 from tests import run_command, test_data
@@ -19,6 +20,7 @@ def test_create_collection(tmp_path: Path) -> None:
     collection.validate()
 
 
+@pytest.mark.external_data
 def test_create_item(tmp_path: Path) -> None:
     destination = tmp_path / "item.json"
     infile = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
@@ -33,6 +35,7 @@ def test_create_item(tmp_path: Path) -> None:
     item.validate()
 
 
+@pytest.mark.external_data
 def test_create_item_with_cogs(tmp_path: Path) -> None:
     path = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
     result = run_command(

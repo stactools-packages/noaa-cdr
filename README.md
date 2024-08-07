@@ -136,6 +136,13 @@ To run the tests:
 pytest
 ```
 
+Many tests are skipped by default because access external data, which makes them slow and a bit flakey.
+To run these tests:
+
+```shell
+pytest --external-data
+```
+
 ### Updating static resources
 
 There are several .json files in the source tree that are used to populate
