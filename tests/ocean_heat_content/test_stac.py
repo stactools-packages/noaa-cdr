@@ -9,7 +9,6 @@ from dateutil.tz import tzutc
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
-
 from stactools.noaa_cdr.ocean_heat_content import cog, stac
 
 from .. import test_data
@@ -51,6 +50,7 @@ def test_create_collection() -> None:
     collection.validate_all()
 
 
+@pytest.mark.external_data
 def test_create_items_one_netcdf(tmp_path: Path) -> None:
     path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
     items = stac.create_items([path], str(tmp_path))
@@ -88,6 +88,7 @@ def test_create_items_one_netcdf(tmp_path: Path) -> None:
         item.validate()
 
 
+@pytest.mark.external_data
 def test_create_items_one_netcdf_cog_hrefs(tmp_path: Path) -> None:
     path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
     items = stac.create_items([path], str(tmp_path))
@@ -104,6 +105,7 @@ def test_create_items_one_netcdf_cog_hrefs(tmp_path: Path) -> None:
     assert len(new_items) == len(items)
 
 
+@pytest.mark.external_data
 def test_create_items_two_netcdfs_same_items(tmp_path: Path) -> None:
     paths = [
         test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc"),
@@ -118,6 +120,7 @@ def test_create_items_two_netcdfs_same_items(tmp_path: Path) -> None:
         item.validate()
 
 
+@pytest.mark.external_data
 def test_create_items_two_netcdfs_different_items() -> None:
     paths = [
         test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc"),
@@ -133,6 +136,7 @@ def test_create_items_two_netcdfs_different_items() -> None:
         item.validate()
 
 
+@pytest.mark.external_data
 def test_create_items_one_netcdf_latest_only(tmp_path: Path) -> None:
     path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
     items = stac.create_items([path], str(tmp_path), latest_only=True)
@@ -155,6 +159,7 @@ def test_create_items_one_netcdf_latest_only(tmp_path: Path) -> None:
         ("mean_total_steric_sea_level_anomaly_0-2000_yearly.nc", 17),
     ],
 )
+@pytest.mark.external_data
 def test_cogify(tmp_path: Path, infile: str, num_cogs: int) -> None:
     external_data_path = test_data.get_external_data(infile)
     cogs = cog.cogify(external_data_path, str(tmp_path))
@@ -165,6 +170,7 @@ def test_cogify(tmp_path: Path, infile: str, num_cogs: int) -> None:
         assert Path(c.asset().href).exists()
 
 
+@pytest.mark.external_data
 def test_cogify_href(tmp_path: Path) -> None:
     href = (
         "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data"
@@ -178,6 +184,7 @@ def test_cogify_href(tmp_path: Path) -> None:
         assert Path(c.asset().href).exists()
 
 
+@pytest.mark.external_data
 def test_cogify_href_no_output_directory() -> None:
     href = (
         "https://www.ncei.noaa.gov/data/oceans/ncei/archive/data"
@@ -187,12 +194,14 @@ def test_cogify_href_no_output_directory() -> None:
         cog.cogify(href)
 
 
+@pytest.mark.external_data
 def test_unitless(tmp_path: Path) -> None:
     path = test_data.get_external_data("mean_salinity_anomaly_0-2000_yearly.nc")
     cogs = cog.cogify(path, str(tmp_path))
     assert "unit" not in cogs[0].asset().extra_fields["raster:bands"][0]
 
 
+@pytest.mark.external_data
 def test_cogify_cog_href(tmp_path: Path) -> None:
     path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
     cogs = cog.cogify(path, str(tmp_path))
@@ -222,6 +231,7 @@ def test_cogify_cog_href(tmp_path: Path) -> None:
         ("heat_content_anomaly_0-2000_seasonal.nc", 2005, "seasonal", 2000),
     ],
 )
+@pytest.mark.external_data
 def test_create_netcdf_item(
     infile: str, year: int, interval: str, max_depth: int
 ) -> None:

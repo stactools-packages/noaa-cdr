@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import pytest
 from pystac import Collection, ItemCollection
 
 from tests import run_command, test_data
@@ -16,6 +17,7 @@ def test_create_collection(tmp_path: Path) -> None:
     collection.validate()
 
 
+@pytest.mark.external_data
 def test_create_items(tmp_path: Path) -> None:
     destination = tmp_path / "item-collection.json"
     infile = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
@@ -38,6 +40,7 @@ def test_download() -> None:
     assert result.exit_code == 0
 
 
+@pytest.mark.external_data
 def test_cogify(tmp_path: Path) -> None:
     path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
     result = run_command(f"noaa-cdr ocean-heat-content cogify {path} -o {tmp_path}")

@@ -1,11 +1,11 @@
 import pytest
 import xarray
-
 from stactools.noaa_cdr import dataset
 
 from . import test_data
 
 
+@pytest.mark.external_data
 def test_data_variable_name() -> None:
     path = test_data.get_external_data("heat_content_anomaly_0-2000_yearly.nc")
     with xarray.open_dataset(path, decode_times=False) as ds:
@@ -23,6 +23,7 @@ def test_data_variable_name() -> None:
             dataset.data_variable_name(ds)
 
 
+@pytest.mark.external_data
 def test_data_variable_names() -> None:
     path = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
     with xarray.open_dataset(path) as ds:

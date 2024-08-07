@@ -1,12 +1,13 @@
 import datetime
 from pathlib import Path
 
+import pytest
+import stactools.noaa_cdr.stac
 from dateutil.tz import tzutc
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterExtension
-
-import stactools.noaa_cdr.stac
 from stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation import stac
+
 from tests import test_data
 
 
@@ -20,6 +21,7 @@ def test_create_collection() -> None:
     collection.validate()
 
 
+@pytest.mark.external_data
 def test_create_item() -> None:
     path = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
     item = stac.create_item(path)
@@ -58,6 +60,7 @@ def test_create_item() -> None:
     item.validate()
 
 
+@pytest.mark.external_data
 def test_add_items(tmp_path: Path) -> None:
     path = test_data.get_external_data("oisst-avhrr-v02r01.20220913.nc")
     item = stac.create_item(path)

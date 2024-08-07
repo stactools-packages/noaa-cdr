@@ -1,10 +1,12 @@
 from pathlib import Path
 
+import pytest
 from pystac import Collection, ItemCollection
 
 from .. import run_command, test_data
 
 
+@pytest.mark.external_data
 def test_create_cog_items(tmp_path: Path) -> None:
     path = test_data.get_external_data(
         "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.nc"
