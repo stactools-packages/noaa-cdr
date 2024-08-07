@@ -1,10 +1,8 @@
-black
 codespell
-flake8
-isort
 mypy
 pre-commit
 pytest
 pytest-cov
+ruff
 types-python-dateutil
 types-requests
