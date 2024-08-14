@@ -2,7 +2,6 @@ import datetime
 from typing import Tuple
 
 import pytest
-
 from stactools.noaa_cdr import time
 from stactools.noaa_cdr.time import TimeResolution
 

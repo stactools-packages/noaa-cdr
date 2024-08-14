@@ -17,9 +17,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import stactools.core.copy
-from pystac import Catalog, CatalogType
-
 import stactools.noaa_cdr.stac
+from pystac import Catalog, CatalogType
 from stactools.noaa_cdr.ocean_heat_content import stac as ocean_heat_content_stac
 from stactools.noaa_cdr.sea_ice_concentration import stac as sea_ice_concentration_stac
 from stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation import (

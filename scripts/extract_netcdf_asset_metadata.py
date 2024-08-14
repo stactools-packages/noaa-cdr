@@ -18,10 +18,9 @@ import sys
 from typing import Dict
 
 import fsspec
+import stactools.noaa_cdr.ocean_heat_content
 import xarray
 from tqdm import tqdm
-
-import stactools.noaa_cdr.ocean_heat_content
 
 metadata: Dict[str, Dict[str, str]] = {}
 for href in tqdm(list(stactools.noaa_cdr.ocean_heat_content.iter_noaa_hrefs())):

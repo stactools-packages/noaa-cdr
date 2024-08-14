@@ -2,10 +2,9 @@ import os
 
 import click
 import pystac.utils
+import stactools.noaa_cdr.stac
 from click import Command, Group
 from pystac import CatalogType
-
-import stactools.noaa_cdr.stac
 
 from . import stac
 

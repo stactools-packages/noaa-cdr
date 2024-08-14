@@ -11,9 +11,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import orjson
-from pystac import Item
-
 import stactools.noaa_cdr.stac
+from pystac import Item
 from stactools.noaa_cdr.sea_ice_concentration import stac as sea_ice_stac
 from stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation import (
     stac as oisst_stac,

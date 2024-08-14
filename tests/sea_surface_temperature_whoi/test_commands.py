@@ -12,7 +12,8 @@ def test_create_cog_items(tmp_path: Path) -> None:
         "SEAFLUX-OSB-CDR_V02R00_SST_D20210831_C20211223.nc"
     )
     result = run_command(
-        f"noaa-cdr sea-surface-temperature-whoi create-cog-items {path} {tmp_path}/out.json"
+        f"noaa-cdr sea-surface-temperature-whoi create-cog-items {path} {tmp_path}"
+        "/out.json"
     )
     assert result.exit_code == 0, result.output
     item_collection = ItemCollection.from_file(str(tmp_path / "out.json"))

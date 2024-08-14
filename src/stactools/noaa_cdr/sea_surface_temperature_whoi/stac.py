@@ -9,7 +9,6 @@ from pystac import Collection, Item
 from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
 from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
-
 from stactools.noaa_cdr.profile import BandProfile
 
 from .. import cog, dataset, stac, time
