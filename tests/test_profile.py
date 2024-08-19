@@ -1,5 +1,4 @@
 import xarray
-
 from stactools.noaa_cdr.profile import BandProfile
 
 from . import test_data

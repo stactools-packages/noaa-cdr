@@ -2,9 +2,8 @@ import os
 
 import click
 import pystac.utils
-from click import Command, Group
-
 import stactools.noaa_cdr.stac
+from click import Command, Group
 from stactools.noaa_cdr.sea_ice_concentration import stac
 
 

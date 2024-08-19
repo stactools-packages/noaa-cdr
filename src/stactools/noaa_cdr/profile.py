@@ -128,7 +128,8 @@ class BandProfile:
         )
         if not data_type:
             raise ValueError(
-                f"No raster extension DataType found for numpy dtype: {data_array.dtype}"
+                f"No raster extension DataType found for numpy dtype:"
+                f"{data_array.dtype}"
             )
         if data_type.startswith("float"):
             nodata: Any = numpy.nan
@@ -221,7 +222,8 @@ class BandProfile:
 
 def _parse_resolution(value: Any) -> float:
     if isinstance(value, str):
-        # Assume that the first part is a number and the rest are units, e.g. for ocean heat content
+        # Assume that the first part is a number and the rest are units,
+        # e.g. for ocean heat content
         return float(value.split(" ")[0])
     else:
         return float(value)

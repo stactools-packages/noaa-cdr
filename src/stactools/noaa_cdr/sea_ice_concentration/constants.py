@@ -67,16 +67,13 @@ PROVIDERS = [
         "https://nsidc.org/data/g02202/versions/4",
     )
 ]
-LICENSE_LINK = Link(
-    "license",
-    (
-        "https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/"
-        "Sea_Ice_Concentration/UseAgreement_01B-11.pdf"
-    ),
-    MediaType.PDF,
-    "NOAA CDR Sea Ice Concentration Use Agreement",
-)
-KEYWORDS = COMMON_KEYWORDS + ["Sea ice", "Polar"]
+KEYWORDS = COMMON_KEYWORDS + [
+    "Sea ice",
+    "Polar",
+    "Earth Science",
+    "Cryosphere",
+    "Sea ice concentration",
+]
 KEYWORDS.remove("Global")
 ITEM_ASSETS = orjson.loads(
     importlib_resources.files("stactools.noaa_cdr.sea_ice_concentration")
@@ -88,5 +85,12 @@ HOMEPAGE_LINK = Link(
     target="https://www.ncei.noaa.gov/products/climate-data-records/sea-ice-concentration",
     media_type=MediaType.HTML,
     title="Sea Ice Concentration CDR",
+)
+# Want to include this because the user guide will always be findable here.
+DATA_HOMEPAGE_LINK = Link(
+    target=("https://nsidc.org/data/g02202/versions/4"),
+    rel="about",
+    media_type=MediaType.HTML,
+    title="CDR Homepage",
 )
 SPATIAL_RESOLUTION = 25000.0

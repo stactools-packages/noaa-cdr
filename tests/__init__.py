@@ -3,10 +3,9 @@ from typing import Any, Dict, Sequence, Union
 
 import click
 from click.testing import CliRunner, Result
-from stactools.testing.test_data import TestData
-
 from stactools.noaa_cdr import ocean_heat_content
 from stactools.noaa_cdr.commands import create_noaa_cdr_command
+from stactools.testing.test_data import TestData
 
 external_data: Dict[str, Any] = {
     "oisst-avhrr-v02r01.20220913.nc": {

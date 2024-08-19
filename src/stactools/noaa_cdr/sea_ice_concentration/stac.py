@@ -14,6 +14,7 @@ from ..constants import (
 from . import cog
 from .constants import (
     CITATION,
+    DATA_HOMEPAGE_LINK,
     DESCRIPTION,
     DOI,
     EXTENT,
@@ -21,7 +22,6 @@ from .constants import (
     ID,
     ITEM_ASSETS,
     KEYWORDS,
-    LICENSE_LINK,
     PROVIDERS,
     TITLE,
 )
@@ -51,9 +51,10 @@ def create_collection() -> Collection:
         catalog_type=DEFAULT_CATALOG_TYPE,
         providers=PROVIDERS,
         keywords=KEYWORDS,
+        license="proprietary",
     )
 
-    collection.add_link(LICENSE_LINK)
+    collection.add_link(DATA_HOMEPAGE_LINK)
     collection.add_link(HOMEPAGE_LINK)
 
     item_assets = ItemAssetsExtension.ext(collection, add_if_missing=True)

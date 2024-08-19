@@ -6,7 +6,6 @@ import pytest
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterExtension
 from pystac.extensions.scientific import ScientificExtension
-
 from stactools.noaa_cdr.constants import CLASSIFICATION_EXTENSION_SCHEMA
 from stactools.noaa_cdr.sea_ice_concentration import cog, stac
 

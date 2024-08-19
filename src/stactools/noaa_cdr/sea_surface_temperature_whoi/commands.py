@@ -4,7 +4,6 @@ import click
 import pystac.utils
 from click import Command, Group
 from pystac import ItemCollection
-
 from stactools.noaa_cdr.sea_surface_temperature_whoi import stac
 
 

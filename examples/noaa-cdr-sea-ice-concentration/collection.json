@@ -11,10 +11,10 @@
       "title": "Climate Data Records"
     },
     {
-      "rel": "license",
-      "href": "https://www.ncei.noaa.gov/pub/data/sds/cdr/CDRs/Sea_Ice_Concentration/UseAgreement_01B-11.pdf",
-      "type": "application/pdf",
-      "title": "NOAA CDR Sea Ice Concentration Use Agreement"
+      "rel": "about",
+      "href": "https://nsidc.org/data/g02202/versions/4",
+      "type": "MediaType.HTML",
+      "title": "CDR Homepage"
     },
     {
       "rel": "about",
@@ -25,6 +25,466 @@
     {
       "rel": "cite-as",
       "href": "https://doi.org/10.7265/efmz-2t65"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2023_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2022_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2021_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2020_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2019_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2018_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2017_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2016_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2015_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2014_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2013_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2012_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2011_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2010_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2009_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2008_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2005_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2004_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2003_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2002_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2001_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2000_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1999_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1998_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1997_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1996_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1995_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1994_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1993_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1992_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1991_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1990_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1989_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1988_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1987_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1986_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1985_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1984_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1983_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1982_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1981_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1980_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1979_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_1978_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_monthly_sh_197811_202312_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2023_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2022_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2021_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2020_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2019_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2018_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2017_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2016_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2015_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2014_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2013_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2012_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2011_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2010_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2009_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2008_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2007_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2006_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2005_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2004_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2003_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2002_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2001_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2000_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1999_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1998_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1997_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1996_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1995_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1994_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1993_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1992_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1991_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1990_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1989_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1988_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1987_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1986_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1985_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1984_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1983_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1982_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1981_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1980_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1979_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_1978_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_monthly_nh_197811_202312_v04r00.json",
+      "type": "application/json"
     },
     {
       "rel": "item",
@@ -480,21 +940,9 @@
       "bbox": [
         [
           -180.0,
-          -90,
-          180,
-          90
-        ],
-        [
-          -180,
-          31.1,
+          -90.0,
           180.0,
-          90
-        ],
-        [
-          -180,
-          -90,
-          180.0,
-          -39.36
+          90.0
         ]
       ]
     },
@@ -502,7 +950,7 @@
       "interval": [
         [
           "1978-10-25T00:00:00Z",
-          null
+          "2023-12-31T23:59:59Z"
         ]
       ]
     }
@@ -512,7 +960,10 @@
     "Climate",
     "NOAA",
     "Sea ice",
-    "Polar"
+    "Polar",
+    "Earth Science",
+    "Cryosphere",
+    "Sea ice concentration"
   ],
   "providers": [
     {

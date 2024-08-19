@@ -75,6 +75,8 @@ def create_item(
                 roles=["data"],
             )
             asset.common_metadata.created = dateutil.parser.parse(ds.date_created)
+            asset.common_metadata.platform = ds.platform
+            asset.common_metadata.instruments = [ds.sensor]
             if "date_modified" in ds.attrs:
                 asset.common_metadata.updated = dateutil.parser.parse(ds.date_modified)
             item.assets[NETCDF_ASSET_KEY] = asset
