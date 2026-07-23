@@ -11,18 +11,48 @@ number as needed.
 
 ### Added
 
-- Summaries for the ocean heat content collection ([#50](https://github.com/stactools-packages/noaa-cdr/pull/50))
-- `max_depth` to ocean heat content netcdf items ([#52](https://github.com/stactools-packages/noaa-cdr/pull/52))
+- Summaries for the ocean heat content collection
+  ([#50](https://github.com/stactools-packages/noaa-cdr/pull/50))
+- `max_depth` to ocean heat content netcdf items
+  ([#52](https://github.com/stactools-packages/noaa-cdr/pull/52))
 - Aggregate examples for sea ice concentration, add `common_metadata` to items
+- Support for NOAA/NSIDC Sea Ice Concentration CDR Version 6 (G02202 V6),
+  including updated variable names, the new `cdr_supplementary` netCDF4 group,
+  AMSR2 as an input source, and updated DOI/citation
+- `cdr_melt_onset_day` and `surface_type_mask` assets (from `cdr_supplementary`
+  group)
+- 8-bit QA flag bitfield (V6 adds `No_input_data` and `melt_start_detected`
+  bits)
+- `classification:classes` for `cdr_seaice_conc_interp_temporal_flag` (31
+  discrete enumerated values)
+- `h5py` as an explicit dependency
+- Daily and monthly STAC GeoParquet ingestion pipeline
+  (`scripts/update_geoparquet/`)
+- GitHub Actions workflow for automated daily GeoParquet updates
+- Static STAC catalog and collection generation script
+  (`scripts/update_geoparquet/generate_catalog.py`)
 
 ### Changed
 
-- Use `application/x-netcdf` for media types instead of `application/netcdf` ([#55](https://github.com/stactools-packages/noaa-cdr/pull/55))
+- Use `application/x-netcdf` for media types instead of `application/netcdf`
+  ([#55](https://github.com/stactools-packages/noaa-cdr/pull/55))
+- `profile.py` grid geometry resolution now supports V6's `crs` variable
+  (renamed from `projection`) and derives shape from `x`/`y` coordinate arrays
+  when `parent_grid_cell_row/column_subset_end` attributes are absent
+- `cog.py` merges `cdr_supplementary` netCDF4 group into root dataset before
+  COG generation
+- `surface_type_mask` replaces embedded land-mask flag values on
+  `cdr_seaice_conc` (removed as of V5)
+- Updated DOI to `10.7265/b18j-z797`, citation, and dataset homepage URL to V6
 
 ### Removed
 
-- Spurious bitfield for sea ice concentration ([#53](https://github.com/stactools-packages/noaa-cdr/pull/53))
-- `updated` from collections' item assets ([#54](https://github.com/stactools-packages/noaa-cdr/pull/54))
+- Spurious bitfield for sea ice concentration
+  ([#53](https://github.com/stactools-packages/noaa-cdr/pull/53))
+- `updated` from collections' item assets
+  ([#54](https://github.com/stactools-packages/noaa-cdr/pull/54))
+- V4 test fixtures (`seaice_conc_daily/monthly_nh/sh_*.nc`), replaced with
+  real V6 sample files
 
 ## [0.2.1] - 2023-03-31
 

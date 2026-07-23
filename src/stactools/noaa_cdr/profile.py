@@ -13,6 +13,13 @@ from xarray import DataArray, Dataset
 
 UNITLESS = ["unitless", "1"]
 
+# G02202 (sea ice concentration) renamed its grid-mapping variable from
+# `projection` (V4) to `crs` (V6). We check for either name so this same
+# profile code keeps working across CDR versions/products.
+GRID_MAPPING_VARIABLE_NAMES = ("projection", "crs")
+X_VARIABLE_NAMES = ("xgrid", "x")
+Y_VARIABLE_NAMES = ("ygrid", "y")
+
 
 @dataclass
 class DatasetProfile:
@@ -44,19 +51,17 @@ class DatasetProfile:
         ymin = float(dataset.geospatial_lat_min)
         ymax = float(dataset.geospatial_lat_max)
 
-        if "projection" in dataset.variables:
+        grid_mapping_name = next(
+            (n for n in GRID_MAPPING_VARIABLE_NAMES if n in dataset.variables), None
+        )
+        if grid_mapping_name is not None:
+            grid_mapping = dataset[grid_mapping_name]
             # We can't use the spatial reference attribute, which is WKT,
             # because it doesn't parse valid for sea ice.
             epsg = None
-            crs = CRS(dataset.projection.proj4text)
+            crs = CRS(grid_mapping.attrs["proj4text"])
             wkt2 = crs.to_wkt(WktVersion.WKT2_2019)
-            shape = [
-                int(dataset.projection.parent_grid_cell_row_subset_end),
-                int(dataset.projection.parent_grid_cell_column_subset_end),
-            ]
-            transform = Affine.from_gdal(
-                *list(float(s) for s in dataset.projection.GeoTransform.split(" "))
-            )
+            shape, transform = _grid_geometry(dataset, grid_mapping)
             needs_vertical_flip = False
         else:
             epsg = 4326
@@ -133,8 +138,13 @@ class BandProfile:
             )
         if data_type.startswith("float"):
             nodata: Any = numpy.nan
-        else:
+        elif "_FillValue" in data_array.attrs:
             nodata = int(data_array._FillValue)
+        else:
+            # Some variables are documented with "Fill Value: N/A" (e.g. V6's
+            # surface_type_mask and daily cdr_melt_onset_day) and genuinely
+            # have no _FillValue attribute in the netCDF file.
+            nodata = None
         if "scale_factor" in data_array.attrs:
             scale = float(data_array.scale_factor)
         else:
@@ -184,7 +194,9 @@ class BandProfile:
         }
 
     def raster_band(self) -> RasterBand:
-        if math.isnan(self.nodata):
+        if self.nodata is None:
+            nodata: Any = None
+        elif math.isnan(self.nodata):
             nodata = NoDataStrings.NAN
         else:
             nodata = self.nodata
@@ -218,6 +230,66 @@ class BandProfile:
     @property
     def needs_vertical_flip(self) -> bool:
         return self.dataset_profile.needs_vertical_flip
+
+
+def _grid_geometry(dataset: Dataset, grid_mapping: DataArray) -> Any:
+    """Returns (shape, transform) for a projected (non-geographic) grid.
+
+    Tries the GDAL-style ``GeoTransform`` attribute on the grid-mapping
+    variable first for the transform, since that's present on both V4's
+    ``projection`` and V6's ``crs`` variables. Shape comes from
+    ``parent_grid_cell_row/column_subset_end`` if present (V4), otherwise
+    from the length of the `x`/`y` (or `xgrid`/`ygrid`) coordinate
+    variables -- confirmed against a real V6 file that ``crs`` keeps
+    `GeoTransform` but no longer has the `parent_grid_cell_*` attrs at all.
+    If `GeoTransform` itself is missing, the whole transform is derived
+    from the x/y coordinate arrays instead.
+    """
+    x_name = next((n for n in X_VARIABLE_NAMES if n in dataset.variables), None)
+    y_name = next((n for n in Y_VARIABLE_NAMES if n in dataset.variables), None)
+
+    if "GeoTransform" in grid_mapping.attrs:
+        transform = Affine.from_gdal(
+            *list(float(s) for s in grid_mapping.attrs["GeoTransform"].split(" "))
+        )
+        if (
+            "parent_grid_cell_row_subset_end" in grid_mapping.attrs
+            and "parent_grid_cell_column_subset_end" in grid_mapping.attrs
+        ):
+            shape = [
+                int(grid_mapping.attrs["parent_grid_cell_row_subset_end"]),
+                int(grid_mapping.attrs["parent_grid_cell_column_subset_end"]),
+            ]
+        elif x_name is not None and y_name is not None:
+            shape = [dataset.sizes[y_name], dataset.sizes[x_name]]
+        else:
+            raise ValueError(
+                "Could not determine grid shape: grid-mapping variable has "
+                "GeoTransform but no parent_grid_cell_row/column_subset_end "
+                "attrs, and no x/y (or xgrid/ygrid) variables to fall back on."
+            )
+        return shape, transform
+
+    if x_name is None or y_name is None:
+        raise ValueError(
+            "Could not determine grid geometry: grid-mapping variable has no "
+            "GeoTransform attribute, and no x/y (or xgrid/ygrid) coordinate "
+            "variables were found to fall back on."
+        )
+    x = dataset[x_name].values
+    y = dataset[y_name].values
+    resolution_x = float(x[1] - x[0])
+    resolution_y = float(y[1] - y[0])
+    shape = [len(y), len(x)]
+    transform = Affine(
+        resolution_x,
+        0,
+        float(x[0] - resolution_x / 2),
+        0,
+        resolution_y,
+        float(y[0] - resolution_y / 2),
+    )
+    return shape, transform
 
 
 def _parse_resolution(value: Any) -> float:

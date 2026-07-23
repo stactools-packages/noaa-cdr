@@ -121,7 +121,7 @@ stac noaa-cdr sea-ice-concentration create-item
 To add an item to a catalog:
 
 ```sh
-stac add examples/sea-ice-concentration/north/seaice_conc_daily_20230203_f17_v0400.json
+stac add examples/noaa-cdr-sea-ice-concentration/north/seaice_conc_daily_20230203_f17_v0400.json
  examples/noaa-cdr-sea-ice-concentration/collection.json
 ```
 

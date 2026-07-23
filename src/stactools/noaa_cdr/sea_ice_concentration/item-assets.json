@@ -15,70 +15,13 @@
         "spatial_resolution": 25000.0
       }
     ],
-    "classification:classes": [
-      {
-        "value": 251,
-        "name": "pole_hole"
-      },
-      {
-        "value": 252,
-        "name": "lakes"
-      },
-      {
-        "value": 253,
-        "name": "coastal"
-      },
-      {
-        "value": 254,
-        "name": "land_mask"
-      },
-      {
-        "value": 255,
-        "name": "missing_data"
-      }
-    ],
     "roles": [
       "data"
     ]
   },
-  "nsidc_bt_seaice_conc": {
+  "raw_bt_seaice_conc": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-    "raster:bands": [
-      {
-        "nodata": 255,
-        "data_type": "uint8",
-        "scale": 0.009999999776482582,
-        "spatial_resolution": 25000.0
-      }
-    ],
-    "classification:classes": [
-      {
-        "value": 251,
-        "name": "pole_hole"
-      },
-      {
-        "value": 252,
-        "name": "unused"
-      },
-      {
-        "value": 253,
-        "name": "coastal"
-      },
-      {
-        "value": 254,
-        "name": "land_mask"
-      },
-      {
-        "value": 255,
-        "name": "missing_data"
-      }
-    ],
-    "roles": [
-      "data"
-    ]
-  },
-  "nsidc_nt_seaice_conc": {
-    "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+    "description": "NSIDC-processed Bootstrap daily sea ice concentrations. Located in the cdr_supplementary group.",
     "raster:bands": [
       {
         "nodata": 255,
@@ -91,7 +34,22 @@
       "data"
     ]
   },
-  "qa_of_cdr_seaice_conc": {
+  "raw_nt_seaice_conc": {
+    "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+    "description": "NSIDC-processed NASA Team daily sea ice concentrations. Located in the cdr_supplementary group.",
+    "raster:bands": [
+      {
+        "nodata": 255,
+        "data_type": "uint8",
+        "scale": 0.009999999776482582,
+        "spatial_resolution": 25000.0
+      }
+    ],
+    "roles": [
+      "data"
+    ]
+  },
+  "cdr_seaice_conc_qa_flag": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
     "raster:bands": [
       {
@@ -132,46 +90,46 @@
         ]
       },
       {
-        "name": "BT_land_spillover_filter_applied",
+        "name": "Land_spillover_filter_applied",
         "offset": 2,
         "length": 1,
         "classes": [
           {
-            "name": "BT_land_spillover_filter_not_applied",
+            "name": "Land_spillover_filter_not_applied",
             "value": 0
           },
           {
-            "name": "BT_land_spillover_filter_applied",
+            "name": "Land_spillover_filter_applied",
             "value": 1
           }
         ]
       },
       {
-        "name": "NT_land_spillover_filter_applied",
+        "name": "No_input_data",
         "offset": 3,
         "length": 1,
         "classes": [
           {
-            "name": "NT_land_spillover_filter_not_applied",
+            "name": "input_data_available",
             "value": 0
           },
           {
-            "name": "NT_land_spillover_filter_applied",
+            "name": "No_input_data",
             "value": 1
           }
         ]
       },
       {
-        "name": "valid_ice_mask_applied",
+        "name": "invalid_ice_mask_applied",
         "offset": 4,
         "length": 1,
         "classes": [
           {
-            "name": "valid_ice_mask_not_applied",
+            "name": "invalid_ice_mask_not_applied",
             "value": 0
           },
           {
-            "name": "valid_ice_mask_applied",
+            "name": "invalid_ice_mask_applied",
             "value": 1
           }
         ]
@@ -205,13 +163,29 @@
             "value": 1
           }
         ]
+      },
+      {
+        "name": "melt_start_detected",
+        "offset": 7,
+        "length": 1,
+        "description": "Northern Hemisphere files only.",
+        "classes": [
+          {
+            "name": "melt_start_not_detected",
+            "value": 0
+          },
+          {
+            "name": "melt_start_detected",
+            "value": 1
+          }
+        ]
       }
     ],
     "roles": [
       "data"
     ]
   },
-  "spatial_interpolation_flag": {
+  "cdr_seaice_conc_interp_spatial_flag": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
     "raster:bands": [
       {
@@ -297,16 +271,16 @@
         ]
       },
       {
-        "name": "pole_hole_value_interpolated",
+        "name": "pole_hole_spatially_interpolated_(Arctic_only)",
         "offset": 5,
         "length": 1,
         "classes": [
           {
-            "name": "pole_hole_value_not_interpolated",
+            "name": "pole_hole_not_spatially_interpolated_(Arctic_only)",
             "value": 0
           },
           {
-            "name": "pole_hole_value_interpolated",
+            "name": "pole_hole_spatially_interpolated_(Arctic_only)",
             "value": 1
           }
         ]
@@ -316,43 +290,9 @@
       "data"
     ]
   },
-  "stdev_of_cdr_seaice_conc": {
+  "cdr_seaice_conc_interp_temporal_flag": {
     "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-    "raster:bands": [
-      {
-        "nodata": "nan",
-        "data_type": "float32",
-        "spatial_resolution": 25000.0
-      }
-    ],
-    "classification:classes": [
-      {
-        "value": 251,
-        "name": "pole_hole"
-      },
-      {
-        "value": 252,
-        "name": "lakes"
-      },
-      {
-        "value": 253,
-        "name": "coastal"
-      },
-      {
-        "value": 254,
-        "name": "land_mask"
-      },
-      {
-        "value": 255,
-        "name": "missing_data"
-      }
-    ],
-    "roles": [
-      "data"
-    ]
-  },
-  "temporal_interpolation_flag": {
-    "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+    "description": "Value of 0 indicates no temporal interpolation occurred. Values greater than 0 and less than or equal to 55 are of the form 'AB' where 'A' is the number of days prior to the current day and 'B' is the number of days after the current day used to linearly interpolate the data. If either A or B are zero, the value was extrapolated rather than interpolated. A value of 255 indicates temporal interpolation could not be accomplished.",
     "raster:bands": [
       {
         "nodata": 0,
@@ -362,24 +302,20 @@
     ],
     "classification:classes": [
       {
+        "value": 0,
+        "name": "no_temporal_interp"
+      },
+      {
         "value": 1,
-        "name": "1_day_following"
+        "name": "1_day_after"
       },
       {
         "value": 2,
-        "name": "2_days_following"
+        "name": "2_days_after"
       },
       {
         "value": 3,
-        "name": "3_days_following"
-      },
-      {
-        "value": 4,
-        "name": "4_days_following"
-      },
-      {
-        "value": 5,
-        "name": "5_days_following"
+        "name": "3_days_after"
       },
       {
         "value": 10,
@@ -387,39 +323,172 @@
       },
       {
         "value": 11,
-        "name": "mean_of_prior_and_following_1_day"
+        "name": "1_day_prior_and_1_day_after"
+      },
+      {
+        "value": 12,
+        "name": "1_day_prior_and_2_days_after"
+      },
+      {
+        "value": 13,
+        "name": "1_day_prior_and_3_days_after"
+      },
+      {
+        "value": 14,
+        "name": "1_day_prior_and_4_days_after"
+      },
+      {
+        "value": 15,
+        "name": "1_day_prior_and_5_days_after"
       },
       {
         "value": 20,
         "name": "2_days_prior"
       },
       {
+        "value": 21,
+        "name": "2_days_prior_and_1_day_after"
+      },
+      {
         "value": 22,
-        "name": "mean_of_prior_and_following_2_days"
+        "name": "2_days_prior_and_2_days_after"
+      },
+      {
+        "value": 23,
+        "name": "2_days_prior_and_3_days_after"
+      },
+      {
+        "value": 24,
+        "name": "2_days_prior_and_4_days_after"
+      },
+      {
+        "value": 25,
+        "name": "2_days_prior_and_5_days_after"
       },
       {
         "value": 30,
         "name": "3_days_prior"
       },
       {
-        "value": 33,
-        "name": "mean_of_prior_and_following_3_days"
+        "value": 31,
+        "name": "3_days_prior_and_1_day_after"
       },
       {
-        "value": 40,
-        "name": "4_days_prior"
+        "value": 32,
+        "name": "3_days_prior_and_2_days_after"
+      },
+      {
+        "value": 33,
+        "name": "3_days_prior_and_3_days_after"
+      },
+      {
+        "value": 34,
+        "name": "3_days_prior_and_4_days_after"
+      },
+      {
+        "value": 35,
+        "name": "3_days_prior_and_5_days_after"
+      },
+      {
+        "value": 41,
+        "name": "4_days_prior_and_1_day_after"
+      },
+      {
+        "value": 42,
+        "name": "4_days_prior_and_2_days_after"
+      },
+      {
+        "value": 43,
+        "name": "4_days_prior_and_3_days_after"
       },
       {
         "value": 44,
-        "name": "mean_of_prior_and_following_4_days"
+        "name": "4_days_prior_and_4_days_after"
       },
       {
-        "value": 50,
-        "name": "5_days_prior"
+        "value": 45,
+        "name": "4_days_prior_and_5_days_after"
+      },
+      {
+        "value": 51,
+        "name": "5_days_prior_and_1_day_after"
+      },
+      {
+        "value": 52,
+        "name": "5_days_prior_and_2_days_after"
+      },
+      {
+        "value": 53,
+        "name": "5_days_prior_and_3_days_after"
+      },
+      {
+        "value": 54,
+        "name": "5_days_prior_and_4_days_after"
       },
       {
         "value": 55,
-        "name": "mean_of_prior_and_following_5_days"
+        "name": "5_days_prior_and_5_days_after"
+      }
+    ],
+    "roles": [
+      "data"
+    ]
+  },
+  "cdr_seaice_conc_stdev": {
+    "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+    "raster:bands": [
+      {
+        "nodata": "nan",
+        "data_type": "float32",
+        "spatial_resolution": 25000.0
+      }
+    ],
+    "roles": [
+      "data"
+    ]
+  },
+  "cdr_melt_onset_day": {
+    "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+    "description": "Day of year melting sea ice was first detected. Northern Hemisphere only. Located in the cdr_supplementary group.",
+    "raster:bands": [
+      {
+        "data_type": "uint8",
+        "spatial_resolution": 25000.0
+      }
+    ],
+    "roles": [
+      "data"
+    ]
+  },
+  "surface_type_mask": {
+    "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+    "description": "Mask of Earth surface types. Located in the cdr_supplementary group.",
+    "raster:bands": [
+      {
+        "data_type": "uint8",
+        "spatial_resolution": 25000.0
+      }
+    ],
+    "classification:classes": [
+      {
+        "value": 50,
+        "name": "ocean"
+      },
+      {
+        "value": 75,
+        "name": "lake"
+      },
+      {
+        "value": 100,
+        "name": "polehole_mask"
+      },
+      {
+        "value": 200,
+        "name": "coast"
+      },
+      {
+        "value": 250,
+        "name": "land"
       }
     ],
     "roles": [

@@ -1,0 +1,25 @@
+{
+  "type": "Catalog",
+  "id": "noaa-cdr",
+  "stac_version": "1.0.0",
+  "title": "NOAA Climate Data Records",
+  "description": "NOAA Climate Data Records (CDRs) are robust, sustainable, and scientifically defensible climate records that can be used to assess climate variability and change.",
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://noaadata.apps.nsidc.org/NOAA/G02202_V6/stac/catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "root",
+      "href": "https://noaadata.apps.nsidc.org/NOAA/G02202_V6/stac/catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "child",
+      "href": "https://noaadata.apps.nsidc.org/NOAA/G02202_V6/stac/sea-ice-concentration/collection.json",
+      "type": "application/json",
+      "title": "Sea Ice Concentration CDR"
+    }
+  ]
+}

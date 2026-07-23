@@ -42,7 +42,7 @@ def datetime64_to_datetime(datetime64: numpy.datetime64) -> datetime.datetime:
     # https://stackoverflow.com/a/46921593/732529
     unix_epoch = numpy.datetime64(0, "s")
     one_second = numpy.timedelta64(1, "s")
-    seconds_since_epoch = float((datetime64 - unix_epoch) / one_second)
+    seconds_since_epoch = float(int(datetime64 - unix_epoch) / int(one_second))
     dt = datetime.datetime.utcfromtimestamp(seconds_since_epoch)
     return dt.replace(tzinfo=tzutc())
 

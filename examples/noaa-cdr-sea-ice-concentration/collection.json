@@ -28,6 +28,26 @@
     },
     {
       "rel": "item",
+      "href": "./north/seaice_conc_daily_nh_2024_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_daily_sh_2024_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./north/seaice_conc_monthly_nh_197811_202412_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./south/seaice_conc_monthly_sh_197811_202412_v04r00.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
       "href": "./south/seaice_conc_daily_sh_2023_v04r00.json",
       "type": "application/json"
     },
@@ -244,11 +264,6 @@
     {
       "rel": "item",
       "href": "./south/seaice_conc_daily_sh_1978_v04r00.json",
-      "type": "application/json"
-    },
-    {
-      "rel": "item",
-      "href": "./south/seaice_conc_monthly_sh_197811_202312_v04r00.json",
       "type": "application/json"
     },
     {
@@ -479,16 +494,6 @@
     {
       "rel": "item",
       "href": "./north/seaice_conc_daily_nh_1978_v04r00.json",
-      "type": "application/json"
-    },
-    {
-      "rel": "item",
-      "href": "./north/seaice_conc_monthly_nh_197811_202312_v04r00.json",
-      "type": "application/json"
-    },
-    {
-      "rel": "item",
-      "href": "./seaice_conc_daily_nh_20211231_f17_v04r00/seaice_conc_daily_nh_20211231_f17_v04r00.json",
       "type": "application/json"
     },
     {
@@ -950,7 +955,7 @@
       "interval": [
         [
           "1978-10-25T00:00:00Z",
-          "2023-12-31T23:59:59Z"
+          "2024-03-31T23:59:59Z"
         ]
       ]
     }

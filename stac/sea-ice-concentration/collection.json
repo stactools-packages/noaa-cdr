@@ -1,0 +1,623 @@
+{
+  "type": "Collection",
+  "id": "noaa-cdr-sea-ice-concentration",
+  "stac_version": "1.1.0",
+  "description": "The Sea Ice Concentration Climate Data Record (CDR) provides a consistent daily and monthly time series of sea ice concentrations for both the north and south Polar Regions on a 25 km x 25 km grid. These data can be used to estimate how much of the ocean surface is covered by ice, and monitor changes in sea ice concentration. The CDR combines concentration estimates using two algorithms developed at the NASA Goddard Space Flight Center (GSFC). Gridded brightness temperatures acquired from Defense Meteorological Satellite Program (DMSP) passive microwave radiometers, and, beginning 1 January 2025, the JAXA AMSR2 sensor, provide the necessary input to produce the dataset.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "./collection.json",
+      "type": "application/json",
+      "title": "Sea Ice Concentration CDR"
+    },
+    {
+      "rel": "about",
+      "href": "https://nsidc.org/data/g02202/versions/6",
+      "type": "text/html",
+      "title": "CDR Homepage"
+    },
+    {
+      "rel": "about",
+      "href": "https://www.ncei.noaa.gov/products/climate-data-records/sea-ice-concentration",
+      "type": "text/html",
+      "title": "Sea Ice Concentration CDR"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.7265/b18j-z797"
+    },
+    {
+      "rel": "self",
+      "href": "https://noaadata.apps.nsidc.org/NOAA/G02202_V6/stac/sea-ice-concentration/collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "root",
+      "href": "https://noaadata.apps.nsidc.org/NOAA/G02202_V6/stac/catalog.json",
+      "type": "application/json"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.1.0/schema.json"
+  ],
+  "item_assets": {
+    "netcdf": {
+      "type": "application/x-netcdf",
+      "roles": [
+        "data"
+      ]
+    },
+    "cdr_seaice_conc": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": 255,
+          "data_type": "uint8",
+          "scale": 0.009999999776482582,
+          "spatial_resolution": 25000.0
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "raw_bt_seaice_conc": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "description": "NSIDC-processed Bootstrap daily sea ice concentrations. Located in the cdr_supplementary group.",
+      "raster:bands": [
+        {
+          "nodata": 255,
+          "data_type": "uint8",
+          "scale": 0.009999999776482582,
+          "spatial_resolution": 25000.0
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "raw_nt_seaice_conc": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "description": "NSIDC-processed NASA Team daily sea ice concentrations. Located in the cdr_supplementary group.",
+      "raster:bands": [
+        {
+          "nodata": 255,
+          "data_type": "uint8",
+          "scale": 0.009999999776482582,
+          "spatial_resolution": 25000.0
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "cdr_seaice_conc_qa_flag": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 25000.0
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "BT_weather_filter_applied",
+          "offset": 0,
+          "length": 1,
+          "classes": [
+            {
+              "name": "BT_weather_filter_not_applied",
+              "value": 0
+            },
+            {
+              "name": "BT_weather_filter_applied",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "NT_weather_filter_applied",
+          "offset": 1,
+          "length": 1,
+          "classes": [
+            {
+              "name": "NT_weather_filter_not_applied",
+              "value": 0
+            },
+            {
+              "name": "NT_weather_filter_applied",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "Land_spillover_filter_applied",
+          "offset": 2,
+          "length": 1,
+          "classes": [
+            {
+              "name": "Land_spillover_filter_not_applied",
+              "value": 0
+            },
+            {
+              "name": "Land_spillover_filter_applied",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "No_input_data",
+          "offset": 3,
+          "length": 1,
+          "classes": [
+            {
+              "name": "input_data_available",
+              "value": 0
+            },
+            {
+              "name": "No_input_data",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "invalid_ice_mask_applied",
+          "offset": 4,
+          "length": 1,
+          "classes": [
+            {
+              "name": "invalid_ice_mask_not_applied",
+              "value": 0
+            },
+            {
+              "name": "invalid_ice_mask_applied",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "spatial_interpolation_applied",
+          "offset": 5,
+          "length": 1,
+          "classes": [
+            {
+              "name": "spatial_interpolation_not_applied",
+              "value": 0
+            },
+            {
+              "name": "spatial_interpolation_applied",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "temporal_interpolation_applied",
+          "offset": 6,
+          "length": 1,
+          "classes": [
+            {
+              "name": "temporal_interpolation_not_applied",
+              "value": 0
+            },
+            {
+              "name": "temporal_interpolation_applied",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "melt_start_detected",
+          "offset": 7,
+          "length": 1,
+          "description": "Northern Hemisphere files only.",
+          "classes": [
+            {
+              "name": "melt_start_not_detected",
+              "value": 0
+            },
+            {
+              "name": "melt_start_detected",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "cdr_seaice_conc_interp_spatial_flag": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 25000.0
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "19v_tb_value_interpolated",
+          "offset": 0,
+          "length": 1,
+          "classes": [
+            {
+              "name": "19v_tb_value_not_interpolated",
+              "value": 0
+            },
+            {
+              "name": "19v_tb_value_interpolated",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "19h_tb_value_interpolated",
+          "offset": 1,
+          "length": 1,
+          "classes": [
+            {
+              "name": "19h_tb_value_not_interpolated",
+              "value": 0
+            },
+            {
+              "name": "19h_tb_value_interpolated",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "22v_tb_value_interpolated",
+          "offset": 2,
+          "length": 1,
+          "classes": [
+            {
+              "name": "22v_tb_value_not_interpolated",
+              "value": 0
+            },
+            {
+              "name": "22v_tb_value_interpolated",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "37v_tb_value_interpolated",
+          "offset": 3,
+          "length": 1,
+          "classes": [
+            {
+              "name": "37v_tb_value_not_interpolated",
+              "value": 0
+            },
+            {
+              "name": "37v_tb_value_interpolated",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "37h_tb_value_interpolated",
+          "offset": 4,
+          "length": 1,
+          "classes": [
+            {
+              "name": "37h_tb_value_not_interpolated",
+              "value": 0
+            },
+            {
+              "name": "37h_tb_value_interpolated",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "pole_hole_spatially_interpolated_(Arctic_only)",
+          "offset": 5,
+          "length": 1,
+          "classes": [
+            {
+              "name": "pole_hole_not_spatially_interpolated_(Arctic_only)",
+              "value": 0
+            },
+            {
+              "name": "pole_hole_spatially_interpolated_(Arctic_only)",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "cdr_seaice_conc_interp_temporal_flag": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "description": "Value of 0 indicates no temporal interpolation occurred. Values greater than 0 and less than or equal to 55 are of the form 'AB' where 'A' is the number of days prior to the current day and 'B' is the number of days after the current day used to linearly interpolate the data. If either A or B are zero, the value was extrapolated rather than interpolated. A value of 255 indicates temporal interpolation could not be accomplished.",
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 25000.0
+        }
+      ],
+      "classification:classes": [
+        {
+          "value": 0,
+          "name": "no_temporal_interp"
+        },
+        {
+          "value": 1,
+          "name": "1_day_after"
+        },
+        {
+          "value": 2,
+          "name": "2_days_after"
+        },
+        {
+          "value": 3,
+          "name": "3_days_after"
+        },
+        {
+          "value": 10,
+          "name": "1_day_prior"
+        },
+        {
+          "value": 11,
+          "name": "1_day_prior_and_1_day_after"
+        },
+        {
+          "value": 12,
+          "name": "1_day_prior_and_2_days_after"
+        },
+        {
+          "value": 13,
+          "name": "1_day_prior_and_3_days_after"
+        },
+        {
+          "value": 14,
+          "name": "1_day_prior_and_4_days_after"
+        },
+        {
+          "value": 15,
+          "name": "1_day_prior_and_5_days_after"
+        },
+        {
+          "value": 20,
+          "name": "2_days_prior"
+        },
+        {
+          "value": 21,
+          "name": "2_days_prior_and_1_day_after"
+        },
+        {
+          "value": 22,
+          "name": "2_days_prior_and_2_days_after"
+        },
+        {
+          "value": 23,
+          "name": "2_days_prior_and_3_days_after"
+        },
+        {
+          "value": 24,
+          "name": "2_days_prior_and_4_days_after"
+        },
+        {
+          "value": 25,
+          "name": "2_days_prior_and_5_days_after"
+        },
+        {
+          "value": 30,
+          "name": "3_days_prior"
+        },
+        {
+          "value": 31,
+          "name": "3_days_prior_and_1_day_after"
+        },
+        {
+          "value": 32,
+          "name": "3_days_prior_and_2_days_after"
+        },
+        {
+          "value": 33,
+          "name": "3_days_prior_and_3_days_after"
+        },
+        {
+          "value": 34,
+          "name": "3_days_prior_and_4_days_after"
+        },
+        {
+          "value": 35,
+          "name": "3_days_prior_and_5_days_after"
+        },
+        {
+          "value": 41,
+          "name": "4_days_prior_and_1_day_after"
+        },
+        {
+          "value": 42,
+          "name": "4_days_prior_and_2_days_after"
+        },
+        {
+          "value": 43,
+          "name": "4_days_prior_and_3_days_after"
+        },
+        {
+          "value": 44,
+          "name": "4_days_prior_and_4_days_after"
+        },
+        {
+          "value": 45,
+          "name": "4_days_prior_and_5_days_after"
+        },
+        {
+          "value": 51,
+          "name": "5_days_prior_and_1_day_after"
+        },
+        {
+          "value": 52,
+          "name": "5_days_prior_and_2_days_after"
+        },
+        {
+          "value": 53,
+          "name": "5_days_prior_and_3_days_after"
+        },
+        {
+          "value": 54,
+          "name": "5_days_prior_and_4_days_after"
+        },
+        {
+          "value": 55,
+          "name": "5_days_prior_and_5_days_after"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "cdr_seaice_conc_stdev": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "spatial_resolution": 25000.0
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "cdr_melt_onset_day": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "description": "Day of year melting sea ice was first detected. Northern Hemisphere only. Located in the cdr_supplementary group.",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "spatial_resolution": 25000.0
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "surface_type_mask": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "description": "Mask of Earth surface types. Located in the cdr_supplementary group.",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "spatial_resolution": 25000.0
+        }
+      ],
+      "classification:classes": [
+        {
+          "value": 50,
+          "name": "ocean"
+        },
+        {
+          "value": 75,
+          "name": "lake"
+        },
+        {
+          "value": 100,
+          "name": "polehole_mask"
+        },
+        {
+          "value": 200,
+          "name": "coast"
+        },
+        {
+          "value": 250,
+          "name": "land"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "sci:doi": "10.7265/b18j-z797",
+  "sci:citation": "Meier, W. N., F. Fetterer, A. K. Windnagel, J. S. Stewart, and T. Stafford. 2026. NOAA/NSIDC Climate Data Record of Passive Microwave Sea Ice Concentration, Version 6. [Indicate subset used]. Boulder, Colorado USA. NSIDC: National Snow and Ice Data Center https://doi.org/10.7265/b18j-z797. ",
+  "title": "Sea Ice Concentration CDR",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90,
+          180,
+          90
+        ],
+        [
+          -180,
+          31.1,
+          180.0,
+          90
+        ],
+        [
+          -180,
+          -90,
+          180.0,
+          -39.36
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1978-10-25T00:00:00Z",
+          "2026-07-16T00:00:00Z"
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "keywords": [
+    "Climate",
+    "NOAA",
+    "Sea ice",
+    "Polar",
+    "Earth Science",
+    "Cryosphere",
+    "Sea ice concentration"
+  ],
+  "providers": [
+    {
+      "name": "National Snow and Ice Data Center",
+      "description": "The National Snow and Ice Data Center (NSIDC) at the University of Colorado Boulder (CU Boulder), part of the CU Boulder Cooperative Institute for Research in Environmental Sciences (CIRES), conducts innovative research and provides open data to understand how the frozen parts of Earth affect the rest of the planet and impact society.",
+      "roles": [
+        "producer",
+        "processor",
+        "licensor",
+        "host"
+      ],
+      "url": "https://nsidc.org/data/g02202/versions/6"
+    }
+  ],
+  "assets": {
+    "daily-items-geoparquet": {
+      "href": "https://noaadata.apps.nsidc.org/NOAA/G02202_V6/stac/sea-ice-concentration/sea-ice-concentration-daily-items.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Daily STAC Items (GeoParquet)",
+      "description": "All daily sea ice concentration STAC items in GeoParquet format. Filter by start_datetime, bbox, or noaa_cdr:hemisphere to find items.",
+      "roles": [
+        "data",
+        "stac-items"
+      ]
+    },
+    "monthly-items-geoparquet": {
+      "href": "https://noaadata.apps.nsidc.org/NOAA/G02202_V6/stac/sea-ice-concentration/sea-ice-concentration-monthly-items.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Monthly STAC Items (GeoParquet)",
+      "description": "All monthly sea ice concentration STAC items in GeoParquet format. Filter by start_datetime, bbox, or noaa_cdr:hemisphere to find items.",
+      "roles": [
+        "data",
+        "stac-items"
+      ]
+    }
+  }
+}

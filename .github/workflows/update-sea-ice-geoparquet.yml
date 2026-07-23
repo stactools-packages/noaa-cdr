@@ -1,0 +1,43 @@
+name: Update sea ice concentration GeoParquet
+
+on:
+  schedule:
+    # Once daily. Files at noaadata.apps.nsidc.org lag ~7 days behind
+    # present, so don't expect new rows every single day.
+    - cron: "17 13 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-geoparquet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install package and pipeline dependencies
+        run: |
+          pip install -e .
+          pip install -r scripts/update_geoparquet/requirements.txt
+
+      - name: Run ingestion
+        id: ingest
+        run: |
+          python scripts/update_geoparquet/ingest.py \
+            --geoparquet data/sea-ice-concentration-items.parquet \
+            | tee ingest_output.txt
+          echo "items_added=$(grep -o 'items_added=[0-9]*' ingest_output.txt | cut -d= -f2)" >> "$GITHUB_OUTPUT"
+
+      - name: Commit updated GeoParquet
+        if: steps.ingest.outputs.items_added != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/sea-ice-concentration-items.parquet
+          git commit -m "Add ${{ steps.ingest.outputs.items_added }} new sea ice concentration item(s)"
+          git push

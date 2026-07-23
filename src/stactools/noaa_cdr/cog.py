@@ -5,12 +5,33 @@ import fsspec
 import numpy
 import rasterio.shutil
 import xarray
-from numpy.typing import NDArray
 from pystac import Asset
 from rasterio import MemoryFile
 
 from . import dataset
 from .profile import BandProfile
+
+# Variables that moved into this netCDF4 group in sea ice concentration V6
+# (raw_bt_seaice_conc, raw_nt_seaice_conc, surface_type_mask,
+# cdr_melt_onset_day, latitude, longitude). Other CDRs don't have this group,
+# so we just no-op if it's missing.
+SUPPLEMENTARY_GROUP = "cdr_supplementary"
+
+
+def _open_with_groups(file: Any) -> xarray.Dataset:
+    """Opens the root group, and merges in the cdr_supplementary group if
+    present, so all data variables are visible on one Dataset regardless of
+    which netCDF4 group they live in."""
+    root = xarray.open_dataset(file, mask_and_scale=False)
+    try:
+        supplementary = xarray.open_dataset(
+            file, group=SUPPLEMENTARY_GROUP, mask_and_scale=False
+        )
+    except OSError:
+        # Group doesn't exist on this file -- not a V6 sea ice file, or an
+        # older revision without cdr_supplementary. Nothing to merge.
+        return root
+    return xarray.merge([root, supplementary], compat="override", join="override")
 
 
 def cogify(
@@ -22,7 +43,7 @@ def cogify(
     file_name = os.path.splitext(os.path.basename(path))[0]
     assets = dict()
     with fsspec.open(path) as file:
-        with xarray.open_dataset(file, mask_and_scale=False) as ds:
+        with _open_with_groups(file) as ds:
             for variable in dataset.data_variable_names(ds):
                 profile = band_profile_class.build(ds, variable)
                 data = ds[variable]
@@ -42,7 +63,7 @@ def cogify(
 
 
 def write(
-    values: NDArray[Any],
+    values: numpy.ndarray[Any, Any],
     path: str,
     profile: BandProfile,
 ) -> None:

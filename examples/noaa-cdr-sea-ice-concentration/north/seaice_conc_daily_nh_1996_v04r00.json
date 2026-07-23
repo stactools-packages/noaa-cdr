@@ -53,9 +53,9 @@
   "links": [
     {
       "rel": "root",
-      "href": "../collection.json",
+      "href": "../../catalog.json",
       "type": "application/json",
-      "title": "Sea Ice Concentration CDR"
+      "title": "Climate Data Records"
     },
     {
       "rel": "parent",

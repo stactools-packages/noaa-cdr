@@ -3,6 +3,9 @@ mypy
 pre-commit
 pytest
 pytest-cov
+stac-geoparquet
+pyarrow
+requests
 ruff
 types-python-dateutil
 types-requests
